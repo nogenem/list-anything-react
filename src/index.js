@@ -6,7 +6,10 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
+import decode from "jwt-decode";
 
+import { userLoggedIn } from "./actions/auth";
+import setAuthorizationHeader from "./utils/setAuthorizationHeader";
 import rootReducer from "./rootReducer";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
@@ -15,6 +18,17 @@ const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
+
+if (localStorage.listanythingJWT) {
+  const payload = decode(localStorage.listanythingJWT);
+  const user = {
+    token: localStorage.listanythingJWT,
+    email: payload.email,
+    confirmed: payload.confirmed
+  };
+  setAuthorizationHeader(localStorage.listanythingJWT);
+  store.dispatch(userLoggedIn(user));
+}
 
 ReactDOM.render(
   <BrowserRouter>

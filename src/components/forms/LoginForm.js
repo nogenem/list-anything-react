@@ -26,7 +26,6 @@ class LoginForm extends React.Component {
       this.setState({ loading: true });
       this.props
         .submit(this.state.data)
-        .then(() => this.setState({ loading: false })) // TODO: Remover isso!
         .catch(err =>
           this.setState({ errors: err.response.data.errors, loading: false })
         );

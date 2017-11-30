@@ -20,7 +20,8 @@ class LoginPage extends Component {
         <LoginForm submit={this.submit} />
         <Message>
           Dont have an account? <a href="/signup">Sign Up</a> now!
-          {/* // TODO: implementar 'forgot password?' */}
+          <br />
+          <a href="/forgot_password">Forgot</a> your password?
         </Message>
       </CenterElemsContainer>
     );

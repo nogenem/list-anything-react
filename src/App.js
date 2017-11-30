@@ -6,9 +6,12 @@ import HomePage from "./components/pages/HomePage";
 import DashboardPage from "./components/pages/DashboardPage";
 import LoginPage from "./components/pages/LoginPage";
 import SignupPage from "./components/pages/SignupPage";
+import ConfirmationPage from "./components/pages/ConfirmationPage";
+import ForgotPasswordPage from "./components/pages/ForgotPasswordPage";
+import ResetPasswordPage from "./components/pages/ResetPasswordPage";
+
 import GuestRoute from "./components/routes/GuestRoute";
 import UserRoute from "./components/routes/UserRoute";
-import ConfirmationPage from "./components/routes/ConfirmationPage";
 
 const App = ({ location }) => (
   <div className="ui container">
@@ -25,6 +28,18 @@ const App = ({ location }) => (
       path="/confirmation/:token"
       exact
       component={ConfirmationPage}
+    />
+    <GuestRoute
+      location={location}
+      path="/forgot_password"
+      exact
+      component={ForgotPasswordPage}
+    />
+    <GuestRoute
+      location={location}
+      path="/reset_password/:token"
+      exact
+      component={ResetPasswordPage}
     />
     <UserRoute
       location={location}

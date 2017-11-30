@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Grid, Header, Message } from "semantic-ui-react";
+import { Header, Message } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import LoginForm from "../forms/LoginForm";
+import SingleFormContainer from "../containers/SingleFormContainer";
 import { login } from "../../actions/auth";
 
 class LoginPage extends Component {
@@ -12,31 +13,16 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div className="login-form">
-        <style>{`
-          body > div,
-          body > div > div,
-          body > div > div > div.login-form {
-            height: 100%;
-          }
-        `}</style>
-        <Grid
-          textAlign="center"
-          style={{ height: "100%" }}
-          verticalAlign="middle"
-        >
-          <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as="h2" color="teal" textAlign="center">
-              Log-in to your account
-            </Header>
-            <LoginForm submit={this.submit} />
-            <Message>
-              Don't have an account? <a href="/signup">Sign Up</a> now!
-              {/* // TODO: implementar 'forgot password?' */}
-            </Message>
-          </Grid.Column>
-        </Grid>
-      </div>
+      <SingleFormContainer>
+        <Header as="h2" color="teal" textAlign="center">
+          Log-in to your account
+        </Header>
+        <LoginForm submit={this.submit} />
+        <Message>
+          Dont have an account? <a href="/signup">Sign Up</a> now!
+          {/* // TODO: implementar 'forgot password?' */}
+        </Message>
+      </SingleFormContainer>
     );
   }
 }

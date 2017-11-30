@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Grid } from "semantic-ui-react";
 
-const SingleFormContainer = ({ children }) => (
+const CenterElemsContainer = ({ children }) => (
   <div className="form-container">
     <style>{`
       body > div,
@@ -17,11 +17,11 @@ const SingleFormContainer = ({ children }) => (
   </div>
 );
 
-SingleFormContainer.propTypes = {
+CenterElemsContainer.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired
 };
 
-export default SingleFormContainer;
+export default CenterElemsContainer;

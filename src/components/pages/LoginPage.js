@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import LoginForm from "../forms/LoginForm";
-import SingleFormContainer from "../containers/SingleFormContainer";
+import CenterElemsContainer from "../containers/CenterElemsContainer";
 import { login } from "../../actions/auth";
 
 class LoginPage extends Component {
@@ -13,7 +13,7 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <SingleFormContainer>
+      <CenterElemsContainer>
         <Header as="h2" color="teal" textAlign="center">
           Log-in to your account
         </Header>
@@ -22,7 +22,7 @@ class LoginPage extends Component {
           Dont have an account? <a href="/signup">Sign Up</a> now!
           {/* // TODO: implementar 'forgot password?' */}
         </Message>
-      </SingleFormContainer>
+      </CenterElemsContainer>
     );
   }
 }

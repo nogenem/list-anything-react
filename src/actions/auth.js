@@ -13,3 +13,9 @@ export const login = credentials => dispatch =>
     setAuthorizationHeader(user.token);
     dispatch(userLoggedIn(user));
   });
+
+export const confirm = token => dispatch =>
+  api.user.confirm(token).then(user => {
+    localStorage.listanythingJWT = user.token;
+    dispatch(userLoggedIn(user));
+  });

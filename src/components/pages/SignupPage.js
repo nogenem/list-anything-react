@@ -1,25 +1,33 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Header } from "semantic-ui-react";
+import { connect } from "react-redux";
 
 import SignupForm from "../forms/SignupForm";
-import SingleFormContainer from "../containers/SingleFormContainer";
+import CenterElemsContainer from "../containers/CenterElemsContainer";
+import { signup } from "../../actions/users";
 
 class SignupPage extends Component {
-  submit = () => {
-    console.log("SIGN UP!");
-    return Promise.resolve();
-  };
+  submit = data =>
+    this.props.signup(data).then(() => this.props.history.push("/dashboard"));
 
   render() {
     return (
-      <SingleFormContainer>
+      <CenterElemsContainer>
         <Header as="h2" color="teal" textAlign="center">
           Sign up now!
         </Header>
         <SignupForm submit={this.submit} />
-      </SingleFormContainer>
+      </CenterElemsContainer>
     );
   }
 }
 
-export default SignupPage;
+SignupPage.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }).isRequired,
+  signup: PropTypes.func.isRequired
+};
+
+export default connect(null, { signup })(SignupPage);

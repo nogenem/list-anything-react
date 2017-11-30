@@ -8,6 +8,7 @@ import LoginPage from "./components/pages/LoginPage";
 import SignupPage from "./components/pages/SignupPage";
 import GuestRoute from "./components/routes/GuestRoute";
 import UserRoute from "./components/routes/UserRoute";
+import ConfirmationPage from "./components/routes/ConfirmationPage";
 
 const App = ({ location }) => (
   <div className="ui container">
@@ -18,6 +19,12 @@ const App = ({ location }) => (
       path="/signup"
       exact
       component={SignupPage}
+    />
+    <Route
+      location={location}
+      path="/confirmation/:token"
+      exact
+      component={ConfirmationPage}
     />
     <UserRoute
       location={location}

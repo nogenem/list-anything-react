@@ -4,8 +4,10 @@ import { Menu, Dropdown, Image, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import gravatarUrl from "gravatar-url";
+import isEmpty from "lodash.isempty";
 
 import * as actions from "../../actions/auth";
+import { allSubjectsSelector } from "../../reducers/subjects";
 
 const trigger = user => (
   <span>
@@ -13,7 +15,7 @@ const trigger = user => (
   </span>
 );
 
-const TopNavigation = ({ user, logout, toggleMenu }) => (
+const TopNavigation = ({ user, logout, toggleMenu, hasSubjects }) => (
   <Menu pointing size="small" attached="top" inverted>
     <Menu.Item onClick={toggleMenu}>
       <Icon name="sidebar" />Menu
@@ -21,6 +23,11 @@ const TopNavigation = ({ user, logout, toggleMenu }) => (
     <Menu.Item as={Link} to="/dashboard">
       Dashboard
     </Menu.Item>
+    {hasSubjects && (
+      <Menu.Item as={Link} to="/subjects/new">
+        Add new Subject
+      </Menu.Item>
+    )}
 
     <Menu.Menu position="right">
       <Dropdown item trigger={trigger(user)}>
@@ -37,12 +44,14 @@ TopNavigation.propTypes = {
     email: PropTypes.string.isRequired
   }).isRequired,
   logout: PropTypes.func.isRequired,
+  hasSubjects: PropTypes.bool.isRequired,
   toggleMenu: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
+    hasSubjects: !isEmpty(allSubjectsSelector(state))
   };
 }
 

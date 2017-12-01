@@ -1,14 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Menu, Sidebar, Segment } from "semantic-ui-react";
+import { connect } from "react-redux";
 
-const subjects = [
-  { _id: "12345", subject: "Jogos" },
-  { _id: "12346", subject: "Filmes" },
-  { _id: "12347", subject: "Series" }
-]; // Exemplo
+import { allSubjectsSelector } from "../../reducers/subjects";
 
-const MainContainer = ({ menuVisible, children }) => (
+const MainContainer = ({ menuVisible, children, subjects }) => (
   <Sidebar.Pushable
     className="main-container"
     as={Segment}
@@ -31,7 +28,7 @@ const MainContainer = ({ menuVisible, children }) => (
       inverted
     >
       {subjects.map(data => (
-        <Menu.Item key={data._id}>{data.subject}</Menu.Item>
+        <Menu.Item key={data._id}>{data.description}</Menu.Item>
       ))}
     </Sidebar>
     <Sidebar.Pusher dimmed={menuVisible}>{children}</Sidebar.Pusher>
@@ -43,7 +40,18 @@ MainContainer.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
-  ]).isRequired
+  ]).isRequired,
+  subjects: PropTypes.arrayOf(
+    PropTypes.shape({
+      description: PropTypes.string.isRequired
+    }).isRequired
+  ).isRequired
 };
 
-export default MainContainer;
+function mapStateToProps(state) {
+  return {
+    subjects: allSubjectsSelector(state)
+  };
+}
+
+export default connect(mapStateToProps)(MainContainer);

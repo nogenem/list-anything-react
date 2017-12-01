@@ -7,7 +7,12 @@ import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
 class DashboardPage extends Component {
   render() {
     const { isConfirmed } = this.props;
-    return <div>{!isConfirmed && <ConfirmEmailMessage />}</div>;
+    return (
+      <div>
+        {!isConfirmed && <ConfirmEmailMessage />}
+        {isConfirmed && "DashBoard!!!!"}
+      </div>
+    );
   }
 }
 

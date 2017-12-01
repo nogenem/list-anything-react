@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Button, Segment } from "semantic-ui-react";
+import { Form, Button, Segment, Message } from "semantic-ui-react";
 import isEmail from "validator/lib/isEmail";
 import InlineError from "../messages/InlineError";
 
@@ -26,11 +26,15 @@ class SignupForm extends React.Component {
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
-      this.props
-        .submit(this.state.data)
-        .catch(err =>
-          this.setState({ errors: err.response.data.errors, loading: false })
-        );
+      this.props.submit(this.state.data).catch(err => {
+        if (err.response.status === 500)
+          this.setState({
+            errors: { global: "Internal server error" },
+            loading: false
+          });
+        else
+          this.setState({ errors: err.response.data.errors, loading: false });
+      });
     }
   };
 
@@ -46,6 +50,12 @@ class SignupForm extends React.Component {
 
     return (
       <Form onSubmit={this.onSubmit} loading={loading}>
+        {errors.global && (
+          <Message negative>
+            <Message.Header>Something went wrong</Message.Header>
+            <p>{errors.global}</p>
+          </Message>
+        )}
         <Segment stacked>
           <Form.Field error={!!errors.email}>
             <Form.Input

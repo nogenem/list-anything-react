@@ -24,11 +24,15 @@ class LoginForm extends React.Component {
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
-      this.props
-        .submit(this.state.data)
-        .catch(err =>
-          this.setState({ errors: err.response.data.errors, loading: false })
-        );
+      this.props.submit(this.state.data).catch(err => {
+        if (err.response.status === 500)
+          this.setState({
+            errors: { global: "Internal server error" },
+            loading: false
+          });
+        else
+          this.setState({ errors: err.response.data.errors, loading: false });
+      });
     }
   };
 

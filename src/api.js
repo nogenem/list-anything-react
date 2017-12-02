@@ -16,6 +16,8 @@ export default {
     resetPassword: data => axios.post("/api/auth/reset_password", { data })
   },
   subjects: {
-    fetchAll: () => axios.get("/api/subjects").then(res => res.data.subjects)
+    fetchAll: () => axios.get("/api/subjects").then(res => res.data.subjects),
+    create: subject =>
+      axios.post("/api/subjects", { subject }).then(res => res.data.subject)
   }
 };

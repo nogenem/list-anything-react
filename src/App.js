@@ -10,6 +10,7 @@ import SignupPage from "./components/pages/SignupPage";
 import ConfirmationPage from "./components/pages/ConfirmationPage";
 import ForgotPasswordPage from "./components/pages/ForgotPasswordPage";
 import ResetPasswordPage from "./components/pages/ResetPasswordPage";
+import NewSubjectPage from "./components/pages/NewSubjectPage";
 import TopNavigation from "./components/navigation/TopNavigation";
 import MainContainer from "./components/containers/MainContainer";
 
@@ -30,16 +31,24 @@ class App extends Component {
     return (
       <div>
         {isAuthenticated && <TopNavigation toggleMenu={this.toggleMenu} />}
-        {isAuthenticated && (
-          <MainContainer menuVisible={menuVisible}>
-            <UserRoute
-              location={location}
-              path="/dashboard"
-              exact
-              component={DashboardPage}
-            />
-          </MainContainer>
-        )}
+
+        <MainContainer
+          menuVisible={menuVisible}
+          style={{ display: isAuthenticated ? "block" : "none" }}
+        >
+          <UserRoute
+            location={location}
+            path="/dashboard"
+            exact
+            component={DashboardPage}
+          />
+          <UserRoute
+            location={location}
+            path="/subjects/new"
+            exact
+            component={NewSubjectPage}
+          />
+        </MainContainer>
 
         <Route location={location} path="/" exact component={HomePage} />
         <GuestRoute

@@ -5,16 +5,18 @@ import { connect } from "react-redux";
 
 import { allSubjectsSelector } from "../../reducers/subjects";
 
-const MainContainer = ({ menuVisible, children, subjects }) => (
+const MainContainer = ({ menuVisible, children, subjects, style }) => (
   <Sidebar.Pushable
     className="main-container"
     as={Segment}
     attached="bottom"
-    style={{ height: "92.3%" }}
+    style={{ height: "92.3%", ...style }}
   >
     <style>{`
       body > div,
-      body > div > div {
+      body > div > div,
+      .main-container > div.pusher,
+      .main-container > div.pusher > div.form-container {
           height: 100%;
       }
     `}</style>
@@ -31,7 +33,9 @@ const MainContainer = ({ menuVisible, children, subjects }) => (
         <Menu.Item key={data._id}>{data.description}</Menu.Item>
       ))}
     </Sidebar>
-    <Sidebar.Pusher dimmed={menuVisible}>{children}</Sidebar.Pusher>
+    <Sidebar.Pusher dimmed={menuVisible} style={{ overflowY: "auto" }}>
+      {children}
+    </Sidebar.Pusher>
   </Sidebar.Pushable>
 );
 
@@ -45,7 +49,14 @@ MainContainer.propTypes = {
     PropTypes.shape({
       description: PropTypes.string.isRequired
     }).isRequired
-  ).isRequired
+  ).isRequired,
+  style: PropTypes.shape({
+    display: PropTypes.string
+  })
+};
+
+MainContainer.defaultProps = {
+  style: {}
 };
 
 function mapStateToProps(state) {

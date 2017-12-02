@@ -1,5 +1,10 @@
 import { normalize } from "normalizr";
-import { SUBJECTS_FETCHED, SUBJECT_CREATED, SUBJECT_FETCHED } from "../types";
+import {
+  SUBJECTS_FETCHED,
+  SUBJECT_CREATED,
+  SUBJECT_FETCHED,
+  SUBJECT_DATA_FETCHED
+} from "../types";
 import api from "../api";
 import { subjectsSchema } from "../schemas";
 
@@ -15,6 +20,11 @@ const subjectCreated = data => ({
 
 const subjectFetched = data => ({
   type: SUBJECT_FETCHED,
+  data
+});
+
+const subjectDataFetched = data => ({
+  type: SUBJECT_DATA_FETCHED,
   data
 });
 
@@ -38,7 +48,9 @@ export const fetchSubjectData = (_id = null) => (dispatch, getState) => {
     const { subject } = getState();
     id = subject.tabs[0]._id;
   }
-  api.subjects.fetchSubjectData(id).then(data => console.log("Data:", data));
+  api.subjects
+    .fetchSubjectData(id)
+    .then(data => dispatch(subjectDataFetched(data)));
 };
 
 export const fetchSubject = _id => dispatch =>

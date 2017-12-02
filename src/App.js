@@ -11,11 +11,15 @@ import ConfirmationPage from "./components/pages/ConfirmationPage";
 import ForgotPasswordPage from "./components/pages/ForgotPasswordPage";
 import ResetPasswordPage from "./components/pages/ResetPasswordPage";
 import NewSubjectPage from "./components/pages/NewSubjectPage";
+import SubjectPage from "./components/pages/SubjectPage";
+
 import TopNavigation from "./components/navigation/TopNavigation";
 import MainContainer from "./components/containers/MainContainer";
 
 import GuestRoute from "./components/routes/GuestRoute";
 import UserRoute from "./components/routes/UserRoute";
+
+import { fetchSubjects } from "./actions/subjects";
 
 // className="ui container"
 class App extends Component {
@@ -23,18 +27,35 @@ class App extends Component {
     menuVisible: false
   };
 
+  componentDidMount() {
+    if (this.props.isAuthenticated) {
+      this.props.fetchSubjects();
+    }
+  }
+
   toggleMenu = () => this.setState({ menuVisible: !this.state.menuVisible });
+
+  hideMenu = () => this.setState({ menuVisible: false });
 
   render() {
     const { location, isAuthenticated } = this.props;
     const { menuVisible } = this.state;
+    const showMainContent =
+      isAuthenticated && !location.pathname.startsWith("/confirmation");
+
     return (
       <div>
-        {isAuthenticated && <TopNavigation toggleMenu={this.toggleMenu} />}
+        {showMainContent && (
+          <TopNavigation
+            toggleMenu={this.toggleMenu}
+            hideMenu={this.hideMenu}
+          />
+        )}
 
         <MainContainer
           menuVisible={menuVisible}
-          style={{ display: isAuthenticated ? "block" : "none" }}
+          hideMenu={this.hideMenu}
+          style={{ display: showMainContent ? "block" : "none" }}
         >
           <UserRoute
             location={location}
@@ -47,6 +68,12 @@ class App extends Component {
             path="/subjects/new"
             exact
             component={NewSubjectPage}
+          />
+          <UserRoute
+            location={location}
+            path="/subject/:_id"
+            exact
+            component={SubjectPage}
           />
         </MainContainer>
 
@@ -63,7 +90,7 @@ class App extends Component {
           exact
           component={SignupPage}
         />
-        <GuestRoute
+        <Route
           location={location}
           path="/confirmation/:token"
           exact
@@ -90,7 +117,8 @@ App.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
   }).isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
+  fetchSubjects: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -99,4 +127,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { fetchSubjects })(App);

@@ -15,16 +15,16 @@ const trigger = user => (
   </span>
 );
 
-const TopNavigation = ({ user, logout, toggleMenu, hasSubjects }) => (
+const TopNavigation = ({ user, logout, toggleMenu, hideMenu, hasSubjects }) => (
   <Menu pointing size="small" attached="top" inverted>
     <Menu.Item onClick={toggleMenu}>
       <Icon name="sidebar" />Menu
     </Menu.Item>
-    <Menu.Item as={Link} to="/dashboard">
+    <Menu.Item as={Link} to="/dashboard" onClick={hideMenu}>
       Dashboard
     </Menu.Item>
     {hasSubjects && (
-      <Menu.Item as={Link} to="/subjects/new">
+      <Menu.Item as={Link} to="/subjects/new" onClick={hideMenu}>
         Add new Subject
       </Menu.Item>
     )}
@@ -45,7 +45,8 @@ TopNavigation.propTypes = {
   }).isRequired,
   logout: PropTypes.func.isRequired,
   hasSubjects: PropTypes.bool.isRequired,
-  toggleMenu: PropTypes.func.isRequired
+  toggleMenu: PropTypes.func.isRequired,
+  hideMenu: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {

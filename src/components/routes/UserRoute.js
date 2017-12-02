@@ -3,11 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
-import { fetchSubjects } from "../../actions/subjects";
-
 class UserRoute extends React.Component {
-  componentDidMount = () => this.props.fetchSubjects();
-
   render() {
     const { isAuthenticated, component: Component, ...rest } = this.props;
     return (
@@ -23,8 +19,7 @@ class UserRoute extends React.Component {
 
 UserRoute.propTypes = {
   component: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  fetchSubjects: PropTypes.func.isRequired
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
@@ -33,4 +28,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchSubjects })(UserRoute);
+export default connect(mapStateToProps)(UserRoute);

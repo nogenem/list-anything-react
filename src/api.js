@@ -18,6 +18,12 @@ export default {
   subjects: {
     fetchAll: () => axios.get("/api/subjects").then(res => res.data.subjects),
     create: subject =>
-      axios.post("/api/subjects", { subject }).then(res => res.data.subject)
+      axios.post("/api/subjects", { subject }).then(res => res.data.subject),
+    fetchSubject: _id =>
+      axios.get(`/api/subjects?_id=${_id}`).then(res => res.data.subject),
+    fetchSubjectData: _id =>
+      axios
+        .get(`/api/subjects/data?tabId=${_id}`)
+        .then(res => res.data.subjectData)
   }
 };

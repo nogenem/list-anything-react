@@ -2,10 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Menu, Sidebar, Segment } from "semantic-ui-react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { allSubjectsSelector } from "../../reducers/subjects";
 
-const MainContainer = ({ menuVisible, children, subjects, style }) => (
+const MainContainer = ({
+  menuVisible,
+  hideMenu,
+  children,
+  subjects,
+  style
+}) => (
   <Sidebar.Pushable
     className="main-container"
     as={Segment}
@@ -30,7 +37,14 @@ const MainContainer = ({ menuVisible, children, subjects, style }) => (
       inverted
     >
       {subjects.map(data => (
-        <Menu.Item key={data._id}>{data.description}</Menu.Item>
+        <Menu.Item
+          as={Link}
+          to={`/subject/${data._id}`}
+          key={data._id}
+          onClick={hideMenu}
+        >
+          {data.description}
+        </Menu.Item>
       ))}
     </Sidebar>
     <Sidebar.Pusher dimmed={menuVisible} style={{ overflowY: "auto" }}>
@@ -41,14 +55,15 @@ const MainContainer = ({ menuVisible, children, subjects, style }) => (
 
 MainContainer.propTypes = {
   menuVisible: PropTypes.bool.isRequired,
+  hideMenu: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired,
   subjects: PropTypes.arrayOf(
     PropTypes.shape({
-      description: PropTypes.string.isRequired
-    }).isRequired
+      description: PropTypes.string
+    })
   ).isRequired,
   style: PropTypes.shape({
     display: PropTypes.string
@@ -56,7 +71,8 @@ MainContainer.propTypes = {
 };
 
 MainContainer.defaultProps = {
-  style: {}
+  style: {},
+  subjects: []
 };
 
 function mapStateToProps(state) {

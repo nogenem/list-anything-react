@@ -7,11 +7,8 @@ import isEmpty from "lodash.isempty";
 import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
 import AddSubjectCtA from "../ctas/AddSubjectCtA";
 import { allSubjectsSelector } from "../../reducers/subjects";
-import { fetchSubjects } from "../../actions/subjects";
 
 class DashboardPage extends Component {
-  componentDidMount = () => this.props.fetchSubjects();
-
   render() {
     const { isConfirmed, subjects } = this.props;
     return (
@@ -29,8 +26,7 @@ DashboardPage.propTypes = {
     PropTypes.shape({
       description: PropTypes.string.isRequired
     }).isRequired
-  ).isRequired,
-  fetchSubjects: PropTypes.func.isRequired
+  ).isRequired
 };
 
 function mapStateToProps(state) {
@@ -40,4 +36,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchSubjects })(DashboardPage);
+export default connect(mapStateToProps)(DashboardPage);

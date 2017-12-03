@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Header, Segment, Table, Loader } from "semantic-ui-react";
+import { Header, Segment, Table, Loader, Button } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { fetchSubject, fetchSubjectData } from "../../actions/subjects";
 
@@ -45,6 +46,7 @@ class SubjectPage extends Component {
         <Header as="h2" color="teal" textAlign="center">
           {subject.description} Data
         </Header>
+        <Button icon="add" positive primary as={Link} to="/subject-data/new" />
         {!loadingSubject && (
           <Table celled compact>
             <Table.Header>

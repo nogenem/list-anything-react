@@ -42,6 +42,8 @@ export const createSubject = data => dispatch =>
       dispatch(subjectCreated(normalize(subject, subjectsSchema)))
     );
 
+export const createSubjectData = data => dispatch => console.log(data);
+
 export const fetchSubjectData = (_id = null) => (dispatch, getState) => {
   let id = _id;
   if (id === null) {

@@ -11,6 +11,7 @@ import ConfirmationPage from "./components/pages/ConfirmationPage";
 import ForgotPasswordPage from "./components/pages/ForgotPasswordPage";
 import ResetPasswordPage from "./components/pages/ResetPasswordPage";
 import NewSubjectPage from "./components/pages/NewSubjectPage";
+import NewSubjectDataPage from "./components/pages/NewSubjectDataPage";
 import SubjectPage from "./components/pages/SubjectPage";
 
 import TopNavigation from "./components/navigation/TopNavigation";
@@ -74,6 +75,12 @@ class App extends Component {
             path="/subject/:_id"
             exact
             component={SubjectPage}
+          />
+          <UserRoute
+            location={location}
+            path="/subject-data/new"
+            exact
+            component={NewSubjectDataPage}
           />
         </MainContainer>
 

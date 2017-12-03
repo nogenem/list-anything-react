@@ -15,11 +15,11 @@ class FieldsAccordionForm extends Component {
     active: false,
     error: "",
     fieldTypes: [
+      "text_input",
+      "url_input_img",
       "textarea",
-      "input_text",
-      "input_url_image",
-      "input_url",
-      "input_text_list"
+      "url_input",
+      "texT_input_list"
     ] // TODO: jogar pro banco de dados
   };
 

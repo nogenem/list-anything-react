@@ -3,6 +3,7 @@ import { Header, Segment } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import NewSubjectDataForm from "../forms/NewSubjectDataForm";
 import { createSubjectData } from "../../actions/subjects";
 
 class NewSubjectDataPage extends Component {
@@ -21,7 +22,7 @@ class NewSubjectDataPage extends Component {
         <Header as="h2" color="teal" textAlign="center">
           Add new Subject Data
         </Header>
-        {/* Form... */}
+        <NewSubjectDataForm submit={this.submit} />
       </Segment>
     );
   }

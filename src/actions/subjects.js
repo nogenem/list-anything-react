@@ -1,9 +1,12 @@
 import { normalize } from "normalizr";
+import forEach from "lodash.foreach";
+
 import {
   SUBJECTS_FETCHED,
   SUBJECT_CREATED,
   SUBJECT_FETCHED,
-  SUBJECT_DATA_FETCHED
+  SUBJECT_DATA_FETCHED,
+  SUBJECT_DATA_CREATED
 } from "../types";
 import api from "../api";
 import { subjectsSchema } from "../schemas";
@@ -15,6 +18,11 @@ const subjectsFetched = data => ({
 
 const subjectCreated = data => ({
   type: SUBJECT_CREATED,
+  data
+});
+
+const subjectDataCreated = data => ({
+  type: SUBJECT_DATA_CREATED,
   data
 });
 
@@ -42,7 +50,27 @@ export const createSubject = data => dispatch =>
       dispatch(subjectCreated(normalize(subject, subjectsSchema)))
     );
 
-export const createSubjectData = data => dispatch => console.log(data);
+const reshapeSubjectData = data => {
+  const result = {
+    tabId: data.tabId,
+    data: []
+  };
+  const keys = Object.keys(data).splice(1); // retira o tabId
+  forEach(keys, key => {
+    result.data.push({
+      fieldId: key,
+      value: data[key]
+    });
+  });
+  return result;
+};
+
+export const createSubjectData = data => dispatch => {
+  const subjectData = reshapeSubjectData(data);
+  return api.subjects
+    .createSubjectData(subjectData)
+    .then(resData => dispatch(subjectDataCreated(resData)));
+};
 
 export const fetchSubjectData = (_id = null) => (dispatch, getState) => {
   let id = _id;

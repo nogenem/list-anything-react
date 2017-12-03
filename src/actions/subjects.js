@@ -48,7 +48,7 @@ export const fetchSubjectData = (_id = null) => (dispatch, getState) => {
     const { subject } = getState();
     id = subject.tabs[0]._id;
   }
-  api.subjects
+  return api.subjects
     .fetchSubjectData(id)
     .then(data => dispatch(subjectDataFetched(data)));
 };

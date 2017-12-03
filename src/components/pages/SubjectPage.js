@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Segment, Table } from "semantic-ui-react";
+import { Header, Segment, Table, Loader } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -11,11 +11,21 @@ class SubjectPage extends Component {
     loadingData: false
   };
 
-  componentDidMount = () => {
+  componentDidMount = () => this.loadData(this.props);
+
+  componentWillReceiveProps(nextProps) {
+    const currentId = this.props.match.params._id;
+    const nextId = nextProps.match.params._id;
+    if (currentId !== nextId) {
+      this.loadData(nextProps);
+    }
+  }
+
+  loadData = props => {
     this.setState({ loadingSubject: true });
-    this.props.fetchSubject(this.props.match.params._id).then(() => {
+    props.fetchSubject(props.match.params._id).then(() => {
       this.setState({ loadingSubject: false, loadingData: true });
-      this.props
+      props
         .fetchSubjectData(null)
         .then(() => this.setState({ loadingData: false }));
     });
@@ -33,7 +43,7 @@ class SubjectPage extends Component {
         loading={loadingSubject}
       >
         <Header as="h2" color="teal" textAlign="center">
-          Show Subject
+          {subject.description} Data
         </Header>
         {!loadingSubject && (
           <Table celled compact>
@@ -47,6 +57,14 @@ class SubjectPage extends Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
+              {loadingData && (
+                <Table.Row>
+                  <Table.Cell width={16}>
+                    <Loader active inline="centered" />
+                  </Table.Cell>
+                </Table.Row>
+              )}
+
               <Table.Row>
                 <Table.Cell>{/* Repensar isso... */}</Table.Cell>
               </Table.Row>

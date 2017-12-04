@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import sortBy from "lodash.sortby";
 
 import { SUBJECT_FETCHED } from "../types";
 
@@ -27,6 +28,10 @@ export const getSubjectId = createSelector(
   subject => subject._id || ""
 );
 export const getTabsArray = state =>
-  Object.values(state.currentSubject.tabs || {});
+  sortBy(Object.values(state.currentSubject.tabs || {}), ["description"]);
 export const getFieldsArray = state =>
-  Object.values(state.currentSubject.fields || {});
+  sortBy(Object.values(state.currentSubject.fields || {}), ["description"]);
+export const getFieldsHash = createSelector(
+  getSubject,
+  subject => subject.fields
+);

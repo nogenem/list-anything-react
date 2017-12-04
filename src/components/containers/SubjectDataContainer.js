@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Menu, Sidebar, Segment } from "semantic-ui-react";
 import { connect } from "react-redux";
+import { getTabsArray } from "../../reducers/currentSubject";
 
 const SubjectDataContainer = ({ menuVisible, onMenuClick, children, tabs }) => (
   <Sidebar.Pushable
@@ -48,7 +49,7 @@ SubjectDataContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    tabs: state.subject.tabs || []
+    tabs: getTabsArray(state)
   };
 }
 

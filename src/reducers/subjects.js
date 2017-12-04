@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+
 import { SUBJECTS_FETCHED, SUBJECT_CREATED } from "../types";
 
 export default function subjects(state = {}, action = {}) {

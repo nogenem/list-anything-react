@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Segment, Table, Loader, Button } from "semantic-ui-react";
+import { Header, Segment, Button } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -7,7 +7,12 @@ import { Link } from "react-router-dom";
 import SubjectDataContainer from "../containers/SubjectDataContainer";
 import { fetchSubject } from "../../actions/subjects";
 import { fetchSubjectData } from "../../actions/subjectData";
-import { getSubjectDescription } from "../../reducers/currentSubject";
+import {
+  getSubjectDescription,
+  getFieldsArray
+} from "../../reducers/currentSubject";
+import { getSubjectDataArray } from "../../reducers/subjectData";
+import SubjectDataTable from "../tables/SubjectDataTable";
 
 class SubjectPage extends Component {
   state = {
@@ -49,7 +54,7 @@ class SubjectPage extends Component {
 
   render() {
     const { loadingData, loadingSubject, menuVisible } = this.state;
-    const { subjectDescription } = this.props;
+    const { subjectDescription, fields, subjectData } = this.props;
     return (
       <Segment
         style={{ maxWidth: "90%", margin: "10px auto", height: "92.3%" }}
@@ -60,6 +65,18 @@ class SubjectPage extends Component {
         </Header>
         <Button icon="sidebar" onClick={this.toggleMenu} />
         <Button icon="add" positive primary as={Link} to="/subject-data/new" />
+        {!loadingSubject && (
+          <SubjectDataContainer
+            menuVisible={menuVisible}
+            onMenuClick={this.onMenuClick}
+          >
+            <SubjectDataTable
+              fields={fields}
+              subjectData={subjectData}
+              loading={loadingData}
+            />
+          </SubjectDataContainer>
+        )}
       </Segment>
     );
   }
@@ -73,12 +90,24 @@ SubjectPage.propTypes = {
   }).isRequired,
   fetchSubject: PropTypes.func.isRequired,
   fetchSubjectData: PropTypes.func.isRequired,
-  subjectDescription: PropTypes.string.isRequired
+  subjectDescription: PropTypes.string.isRequired,
+  fields: PropTypes.arrayOf(
+    PropTypes.shape({
+      description: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  subjectData: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired
+    })
+  ).isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    subjectDescription: getSubjectDescription(state)
+    subjectDescription: getSubjectDescription(state),
+    fields: getFieldsArray(state),
+    subjectData: getSubjectDataArray(state)
   };
 }
 

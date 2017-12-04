@@ -18,7 +18,8 @@ class TabsAccordionForm extends Component {
       data: { ...this.state.data, [e.target.name]: e.target.value }
     });
 
-  onAccordionClick = () => this.setState({ active: !this.state.active });
+  onAccordionClick = () =>
+    this.setState(prevState => ({ active: !prevState.active }));
 
   onAddTab = e => {
     e.preventDefault();

@@ -21,8 +21,8 @@ import GuestRoute from "./components/routes/GuestRoute";
 import UserRoute from "./components/routes/UserRoute";
 
 import { fetchSubjects } from "./actions/subjects";
+import { getEmail } from "./reducers/user";
 
-// className="ui container"
 class App extends Component {
   state = {
     menuVisible: false
@@ -34,7 +34,14 @@ class App extends Component {
     }
   }
 
-  toggleMenu = () => this.setState({ menuVisible: !this.state.menuVisible });
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.isAuthenticated && nextProps.isAuthenticated) {
+      this.props.fetchSubjects();
+    }
+  }
+
+  toggleMenu = () =>
+    this.setState(prevState => ({ menuVisible: !prevState.menuVisible }));
 
   hideMenu = () => this.setState({ menuVisible: false });
 
@@ -130,7 +137,7 @@ App.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: !!state.user.email
+    isAuthenticated: !!getEmail(state)
   };
 }
 

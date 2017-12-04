@@ -85,7 +85,6 @@ class NewSubjectForm extends React.Component {
     return errors;
   };
 
-  // readOnly
   render() {
     const { data, errors, loading } = this.state;
 

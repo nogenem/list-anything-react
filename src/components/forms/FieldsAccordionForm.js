@@ -33,7 +33,8 @@ class FieldsAccordionForm extends Component {
       data: { ...this.state.data, [elm.name]: elm.checked }
     });
 
-  onAccordionClick = () => this.setState({ active: !this.state.active });
+  onAccordionClick = () =>
+    this.setState(prevState => ({ active: !prevState.active }));
 
   onAddField = e => {
     e.preventDefault();

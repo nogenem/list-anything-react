@@ -4,7 +4,7 @@ import { Form } from "semantic-ui-react";
 
 import InlineError from "../messages/InlineError";
 
-const TextInputField = ({ editable, error, onChange, field, value }) => {
+const TextInputField = ({ editable, error, value, field, onChange }) => {
   if (editable)
     return (
       <Form.Field error={!!error}>
@@ -26,17 +26,16 @@ const TextInputField = ({ editable, error, onChange, field, value }) => {
 TextInputField.propTypes = {
   editable: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
-  field: PropTypes.shape({
-    field_type: PropTypes.string.isRequired
-  }),
   value: PropTypes.string.isRequired,
+  field: PropTypes.shape({
+    _id: PropTypes.string,
+    description: PropTypes.string
+  }),
   onChange: PropTypes.func
 };
 
 TextInputField.defaultProps = {
-  field: {
-    field_type: ""
-  },
+  field: {},
   onChange: () => {}
 };
 

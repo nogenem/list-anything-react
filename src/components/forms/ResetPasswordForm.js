@@ -17,7 +17,6 @@ class ResetPasswordForm extends React.Component {
 
   onChange = e =>
     this.setState({
-      ...this.state,
       data: { ...this.state.data, [e.target.name]: e.target.value }
     });
 

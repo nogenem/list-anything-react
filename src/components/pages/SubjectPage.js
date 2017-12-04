@@ -56,7 +56,8 @@ class SubjectPage extends Component {
       .then(() => this.setState({ loadingData: false, currentTabId: tabId }));
   };
 
-  toggleMenu = () => this.setState({ menuVisible: !this.state.menuVisible });
+  toggleMenu = () =>
+    this.setState(prevState => ({ menuVisible: !prevState.menuVisible }));
 
   render() {
     const {
@@ -66,15 +67,15 @@ class SubjectPage extends Component {
       currentTabId
     } = this.state;
     const { subjectDescription, fields } = this.props;
-    let { subjectData } = this.props;
 
+    let { subjectData } = this.props;
     if (subjectData.length > 0 && currentTabId !== "") {
       subjectData = subjectData.filter(d => d.tabId === currentTabId);
     }
 
     return (
       <Segment
-        style={{ maxWidth: "90%", margin: "10px auto", height: "92.3%" }}
+        style={{ maxWidth: "90%", margin: "10px auto", height: "96.5%" }}
         loading={loadingSubject}
       >
         <Header as="h2" color="teal" textAlign="center">

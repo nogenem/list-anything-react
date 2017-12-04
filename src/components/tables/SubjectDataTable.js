@@ -14,7 +14,6 @@ const renderValue = (data, fieldHash) => {
     key: data._id,
     editable: false,
     error: "",
-    onChange: null,
     value: data.value
   };
   switch (fieldHash[data.fieldId].field_type) {

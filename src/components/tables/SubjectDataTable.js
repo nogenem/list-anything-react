@@ -6,13 +6,35 @@ import PropTypes from "prop-types";
 import * as sdReducers from "../../reducers/subjectData";
 import { getFieldsHash } from "../../reducers/currentSubject";
 
+import TextInputField from "../fields/TextInputField";
+import UrlInputImgField from "../fields/UrlInputImgField";
+
+const renderValue = (data, fieldHash) => {
+  const fieldData = {
+    key: data._id,
+    editable: false,
+    error: "",
+    onChange: null,
+    value: data.value
+  };
+  switch (fieldHash[data.fieldId].field_type) {
+    case "text_input":
+      return <TextInputField {...fieldData} />;
+    case "url_input_img":
+      return <UrlInputImgField {...fieldData} />;
+    default:
+      return <div key={data._id} />;
+  }
+};
+
 const SubjectDataTable = ({
   loading,
   fields,
   subjectData,
+  fieldHash,
   getSubjectDataData
 }) => (
-  <Table celled compact>
+  <Table celled compact="very" selectable>
     <Table.Header>
       <Table.Row>
         {fields.map(field => (
@@ -34,7 +56,9 @@ const SubjectDataTable = ({
         subjectData.map(sd => (
           <Table.Row key={sd._id}>
             {getSubjectDataData(sd._id).map(d => (
-              <Table.Cell key={d._id}>{d.value}</Table.Cell>
+              <Table.Cell collapsing key={d._id}>
+                {renderValue(d, fieldHash)}
+              </Table.Cell>
             ))}
           </Table.Row>
         ))}
@@ -54,15 +78,23 @@ SubjectDataTable.propTypes = {
     PropTypes.shape({
       _id: PropTypes.string.isRequired
     })
-  ).isRequired
+  ).isRequired,
+  fieldHash: PropTypes.objectOf(
+    PropTypes.shape({
+      _id: PropTypes.string
+    })
+  )
+};
+
+SubjectDataTable.defaultProps = {
+  fieldHash: {}
 };
 
 function mapStateToProps(state) {
+  const fieldHash = getFieldsHash(state);
   return {
-    getSubjectDataData: sdReducers.getSubjectDataData(
-      state,
-      getFieldsHash(state)
-    )
+    getSubjectDataData: sdReducers.getSubjectDataData(state, fieldHash),
+    fieldHash
   };
 }
 

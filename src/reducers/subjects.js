@@ -12,9 +12,7 @@ export default function subjects(state = {}, action = {}) {
 }
 
 // SELECTORS
-
 export const getSubjects = state => state.subjects;
-
 export const getSubjectsArray = createSelector(getSubjects, subjectsHash =>
-  Object.values(subjectsHash)
+  Object.values(subjectsHash || {})
 );

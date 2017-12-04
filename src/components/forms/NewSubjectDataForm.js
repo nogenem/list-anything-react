@@ -6,13 +6,14 @@ import forEach from "lodash.foreach";
 
 import TextInputField from "../fields/TextInputField";
 import UrlInputImgField from "../fields/UrlInputImgField";
+import { getTabsArray, getFieldsArray } from "../../reducers/currentSubject";
 
 class NewSubjectDataForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       data: {
-        tabId: props.subject.tabs[0]._id
+        tabId: props.tabs[0]._id
       },
       errors: {},
       loading: false
@@ -43,9 +44,9 @@ class NewSubjectDataForm extends React.Component {
 
   validate = data => {
     const errors = {};
-    const { subject } = this.props;
+    const { fields } = this.props;
     // TODO: Melhorar isso...
-    forEach(subject.fields, val => {
+    forEach(fields, val => {
       if (!data[val._id]) errors[val._id] = "Can't be blank";
     });
     return errors;
@@ -73,7 +74,7 @@ class NewSubjectDataForm extends React.Component {
 
   render() {
     const { errors, loading, data } = this.state;
-    const { subject } = this.props;
+    const { tabs, fields } = this.props;
     return (
       <Form onSubmit={this.onSubmit} loading={loading} size="large">
         {errors.global && (
@@ -90,13 +91,13 @@ class NewSubjectDataForm extends React.Component {
             value={data.tabId}
             onChange={this.onChange}
           >
-            {subject.tabs.map(tab => (
+            {tabs.map(tab => (
               <option key={tab._id} value={tab._id}>
                 {tab.description}
               </option>
             ))}
           </Form.Field>
-          {subject.fields.map(field => this.renderField(field))}
+          {fields.map(field => this.renderField(field))}
           <Button color="teal" fluid size="large">
             Add
           </Button>
@@ -108,25 +109,24 @@ class NewSubjectDataForm extends React.Component {
 
 NewSubjectDataForm.propTypes = {
   submit: PropTypes.func.isRequired,
-  subject: PropTypes.shape({
-    fields: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.string,
-        description: PropTypes.string
-      })
-    ).isRequired,
-    tabs: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.string,
-        description: PropTypes.string
-      })
-    ).isRequired
-  }).isRequired
+  fields: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      description: PropTypes.string
+    })
+  ).isRequired,
+  tabs: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      description: PropTypes.string
+    })
+  ).isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    subject: state.subject
+    tabs: getTabsArray(state),
+    fields: getFieldsArray(state)
   };
 }
 

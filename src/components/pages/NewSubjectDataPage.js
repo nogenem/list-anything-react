@@ -4,19 +4,18 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import NewSubjectDataForm from "../forms/NewSubjectDataForm";
-import { createSubjectData } from "../../actions/subjects";
+import { createSubjectData } from "../../actions/subjectData";
+import { getSubjectId } from "../../reducers/currentSubject";
 
 class NewSubjectDataPage extends Component {
   submit = data =>
     this.props
       .createSubjectData(data)
-      .then(() =>
-        this.props.history.push(`/subject/${this.props.subject._id}`)
-      );
+      .then(() => this.props.history.push(`/subject/${this.props.subjectId}`));
 
   render() {
-    const { subject } = this.props;
-    if (!subject.description) return <div />;
+    const { subjectId } = this.props;
+    if (!subjectId) return <div />;
     return (
       <Segment style={{ maxWidth: 500, margin: "10px auto" }}>
         <Header as="h2" color="teal" textAlign="center">
@@ -33,15 +32,12 @@ NewSubjectDataPage.propTypes = {
     push: PropTypes.func.isRequired
   }).isRequired,
   createSubjectData: PropTypes.func.isRequired,
-  subject: PropTypes.shape({
-    _id: PropTypes.string,
-    description: PropTypes.string
-  }).isRequired
+  subjectId: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    subject: state.subject
+    subjectId: getSubjectId(state)
   };
 }
 

@@ -15,9 +15,15 @@ export default function user(state = {}, action = {}) {
 
 // SELECTORS
 export const getUser = state => state.user;
-export const getEmail = createSelector(getUser, userData => userData.email);
+export const getEmail = createSelector(
+  getUser,
+  userData => userData.email || ""
+);
 export const getConfirmed = createSelector(
   getUser,
-  userData => userData.confirmed
+  userData => userData.confirmed || false
 );
-export const getToken = createSelector(getUser, userData => userData.token);
+export const getToken = createSelector(
+  getUser,
+  userData => userData.token || ""
+);

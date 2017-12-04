@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import SubjectDataContainer from "../containers/SubjectDataContainer";
-import { fetchSubject, fetchSubjectData } from "../../actions/subjects";
+import { fetchSubject } from "../../actions/subjects";
+import { fetchSubjectData } from "../../actions/subjectData";
+import { getSubjectDescription } from "../../reducers/currentSubject";
 
 class SubjectPage extends Component {
   state = {
@@ -47,51 +49,17 @@ class SubjectPage extends Component {
 
   render() {
     const { loadingData, loadingSubject, menuVisible } = this.state;
-    const { subject } = this.props;
-    const fields = subject.fields
-      ? subject.fields.filter(field => field.show_in_list)
-      : [];
+    const { subjectDescription } = this.props;
     return (
       <Segment
         style={{ maxWidth: "90%", margin: "10px auto", height: "92.3%" }}
         loading={loadingSubject}
       >
         <Header as="h2" color="teal" textAlign="center">
-          {subject.description} Data
+          {subjectDescription} Data
         </Header>
         <Button icon="sidebar" onClick={this.toggleMenu} />
         <Button icon="add" positive primary as={Link} to="/subject-data/new" />
-        {!loadingSubject && (
-          <SubjectDataContainer
-            menuVisible={menuVisible}
-            onMenuClick={this.onMenuClick}
-          >
-            <Table celled compact>
-              <Table.Header>
-                <Table.Row>
-                  {fields.map(field => (
-                    <Table.HeaderCell key={field._id}>
-                      {field.description}
-                    </Table.HeaderCell>
-                  ))}
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {loadingData && (
-                  <Table.Row>
-                    <Table.Cell width={16}>
-                      <Loader active inline="centered" />
-                    </Table.Cell>
-                  </Table.Row>
-                )}
-
-                <Table.Row>
-                  <Table.Cell>{/* Repensar isso... */}</Table.Cell>
-                </Table.Row>
-              </Table.Body>
-            </Table>
-          </SubjectDataContainer>
-        )}
       </Segment>
     );
   }
@@ -105,14 +73,12 @@ SubjectPage.propTypes = {
   }).isRequired,
   fetchSubject: PropTypes.func.isRequired,
   fetchSubjectData: PropTypes.func.isRequired,
-  subject: PropTypes.shape({
-    description: PropTypes.string
-  }).isRequired
+  subjectDescription: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    subject: state.subject
+    subjectDescription: getSubjectDescription(state)
   };
 }
 

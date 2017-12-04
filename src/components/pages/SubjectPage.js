@@ -9,7 +9,8 @@ import { fetchSubject } from "../../actions/subjects";
 import { fetchSubjectData } from "../../actions/subjectData";
 import {
   getSubjectDescription,
-  getFieldsArray
+  getFieldsArray,
+  getTabsArray
 } from "../../reducers/currentSubject";
 import { getSubjectDataArray } from "../../reducers/subjectData";
 import SubjectDataTable from "../tables/SubjectDataTable";
@@ -18,7 +19,8 @@ class SubjectPage extends Component {
   state = {
     loadingSubject: false,
     loadingData: false,
-    menuVisible: false
+    menuVisible: false,
+    currentTabId: ""
   };
 
   componentDidMount = () => this.loadSubjects(this.props);
@@ -28,6 +30,10 @@ class SubjectPage extends Component {
     const nextId = nextProps.match.params._id;
     if (currentId !== nextId) {
       this.loadSubjects(nextProps);
+    }
+
+    if (this.props.firstTab !== nextProps.firstTab) {
+      this.loadSubjectData(nextProps, nextProps.firstTab._id);
     }
   }
 
@@ -40,21 +46,32 @@ class SubjectPage extends Component {
     this.setState({ loadingSubject: true });
     props
       .fetchSubject(props.match.params._id)
-      .then(() => this.loadSubjectData(props, null));
+      .then(() => this.setState({ loadingSubject: false }));
   };
 
-  loadSubjectData = (props, _id) => {
-    this.setState({ loadingSubject: false, loadingData: true });
+  loadSubjectData = (props, tabId) => {
+    this.setState({ loadingData: true });
     props
-      .fetchSubjectData(_id)
-      .then(() => this.setState({ loadingData: false }));
+      .fetchSubjectData(tabId)
+      .then(() => this.setState({ loadingData: false, currentTabId: tabId }));
   };
 
   toggleMenu = () => this.setState({ menuVisible: !this.state.menuVisible });
 
   render() {
-    const { loadingData, loadingSubject, menuVisible } = this.state;
-    const { subjectDescription, fields, subjectData } = this.props;
+    const {
+      loadingData,
+      loadingSubject,
+      menuVisible,
+      currentTabId
+    } = this.state;
+    const { subjectDescription, fields } = this.props;
+    let { subjectData } = this.props;
+
+    if (subjectData.length > 0 && currentTabId !== "") {
+      subjectData = subjectData.filter(d => d.tabId === currentTabId);
+    }
+
     return (
       <Segment
         style={{ maxWidth: "90%", margin: "10px auto", height: "92.3%" }}
@@ -100,14 +117,24 @@ SubjectPage.propTypes = {
     PropTypes.shape({
       _id: PropTypes.string.isRequired
     })
-  ).isRequired
+  ).isRequired,
+  firstTab: PropTypes.shape({
+    _id: PropTypes.string.isRequired
+  })
+};
+
+SubjectPage.defaultProps = {
+  firstTab: {
+    _id: ""
+  }
 };
 
 function mapStateToProps(state) {
   return {
     subjectDescription: getSubjectDescription(state),
     fields: getFieldsArray(state),
-    subjectData: getSubjectDataArray(state)
+    subjectData: getSubjectDataArray(state),
+    firstTab: getTabsArray(state)[0]
   };
 }
 

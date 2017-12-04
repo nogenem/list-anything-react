@@ -1,6 +1,5 @@
 import { normalize } from "normalizr";
 import forEach from "lodash.foreach";
-import { getTabsArray } from "../reducers/currentSubject";
 
 import { SUBJECT_DATA_FETCHED, SUBJECT_DATA_CREATED } from "../types";
 import api from "../api";
@@ -16,18 +15,12 @@ const subjectDataFetched = data => ({
   data
 });
 
-export const fetchSubjectData = (_id = null) => (dispatch, getState) => {
-  let id = _id;
-  if (id === null) {
-    const tabs = getTabsArray(getState());
-    id = tabs[0]._id;
-  }
-  return api.subjects
-    .fetchSubjectData(id)
+export const fetchSubjectData = tabId => dispatch =>
+  api.subjects
+    .fetchSubjectData(tabId)
     .then(data =>
       dispatch(subjectDataFetched(normalize(data, [subjectDataSchema])))
     );
-};
 
 const reshapeSubjectData = data => {
   const result = {

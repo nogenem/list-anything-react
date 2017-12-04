@@ -7,15 +7,22 @@ import gravatarUrl from "gravatar-url";
 import isEmpty from "lodash.isempty";
 
 import * as actions from "../../actions/auth";
-import { allSubjectsSelector } from "../../reducers/subjects";
+import { getSubjectsArray } from "../../reducers/subjects";
+import { getEmail } from "../../reducers/user";
 
-const trigger = user => (
+const trigger = email => (
   <span>
-    <Image avatar src={gravatarUrl(user.email, { size: 30 })} />
+    <Image avatar src={gravatarUrl(email, { size: 30 })} />
   </span>
 );
 
-const TopNavigation = ({ user, logout, toggleMenu, hideMenu, hasSubjects }) => (
+const TopNavigation = ({
+  email,
+  logout,
+  toggleMenu,
+  hideMenu,
+  hasSubjects
+}) => (
   <Menu pointing size="small" attached="top" inverted>
     <Menu.Item onClick={toggleMenu}>
       <Icon name="sidebar" />Menu
@@ -30,9 +37,9 @@ const TopNavigation = ({ user, logout, toggleMenu, hideMenu, hasSubjects }) => (
     )}
 
     <Menu.Menu position="right">
-      <Dropdown item trigger={trigger(user)}>
+      <Dropdown item trigger={trigger(email)}>
         <Dropdown.Menu>
-          <Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>
+          <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </Menu.Menu>
@@ -40,9 +47,7 @@ const TopNavigation = ({ user, logout, toggleMenu, hideMenu, hasSubjects }) => (
 );
 
 TopNavigation.propTypes = {
-  user: PropTypes.shape({
-    email: PropTypes.string.isRequired
-  }).isRequired,
+  email: PropTypes.string.isRequired,
   logout: PropTypes.func.isRequired,
   hasSubjects: PropTypes.bool.isRequired,
   toggleMenu: PropTypes.func.isRequired,
@@ -51,8 +56,8 @@ TopNavigation.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
-    hasSubjects: !isEmpty(allSubjectsSelector(state))
+    email: getEmail(state),
+    hasSubjects: !isEmpty(getSubjectsArray(state))
   };
 }
 

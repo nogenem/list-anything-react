@@ -1,3 +1,5 @@
+import { createSelector } from "reselect";
+
 import { USER_LOGGED_IN, USER_LOGGED_OUT } from "../types";
 
 export default function user(state = {}, action = {}) {
@@ -10,3 +12,12 @@ export default function user(state = {}, action = {}) {
       return state;
   }
 }
+
+// SELECTORS
+export const getUser = state => state.user;
+export const getEmail = createSelector(getUser, userData => userData.email);
+export const getConfirmed = createSelector(
+  getUser,
+  userData => userData.confirmed
+);
+export const getToken = createSelector(getUser, userData => userData.token);

@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
+import { getToken } from "../../reducers/user";
+
 class UserRoute extends React.Component {
   render() {
     const { isAuthenticated, component: Component, ...rest } = this.props;
@@ -24,7 +26,7 @@ UserRoute.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: !!state.user.token
+    isAuthenticated: !!getToken(state)
   };
 }
 

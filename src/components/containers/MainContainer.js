@@ -4,7 +4,7 @@ import { Menu, Sidebar, Segment } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { allSubjectsSelector } from "../../reducers/subjects";
+import { getSubjectsArray } from "../../reducers/subjects";
 
 const MainContainer = ({
   menuVisible,
@@ -36,14 +36,14 @@ const MainContainer = ({
       vertical
       inverted
     >
-      {subjects.map(data => (
+      {subjects.map(subject => (
         <Menu.Item
           as={Link}
-          to={`/subject/${data._id}`}
-          key={data._id}
+          to={`/subject/${subject._id}`}
+          key={subject._id}
           onClick={hideMenu}
         >
-          {data.description}
+          {subject.description}
         </Menu.Item>
       ))}
     </Sidebar>
@@ -62,6 +62,7 @@ MainContainer.propTypes = {
   ]).isRequired,
   subjects: PropTypes.arrayOf(
     PropTypes.shape({
+      _id: PropTypes.string,
       description: PropTypes.string
     })
   ).isRequired,
@@ -77,7 +78,7 @@ MainContainer.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    subjects: allSubjectsSelector(state)
+    subjects: getSubjectsArray(state)
   };
 }
 

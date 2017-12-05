@@ -1,7 +1,10 @@
 import { createSelector } from "reselect";
 import sortBy from "lodash.sortby";
 
-import { SUBJECT_DATA_FETCHED, SUBJECT_FETCHED } from "../types";
+import {
+  SUBJECT_DATA_FETCHED,
+  SUBJECT_FETCHED
+} from "../constants/actionTypes";
 
 export default function subjectData(state = {}, action = {}) {
   switch (action.type) {

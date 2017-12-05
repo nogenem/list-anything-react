@@ -1,6 +1,10 @@
 import { normalize } from "normalizr";
 
-import { SUBJECTS_FETCHED, SUBJECT_CREATED, SUBJECT_FETCHED } from "../types";
+import {
+  SUBJECTS_FETCHED,
+  SUBJECT_CREATED,
+  SUBJECT_FETCHED
+} from "../constants/actionTypes";
 import api from "../api";
 import { subjectsSchema, subjectSchema } from "../schemas";
 

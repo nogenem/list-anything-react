@@ -7,6 +7,7 @@ import forEach from "lodash.foreach";
 import TextInputField from "../fields/TextInputField";
 import UrlInputImgField from "../fields/UrlInputImgField";
 import { getTabsArray, getFieldsArray } from "../../reducers/currentSubject";
+import * as fieldTypes from "../../constants/fieldTypes";
 
 class NewSubjectDataForm extends React.Component {
   constructor(props) {
@@ -63,9 +64,9 @@ class NewSubjectDataForm extends React.Component {
       value: data[field._id] || ""
     };
     switch (field.field_type) {
-      case "text_input":
+      case fieldTypes.TEXT_INPUT:
         return <TextInputField {...fieldData} />;
-      case "url_input_img":
+      case fieldTypes.URL_INPUT_IMG:
         return <UrlInputImgField {...fieldData} />;
       default:
         return <div key={field._id} />;

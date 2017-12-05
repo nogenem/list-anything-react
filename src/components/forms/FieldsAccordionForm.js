@@ -3,6 +3,7 @@ import { Accordion, List, Icon, Form } from "semantic-ui-react";
 import PropTypes from "prop-types";
 
 import InlineError from "../messages/InlineError";
+import * as fieldTypes from "../../constants/fieldTypes";
 
 class FieldsAccordionForm extends Component {
   state = {
@@ -13,14 +14,7 @@ class FieldsAccordionForm extends Component {
       field_type: ""
     },
     active: false,
-    error: "",
-    fieldTypes: [
-      "text_input",
-      "url_input_img",
-      "textarea",
-      "url_input",
-      "texT_input_list"
-    ] // TODO: jogar pro banco de dados
+    error: ""
   };
 
   onChange = e =>
@@ -69,7 +63,7 @@ class FieldsAccordionForm extends Component {
 
   render() {
     const { fields, removeField } = this.props;
-    const { data, active, error, fieldTypes } = this.state;
+    const { data, active, error } = this.state;
 
     return (
       <Accordion as={Form.Field}>
@@ -101,7 +95,7 @@ class FieldsAccordionForm extends Component {
             value={data.field_type}
             onChange={this.onChange}
           >
-            {fieldTypes.map((type, idx) => (
+            {Object.values(fieldTypes).map((type, idx) => (
               <option key={idx} value={type}>
                 {type}
               </option>

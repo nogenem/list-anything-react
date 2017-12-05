@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 
 import * as sdReducers from "../../reducers/subjectData";
 import { getFieldsHash } from "../../reducers/currentSubject";
+import * as fieldTypes from "../../constants/fieldTypes";
 
 import TextInputField from "../fields/TextInputField";
 import UrlInputImgField from "../fields/UrlInputImgField";
@@ -17,9 +18,9 @@ const renderValue = (data, fieldHash) => {
     value: data.value
   };
   switch (fieldHash[data.fieldId].field_type) {
-    case "text_input":
+    case fieldTypes.TEXT_INPUT:
       return <TextInputField {...fieldData} />;
-    case "url_input_img":
+    case fieldTypes.URL_INPUT_IMG:
       return <UrlInputImgField {...fieldData} />;
     default:
       return <div key={data._id} />;

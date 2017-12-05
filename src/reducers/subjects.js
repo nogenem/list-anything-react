@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-import { SUBJECTS_FETCHED, SUBJECT_CREATED } from "../types";
+import { SUBJECTS_FETCHED, SUBJECT_CREATED } from "../constants/actionTypes";
 
 export default function subjects(state = {}, action = {}) {
   switch (action.type) {

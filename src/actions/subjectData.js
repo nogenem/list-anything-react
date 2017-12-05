@@ -1,7 +1,10 @@
 import { normalize } from "normalizr";
 import forEach from "lodash.foreach";
 
-import { SUBJECT_DATA_FETCHED, SUBJECT_DATA_CREATED } from "../types";
+import {
+  SUBJECT_DATA_FETCHED,
+  SUBJECT_DATA_CREATED
+} from "../constants/actionTypes";
 import api from "../api";
 import { subjectDataSchema } from "../schemas";
 

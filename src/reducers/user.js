@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-import { USER_LOGGED_IN, USER_LOGGED_OUT } from "../types";
+import { USER_LOGGED_IN, USER_LOGGED_OUT } from "../constants/actionTypes";
 
 export default function user(state = {}, action = {}) {
   switch (action.type) {

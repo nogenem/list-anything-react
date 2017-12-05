@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import sortBy from "lodash.sortby";
 
-import { SUBJECT_FETCHED } from "../types";
+import { SUBJECT_FETCHED } from "../constants/actionTypes";
 
 const reshapeSubject = ({ subject: subjectHash, tabs, fields }) => {
   const subject = Object.values(subjectHash)[0];

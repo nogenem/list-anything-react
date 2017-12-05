@@ -68,9 +68,9 @@ class SubjectPage extends Component {
     } = this.state;
     const { subjectDescription, fields } = this.props;
 
-    let { subjectData } = this.props;
-    if (subjectData.length > 0 && currentTabId !== "") {
-      subjectData = subjectData.filter(d => d.tabId === currentTabId);
+    let { subjectDataArray } = this.props;
+    if (subjectDataArray.length > 0 && currentTabId !== "") {
+      subjectDataArray = subjectDataArray.filter(d => d.tabId === currentTabId);
     }
 
     return (
@@ -90,7 +90,7 @@ class SubjectPage extends Component {
           >
             <SubjectDataTable
               fields={fields}
-              subjectData={subjectData}
+              subjectDataArray={subjectDataArray}
               loading={loadingData}
             />
           </SubjectDataContainer>
@@ -114,7 +114,7 @@ SubjectPage.propTypes = {
       description: PropTypes.string.isRequired
     })
   ).isRequired,
-  subjectData: PropTypes.arrayOf(
+  subjectDataArray: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired
     })
@@ -134,7 +134,7 @@ function mapStateToProps(state) {
   return {
     subjectDescription: getSubjectDescription(state),
     fields: getFieldsArray(state),
-    subjectData: getSubjectDataArray(state),
+    subjectDataArray: getSubjectDataArray(state),
     firstTab: getTabsArray(state)[0]
   };
 }

@@ -1,23 +1,20 @@
 import React from "react";
 import { Table, Loader } from "semantic-ui-react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import * as sdReducers from "../../reducers/subjectData";
-import { getFieldsHash } from "../../reducers/currentSubject";
 import * as fieldTypes from "../../constants/fieldTypes";
 
 import TextInputField from "../fields/TextInputField";
 import UrlInputImgField from "../fields/UrlInputImgField";
 
-const renderValue = (data, fieldHash) => {
+const renderValue = (data, field) => {
   const fieldData = {
     key: data._id,
     editable: false,
     error: "",
     value: data.value
   };
-  switch (fieldHash[data.fieldId].field_type) {
+  switch (field.field_type) {
     case fieldTypes.TEXT_INPUT:
       return <TextInputField {...fieldData} />;
     case fieldTypes.URL_INPUT_IMG:
@@ -27,13 +24,16 @@ const renderValue = (data, fieldHash) => {
   }
 };
 
-const SubjectDataTable = ({
-  loading,
-  fields,
-  subjectData,
-  fieldHash,
-  getSubjectDataData
-}) => (
+const renderCell = (subjectData, field) => {
+  const data = subjectData.data[field._id];
+  return (
+    <Table.Cell collapsing key={data._id}>
+      {renderValue(data, field)}
+    </Table.Cell>
+  );
+};
+
+const SubjectDataTable = ({ loading, fields, subjectDataArray }) => (
   <Table celled compact="very" selectable>
     <Table.Header>
       <Table.Row>
@@ -53,13 +53,9 @@ const SubjectDataTable = ({
         </Table.Row>
       )}
       {!loading &&
-        subjectData.map(sd => (
+        subjectDataArray.map(sd => (
           <Table.Row key={sd._id}>
-            {getSubjectDataData(sd._id).map(d => (
-              <Table.Cell collapsing key={d._id}>
-                {renderValue(d, fieldHash)}
-              </Table.Cell>
-            ))}
+            {fields.map(field => renderCell(sd, field))}
           </Table.Row>
         ))}
     </Table.Body>
@@ -73,29 +69,15 @@ SubjectDataTable.propTypes = {
       description: PropTypes.string.isRequired
     })
   ).isRequired,
-  getSubjectDataData: PropTypes.func.isRequired,
-  subjectData: PropTypes.arrayOf(
+  subjectDataArray: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired
     })
-  ).isRequired,
-  fieldHash: PropTypes.objectOf(
-    PropTypes.shape({
-      _id: PropTypes.string
-    })
-  )
+  ).isRequired
 };
 
 SubjectDataTable.defaultProps = {
   fieldHash: {}
 };
 
-function mapStateToProps(state) {
-  const fieldHash = getFieldsHash(state);
-  return {
-    getSubjectDataData: sdReducers.getSubjectDataData(state, fieldHash),
-    fieldHash
-  };
-}
-
-export default connect(mapStateToProps)(SubjectDataTable);
+export default SubjectDataTable;

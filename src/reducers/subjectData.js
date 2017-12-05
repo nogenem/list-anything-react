@@ -1,15 +1,32 @@
 import { createSelector } from "reselect";
-import sortBy from "lodash.sortby";
+import forEach from "lodash.foreach";
 
 import {
   SUBJECT_DATA_FETCHED,
   SUBJECT_FETCHED
 } from "../constants/actionTypes";
 
+// Muda a sub-array data para um objeto aonde as keys
+// são os fieldId de cada dado de campo.
+// Isso ajuda na hora de apresentar os dados na forma de tabela
+// na classe SubjectDataTable, por exemplo.
+const reshapeData = ({ subjectData: sData }) => {
+  const values = Object.values(sData || {});
+  const result = {};
+  forEach(values, v => {
+    const ret = { _id: v._id, tabId: v.tabId, data: {} };
+    forEach(Object.values(v.data), e => {
+      ret.data[e.fieldId] = e;
+    });
+    result[v._id] = ret;
+  });
+  return result;
+};
+
 export default function subjectData(state = {}, action = {}) {
   switch (action.type) {
     case SUBJECT_DATA_FETCHED:
-      return { ...state, ...action.data.entities.subjectData };
+      return { ...state, ...reshapeData(action.data.entities) };
     case SUBJECT_FETCHED:
       return {};
     default:
@@ -22,9 +39,3 @@ export const getSubjectData = state => state.subjectData;
 export const getSubjectDataArray = createSelector(getSubjectData, dataHash =>
   Object.values(dataHash || {})
 );
-export const getSubjectDataData = (state, fieldHash) => _id => {
-  const dataObj = getSubjectData(state)[_id];
-  return dataObj
-    ? sortBy(dataObj.data, [o => fieldHash[o.fieldId].description])
-    : [];
-};

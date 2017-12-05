@@ -88,7 +88,7 @@ class NewSubjectDataForm extends React.Component {
           <Form.Field
             label="Select the tab:"
             control="select"
-            name="tab"
+            name="tabId"
             value={data.tabId}
             onChange={this.onChange}
           >

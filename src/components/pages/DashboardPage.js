@@ -5,30 +5,28 @@ import { Segment } from "semantic-ui-react";
 import isEmpty from "lodash.isempty";
 
 import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
+import WelcomeMessage from "../messages/WelcomeMessage";
 import AddSubjectCtA from "../ctas/AddSubjectCtA";
 import { getConfirmed } from "../../reducers/user";
 import { getSubjectsArray } from "../../reducers/subjects";
 
-const DashboardPage = ({ isConfirmed, subjects }) => (
+const DashboardPage = ({ isConfirmed, hasSubjects }) => (
   <Segment basic>
     {!isConfirmed && <ConfirmEmailMessage />}
-    {isConfirmed && isEmpty(subjects) && <AddSubjectCtA />}
+    {isConfirmed && !hasSubjects && <AddSubjectCtA />}
+    {isConfirmed && hasSubjects && <WelcomeMessage />}
   </Segment>
 );
 
 DashboardPage.propTypes = {
   isConfirmed: PropTypes.bool.isRequired,
-  subjects: PropTypes.arrayOf(
-    PropTypes.shape({
-      description: PropTypes.string.isRequired
-    }).isRequired
-  ).isRequired
+  hasSubjects: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     isConfirmed: !!getConfirmed(state),
-    subjects: getSubjectsArray(state)
+    hasSubjects: !isEmpty(getSubjectsArray(state))
   };
 }
 

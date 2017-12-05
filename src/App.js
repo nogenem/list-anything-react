@@ -13,6 +13,7 @@ import ResetPasswordPage from "./components/pages/ResetPasswordPage";
 import NewSubjectPage from "./components/pages/NewSubjectPage";
 import NewSubjectDataPage from "./components/pages/NewSubjectDataPage";
 import SubjectPage from "./components/pages/SubjectPage";
+import ErrorPage from "./components/pages/ErrorPage";
 
 import TopNavigation from "./components/navigation/TopNavigation";
 import MainContainer from "./components/containers/MainContainer";
@@ -25,20 +26,30 @@ import { getEmail } from "./reducers/user";
 
 class App extends Component {
   state = {
-    menuVisible: false
+    menuVisible: false,
+    loading: true,
+    error: false
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     if (this.props.isAuthenticated) {
-      this.props.fetchSubjects();
+      this.loadSubjects();
     }
-  }
+  };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps = nextProps => {
     if (!this.props.isAuthenticated && nextProps.isAuthenticated) {
-      this.props.fetchSubjects();
+      this.setState({ loading: true });
+      this.loadSubjects();
     }
-  }
+  };
+
+  loadSubjects = () => {
+    this.props
+      .fetchSubjects()
+      .then(() => this.setState({ loading: false }))
+      .catch(() => this.setState({ error: true }));
+  };
 
   toggleMenu = () =>
     this.setState(prevState => ({ menuVisible: !prevState.menuVisible }));
@@ -47,12 +58,17 @@ class App extends Component {
 
   render() {
     const { location, isAuthenticated } = this.props;
-    const { menuVisible } = this.state;
+    const { menuVisible, error, loading } = this.state;
     const showMainContent =
-      isAuthenticated && !location.pathname.startsWith("/confirmation");
+      isAuthenticated &&
+      !loading &&
+      !error &&
+      !location.pathname.startsWith("/confirmation");
 
     return (
       <div>
+        {error && <ErrorPage />}
+
         {showMainContent && (
           <TopNavigation
             toggleMenu={this.toggleMenu}

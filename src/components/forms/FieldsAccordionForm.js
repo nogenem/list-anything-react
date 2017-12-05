@@ -11,7 +11,7 @@ class FieldsAccordionForm extends Component {
       description: "",
       is_unique: false,
       show_in_list: false,
-      field_type: ""
+      field_type: Object.values(fieldTypes)[0]
     },
     active: false,
     error: ""
@@ -41,7 +41,7 @@ class FieldsAccordionForm extends Component {
           description: "",
           is_unique: false,
           show_in_list: false,
-          field_type: ""
+          field_type: Object.values(fieldTypes)[0]
         }
       });
     }

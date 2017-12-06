@@ -4,7 +4,7 @@ import { Form, Image } from "semantic-ui-react";
 
 import InlineError from "../messages/InlineError";
 
-const UrlInputImgField = ({ editable, error, value, field, onChange }) => {
+const UrlInputImgField = ({ value, editable, error, field, onChange }) => {
   if (editable)
     return (
       <Form.Field error={!!error}>
@@ -24,9 +24,9 @@ const UrlInputImgField = ({ editable, error, value, field, onChange }) => {
 };
 
 UrlInputImgField.propTypes = {
-  editable: PropTypes.bool.isRequired,
-  error: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  editable: PropTypes.bool,
+  error: PropTypes.string,
   field: PropTypes.shape({
     _id: PropTypes.string,
     description: PropTypes.string
@@ -35,6 +35,8 @@ UrlInputImgField.propTypes = {
 };
 
 UrlInputImgField.defaultProps = {
+  editable: false,
+  error: "",
   field: {},
   onChange: () => {}
 };

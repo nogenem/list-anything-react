@@ -1,16 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form } from "semantic-ui-react";
+import { Form, Container } from "semantic-ui-react";
 
 import InlineError from "../messages/InlineError";
 
-const TextInputField = ({ value, editable, error, field, onChange }) => {
+const TextareaField = ({ value, editable, error, field, onChange }) => {
   if (editable)
     return (
       <Form.Field error={!!error}>
-        <Form.Input
-          fluid
-          type="text"
+        <Form.TextArea
+          autoHeight
           label={field.description}
           value={value}
           onChange={onChange}
@@ -20,10 +19,14 @@ const TextInputField = ({ value, editable, error, field, onChange }) => {
         {error && <InlineError text={error} />}
       </Form.Field>
     );
-  return value;
+  return (
+    <Container text fluid textAlign="left">
+      <p>{value}</p>
+    </Container>
+  );
 };
 
-TextInputField.propTypes = {
+TextareaField.propTypes = {
   value: PropTypes.string.isRequired,
   editable: PropTypes.bool,
   error: PropTypes.string,
@@ -34,11 +37,11 @@ TextInputField.propTypes = {
   onChange: PropTypes.func
 };
 
-TextInputField.defaultProps = {
+TextareaField.defaultProps = {
   editable: false,
   error: "",
   field: {},
   onChange: () => {}
 };
 
-export default TextInputField;
+export default TextareaField;

@@ -4,26 +4,30 @@ import { Form } from "semantic-ui-react";
 
 import InlineError from "../messages/InlineError";
 
-const TextInputField = ({ value, editable, error, field, onChange }) => {
+const UrlInputField = ({ value, editable, error, field, onChange }) => {
   if (editable)
     return (
       <Form.Field error={!!error}>
         <Form.Input
           fluid
-          type="text"
+          type="url"
           label={field.description}
           value={value}
           onChange={onChange}
           name={field._id}
-          placeholder={field.description}
+          placeholder="http://site.com/"
         />
         {error && <InlineError text={error} />}
       </Form.Field>
     );
-  return value;
+  return (
+    <a href={value} target="_blank">
+      {value}
+    </a>
+  );
 };
 
-TextInputField.propTypes = {
+UrlInputField.propTypes = {
   value: PropTypes.string.isRequired,
   editable: PropTypes.bool,
   error: PropTypes.string,
@@ -34,11 +38,11 @@ TextInputField.propTypes = {
   onChange: PropTypes.func
 };
 
-TextInputField.defaultProps = {
+UrlInputField.defaultProps = {
   editable: false,
   error: "",
   field: {},
   onChange: () => {}
 };
 
-export default TextInputField;
+export default UrlInputField;

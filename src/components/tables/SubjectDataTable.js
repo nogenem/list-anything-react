@@ -6,12 +6,13 @@ import * as fieldTypes from "../../constants/fieldTypes";
 
 import TextInputField from "../fields/TextInputField";
 import UrlInputImgField from "../fields/UrlInputImgField";
+import NumberInputField from "../fields/NumberInputField";
+import TextareaField from "../fields/TextareaField";
+import UrlInputField from "../fields/UrlInputField";
 
 const renderValue = (data, field) => {
   const fieldData = {
     key: data._id,
-    editable: false,
-    error: "",
     value: data.value
   };
   switch (field.field_type) {
@@ -19,6 +20,12 @@ const renderValue = (data, field) => {
       return <TextInputField {...fieldData} />;
     case fieldTypes.URL_INPUT_IMG:
       return <UrlInputImgField {...fieldData} />;
+    case fieldTypes.NUMBER_INPUT:
+      return <NumberInputField {...fieldData} />;
+    case fieldTypes.TEXTAREA:
+      return <TextareaField {...fieldData} />;
+    case fieldTypes.URL_INPUT:
+      return <UrlInputField {...fieldData} />;
     default:
       return <div key={data._id} />;
   }

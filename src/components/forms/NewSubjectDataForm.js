@@ -4,10 +4,14 @@ import { connect } from "react-redux";
 import { Form, Segment, Message, Button } from "semantic-ui-react";
 import forEach from "lodash.foreach";
 
-import TextInputField from "../fields/TextInputField";
-import UrlInputImgField from "../fields/UrlInputImgField";
 import { getTabsArray, getFieldsArray } from "../../reducers/currentSubject";
 import * as fieldTypes from "../../constants/fieldTypes";
+
+import TextInputField from "../fields/TextInputField";
+import UrlInputImgField from "../fields/UrlInputImgField";
+import NumberInputField from "../fields/NumberInputField";
+import TextareaField from "../fields/TextareaField";
+import UrlInputField from "../fields/UrlInputField";
 
 class NewSubjectDataForm extends React.Component {
   constructor(props) {
@@ -68,6 +72,12 @@ class NewSubjectDataForm extends React.Component {
         return <TextInputField {...fieldData} />;
       case fieldTypes.URL_INPUT_IMG:
         return <UrlInputImgField {...fieldData} />;
+      case fieldTypes.NUMBER_INPUT:
+        return <NumberInputField {...fieldData} />;
+      case fieldTypes.TEXTAREA:
+        return <TextareaField {...fieldData} />;
+      case fieldTypes.URL_INPUT:
+        return <UrlInputField {...fieldData} />;
       default:
         return <div key={field._id} />;
     }

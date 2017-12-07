@@ -16,18 +16,20 @@ export default {
     resetPassword: data => axios.post("/api/auth/reset_password", { data })
   },
   subjects: {
-    fetchAll: () => axios.get("/api/subjects").then(res => res.data.subjects),
     create: subject =>
       axios.post("/api/subjects", { subject }).then(res => res.data.subject),
-    createSubjectData: data =>
+    fetchAll: () => axios.get("/api/subjects").then(res => res.data.subjects),
+    fetchSubject: _id =>
+      axios.get(`/api/subjects?_id=${_id}`).then(res => res.data.subject)
+  },
+  subjectData: {
+    create: data =>
       axios
         .post("/api/subjects/data", { ...data })
         .then(res => res.data.subjectData),
-    fetchSubject: _id =>
-      axios.get(`/api/subjects?_id=${_id}`).then(res => res.data.subject),
-    fetchSubjectData: _id =>
+    fetchByTabId: tabId =>
       axios
-        .get(`/api/subjects/data?tabId=${_id}`)
+        .get(`/api/subjects/data?tabId=${tabId}`)
         .then(res => res.data.subjectData)
   }
 };

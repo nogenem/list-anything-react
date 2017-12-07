@@ -19,8 +19,8 @@ const subjectDataFetched = data => ({
 });
 
 export const fetchSubjectData = tabId => dispatch =>
-  api.subjects
-    .fetchSubjectData(tabId)
+  api.subjectData
+    .fetchByTabId(tabId)
     .then(data =>
       dispatch(subjectDataFetched(normalize(data, [subjectDataSchema])))
     );
@@ -42,8 +42,8 @@ const reshapeSubjectData = data => {
 
 export const createSubjectData = data => dispatch => {
   const subjectData = reshapeSubjectData(data);
-  return api.subjects
-    .createSubjectData(subjectData)
+  return api.subjectData
+    .create(subjectData)
     .then(resData =>
       dispatch(subjectDataCreated(normalize(resData, subjectDataSchema)))
     );

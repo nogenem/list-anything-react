@@ -13,7 +13,8 @@ import UrlInputField from "../fields/UrlInputField";
 const renderValue = (data, field) => {
   const fieldData = {
     key: data._id,
-    value: data.value
+    value: data.value,
+    showFieldDescription: false
   };
   switch (field.field_type) {
     case fieldTypes.TEXT_INPUT:

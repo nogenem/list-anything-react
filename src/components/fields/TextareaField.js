@@ -4,7 +4,14 @@ import { Form, Container } from "semantic-ui-react";
 
 import InlineError from "../messages/InlineError";
 
-const TextareaField = ({ value, editable, error, field, onChange }) => {
+const TextareaField = ({
+  value,
+  editable,
+  showFieldDescription,
+  error,
+  field,
+  onChange
+}) => {
   if (editable)
     return (
       <Form.Field error={!!error}>
@@ -19,8 +26,10 @@ const TextareaField = ({ value, editable, error, field, onChange }) => {
         {error && <InlineError text={error} />}
       </Form.Field>
     );
+  // TODO testar isso, talvez não seja uma boa utilizar Container...
   return (
     <Container text fluid textAlign="left">
+      {showFieldDescription && <b>{field.description}:</b>}
       <p>{value}</p>
     </Container>
   );
@@ -29,6 +38,7 @@ const TextareaField = ({ value, editable, error, field, onChange }) => {
 TextareaField.propTypes = {
   value: PropTypes.string.isRequired,
   editable: PropTypes.bool,
+  showFieldDescription: PropTypes.bool,
   error: PropTypes.string,
   field: PropTypes.shape({
     _id: PropTypes.string,
@@ -39,6 +49,7 @@ TextareaField.propTypes = {
 
 TextareaField.defaultProps = {
   editable: false,
+  showFieldDescription: true,
   error: "",
   field: {},
   onChange: () => {}

@@ -4,7 +4,14 @@ import { Form } from "semantic-ui-react";
 
 import InlineError from "../messages/InlineError";
 
-const NumberInputField = ({ value, editable, error, field, onChange }) => {
+const NumberInputField = ({
+  value,
+  editable,
+  showFieldDescription,
+  error,
+  field,
+  onChange
+}) => {
   if (editable)
     return (
       <Form.Field error={!!error}>
@@ -20,12 +27,19 @@ const NumberInputField = ({ value, editable, error, field, onChange }) => {
         {error && <InlineError text={error} />}
       </Form.Field>
     );
+  if (showFieldDescription)
+    return (
+      <div>
+        <b>{field.description}:</b> {Number(value)}
+      </div>
+    );
   return Number(value);
 };
 
 NumberInputField.propTypes = {
   value: PropTypes.string.isRequired,
   editable: PropTypes.bool,
+  showFieldDescription: PropTypes.bool,
   error: PropTypes.string,
   field: PropTypes.shape({
     _id: PropTypes.string,
@@ -36,6 +50,7 @@ NumberInputField.propTypes = {
 
 NumberInputField.defaultProps = {
   editable: false,
+  showFieldDescription: true,
   error: "",
   field: {},
   onChange: () => {}

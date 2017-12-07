@@ -11,8 +11,9 @@ import ConfirmationPage from "./components/pages/ConfirmationPage";
 import ForgotPasswordPage from "./components/pages/ForgotPasswordPage";
 import ResetPasswordPage from "./components/pages/ResetPasswordPage";
 import NewSubjectPage from "./components/pages/NewSubjectPage";
-import NewSubjectDataPage from "./components/pages/NewSubjectDataPage";
 import SubjectPage from "./components/pages/SubjectPage";
+import NewSubjectDataPage from "./components/pages/NewSubjectDataPage";
+import SubjectDataPage from "./components/pages/SubjectDataPage";
 import ErrorPage from "./components/pages/ErrorPage";
 
 import MainContentContainer from "./components/containers/MainContentContainer";
@@ -96,6 +97,12 @@ class App extends Component {
             path="/subject-data/new"
             exact
             component={NewSubjectDataPage}
+          />
+          <UserRoute
+            location={location}
+            path="/subject-data/:_id"
+            exact
+            component={SubjectDataPage}
           />
         </MainContentContainer>
 

@@ -18,9 +18,16 @@ const subjectDataFetched = data => ({
   data
 });
 
-export const fetchSubjectData = tabId => dispatch =>
+export const fetchByTabId = tabId => dispatch =>
   api.subjectData
     .fetchByTabId(tabId)
+    .then(data =>
+      dispatch(subjectDataFetched(normalize(data, [subjectDataSchema])))
+    );
+
+export const fetchById = _id => dispatch =>
+  api.subjectData
+    .fetchById(_id)
     .then(data =>
       dispatch(subjectDataFetched(normalize(data, [subjectDataSchema])))
     );

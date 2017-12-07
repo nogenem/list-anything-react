@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import SubjectDataContainer from "../containers/SubjectDataContainer";
 import { fetchSubject } from "../../actions/subjects";
-import { fetchSubjectData } from "../../actions/subjectData";
+import { fetchByTabId } from "../../actions/subjectData";
 import { getFieldsArray, getTabsArray } from "../../reducers/currentSubject";
 import { getSubjectDataArray } from "../../reducers/subjectData";
 import SubjectDataTable from "../tables/SubjectDataTable";
@@ -39,6 +39,14 @@ class SubjectPage extends Component {
     this.loadSubjectData(this.props, tabid);
   };
 
+  onTableRowClick = e => {
+    // Workaround ja que o onClick em Table.Row retorna
+    // a Table.Cell que foi clicada e não a Table.Row e
+    // também porque não da pra por Table.Row como Link
+    const to = e.currentTarget.getAttribute("to");
+    this.props.history.push(to);
+  };
+
   loadSubjects = props => {
     this.setState({ loadingSubject: true });
     props
@@ -49,7 +57,7 @@ class SubjectPage extends Component {
   loadSubjectData = (props, tabId) => {
     this.setState({ loadingData: true, activeTab: tabId });
     props
-      .fetchSubjectData(tabId)
+      .fetchByTabId(tabId)
       .then(() => this.setState({ loadingData: false, currentTabId: tabId }));
   };
 
@@ -91,6 +99,7 @@ class SubjectPage extends Component {
               fields={fields}
               subjectDataArray={subjectDataArray}
               loading={loadingData}
+              onTableRowClick={this.onTableRowClick}
             />
           </SubjectDataContainer>
         )}
@@ -106,7 +115,7 @@ SubjectPage.propTypes = {
     }).isRequired
   }).isRequired,
   fetchSubject: PropTypes.func.isRequired,
-  fetchSubjectData: PropTypes.func.isRequired,
+  fetchByTabId: PropTypes.func.isRequired,
   fields: PropTypes.arrayOf(
     PropTypes.shape({
       description: PropTypes.string.isRequired
@@ -119,7 +128,10 @@ SubjectPage.propTypes = {
   ).isRequired,
   firstTab: PropTypes.shape({
     _id: PropTypes.string.isRequired
-  })
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
 };
 
 SubjectPage.defaultProps = {
@@ -136,6 +148,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchSubject, fetchSubjectData })(
+export default connect(mapStateToProps, { fetchSubject, fetchByTabId })(
   SubjectPage
 );

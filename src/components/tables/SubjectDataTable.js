@@ -41,7 +41,12 @@ const renderCell = (subjectData, field) => {
   );
 };
 
-const SubjectDataTable = ({ loading, fields, subjectDataArray }) => (
+const SubjectDataTable = ({
+  loading,
+  onTableRowClick,
+  fields,
+  subjectDataArray
+}) => (
   <Table celled compact="very" selectable>
     <Table.Header>
       <Table.Row>
@@ -62,7 +67,11 @@ const SubjectDataTable = ({ loading, fields, subjectDataArray }) => (
       )}
       {!loading &&
         subjectDataArray.map(sd => (
-          <Table.Row key={sd._id}>
+          <Table.Row
+            key={sd._id}
+            to={`/subject-data/${sd._id}`}
+            onClick={onTableRowClick}
+          >
             {fields.map(field => renderCell(sd, field))}
           </Table.Row>
         ))}
@@ -81,7 +90,8 @@ SubjectDataTable.propTypes = {
     PropTypes.shape({
       _id: PropTypes.string.isRequired
     })
-  ).isRequired
+  ).isRequired,
+  onTableRowClick: PropTypes.func.isRequired
 };
 
 SubjectDataTable.defaultProps = {

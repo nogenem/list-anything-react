@@ -30,6 +30,10 @@ export default {
     fetchByTabId: tabId =>
       axios
         .get(`/api/subjects/data?tabId=${tabId}`)
+        .then(res => res.data.subjectData),
+    fetchById: _id =>
+      axios
+        .get(`/api/subjects/data?_id=${_id}`)
         .then(res => res.data.subjectData)
   }
 };

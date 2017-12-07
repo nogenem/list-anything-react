@@ -15,7 +15,7 @@ const SubjectDataContainer = ({
     className="subject-data-container"
     as={Segment}
     attached="bottom"
-    style={{ height: "86%" }}
+    style={{ height: "94%" }}
   >
     <Sidebar
       width="thin"

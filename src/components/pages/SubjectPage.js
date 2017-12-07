@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Segment, Button } from "semantic-ui-react";
+import { Segment, Button } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -7,11 +7,7 @@ import { Link } from "react-router-dom";
 import SubjectDataContainer from "../containers/SubjectDataContainer";
 import { fetchSubject } from "../../actions/subjects";
 import { fetchSubjectData } from "../../actions/subjectData";
-import {
-  getSubjectDescription,
-  getFieldsArray,
-  getTabsArray
-} from "../../reducers/currentSubject";
+import { getFieldsArray, getTabsArray } from "../../reducers/currentSubject";
 import { getSubjectDataArray } from "../../reducers/subjectData";
 import SubjectDataTable from "../tables/SubjectDataTable";
 
@@ -68,7 +64,7 @@ class SubjectPage extends Component {
       currentTabId,
       activeTab
     } = this.state;
-    const { subjectDescription, fields } = this.props;
+    const { fields } = this.props;
 
     let { subjectDataArray } = this.props;
     if (subjectDataArray.length > 0 && currentTabId !== "") {
@@ -79,12 +75,12 @@ class SubjectPage extends Component {
       <Segment
         style={{ maxWidth: "90%", margin: "10px auto", height: "96.5%" }}
         loading={loadingSubject}
+        basic
       >
-        <Header as="h2" color="teal" textAlign="center">
-          {subjectDescription} Data
-        </Header>
-        <Button icon="sidebar" onClick={this.toggleMenu} />
-        <Button icon="add" positive primary as={Link} to="/subject-data/new" />
+        <Button.Group icon size="medium" style={{ marginBottom: "3px" }}>
+          <Button onClick={this.toggleMenu} icon="sidebar" />
+          <Button as={Link} to="/subject-data/new" icon="plus" color="green" />
+        </Button.Group>
         {!loadingSubject && (
           <SubjectDataContainer
             menuVisible={menuVisible}
@@ -111,7 +107,6 @@ SubjectPage.propTypes = {
   }).isRequired,
   fetchSubject: PropTypes.func.isRequired,
   fetchSubjectData: PropTypes.func.isRequired,
-  subjectDescription: PropTypes.string.isRequired,
   fields: PropTypes.arrayOf(
     PropTypes.shape({
       description: PropTypes.string.isRequired
@@ -135,7 +130,6 @@ SubjectPage.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    subjectDescription: getSubjectDescription(state),
     fields: getFieldsArray(state),
     subjectDataArray: getSubjectDataArray(state),
     firstTab: getTabsArray(state)[0]

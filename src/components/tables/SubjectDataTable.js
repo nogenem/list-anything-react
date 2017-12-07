@@ -57,7 +57,7 @@ const SubjectDataTable = ({
         ))}
       </Table.Row>
     </Table.Header>
-    <Table.Body>
+    <Table.Body style={{ cursor: "pointer" }}>
       {loading && (
         <Table.Row>
           <Table.Cell width={16}>

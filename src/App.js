@@ -72,7 +72,7 @@ class App extends Component {
         `}</style>
 
         {error && <ErrorPage />}
-        <MainContentContainer showContent={showMainContent}>
+        <MainContentContainer location={location} showContent={showMainContent}>
           <UserRoute
             location={location}
             path="/dashboard"

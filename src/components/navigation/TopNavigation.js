@@ -17,21 +17,32 @@ const trigger = email => (
 );
 
 const TopNavigation = ({
-  email,
-  logout,
   toggleMenu,
   hideMenu,
-  hasSubjects
+  activeItem,
+  email,
+  hasSubjects,
+  logout
 }) => (
   <Menu pointing size="small" attached="top" inverted>
     <Menu.Item onClick={toggleMenu}>
       <Icon name="sidebar" />Menu
     </Menu.Item>
-    <Menu.Item as={Link} to="/dashboard" onClick={hideMenu}>
+    <Menu.Item
+      as={Link}
+      to="/dashboard"
+      active={activeItem === "/dashboard"}
+      onClick={hideMenu}
+    >
       Dashboard
     </Menu.Item>
     {hasSubjects && (
-      <Menu.Item as={Link} to="/subjects/new" onClick={hideMenu}>
+      <Menu.Item
+        as={Link}
+        to="/subjects/new"
+        active={activeItem === "/subjects/new"}
+        onClick={hideMenu}
+      >
         Add new Subject
       </Menu.Item>
     )}
@@ -47,11 +58,16 @@ const TopNavigation = ({
 );
 
 TopNavigation.propTypes = {
-  email: PropTypes.string.isRequired,
-  logout: PropTypes.func.isRequired,
-  hasSubjects: PropTypes.bool.isRequired,
   toggleMenu: PropTypes.func.isRequired,
-  hideMenu: PropTypes.func.isRequired
+  hideMenu: PropTypes.func.isRequired,
+  activeItem: PropTypes.string,
+  email: PropTypes.string.isRequired,
+  hasSubjects: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired
+};
+
+TopNavigation.defaultProps = {
+  activeItem: ""
 };
 
 function mapStateToProps(state) {

@@ -20,7 +20,8 @@ class SubjectPage extends Component {
     loadingSubject: false,
     loadingData: false,
     menuVisible: false,
-    currentTabId: ""
+    currentTabId: "",
+    activeTab: ""
   };
 
   componentDidMount = () => this.loadSubjects(this.props);
@@ -50,7 +51,7 @@ class SubjectPage extends Component {
   };
 
   loadSubjectData = (props, tabId) => {
-    this.setState({ loadingData: true });
+    this.setState({ loadingData: true, activeTab: tabId });
     props
       .fetchSubjectData(tabId)
       .then(() => this.setState({ loadingData: false, currentTabId: tabId }));
@@ -64,7 +65,8 @@ class SubjectPage extends Component {
       loadingData,
       loadingSubject,
       menuVisible,
-      currentTabId
+      currentTabId,
+      activeTab
     } = this.state;
     const { subjectDescription, fields } = this.props;
 
@@ -87,6 +89,7 @@ class SubjectPage extends Component {
           <SubjectDataContainer
             menuVisible={menuVisible}
             onMenuClick={this.onMenuClick}
+            activeTab={activeTab}
           >
             <SubjectDataTable
               fields={fields}

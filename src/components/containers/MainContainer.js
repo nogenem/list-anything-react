@@ -8,10 +8,11 @@ import { getSubjectsArray } from "../../reducers/subjects";
 
 const MainContainer = ({
   menuVisible,
+  activeItem,
   hideMenu,
+  style,
   children,
-  subjects,
-  style
+  subjects
 }) => (
   <Sidebar.Pushable
     id="main-container"
@@ -32,6 +33,7 @@ const MainContainer = ({
         <Menu.Item
           as={Link}
           to={`/subject/${subject._id}`}
+          active={activeItem === `/subject/${subject._id}`}
           key={subject._id}
           onClick={hideMenu}
         >
@@ -47,7 +49,11 @@ const MainContainer = ({
 
 MainContainer.propTypes = {
   menuVisible: PropTypes.bool.isRequired,
+  activeItem: PropTypes.string,
   hideMenu: PropTypes.func.isRequired,
+  style: PropTypes.shape({
+    display: PropTypes.string
+  }),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
@@ -57,13 +63,11 @@ MainContainer.propTypes = {
       _id: PropTypes.string,
       description: PropTypes.string
     })
-  ).isRequired,
-  style: PropTypes.shape({
-    display: PropTypes.string
-  })
+  ).isRequired
 };
 
 MainContainer.defaultProps = {
+  activeItem: "",
   style: {},
   subjects: []
 };

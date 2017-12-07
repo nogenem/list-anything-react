@@ -4,7 +4,13 @@ import { Menu, Sidebar, Segment } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { getTabsArray } from "../../reducers/currentSubject";
 
-const SubjectDataContainer = ({ menuVisible, onMenuClick, children, tabs }) => (
+const SubjectDataContainer = ({
+  menuVisible,
+  activeTab,
+  onMenuClick,
+  children,
+  tabs
+}) => (
   <Sidebar.Pushable
     className="subject-data-container"
     as={Segment}
@@ -21,7 +27,12 @@ const SubjectDataContainer = ({ menuVisible, onMenuClick, children, tabs }) => (
       inverted
     >
       {tabs.map(data => (
-        <Menu.Item key={data._id} tabid={data._id} onClick={onMenuClick}>
+        <Menu.Item
+          key={data._id}
+          tabid={data._id}
+          active={activeTab === data._id}
+          onClick={onMenuClick}
+        >
           {data.description}
         </Menu.Item>
       ))}
@@ -34,6 +45,7 @@ const SubjectDataContainer = ({ menuVisible, onMenuClick, children, tabs }) => (
 
 SubjectDataContainer.propTypes = {
   menuVisible: PropTypes.bool.isRequired,
+  activeTab: PropTypes.string,
   onMenuClick: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -45,6 +57,10 @@ SubjectDataContainer.propTypes = {
       description: PropTypes.string
     })
   ).isRequired
+};
+
+SubjectDataContainer.defaultProps = {
+  activeTab: ""
 };
 
 function mapStateToProps(state) {

@@ -15,8 +15,7 @@ import NewSubjectDataPage from "./components/pages/NewSubjectDataPage";
 import SubjectPage from "./components/pages/SubjectPage";
 import ErrorPage from "./components/pages/ErrorPage";
 
-import TopNavigation from "./components/navigation/TopNavigation";
-import MainContainer from "./components/containers/MainContainer";
+import MainContentContainer from "./components/containers/MainContentContainer";
 
 import GuestRoute from "./components/routes/GuestRoute";
 import UserRoute from "./components/routes/UserRoute";
@@ -26,7 +25,6 @@ import { getEmail } from "./reducers/user";
 
 class App extends Component {
   state = {
-    menuVisible: false,
     loading: true,
     error: false
   };
@@ -51,14 +49,9 @@ class App extends Component {
       .catch(() => this.setState({ error: true }));
   };
 
-  toggleMenu = () =>
-    this.setState(prevState => ({ menuVisible: !prevState.menuVisible }));
-
-  hideMenu = () => this.setState({ menuVisible: false });
-
   render() {
     const { location, isAuthenticated } = this.props;
-    const { menuVisible, error, loading } = this.state;
+    const { error, loading } = this.state;
     const showMainContent =
       isAuthenticated &&
       !loading &&
@@ -66,21 +59,20 @@ class App extends Component {
       !location.pathname.startsWith("/confirmation");
 
     return (
-      <div>
+      <div id="app-container">
+        <style>{`
+          #root,
+          #app-container,
+          #main-content-container,
+          #center-elems-container,
+          #main-container,
+          #main-container > div.pusher  {
+              height: 100%;
+          }
+        `}</style>
+
         {error && <ErrorPage />}
-
-        {showMainContent && (
-          <TopNavigation
-            toggleMenu={this.toggleMenu}
-            hideMenu={this.hideMenu}
-          />
-        )}
-
-        <MainContainer
-          menuVisible={menuVisible}
-          hideMenu={this.hideMenu}
-          style={{ display: showMainContent ? "block" : "none" }}
-        >
+        <MainContentContainer showContent={showMainContent}>
           <UserRoute
             location={location}
             path="/dashboard"
@@ -105,7 +97,7 @@ class App extends Component {
             exact
             component={NewSubjectDataPage}
           />
-        </MainContainer>
+        </MainContentContainer>
 
         <Route location={location} path="/" exact component={HomePage} />
         <GuestRoute

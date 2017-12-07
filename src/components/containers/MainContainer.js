@@ -14,19 +14,11 @@ const MainContainer = ({
   style
 }) => (
   <Sidebar.Pushable
-    className="main-container"
+    id="main-container"
     as={Segment}
     attached="bottom"
     style={{ height: "92.3%", ...style }}
   >
-    <style>{`
-      body > div,
-      body > div > div,
-      .main-container > div.pusher,
-      .main-container > div.pusher > div.form-container {
-          height: 100%;
-      }
-    `}</style>
     <Sidebar
       width="thin"
       as={Menu}

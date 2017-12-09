@@ -3,7 +3,8 @@ import forEach from "lodash.foreach";
 
 import {
   SUBJECT_DATA_FETCHED,
-  SUBJECT_FETCHED
+  SUBJECT_FETCHED,
+  SUBJECT_DATA_EDITED
 } from "../constants/actionTypes";
 
 // Muda a sub-array data para um objeto aonde as keys
@@ -26,6 +27,7 @@ const reshapeData = ({ subjectData: sData }) => {
 export default function subjectData(state = {}, action = {}) {
   switch (action.type) {
     case SUBJECT_DATA_FETCHED:
+    case SUBJECT_DATA_EDITED:
       return { ...state, ...reshapeData(action.data.entities) };
     case SUBJECT_FETCHED:
       return {};

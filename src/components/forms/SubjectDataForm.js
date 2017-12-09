@@ -23,25 +23,44 @@ class SubjectDataForm extends React.Component {
     };
   }
 
-  onChange = e =>
-    this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value }
+  onChange = e => {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState(prevState => {
+      const _id = prevState.data[name]._id;
+      return {
+        data: {
+          ...this.state.data,
+          [name]: { _id, value }
+        }
+      };
     });
+  };
 
   onSubmit = () => {
     const errors = this.validate(this.state.data);
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
-      this.props.submit(this.state.data).catch(err => {
-        if (err.response.status === 500)
+      this.props
+        .submit(this.state.data)
+        .then(() =>
           this.setState({
-            errors: { global: "Internal server error" },
-            loading: false
-          });
-        else
-          this.setState({ errors: err.response.data.errors, loading: false });
-      });
+            data: this.getOriginalFormData(this.props),
+            errors: this.getCleanFormErrors(this.props),
+            loading: false,
+            editing: false
+          })
+        )
+        .catch(err => {
+          if (err.response.status === 500)
+            this.setState({
+              errors: { global: "Internal server error" },
+              loading: false
+            });
+          else
+            this.setState({ errors: err.response.data.errors, loading: false });
+        });
     }
   };
 
@@ -58,14 +77,12 @@ class SubjectDataForm extends React.Component {
     const data = {};
     if (props.subjectData.data)
       forEach(Object.values(props.subjectData.data), elem => {
-        data[elem.fieldId] = elem.value;
+        data[elem.fieldId] = { _id: elem._id, value: elem.value };
       });
     return data;
   };
 
-  startEditing = () => {
-    this.setState({ editing: true });
-  };
+  startEditing = () => this.setState({ editing: true });
 
   cancelEditing = () => {
     this.setState({
@@ -77,6 +94,11 @@ class SubjectDataForm extends React.Component {
 
   validate = data => {
     const errors = {};
+    const { fields } = this.props;
+    // TODO: Melhorar isso...
+    forEach(fields, val => {
+      if (!data[val._id]) errors[val._id] = "Can't be blank";
+    });
     return errors;
   };
 
@@ -87,7 +109,7 @@ class SubjectDataForm extends React.Component {
 
     const fieldData = {
       key: data._id,
-      value: this.state.data[data.fieldId],
+      value: this.state.data[data.fieldId].value,
       editable: editing,
       field,
       error: this.state.errors[data.fieldId],
@@ -127,7 +149,7 @@ class SubjectDataForm extends React.Component {
           </Message>
         )}
         {!editing && (
-          <Button.Group icon size="medium" style={{ marginBottom: "3px" }}>
+          <Button.Group icon size="medium">
             <Popup
               trigger={
                 <Button icon="edit" color="blue" onClick={this.startEditing} />

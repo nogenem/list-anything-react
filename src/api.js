@@ -34,6 +34,10 @@ export default {
     fetchById: _id =>
       axios
         .get(`/api/subjects/data?_id=${_id}`)
+        .then(res => res.data.subjectData),
+    edit: data =>
+      axios
+        .put("/api/subjects/data", { ...data })
         .then(res => res.data.subjectData)
   }
 };

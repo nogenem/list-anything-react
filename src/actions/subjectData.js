@@ -3,7 +3,8 @@ import forEach from "lodash.foreach";
 
 import {
   SUBJECT_DATA_FETCHED,
-  SUBJECT_DATA_CREATED
+  SUBJECT_DATA_CREATED,
+  SUBJECT_DATA_EDITED
 } from "../constants/actionTypes";
 import api from "../api";
 import { subjectDataSchema } from "../schemas";
@@ -15,6 +16,11 @@ const subjectDataCreated = data => ({
 
 const subjectDataFetched = data => ({
   type: SUBJECT_DATA_FETCHED,
+  data
+});
+
+const subjectDataEdited = data => ({
+  type: SUBJECT_DATA_EDITED,
   data
 });
 
@@ -55,3 +61,10 @@ export const createSubjectData = data => dispatch => {
       dispatch(subjectDataCreated(normalize(resData, subjectDataSchema)))
     );
 };
+
+export const editSubjectData = (sdId, data) => dispatch =>
+  api.subjectData
+    .edit({ _id: sdId, data: { ...data } })
+    .then(resData =>
+      dispatch(subjectDataEdited(normalize(resData, [subjectDataSchema])))
+    );

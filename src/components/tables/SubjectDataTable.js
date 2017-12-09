@@ -32,10 +32,14 @@ const renderValue = (data, field) => {
   }
 };
 
+// Talvez seja necessário lidar com outros tipos também...
+const getCellWidth = fieldType =>
+  fieldType === "url_input_img" ? { width: 2 } : {};
+
 const renderCell = (subjectData, field) => {
   const data = subjectData.data[field._id];
   return (
-    <Table.Cell collapsing key={data._id}>
+    <Table.Cell {...getCellWidth(field.field_type)} collapsing key={data._id}>
       {renderValue(data, field)}
     </Table.Cell>
   );

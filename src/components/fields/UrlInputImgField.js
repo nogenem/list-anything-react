@@ -29,9 +29,9 @@ const UrlInputImgField = ({
     );
   if (showFieldDescription)
     return (
-      <div>
+      <Form.Field>
         <b>{field.description}</b>: <Image size="tiny" src={value} />
-      </div>
+      </Form.Field>
     );
   return <Image size="tiny" centered src={value} />;
 };

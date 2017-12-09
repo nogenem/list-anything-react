@@ -29,12 +29,12 @@ const UrlInputField = ({
     );
   if (showFieldDescription)
     return (
-      <div>
+      <Form.Field>
         <b>{field.description}:</b>{" "}
         <a href={value} target="_blank">
           {value}
         </a>
-      </div>
+      </Form.Field>
     );
   return (
     <a href={value} target="_blank">

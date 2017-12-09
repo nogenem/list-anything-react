@@ -29,9 +29,9 @@ const NumberInputField = ({
     );
   if (showFieldDescription)
     return (
-      <div>
+      <Form.Field>
         <b>{field.description}:</b> {Number(value)}
-      </div>
+      </Form.Field>
     );
   return Number(value);
 };

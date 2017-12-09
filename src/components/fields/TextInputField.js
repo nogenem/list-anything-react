@@ -29,9 +29,9 @@ const TextInputField = ({
     );
   if (showFieldDescription)
     return (
-      <div>
+      <Form.Field>
         <b>{field.description}:</b> {value}
-      </div>
+      </Form.Field>
     );
   return value;
 };

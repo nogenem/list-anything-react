@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Button, Message, Segment } from "semantic-ui-react";
+import { Form, Button, Segment } from "semantic-ui-react";
 import forEach from "lodash.foreach";
 
 import renderFieldComponent from "../../utils/renderFieldComponent";
 import EditDeleteBtnGroup from "../containers/EditDeleteBtnGroup";
+import ErrorMessage from "../messages/ErrorMessage";
 
 class SubjectDataForm extends React.Component {
   constructor(props) {
@@ -130,12 +131,7 @@ class SubjectDataForm extends React.Component {
         size="large"
         style={{ textAlign: "left" }}
       >
-        {errors.global && (
-          <Message negative>
-            <Message.Header>Something went wrong</Message.Header>
-            <p>{errors.global}</p>
-          </Message>
-        )}
+        {errors.global && <ErrorMessage text={errors.global} />}
         {!editing && (
           <EditDeleteBtnGroup
             onEdit={this.startEditing}

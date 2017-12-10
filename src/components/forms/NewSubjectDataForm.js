@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Form, Segment, Message, Button } from "semantic-ui-react";
+import { Form, Segment, Button } from "semantic-ui-react";
 import forEach from "lodash.foreach";
 
+import ErrorMessage from "../messages/ErrorMessage";
 import { getTabsArray, getFieldsArray } from "../../reducers/currentSubject";
 import renderFieldComponent from "../../utils/renderFieldComponent";
 
@@ -69,12 +70,7 @@ class NewSubjectDataForm extends React.Component {
     const { tabs, fields } = this.props;
     return (
       <Form onSubmit={this.onSubmit} loading={loading} size="large">
-        {errors.global && (
-          <Message negative>
-            <Message.Header>Something went wrong</Message.Header>
-            <p>{errors.global}</p>
-          </Message>
-        )}
+        {errors.global && <ErrorMessage text={errors.global} />}
         <Segment stacked textAlign="left">
           <Form.Field
             label="Select the tab:"

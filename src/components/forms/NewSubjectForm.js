@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Button, Message, Segment } from "semantic-ui-react";
+import { Form, Button, Segment } from "semantic-ui-react";
 
+import ErrorMessage from "../messages/ErrorMessage";
 import InlineError from "../messages/InlineError";
 import TabsAccordionForm from "./TabsAccordionForm";
 import FieldsAccordionForm from "./FieldsAccordionForm";
@@ -90,12 +91,7 @@ class NewSubjectForm extends React.Component {
 
     return (
       <Form onSubmit={this.onSubmit} loading={loading} size="large">
-        {errors.global && (
-          <Message negative>
-            <Message.Header>Something went wrong</Message.Header>
-            <p>{errors.global}</p>
-          </Message>
-        )}
+        {errors.global && <ErrorMessage text={errors.global} />}
         <Segment stacked textAlign="left">
           <Form.Field error={!!errors.description}>
             <Form.Input

@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Button, Message, Segment } from "semantic-ui-react";
+import { Form, Button, Segment } from "semantic-ui-react";
 import isEmail from "validator/lib/isEmail";
+
+import ErrorMessage from "../messages/ErrorMessage";
 import InlineError from "../messages/InlineError";
 
 class LoginForm extends React.Component {
@@ -48,12 +50,7 @@ class LoginForm extends React.Component {
 
     return (
       <Form onSubmit={this.onSubmit} loading={loading} size="large">
-        {errors.global && (
-          <Message negative>
-            <Message.Header>Something went wrong</Message.Header>
-            <p>{errors.global}</p>
-          </Message>
-        )}
+        {errors.global && <ErrorMessage text={errors.global} />}
         <Segment stacked>
           <Form.Field error={!!errors.email}>
             <Form.Input

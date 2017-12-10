@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Message } from "semantic-ui-react";
 
 const ErrorMessage = ({ text, showHeader = true }) => (
-  <Message negative>
+  <Message negative style={{ textAlign: "center" }}>
     {showHeader && <Message.Header>Something went wrong</Message.Header>}
     <p>{text}</p>
   </Message>

@@ -3,9 +3,13 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { getSubjectDataElem } from "../../reducers/subjectData";
-import { fetchById, editSubjectData } from "../../actions/subjectData";
+import {
+  fetchById,
+  editSubjectData,
+  deleteSubjectData
+} from "../../actions/subjectData";
 import CenterElemsContainer from "../containers/CenterElemsContainer";
-import { getFieldsArray } from "../../reducers/currentSubject";
+import { getFieldsArray, getSubjectId } from "../../reducers/currentSubject";
 import SubjectDataForm from "../forms/SubjectDataForm";
 
 class SubjectDataPage extends React.Component {
@@ -26,6 +30,13 @@ class SubjectDataPage extends React.Component {
   submit = data =>
     this.props.editSubjectData(this.props.match.params._id, data);
 
+  delete = () =>
+    this.props
+      .deleteSubjectData(this.props.match.params._id)
+      .then(() =>
+        this.props.history.push(`/subject/${this.props.currentSubjectId}`)
+      );
+
   render() {
     const { subjectData, fields } = this.props;
 
@@ -33,6 +44,7 @@ class SubjectDataPage extends React.Component {
       <CenterElemsContainer>
         <SubjectDataForm
           submit={this.submit}
+          delete={this.delete}
           subjectData={subjectData}
           fields={fields}
         />
@@ -49,6 +61,8 @@ SubjectDataPage.propTypes = {
   }).isRequired,
   fetchById: PropTypes.func.isRequired,
   editSubjectData: PropTypes.func.isRequired,
+  deleteSubjectData: PropTypes.func.isRequired,
+  currentSubjectId: PropTypes.string.isRequired,
   subjectData: PropTypes.shape({
     _id: PropTypes.string
   }),
@@ -56,7 +70,10 @@ SubjectDataPage.propTypes = {
     PropTypes.shape({
       description: PropTypes.string.isRequired
     })
-  ).isRequired
+  ).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
 };
 
 SubjectDataPage.defaultProps = {
@@ -68,10 +85,13 @@ SubjectDataPage.defaultProps = {
 function mapStateToProps(state, ownProps) {
   return {
     subjectData: getSubjectDataElem(state, ownProps.match.params._id),
-    fields: getFieldsArray(state)
+    fields: getFieldsArray(state),
+    currentSubjectId: getSubjectId(state)
   };
 }
 
-export default connect(mapStateToProps, { fetchById, editSubjectData })(
-  SubjectDataPage
-);
+export default connect(mapStateToProps, {
+  fetchById,
+  editSubjectData,
+  deleteSubjectData
+})(SubjectDataPage);

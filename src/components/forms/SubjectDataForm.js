@@ -64,6 +64,14 @@ class SubjectDataForm extends React.Component {
     }
   };
 
+  onDelete = () =>
+    this.props.delete().catch(() => {
+      this.setState({
+        errors: { global: "Internal server error" },
+        loading: false
+      });
+    });
+
   getCleanFormErrors = props => {
     const errors = {};
     if (props.subjectData.data)
@@ -102,8 +110,6 @@ class SubjectDataForm extends React.Component {
     return errors;
   };
 
-  removeData = () => true;
-
   renderField = field => {
     const { subjectData } = this.props;
     const { editing } = this.state;
@@ -135,7 +141,7 @@ class SubjectDataForm extends React.Component {
         {!editing && (
           <EditDeleteBtnGroup
             onEdit={this.startEditing}
-            onDelete={this.removeData}
+            onDelete={this.onDelete}
           />
         )}
         <Segment stacked>
@@ -157,6 +163,7 @@ class SubjectDataForm extends React.Component {
 
 SubjectDataForm.propTypes = {
   submit: PropTypes.func.isRequired,
+  delete: PropTypes.func.isRequired,
   subjectData: PropTypes.shape({
     _id: PropTypes.string,
     data: PropTypes.objectOf(

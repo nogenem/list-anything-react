@@ -38,6 +38,8 @@ export default {
     edit: data =>
       axios
         .put("/api/subjects/data", { ...data })
-        .then(res => res.data.subjectData)
+        .then(res => res.data.subjectData),
+    delete: _id =>
+      axios.delete(`/api/subjects/data?_id=${_id}`).then(res => res.data.result)
   }
 };

@@ -5,11 +5,12 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import SubjectDataContainer from "../containers/SubjectDataContainer";
-import { fetchSubject } from "../../actions/subjects";
+import { fetchSubject, deleteSubject } from "../../actions/subjects";
 import { fetchByTabId } from "../../actions/subjectData";
 import { getFieldsArray, getTabsArray } from "../../reducers/currentSubject";
 import { getSubjectDataArray } from "../../reducers/subjectData";
 import SubjectDataTable from "../tables/SubjectDataTable";
+import EditDeleteBtnGroup from "../containers/EditDeleteBtnGroup";
 
 class SubjectPage extends Component {
   state = {
@@ -25,11 +26,15 @@ class SubjectPage extends Component {
   componentWillReceiveProps(nextProps) {
     const currentId = this.props.match.params._id;
     const nextId = nextProps.match.params._id;
+
     if (currentId !== nextId) {
       this.loadSubjects(nextProps);
     }
 
-    if (this.props.firstTab !== nextProps.firstTab) {
+    if (
+      nextProps.firstTab._id !== "" &&
+      this.props.firstTab !== nextProps.firstTab
+    ) {
       this.loadSubjectData(nextProps, nextProps.firstTab._id);
     }
   }
@@ -64,6 +69,11 @@ class SubjectPage extends Component {
   toggleMenu = () =>
     this.setState(prevState => ({ menuVisible: !prevState.menuVisible }));
 
+  deleteSubject = () =>
+    this.props
+      .deleteSubject(this.props.match.params._id)
+      .then(() => this.props.history.push("/dashboard"));
+
   render() {
     const {
       loadingData,
@@ -79,16 +89,31 @@ class SubjectPage extends Component {
       subjectDataArray = subjectDataArray.filter(d => d.tabId === currentTabId);
     }
 
+    // TODO: Melhorar buttons
     return (
       <Segment
         style={{ maxWidth: "90%", margin: "10px auto", height: "96.5%" }}
         loading={loadingSubject}
         basic
       >
-        <Button.Group icon size="medium" style={{ marginBottom: "3px" }}>
-          <Button onClick={this.toggleMenu} icon="sidebar" />
-          <Button as={Link} to="/subject-datas/new" icon="plus" color="green" />
-        </Button.Group>
+        <div
+          style={{
+            marginBottom: "3px",
+            display: "inline-flex"
+          }}
+        >
+          <Button.Group size="medium" icon>
+            <Button onClick={this.toggleMenu} icon="sidebar" />
+            <Button
+              as={Link}
+              to="/subject-datas/new"
+              icon="plus"
+              color="green"
+            />
+          </Button.Group>
+          {" "}
+          <EditDeleteBtnGroup onEdit={() => {}} onDelete={this.deleteSubject} />
+        </div>
         {!loadingSubject && (
           <SubjectDataContainer
             menuVisible={menuVisible}
@@ -116,6 +141,7 @@ SubjectPage.propTypes = {
   }).isRequired,
   fetchSubject: PropTypes.func.isRequired,
   fetchByTabId: PropTypes.func.isRequired,
+  deleteSubject: PropTypes.func.isRequired,
   fields: PropTypes.arrayOf(
     PropTypes.shape({
       description: PropTypes.string.isRequired
@@ -148,6 +174,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchSubject, fetchByTabId })(
-  SubjectPage
-);
+export default connect(mapStateToProps, {
+  fetchSubject,
+  fetchByTabId,
+  deleteSubject
+})(SubjectPage);

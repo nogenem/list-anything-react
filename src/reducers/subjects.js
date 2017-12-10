@@ -1,12 +1,21 @@
 import { createSelector } from "reselect";
 
-import { SUBJECTS_FETCHED, SUBJECT_CREATED } from "../constants/actionTypes";
+import {
+  SUBJECTS_FETCHED,
+  SUBJECT_CREATED,
+  SUBJECT_DELETED
+} from "../constants/actionTypes";
 
 export default function subjects(state = {}, action = {}) {
   switch (action.type) {
     case SUBJECTS_FETCHED:
     case SUBJECT_CREATED:
       return { ...state, ...action.data.entities.subjects };
+    case SUBJECT_DELETED: {
+      const newState = { ...state };
+      delete newState[action.data._id];
+      return newState;
+    }
     default:
       return state;
   }

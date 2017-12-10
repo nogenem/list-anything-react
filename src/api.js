@@ -20,7 +20,9 @@ export default {
       axios.post("/api/subjects", { subject }).then(res => res.data.subject),
     fetchAll: () => axios.get("/api/subjects").then(res => res.data.subjects),
     fetchSubject: _id =>
-      axios.get(`/api/subjects?_id=${_id}`).then(res => res.data.subject)
+      axios.get(`/api/subjects?_id=${_id}`).then(res => res.data.subject),
+    delete: _id =>
+      axios.delete(`/api/subjects?_id=${_id}`).then(res => res.data)
   },
   subjectData: {
     create: data =>
@@ -40,6 +42,6 @@ export default {
         .put("/api/subjects/data", { ...data })
         .then(res => res.data.subjectData),
     delete: _id =>
-      axios.delete(`/api/subjects/data?_id=${_id}`).then(res => res.data.result)
+      axios.delete(`/api/subjects/data?_id=${_id}`).then(res => res.data)
   }
 };

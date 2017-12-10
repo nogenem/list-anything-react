@@ -3,7 +3,8 @@ import { normalize } from "normalizr";
 import {
   SUBJECTS_FETCHED,
   SUBJECT_CREATED,
-  SUBJECT_FETCHED
+  SUBJECT_FETCHED,
+  SUBJECT_DELETED
 } from "../constants/actionTypes";
 import api from "../api";
 import { subjectsSchema, subjectSchema } from "../schemas";
@@ -20,6 +21,11 @@ const subjectFetched = data => ({
 
 const subjectCreated = data => ({
   type: SUBJECT_CREATED,
+  data
+});
+
+const subjectDeleted = data => ({
+  type: SUBJECT_DELETED,
   data
 });
 
@@ -43,3 +49,6 @@ export const fetchSubject = _id => dispatch =>
     .then(subject =>
       dispatch(subjectFetched(normalize(subject, subjectSchema)))
     );
+
+export const deleteSubject = _id => dispatch =>
+  api.subjects.delete(_id).then(res => dispatch(subjectDeleted(res)));

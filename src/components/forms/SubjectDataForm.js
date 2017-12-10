@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Button, Message, Segment, Popup } from "semantic-ui-react";
+import { Form, Button, Message, Segment } from "semantic-ui-react";
 import forEach from "lodash.foreach";
 
 import renderFieldComponent from "../../utils/renderFieldComponent";
+import EditDeleteBtnGroup from "../containers/EditDeleteBtnGroup";
 
 class SubjectDataForm extends React.Component {
   constructor(props) {
@@ -31,7 +32,11 @@ class SubjectDataForm extends React.Component {
     });
   };
 
-  onSubmit = () => {
+  onSubmit = e => {
+    if (!this.state.editing) {
+      e.preventDefault();
+      return;
+    }
     const errors = this.validate(this.state.data);
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
@@ -96,6 +101,8 @@ class SubjectDataForm extends React.Component {
     return errors;
   };
 
+  removeData = () => true;
+
   renderField = field => {
     const { subjectData } = this.props;
     const { editing } = this.state;
@@ -130,18 +137,10 @@ class SubjectDataForm extends React.Component {
           </Message>
         )}
         {!editing && (
-          <Button.Group icon size="medium">
-            <Popup
-              trigger={
-                <Button icon="edit" color="blue" onClick={this.startEditing} />
-              }
-              content="Edit"
-            />
-            <Popup
-              trigger={<Button icon="delete" color="red" />}
-              content="Delete"
-            />
-          </Button.Group>
+          <EditDeleteBtnGroup
+            onEdit={this.startEditing}
+            onDelete={this.removeData}
+          />
         )}
         <Segment stacked>
           {fields.map(field => this.renderField(field))}

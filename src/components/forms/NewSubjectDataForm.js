@@ -5,13 +5,7 @@ import { Form, Segment, Message, Button } from "semantic-ui-react";
 import forEach from "lodash.foreach";
 
 import { getTabsArray, getFieldsArray } from "../../reducers/currentSubject";
-import * as fieldTypes from "../../constants/fieldTypes";
-
-import TextInputField from "../fields/TextInputField";
-import UrlInputImgField from "../fields/UrlInputImgField";
-import NumberInputField from "../fields/NumberInputField";
-import TextareaField from "../fields/TextareaField";
-import UrlInputField from "../fields/UrlInputField";
+import renderFieldComponent from "../../utils/renderFieldComponent";
 
 class NewSubjectDataForm extends React.Component {
   constructor(props) {
@@ -67,20 +61,7 @@ class NewSubjectDataForm extends React.Component {
       field,
       value: data[field._id] || ""
     };
-    switch (field.field_type) {
-      case fieldTypes.TEXT_INPUT:
-        return <TextInputField {...fieldData} />;
-      case fieldTypes.URL_INPUT_IMG:
-        return <UrlInputImgField {...fieldData} />;
-      case fieldTypes.NUMBER_INPUT:
-        return <NumberInputField {...fieldData} />;
-      case fieldTypes.TEXTAREA:
-        return <TextareaField {...fieldData} />;
-      case fieldTypes.URL_INPUT:
-        return <UrlInputField {...fieldData} />;
-      default:
-        return <div key={field._id} />;
-    }
+    return renderFieldComponent(fieldData);
   };
 
   render() {

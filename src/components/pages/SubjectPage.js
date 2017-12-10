@@ -87,7 +87,7 @@ class SubjectPage extends Component {
       >
         <Button.Group icon size="medium" style={{ marginBottom: "3px" }}>
           <Button onClick={this.toggleMenu} icon="sidebar" />
-          <Button as={Link} to="/subject-data/new" icon="plus" color="green" />
+          <Button as={Link} to="/subject-datas/new" icon="plus" color="green" />
         </Button.Group>
         {!loadingSubject && (
           <SubjectDataContainer

@@ -2,34 +2,16 @@ import React from "react";
 import { Table, Loader } from "semantic-ui-react";
 import PropTypes from "prop-types";
 
-import * as fieldTypes from "../../constants/fieldTypes";
+import renderFieldComponent from "../../utils/renderFieldComponent";
 
-import TextInputField from "../fields/TextInputField";
-import UrlInputImgField from "../fields/UrlInputImgField";
-import NumberInputField from "../fields/NumberInputField";
-import TextareaField from "../fields/TextareaField";
-import UrlInputField from "../fields/UrlInputField";
-
-const renderValue = (data, field) => {
+const renderField = (data, field) => {
   const fieldData = {
     key: data._id,
     value: data.value,
-    showFieldDescription: false
+    showFieldDescription: false,
+    field
   };
-  switch (field.field_type) {
-    case fieldTypes.TEXT_INPUT:
-      return <TextInputField {...fieldData} />;
-    case fieldTypes.URL_INPUT_IMG:
-      return <UrlInputImgField {...fieldData} />;
-    case fieldTypes.NUMBER_INPUT:
-      return <NumberInputField {...fieldData} />;
-    case fieldTypes.TEXTAREA:
-      return <TextareaField {...fieldData} />;
-    case fieldTypes.URL_INPUT:
-      return <UrlInputField {...fieldData} />;
-    default:
-      return <div key={data._id} />;
-  }
+  return renderFieldComponent(fieldData);
 };
 
 // Talvez seja necessário lidar com outros tipos também...
@@ -40,7 +22,7 @@ const renderCell = (subjectData, field) => {
   const data = subjectData.data[field._id];
   return (
     <Table.Cell {...getCellWidth(field.field_type)} collapsing key={data._id}>
-      {renderValue(data, field)}
+      {renderField(data, field)}
     </Table.Cell>
   );
 };

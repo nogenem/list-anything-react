@@ -13,25 +13,23 @@ class EditDeleteBtnGroup extends React.Component {
     const { onEdit, onDelete } = this.props;
     const { showConfirm } = this.state;
     return (
-      <div>
-        <Button.Group icon size="medium">
-          <Popup
-            trigger={<Button icon="edit" color="blue" onClick={onEdit} />}
-            content="Edit"
-          />
-          <Popup
-            trigger={
-              <Button icon="delete" color="red" onClick={this.showConfirm} />
-            }
-            content="Delete"
-          />
-        </Button.Group>
+      <Button.Group size="medium" icon>
+        <Popup
+          trigger={<Button icon="edit" color="blue" onClick={onEdit} />}
+          content="Edit"
+        />
+        <Popup
+          trigger={
+            <Button icon="delete" color="red" onClick={this.showConfirm} />
+          }
+          content="Delete"
+        />
         <Confirm
           open={showConfirm}
           onCancel={this.handleCancel}
           onConfirm={onDelete}
         />
-      </div>
+      </Button.Group>
     );
   }
 }

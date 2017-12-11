@@ -11,6 +11,7 @@ const CenterElemsContainer = ({ children }) => (
 );
 
 CenterElemsContainer.propTypes = {
+  // ownProps
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node

@@ -102,6 +102,7 @@ class TabsAccordionForm extends Component {
 }
 
 TabsAccordionForm.propTypes = {
+  // ownProps
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
       description: PropTypes.string.isRequired

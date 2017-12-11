@@ -37,6 +37,7 @@ const NumberInputField = ({
 };
 
 NumberInputField.propTypes = {
+  // ownProps
   value: PropTypes.string.isRequired,
   editable: PropTypes.bool,
   showFieldDescription: PropTypes.bool,

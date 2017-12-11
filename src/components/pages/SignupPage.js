@@ -24,9 +24,11 @@ class SignupPage extends Component {
 }
 
 SignupPage.propTypes = {
+  // ownProps
   history: PropTypes.shape({
     push: PropTypes.func
   }).isRequired,
+  // mapDispatchToProps
   signup: PropTypes.func.isRequired
 };
 

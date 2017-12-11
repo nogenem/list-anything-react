@@ -134,14 +134,16 @@ class SubjectPage extends Component {
 }
 
 SubjectPage.propTypes = {
+  // ownProps
   match: PropTypes.shape({
     params: PropTypes.shape({
       _id: PropTypes.string.isRequired
     }).isRequired
   }).isRequired,
-  fetchSubject: PropTypes.func.isRequired,
-  fetchByTabId: PropTypes.func.isRequired,
-  deleteSubject: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
+  // mapStateToProps
   fields: PropTypes.arrayOf(
     PropTypes.shape({
       description: PropTypes.string.isRequired
@@ -155,9 +157,10 @@ SubjectPage.propTypes = {
   firstTab: PropTypes.shape({
     _id: PropTypes.string.isRequired
   }),
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired
+  // mapDispatchToProps
+  fetchSubject: PropTypes.func.isRequired,
+  fetchByTabId: PropTypes.func.isRequired,
+  deleteSubject: PropTypes.func.isRequired
 };
 
 SubjectPage.defaultProps = {

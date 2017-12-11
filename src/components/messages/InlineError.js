@@ -6,6 +6,7 @@ const InlineError = ({ text }) => (
 );
 
 InlineError.propTypes = {
+  // ownProps
   text: PropTypes.string.isRequired
 };
 

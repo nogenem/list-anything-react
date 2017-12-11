@@ -10,7 +10,7 @@ class EditDeleteBtnGroup extends React.Component {
   showConfirm = () => this.setState({ showConfirm: true });
 
   render() {
-    const { onEdit, showEdit, onDelete, showDelete } = this.props;
+    const { showEdit, onEdit, showDelete, onDelete } = this.props;
     const { showConfirm } = this.state;
     return (
       <Button.Group size="medium" icon>
@@ -41,17 +41,18 @@ class EditDeleteBtnGroup extends React.Component {
 }
 
 EditDeleteBtnGroup.propTypes = {
-  onEdit: PropTypes.func,
+  // ownProps
   showEdit: PropTypes.bool,
-  onDelete: PropTypes.func,
-  showDelete: PropTypes.bool
+  onEdit: PropTypes.func,
+  showDelete: PropTypes.bool,
+  onDelete: PropTypes.func
 };
 
 EditDeleteBtnGroup.defaultProps = {
-  onEdit: null,
   showEdit: true,
-  onDelete: null,
-  showDelete: true
+  onEdit: null,
+  showDelete: true,
+  onDelete: null
 };
 
 export default EditDeleteBtnGroup;

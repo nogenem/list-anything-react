@@ -90,6 +90,7 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
+  // ownProps
   submit: PropTypes.func.isRequired
 };
 

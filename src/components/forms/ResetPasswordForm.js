@@ -91,6 +91,7 @@ class ResetPasswordForm extends React.Component {
 }
 
 ResetPasswordForm.propTypes = {
+  // ownProps
   submit: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired
 };

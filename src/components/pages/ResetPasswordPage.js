@@ -41,8 +41,7 @@ class ResetPasswordPage extends React.Component {
 }
 
 ResetPasswordPage.propTypes = {
-  validateToken: PropTypes.func.isRequired,
-  resetPassword: PropTypes.func.isRequired,
+  // ownProps
   match: PropTypes.shape({
     params: PropTypes.shape({
       token: PropTypes.string.isRequired
@@ -50,7 +49,10 @@ ResetPasswordPage.propTypes = {
   }).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
-  }).isRequired
+  }).isRequired,
+  // mapDispatchToProps
+  validateToken: PropTypes.func.isRequired,
+  resetPassword: PropTypes.func.isRequired
 };
 
 export default connect(null, { validateToken, resetPassword })(

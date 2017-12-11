@@ -96,7 +96,9 @@ class NewSubjectDataForm extends React.Component {
 }
 
 NewSubjectDataForm.propTypes = {
+  // ownProps
   submit: PropTypes.func.isRequired,
+  // mapStateToProps
   fields: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string,

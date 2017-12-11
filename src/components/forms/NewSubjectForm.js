@@ -129,6 +129,7 @@ class NewSubjectForm extends React.Component {
 }
 
 NewSubjectForm.propTypes = {
+  // ownProps
   submit: PropTypes.func.isRequired
 };
 

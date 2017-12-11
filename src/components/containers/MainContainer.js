@@ -8,17 +8,16 @@ import { getSubjectsArray } from "../../reducers/subjects";
 
 const MainContainer = ({
   menuVisible,
-  activeItem,
   hideMenu,
-  style,
   children,
+  activeItem,
   subjects
 }) => (
   <Sidebar.Pushable
     id="main-container"
     as={Segment}
     attached="bottom"
-    style={{ height: "92.3%", ...style }}
+    style={{ height: "92.3%" }}
   >
     <Sidebar
       width="thin"
@@ -48,16 +47,15 @@ const MainContainer = ({
 );
 
 MainContainer.propTypes = {
+  // ownProps
   menuVisible: PropTypes.bool.isRequired,
-  activeItem: PropTypes.string,
   hideMenu: PropTypes.func.isRequired,
-  style: PropTypes.shape({
-    display: PropTypes.string
-  }),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired,
+  activeItem: PropTypes.string,
+  // mapStateToProps
   subjects: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string,
@@ -68,7 +66,6 @@ MainContainer.propTypes = {
 
 MainContainer.defaultProps = {
   activeItem: "",
-  style: {},
   subjects: []
 };
 

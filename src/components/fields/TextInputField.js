@@ -49,6 +49,7 @@ TextInputField.propTypes = {
 };
 
 TextInputField.defaultProps = {
+  // ownProps
   editable: false,
   showFieldDescription: true,
   error: "",

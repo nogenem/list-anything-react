@@ -58,11 +58,14 @@ const TopNavigation = ({
 );
 
 TopNavigation.propTypes = {
+  // ownProps
   toggleMenu: PropTypes.func.isRequired,
   hideMenu: PropTypes.func.isRequired,
   activeItem: PropTypes.string,
+  // mapStateToProps
   email: PropTypes.string.isRequired,
   hasSubjects: PropTypes.bool.isRequired,
+  // mapDispatchToProps
   logout: PropTypes.func.isRequired
 };
 

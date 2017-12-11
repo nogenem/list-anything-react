@@ -25,9 +25,11 @@ class NewSubjectPage extends Component {
 }
 
 NewSubjectPage.propTypes = {
+  // ownProps
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
+  // mapDispatchToProps
   createSubject: PropTypes.func.isRequired
 };
 

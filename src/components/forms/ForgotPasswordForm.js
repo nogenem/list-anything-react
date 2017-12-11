@@ -73,6 +73,7 @@ class ForgotPasswordForm extends React.Component {
 }
 
 ForgotPasswordForm.propTypes = {
+  // ownProps
   submit: PropTypes.func.isRequired
 };
 

@@ -15,7 +15,9 @@ const GuestRoute = ({ isAuthenticated, component: Component, ...rest }) => (
 );
 
 GuestRoute.propTypes = {
+  // ownProps
   component: PropTypes.func.isRequired,
+  // mapStateToProps
   isAuthenticated: PropTypes.bool.isRequired
 };
 

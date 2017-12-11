@@ -12,6 +12,7 @@ const HomePage = ({ isAuthenticated }) => (
 );
 
 HomePage.propTypes = {
+  // mapStateToProps
   isAuthenticated: PropTypes.bool.isRequired
 };
 

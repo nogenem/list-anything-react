@@ -36,6 +36,7 @@ class ForgotPasswordPage extends React.Component {
 }
 
 ForgotPasswordPage.propTypes = {
+  // mapDispatchToProps
   resetPasswordRequest: PropTypes.func.isRequired
 };
 

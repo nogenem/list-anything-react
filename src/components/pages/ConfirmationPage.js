@@ -60,12 +60,14 @@ class ConfirmationPage extends React.Component {
 }
 
 ConfirmationPage.propTypes = {
-  confirm: PropTypes.func.isRequired,
+  // ownProps
   match: PropTypes.shape({
     params: PropTypes.shape({
       token: PropTypes.string.isRequired
     }).isRequired
-  }).isRequired
+  }).isRequired,
+  // mapDispatchToProps
+  confirm: PropTypes.func.isRequired
 };
 
 export default connect(null, { confirm })(ConfirmationPage);

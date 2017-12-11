@@ -139,6 +139,7 @@ class FieldsAccordionForm extends Component {
 }
 
 FieldsAccordionForm.propTypes = {
+  // ownProps
   fields: PropTypes.arrayOf(
     PropTypes.shape({
       description: PropTypes.string.isRequired

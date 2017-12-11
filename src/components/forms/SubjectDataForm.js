@@ -162,6 +162,7 @@ class SubjectDataForm extends React.Component {
 }
 
 SubjectDataForm.propTypes = {
+  // ownProps
   submit: PropTypes.func.isRequired,
   delete: PropTypes.func.isRequired,
   subjectData: PropTypes.shape({

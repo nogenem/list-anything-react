@@ -28,11 +28,14 @@ class NewSubjectDataPage extends Component {
 }
 
 NewSubjectDataPage.propTypes = {
+  // ownProps
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  createSubjectData: PropTypes.func.isRequired,
-  subjectId: PropTypes.string.isRequired
+  // mapStateToProps
+  subjectId: PropTypes.string.isRequired,
+  // mapDispatchToProps
+  createSubjectData: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

@@ -53,6 +53,7 @@ class MainContentContainer extends React.Component {
 }
 
 MainContentContainer.propTypes = {
+  // ownProps
   showContent: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired

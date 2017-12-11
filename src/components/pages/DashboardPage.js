@@ -13,12 +13,13 @@ import { getSubjectsArray } from "../../reducers/subjects";
 const DashboardPage = ({ isConfirmed, hasSubjects }) => (
   <Segment basic>
     {!isConfirmed && <ConfirmEmailMessage />}
+    {isConfirmed && <WelcomeMessage />}
     {isConfirmed && !hasSubjects && <AddSubjectCtA />}
-    {isConfirmed && hasSubjects && <WelcomeMessage />}
   </Segment>
 );
 
 DashboardPage.propTypes = {
+  // mapStateToProps
   isConfirmed: PropTypes.bool.isRequired,
   hasSubjects: PropTypes.bool.isRequired
 };

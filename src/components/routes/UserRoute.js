@@ -20,7 +20,9 @@ class UserRoute extends React.Component {
 }
 
 UserRoute.propTypes = {
+  // ownProps
   component: PropTypes.func.isRequired,
+  // mapStateToProps
   isAuthenticated: PropTypes.bool.isRequired
 };
 

@@ -29,9 +29,11 @@ class LoginPage extends Component {
 }
 
 LoginPage.propTypes = {
+  // ownProps
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
+  // mapDispatchToProps
   login: PropTypes.func.isRequired
 };
 

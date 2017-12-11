@@ -143,10 +143,13 @@ class App extends Component {
 }
 
 App.propTypes = {
+  // ownProps
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
   }).isRequired,
+  // mapStateToProps
   isAuthenticated: PropTypes.bool.isRequired,
+  // mapDispatchToProps
   fetchSubjects: PropTypes.func.isRequired
 };
 

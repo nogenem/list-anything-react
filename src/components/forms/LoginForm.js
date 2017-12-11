@@ -89,6 +89,7 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
+  // ownProps
   submit: PropTypes.func.isRequired
 };
 

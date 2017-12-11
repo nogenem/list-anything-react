@@ -66,6 +66,7 @@ const SubjectDataTable = ({
 );
 
 SubjectDataTable.propTypes = {
+  // ownProps
   loading: PropTypes.bool.isRequired,
   fields: PropTypes.arrayOf(
     PropTypes.shape({

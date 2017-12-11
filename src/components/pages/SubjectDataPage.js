@@ -54,15 +54,16 @@ class SubjectDataPage extends React.Component {
 }
 
 SubjectDataPage.propTypes = {
+  // ownProps
   match: PropTypes.shape({
     params: PropTypes.shape({
       _id: PropTypes.string.isRequired
     }).isRequired
   }).isRequired,
-  fetchById: PropTypes.func.isRequired,
-  editSubjectData: PropTypes.func.isRequired,
-  deleteSubjectData: PropTypes.func.isRequired,
-  currentSubjectId: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
+  // mapStateToProps
   subjectData: PropTypes.shape({
     _id: PropTypes.string
   }),
@@ -71,9 +72,11 @@ SubjectDataPage.propTypes = {
       description: PropTypes.string.isRequired
     })
   ).isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired
+  currentSubjectId: PropTypes.string.isRequired,
+  // mapDispatchToProps
+  fetchById: PropTypes.func.isRequired,
+  editSubjectData: PropTypes.func.isRequired,
+  deleteSubjectData: PropTypes.func.isRequired
 };
 
 SubjectDataPage.defaultProps = {

@@ -89,7 +89,6 @@ class SubjectPage extends Component {
       subjectDataArray = subjectDataArray.filter(d => d.tabId === currentTabId);
     }
 
-    // TODO: Melhorar buttons
     return (
       <Segment
         style={{ maxWidth: "90%", margin: "10px auto", height: "96.5%" }}
@@ -99,7 +98,9 @@ class SubjectPage extends Component {
         <div
           style={{
             marginBottom: "3px",
-            display: "inline-flex"
+            display: "inline-flex",
+            width: "100%",
+            justifyContent: "space-between"
           }}
         >
           <Button.Group size="medium" icon>
@@ -111,8 +112,7 @@ class SubjectPage extends Component {
               color="green"
             />
           </Button.Group>
-          {" "}
-          <EditDeleteBtnGroup onEdit={() => {}} onDelete={this.deleteSubject} />
+          <EditDeleteBtnGroup showEdit={false} onDelete={this.deleteSubject} />
         </div>
         {!loadingSubject && (
           <SubjectDataContainer

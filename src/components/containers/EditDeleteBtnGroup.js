@@ -10,33 +10,48 @@ class EditDeleteBtnGroup extends React.Component {
   showConfirm = () => this.setState({ showConfirm: true });
 
   render() {
-    const { onEdit, onDelete } = this.props;
+    const { onEdit, showEdit, onDelete, showDelete } = this.props;
     const { showConfirm } = this.state;
     return (
       <Button.Group size="medium" icon>
-        <Popup
-          trigger={<Button icon="edit" color="blue" onClick={onEdit} />}
-          content="Edit"
-        />
-        <Popup
-          trigger={
-            <Button icon="delete" color="red" onClick={this.showConfirm} />
-          }
-          content="Delete"
-        />
-        <Confirm
-          open={showConfirm}
-          onCancel={this.handleCancel}
-          onConfirm={onDelete}
-        />
+        {showEdit && (
+          <Popup
+            trigger={<Button icon="edit" color="blue" onClick={onEdit} />}
+            content="Edit"
+          />
+        )}
+        {showDelete && (
+          <Popup
+            trigger={
+              <Button icon="delete" color="red" onClick={this.showConfirm} />
+            }
+            content="Delete"
+          />
+        )}
+        {showDelete && (
+          <Confirm
+            open={showConfirm}
+            onCancel={this.handleCancel}
+            onConfirm={onDelete}
+          />
+        )}
       </Button.Group>
     );
   }
 }
 
 EditDeleteBtnGroup.propTypes = {
-  onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired
+  onEdit: PropTypes.func,
+  showEdit: PropTypes.boolean,
+  onDelete: PropTypes.func,
+  showDelete: PropTypes.boolean
+};
+
+EditDeleteBtnGroup.defaultProps = {
+  onEdit: null,
+  showEdit: true,
+  onDelete: null,
+  showDelete: true
 };
 
 export default EditDeleteBtnGroup;

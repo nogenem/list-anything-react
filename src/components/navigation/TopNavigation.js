@@ -70,12 +70,10 @@ TopNavigation.defaultProps = {
   activeItem: ""
 };
 
-function mapStateToProps(state) {
-  return {
-    email: getEmail(state),
-    hasSubjects: !isEmpty(getSubjectsArray(state))
-  };
-}
+const mapStateToProps = state => ({
+  email: getEmail(state),
+  hasSubjects: !isEmpty(getSubjectsArray(state))
+});
 
 export default connect(mapStateToProps, { logout: actions.logout })(
   TopNavigation

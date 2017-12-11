@@ -35,11 +35,9 @@ NewSubjectDataPage.propTypes = {
   subjectId: PropTypes.string.isRequired
 };
 
-function mapStateToProps(state) {
-  return {
-    subjectId: getSubjectId(state)
-  };
-}
+const mapStateToProps = state => ({
+  subjectId: getSubjectId(state)
+});
 
 export default connect(mapStateToProps, { createSubjectData })(
   NewSubjectDataPage

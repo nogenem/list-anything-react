@@ -166,13 +166,11 @@ SubjectPage.defaultProps = {
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    fields: getFieldsArray(state),
-    subjectDataArray: getSubjectDataArray(state),
-    firstTab: getTabsArray(state)[0]
-  };
-}
+const mapStateToProps = state => ({
+  fields: getFieldsArray(state),
+  subjectDataArray: getSubjectDataArray(state),
+  firstTab: getTabsArray(state)[0]
+});
 
 export default connect(mapStateToProps, {
   fetchSubject,

@@ -72,10 +72,8 @@ MainContainer.defaultProps = {
   subjects: []
 };
 
-function mapStateToProps(state) {
-  return {
-    subjects: getSubjectsArray(state)
-  };
-}
+const mapStateToProps = state => ({
+  subjects: getSubjectsArray(state)
+});
 
 export default connect(mapStateToProps)(MainContainer);

@@ -82,13 +82,11 @@ SubjectDataPage.defaultProps = {
   }
 };
 
-function mapStateToProps(state, ownProps) {
-  return {
-    subjectData: getSubjectDataElem(state, ownProps.match.params._id),
-    fields: getFieldsArray(state),
-    currentSubjectId: getSubjectId(state)
-  };
-}
+const mapStateToProps = (state, ownProps) => ({
+  subjectData: getSubjectDataElem(state, ownProps.match.params._id),
+  fields: getFieldsArray(state),
+  currentSubjectId: getSubjectId(state)
+});
 
 export default connect(mapStateToProps, {
   fetchById,

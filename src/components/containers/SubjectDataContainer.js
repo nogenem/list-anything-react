@@ -63,10 +63,8 @@ SubjectDataContainer.defaultProps = {
   activeTab: ""
 };
 
-function mapStateToProps(state) {
-  return {
-    tabs: getTabsArray(state)
-  };
-}
+const mapStateToProps = state => ({
+  tabs: getTabsArray(state)
+});
 
 export default connect(mapStateToProps)(SubjectDataContainer);

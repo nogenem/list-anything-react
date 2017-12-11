@@ -150,10 +150,8 @@ App.propTypes = {
   fetchSubjects: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {
-  return {
-    isAuthenticated: !!getEmail(state)
-  };
-}
+const mapStateToProps = state => ({
+  isAuthenticated: !!getEmail(state)
+});
 
 export default connect(mapStateToProps, { fetchSubjects })(App);

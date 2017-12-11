@@ -111,11 +111,9 @@ NewSubjectDataForm.propTypes = {
   ).isRequired
 };
 
-function mapStateToProps(state) {
-  return {
-    tabs: getTabsArray(state),
-    fields: getFieldsArray(state)
-  };
-}
+const mapStateToProps = state => ({
+  tabs: getTabsArray(state),
+  fields: getFieldsArray(state)
+});
 
 export default connect(mapStateToProps)(NewSubjectDataForm);

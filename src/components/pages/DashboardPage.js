@@ -23,11 +23,9 @@ DashboardPage.propTypes = {
   hasSubjects: PropTypes.bool.isRequired
 };
 
-function mapStateToProps(state) {
-  return {
-    isConfirmed: !!getConfirmed(state),
-    hasSubjects: !isEmpty(getSubjectsArray(state))
-  };
-}
+const mapStateToProps = state => ({
+  isConfirmed: !!getConfirmed(state),
+  hasSubjects: !isEmpty(getSubjectsArray(state))
+});
 
 export default connect(mapStateToProps)(DashboardPage);

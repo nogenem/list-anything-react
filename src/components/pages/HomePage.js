@@ -15,10 +15,8 @@ HomePage.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired
 };
 
-function mapStateToProps(state) {
-  return {
-    isAuthenticated: !!getToken(state)
-  };
-}
+const mapStateToProps = state => ({
+  isAuthenticated: !!getToken(state)
+});
 
 export default connect(mapStateToProps)(HomePage);

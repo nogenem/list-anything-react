@@ -1,14 +1,11 @@
 import React from "react";
-import { Message } from "semantic-ui-react";
 
 import CenterElemsContainer from "../containers/CenterElemsContainer";
+import ErrorMessage from "../messages/ErrorMessage";
 
 const ErrorPage = () => (
   <CenterElemsContainer>
-    <Message negative>
-      <Message.Header>Something went wrong</Message.Header>
-      <p>Please, try again later...</p>
-    </Message>
+    <ErrorMessage text={"Please, try again later..."} />
   </CenterElemsContainer>
 );
 

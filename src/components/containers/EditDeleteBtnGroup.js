@@ -42,9 +42,9 @@ class EditDeleteBtnGroup extends React.Component {
 
 EditDeleteBtnGroup.propTypes = {
   onEdit: PropTypes.func,
-  showEdit: PropTypes.boolean,
+  showEdit: PropTypes.bool,
   onDelete: PropTypes.func,
-  showDelete: PropTypes.boolean
+  showDelete: PropTypes.bool
 };
 
 EditDeleteBtnGroup.defaultProps = {

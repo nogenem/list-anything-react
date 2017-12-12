@@ -14,7 +14,7 @@ import SearchInput from "../forms/SearchInput";
 
 class TopNavigation extends React.Component {
   search = query =>
-    this.props.requestSearch(query).then(() => console.log("DONE!"));
+    this.props.requestSearch(query).then(() => console.log(this.props.history));
 
   trigger = email => (
     <span>
@@ -75,6 +75,9 @@ TopNavigation.propTypes = {
   // ownProps
   toggleMenu: PropTypes.func.isRequired,
   hideMenu: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
   activeItem: PropTypes.string,
   // mapStateToProps
   email: PropTypes.string.isRequired,

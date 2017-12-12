@@ -9,7 +9,7 @@ class MainContentContainer extends React.Component {
     super(props);
     this.state = {
       menuVisible: false,
-      activeItem: props.location.pathname
+      activeItem: props.history.location.pathname
     };
   }
 
@@ -26,7 +26,7 @@ class MainContentContainer extends React.Component {
     }));
 
   render() {
-    const { children, showContent } = this.props;
+    const { children, showContent, history } = this.props;
     const { menuVisible, activeItem } = this.state;
     return (
       <div
@@ -38,6 +38,7 @@ class MainContentContainer extends React.Component {
             activeItem={activeItem}
             toggleMenu={this.toggleMenu}
             hideMenu={this.hideMenu}
+            history={history}
           />
         )}
         <MainContainer
@@ -55,8 +56,11 @@ class MainContentContainer extends React.Component {
 MainContentContainer.propTypes = {
   // ownProps
   showContent: PropTypes.bool.isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired
+    }).isRequired
   }).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

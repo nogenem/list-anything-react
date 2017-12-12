@@ -51,7 +51,7 @@ class App extends Component {
   };
 
   render() {
-    const { location, isAuthenticated } = this.props;
+    const { location, isAuthenticated, history } = this.props;
     const { error, loading } = this.state;
     const showMainContent =
       isAuthenticated &&
@@ -73,7 +73,7 @@ class App extends Component {
         `}</style>
 
         {error && <ErrorPage />}
-        <MainContentContainer location={location} showContent={showMainContent}>
+        <MainContentContainer history={history} showContent={showMainContent}>
           <UserRoute
             location={location}
             path="/dashboard"
@@ -144,6 +144,9 @@ class App extends Component {
 
 App.propTypes = {
   // ownProps
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
   }).isRequired,

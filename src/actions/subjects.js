@@ -3,7 +3,8 @@ import { normalize } from "normalizr";
 import {
   SUBJECTS_FETCHED,
   SUBJECT_CREATED,
-  SUBJECT_FETCHED,
+  SUBJECT_FETCHED_BY_ID,
+  SUBJECT_FETCHED_BY_TABID,
   SUBJECT_DELETED
 } from "../constants/actionTypes";
 import api from "../api";
@@ -14,8 +15,13 @@ const subjectsFetched = data => ({
   data
 });
 
-const subjectFetched = data => ({
-  type: SUBJECT_FETCHED,
+const subjectFetchedById = data => ({
+  type: SUBJECT_FETCHED_BY_ID,
+  data
+});
+
+const subjectFetchedByTabId = data => ({
+  type: SUBJECT_FETCHED_BY_TABID,
   data
 });
 
@@ -40,7 +46,14 @@ export const fetchSubjectById = _id => dispatch =>
   api.subjects
     .fetchById(_id)
     .then(subject =>
-      dispatch(subjectFetched(normalize(subject, subjectSchema)))
+      dispatch(subjectFetchedById(normalize(subject, subjectSchema)))
+    );
+
+export const fetchSubjectByTabId = tabId => dispatch =>
+  api.subjects
+    .fetchByTabId(tabId)
+    .then(subject =>
+      dispatch(subjectFetchedByTabId(normalize(subject, subjectSchema)))
     );
 
 export const createSubject = data => dispatch =>

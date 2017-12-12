@@ -2,12 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import { Loader } from "semantic-ui-react";
 import { getSubjectDataElem } from "../../reducers/subjectData";
 import {
   fetchSDById,
   editSubjectData,
   deleteSubjectData
 } from "../../actions/subjectData";
+import { fetchSubjectByTabId } from "../../actions/subjects";
 import CenterElemsContainer from "../containers/CenterElemsContainer";
 import { getFieldsArray, getSubjectId } from "../../reducers/currentSubject";
 import SubjectDataForm from "../forms/SubjectDataForm";
@@ -24,7 +26,11 @@ class SubjectDataPage extends React.Component {
     if (this.props.subjectData._id === "")
       this.props
         .fetchSDById(this.props.match.params._id)
-        .then(() => this.setState({ loading: false }));
+        .then(() =>
+          this.props
+            .fetchSubjectByTabId(this.props.subjectData.tabId)
+            .then(() => this.setState({ loading: false }))
+        );
   };
 
   submit = data =>
@@ -39,15 +45,19 @@ class SubjectDataPage extends React.Component {
 
   render() {
     const { subjectData, fields } = this.props;
+    const { loading } = this.state;
 
     return (
       <CenterElemsContainer>
-        <SubjectDataForm
-          submit={this.submit}
-          delete={this.delete}
-          subjectData={subjectData}
-          fields={fields}
-        />
+        {loading && <Loader active inline="centered" />}
+        {!loading && (
+          <SubjectDataForm
+            submit={this.submit}
+            delete={this.delete}
+            subjectData={subjectData}
+            fields={fields}
+          />
+        )}
       </CenterElemsContainer>
     );
   }
@@ -65,7 +75,8 @@ SubjectDataPage.propTypes = {
   }).isRequired,
   // mapStateToProps
   subjectData: PropTypes.shape({
-    _id: PropTypes.string
+    _id: PropTypes.string,
+    tabId: PropTypes.string
   }),
   fields: PropTypes.arrayOf(
     PropTypes.shape({
@@ -75,13 +86,15 @@ SubjectDataPage.propTypes = {
   currentSubjectId: PropTypes.string.isRequired,
   // mapDispatchToProps
   fetchSDById: PropTypes.func.isRequired,
+  fetchSubjectByTabId: PropTypes.func.isRequired,
   editSubjectData: PropTypes.func.isRequired,
   deleteSubjectData: PropTypes.func.isRequired
 };
 
 SubjectDataPage.defaultProps = {
   subjectData: {
-    _id: ""
+    _id: "",
+    tabId: ""
   }
 };
 
@@ -93,6 +106,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 export default connect(mapStateToProps, {
   fetchSDById,
+  fetchSubjectByTabId,
   editSubjectData,
   deleteSubjectData
 })(SubjectDataPage);

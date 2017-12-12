@@ -21,6 +21,8 @@ export default {
     fetchAll: () => axios.get("/api/subjects").then(res => res.data.subjects),
     fetchById: _id =>
       axios.get(`/api/subjects?_id=${_id}`).then(res => res.data.subject),
+    fetchByTabId: tabId =>
+      axios.get(`/api/subjects?tabId=${tabId}`).then(res => res.data.subject),
     delete: _id =>
       axios.delete(`/api/subjects?_id=${_id}`).then(res => res.data)
   },

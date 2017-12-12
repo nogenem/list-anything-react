@@ -1,7 +1,11 @@
 import { createSelector } from "reselect";
 import sortBy from "lodash.sortby";
 
-import { SUBJECT_FETCHED, SUBJECT_DELETED } from "../constants/actionTypes";
+import {
+  SUBJECT_FETCHED_BY_ID,
+  SUBJECT_FETCHED_BY_TABID,
+  SUBJECT_DELETED
+} from "../constants/actionTypes";
 
 const reshapeSubject = ({ subject: subjectHash, tabs, fields }) => {
   const subject = Object.values(subjectHash)[0];
@@ -10,7 +14,8 @@ const reshapeSubject = ({ subject: subjectHash, tabs, fields }) => {
 
 export default function currentSubject(state = {}, action = {}) {
   switch (action.type) {
-    case SUBJECT_FETCHED:
+    case SUBJECT_FETCHED_BY_ID:
+    case SUBJECT_FETCHED_BY_TABID:
       return reshapeSubject(action.data.entities);
     case SUBJECT_DELETED:
       return {};

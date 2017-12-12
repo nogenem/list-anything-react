@@ -3,7 +3,7 @@ import forEach from "lodash.foreach";
 
 import {
   SUBJECT_DATA_FETCHED,
-  SUBJECT_FETCHED,
+  SUBJECT_FETCHED_BY_ID,
   SUBJECT_DATA_EDITED
 } from "../constants/actionTypes";
 
@@ -29,7 +29,7 @@ export default function subjectData(state = {}, action = {}) {
     case SUBJECT_DATA_FETCHED:
     case SUBJECT_DATA_EDITED:
       return { ...state, ...reshapeData(action.data.entities) };
-    case SUBJECT_FETCHED:
+    case SUBJECT_FETCHED_BY_ID:
       return {};
     default:
       return state;

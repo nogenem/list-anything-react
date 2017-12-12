@@ -16,13 +16,13 @@ class SearchInput extends Component {
   onSubmit = () => {
     const { query } = this.state;
     if (query) {
-      this.setState({ error: false });
+      this.setState({ error: false, query: "" });
       this.props.onSearch(query);
     } else this.setState({ error: true });
   };
 
   render() {
-    const { error } = this.state;
+    const { query, error } = this.state;
     return (
       <Form onSubmit={this.onSubmit}>
         <Input
@@ -34,6 +34,7 @@ class SearchInput extends Component {
           placeholder="Search..."
           size="mini"
           error={error}
+          value={query}
           onChange={this.onChange}
         />
       </Form>

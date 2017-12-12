@@ -42,6 +42,10 @@ export default {
         .put("/api/subjects/data", { ...data })
         .then(res => res.data.subjectData),
     delete: _id =>
-      axios.delete(`/api/subjects/data?_id=${_id}`).then(res => res.data)
+      axios.delete(`/api/subjects/data?_id=${_id}`).then(res => res.data),
+    search: query =>
+      axios
+        .get(`/api/subjects/data?query=${query}`)
+        .then(res => res.subjectData)
   }
 };

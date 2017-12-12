@@ -47,9 +47,10 @@ export const fetchById = _id => dispatch =>
 const reshapeSubjectData = data => {
   const result = {
     tabId: data.tabId,
+    subjectId: data.subjectId,
     data: []
   };
-  const keys = Object.keys(data).splice(1); // retira o tabId
+  const keys = Object.keys(data).splice(2); // retira o subjectId e tabId
   forEach(keys, key => {
     result.data.push({
       fieldId: key,

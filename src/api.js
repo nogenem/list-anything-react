@@ -46,6 +46,6 @@ export default {
     search: query =>
       axios
         .get(`/api/subjects/data?query=${query}`)
-        .then(res => res.subjectData)
+        .then(res => res.data.subjectData)
   }
 };

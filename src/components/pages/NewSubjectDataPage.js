@@ -10,7 +10,7 @@ import { getSubjectId } from "../../reducers/currentSubject";
 class NewSubjectDataPage extends Component {
   submit = data =>
     this.props
-      .createSubjectData(data)
+      .createSubjectData({ subjectId: this.props.subjectId, ...data })
       .then(() => this.props.history.push(`/subject/${this.props.subjectId}`));
 
   render() {

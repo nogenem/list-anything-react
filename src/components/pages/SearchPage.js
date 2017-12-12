@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import queryString from "query-string";
+import { Segment } from "semantic-ui-react";
 
 import requestSearch from "../../actions/search";
 import { getResults } from "../../reducers/searchResults";
+import SearchResultTable from "../tables/SearchResultTable";
 
 class SearchPage extends Component {
   state = {
@@ -18,9 +20,26 @@ class SearchPage extends Component {
       .then(() => this.setState({ loading: false }));
   };
 
+  onTableRowClick = e => {
+    const to = e.currentTarget.getAttribute("to");
+    this.props.history.push(to);
+  };
+
   render() {
     const { results } = this.props;
-    return <ul>{results.map(res => <li key={res._id}>{res.value}</li>)}</ul>;
+    const { loading } = this.state;
+    return (
+      <Segment
+        style={{ maxWidth: "90%", margin: "10px auto", height: "96.5%" }}
+        loading={loading}
+        basic
+      >
+        <SearchResultTable
+          results={results}
+          onTableRowClick={this.onTableRowClick}
+        />
+      </Segment>
+    );
   }
 }
 
@@ -34,6 +53,9 @@ SearchPage.propTypes = {
       tab: PropTypes.string
     })
   ).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
   location: PropTypes.shape({
     search: PropTypes.string.isRequired
   }).isRequired,

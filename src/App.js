@@ -22,7 +22,7 @@ import MainContentContainer from "./components/containers/MainContentContainer";
 import GuestRoute from "./components/routes/GuestRoute";
 import UserRoute from "./components/routes/UserRoute";
 
-import { fetchSubjects } from "./actions/subjects";
+import { fetchAllSubjects } from "./actions/subjects";
 import { getEmail } from "./reducers/user";
 
 class App extends Component {
@@ -46,7 +46,7 @@ class App extends Component {
 
   loadSubjects = () => {
     this.props
-      .fetchSubjects()
+      .fetchAllSubjects()
       .then(() => this.setState({ loading: false }))
       .catch(() => this.setState({ error: true }));
   };
@@ -160,11 +160,11 @@ App.propTypes = {
   // mapStateToProps
   isAuthenticated: PropTypes.bool.isRequired,
   // mapDispatchToProps
-  fetchSubjects: PropTypes.func.isRequired
+  fetchAllSubjects: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: !!getEmail(state)
 });
 
-export default connect(mapStateToProps, { fetchSubjects })(App);
+export default connect(mapStateToProps, { fetchAllSubjects })(App);

@@ -29,11 +29,18 @@ const subjectDeleted = data => ({
   data
 });
 
-export const fetchSubjects = () => dispatch =>
+export const fetchAllSubjects = () => dispatch =>
   api.subjects
     .fetchAll()
     .then(subjects =>
       dispatch(subjectsFetched(normalize(subjects, [subjectsSchema])))
+    );
+
+export const fetchSubjectById = _id => dispatch =>
+  api.subjects
+    .fetchById(_id)
+    .then(subject =>
+      dispatch(subjectFetched(normalize(subject, subjectSchema)))
     );
 
 export const createSubject = data => dispatch =>
@@ -41,13 +48,6 @@ export const createSubject = data => dispatch =>
     .create(data)
     .then(subject =>
       dispatch(subjectCreated(normalize(subject, subjectsSchema)))
-    );
-
-export const fetchSubject = _id => dispatch =>
-  api.subjects
-    .fetchSubject(_id)
-    .then(subject =>
-      dispatch(subjectFetched(normalize(subject, subjectSchema)))
     );
 
 export const deleteSubject = _id => dispatch =>

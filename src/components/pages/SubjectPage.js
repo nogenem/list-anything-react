@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import SubjectDataContainer from "../containers/SubjectDataContainer";
-import { fetchSubject, deleteSubject } from "../../actions/subjects";
-import { fetchByTabId } from "../../actions/subjectData";
+import { fetchSubjectById, deleteSubject } from "../../actions/subjects";
+import { fetchSDByTabId } from "../../actions/subjectData";
 import { getFieldsArray, getTabsArray } from "../../reducers/currentSubject";
 import { getSubjectDataArray } from "../../reducers/subjectData";
 import SubjectDataTable from "../tables/SubjectDataTable";
@@ -55,14 +55,14 @@ class SubjectPage extends Component {
   loadSubjects = props => {
     this.setState({ loadingSubject: true });
     props
-      .fetchSubject(props.match.params._id)
+      .fetchSubjectById(props.match.params._id)
       .then(() => this.setState({ loadingSubject: false }));
   };
 
   loadSubjectData = (props, tabId) => {
     this.setState({ loadingData: true, activeTab: tabId });
     props
-      .fetchByTabId(tabId)
+      .fetchSDByTabId(tabId)
       .then(() => this.setState({ loadingData: false, currentTabId: tabId }));
   };
 
@@ -158,8 +158,8 @@ SubjectPage.propTypes = {
     _id: PropTypes.string.isRequired
   }),
   // mapDispatchToProps
-  fetchSubject: PropTypes.func.isRequired,
-  fetchByTabId: PropTypes.func.isRequired,
+  fetchSubjectById: PropTypes.func.isRequired,
+  fetchSDByTabId: PropTypes.func.isRequired,
   deleteSubject: PropTypes.func.isRequired
 };
 
@@ -176,7 +176,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  fetchSubject,
-  fetchByTabId,
+  fetchSubjectById,
+  fetchSDByTabId,
   deleteSubject
 })(SubjectPage);

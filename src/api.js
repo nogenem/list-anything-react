@@ -19,7 +19,7 @@ export default {
     create: subject =>
       axios.post("/api/subjects", { subject }).then(res => res.data.subject),
     fetchAll: () => axios.get("/api/subjects").then(res => res.data.subjects),
-    fetchSubject: _id =>
+    fetchById: _id =>
       axios.get(`/api/subjects?_id=${_id}`).then(res => res.data.subject),
     delete: _id =>
       axios.delete(`/api/subjects?_id=${_id}`).then(res => res.data)

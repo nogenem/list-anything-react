@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { getSubjectDataElem } from "../../reducers/subjectData";
 import {
-  fetchById,
+  fetchSDById,
   editSubjectData,
   deleteSubjectData
 } from "../../actions/subjectData";
@@ -23,7 +23,7 @@ class SubjectDataPage extends React.Component {
   componentDidMount = () => {
     if (this.props.subjectData._id === "")
       this.props
-        .fetchById(this.props.match.params._id)
+        .fetchSDById(this.props.match.params._id)
         .then(() => this.setState({ loading: false }));
   };
 
@@ -74,7 +74,7 @@ SubjectDataPage.propTypes = {
   ).isRequired,
   currentSubjectId: PropTypes.string.isRequired,
   // mapDispatchToProps
-  fetchById: PropTypes.func.isRequired,
+  fetchSDById: PropTypes.func.isRequired,
   editSubjectData: PropTypes.func.isRequired,
   deleteSubjectData: PropTypes.func.isRequired
 };
@@ -92,7 +92,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 export default connect(mapStateToProps, {
-  fetchById,
+  fetchSDById,
   editSubjectData,
   deleteSubjectData
 })(SubjectDataPage);

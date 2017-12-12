@@ -30,14 +30,14 @@ const subjectDataDeleted = data => ({
   data
 });
 
-export const fetchByTabId = tabId => dispatch =>
+export const fetchSDByTabId = tabId => dispatch =>
   api.subjectData
     .fetchByTabId(tabId)
     .then(data =>
       dispatch(subjectDataFetched(normalize(data, [subjectDataSchema])))
     );
 
-export const fetchById = _id => dispatch =>
+export const fetchSDById = _id => dispatch =>
   api.subjectData
     .fetchById(_id)
     .then(data =>

@@ -15,6 +15,7 @@ import SubjectPage from "./components/pages/SubjectPage";
 import NewSubjectDataPage from "./components/pages/NewSubjectDataPage";
 import SubjectDataPage from "./components/pages/SubjectDataPage";
 import ErrorPage from "./components/pages/ErrorPage";
+import SearchPage from "./components/pages/SearchPage";
 
 import MainContentContainer from "./components/containers/MainContentContainer";
 
@@ -103,6 +104,12 @@ class App extends Component {
             path="/subject-data/:_id"
             exact
             component={SubjectDataPage}
+          />
+          <UserRoute
+            location={location}
+            path="/search"
+            exact
+            component={SearchPage}
           />
         </MainContentContainer>
 

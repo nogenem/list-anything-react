@@ -7,14 +7,12 @@ import gravatarUrl from "gravatar-url";
 import isEmpty from "lodash.isempty";
 
 import * as actions from "../../actions/auth";
-import requestSearch from "../../actions/search";
 import { getSubjectsArray } from "../../reducers/subjects";
 import { getEmail } from "../../reducers/user";
 import SearchInput from "../forms/SearchInput";
 
 class TopNavigation extends React.Component {
-  search = query =>
-    this.props.requestSearch(query).then(() => console.log(this.props.history));
+  search = query => this.props.history.push(`/search?query=${query}`);
 
   trigger = email => (
     <span>
@@ -83,8 +81,7 @@ TopNavigation.propTypes = {
   email: PropTypes.string.isRequired,
   hasSubjects: PropTypes.bool.isRequired,
   // mapDispatchToProps
-  logout: PropTypes.func.isRequired,
-  requestSearch: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired
 };
 
 TopNavigation.defaultProps = {
@@ -97,6 +94,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  logout: actions.logout,
-  requestSearch
+  logout: actions.logout
 })(TopNavigation);

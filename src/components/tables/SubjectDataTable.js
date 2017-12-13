@@ -36,11 +36,14 @@ const SubjectDataTable = ({
   <Table celled compact="very" selectable>
     <Table.Header>
       <Table.Row>
-        {fields.map(field => (
-          <Table.HeaderCell key={field._id}>
-            {field.description}
-          </Table.HeaderCell>
-        ))}
+        {fields.map(
+          field =>
+            field.show_in_list && (
+              <Table.HeaderCell key={field._id}>
+                {field.description}
+              </Table.HeaderCell>
+            )
+        )}
       </Table.Row>
     </Table.Header>
     <Table.Body style={{ cursor: "pointer" }}>
@@ -58,7 +61,7 @@ const SubjectDataTable = ({
             to={`/subject-data/${sd._id}`}
             onClick={onTableRowClick}
           >
-            {fields.map(field => renderCell(sd, field))}
+            {fields.map(field => field.show_in_list && renderCell(sd, field))}
           </Table.Row>
         ))}
     </Table.Body>

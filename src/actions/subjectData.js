@@ -69,9 +69,9 @@ export const createSubjectData = data => dispatch => {
     );
 };
 
-export const editSubjectData = (sdId, data) => dispatch =>
+export const editSubjectData = (sdId, tabId, data) => dispatch =>
   api.subjectData
-    .edit({ _id: sdId, data: { ...data } })
+    .edit({ _id: sdId, tabId, data: { ...data } })
     .then(resData =>
       dispatch(subjectDataEdited(normalize(resData, [subjectDataSchema])))
     );

@@ -13,6 +13,7 @@ class SubjectDataForm extends React.Component {
 
     this.state = {
       data: this.getOriginalFormData(props),
+      tabId: props.subjectData.tabId,
       loading: false,
       editing: false,
       errors: this.getCleanFormErrors(props)
@@ -22,15 +23,17 @@ class SubjectDataForm extends React.Component {
   onChange = e => {
     const name = e.target.name;
     const value = e.target.value;
-    this.setState(prevState => {
-      const _id = prevState.data[name]._id;
-      return {
-        data: {
-          ...this.state.data,
-          [name]: { _id, value }
-        }
-      };
-    });
+    if (name === "tabId") this.setState({ tabId: value });
+    else
+      this.setState(prevState => {
+        const _id = prevState.data[name]._id;
+        return {
+          data: {
+            ...this.state.data,
+            [name]: { _id, value }
+          }
+        };
+      });
   };
 
   onSubmit = e => {
@@ -43,9 +46,10 @@ class SubjectDataForm extends React.Component {
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
       this.props
-        .submit(this.state.data)
+        .submit(this.state.tabId, this.state.data)
         .then(() =>
           this.setState({
+            tabId: this.props.subjectData.tabId,
             data: this.getOriginalFormData(this.props),
             errors: this.getCleanFormErrors(this.props),
             loading: false,
@@ -127,8 +131,8 @@ class SubjectDataForm extends React.Component {
   };
 
   render() {
-    const { errors, loading, editing } = this.state;
-    const { fields } = this.props;
+    const { errors, loading, editing, tabId } = this.state;
+    const { fields, tabs } = this.props;
 
     return (
       <Form
@@ -145,6 +149,21 @@ class SubjectDataForm extends React.Component {
           />
         )}
         <Segment stacked>
+          {editing && (
+            <Form.Field
+              label="Select the tab:"
+              control="select"
+              name="tabId"
+              value={tabId}
+              onChange={this.onChange}
+            >
+              {tabs.map(tab => (
+                <option key={tab._id} value={tab._id}>
+                  {tab.description}
+                </option>
+              ))}
+            </Form.Field>
+          )}
           {fields.map(field => this.renderField(field))}
 
           {editing && (
@@ -167,6 +186,7 @@ SubjectDataForm.propTypes = {
   delete: PropTypes.func.isRequired,
   subjectData: PropTypes.shape({
     _id: PropTypes.string,
+    tabId: PropTypes.string,
     data: PropTypes.objectOf(
       PropTypes.shape({
         fieldId: PropTypes.string,
@@ -177,6 +197,12 @@ SubjectDataForm.propTypes = {
   fields: PropTypes.arrayOf(
     PropTypes.shape({
       description: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  tabs: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      description: PropTypes.string
     })
   ).isRequired
 };

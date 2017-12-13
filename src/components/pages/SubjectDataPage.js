@@ -11,7 +11,11 @@ import {
 } from "../../actions/subjectData";
 import { fetchSubjectByTabId } from "../../actions/subjects";
 import CenterElemsContainer from "../containers/CenterElemsContainer";
-import { getFieldsArray, getSubjectId } from "../../reducers/currentSubject";
+import {
+  getFieldsArray,
+  getSubjectId,
+  getTabsArray
+} from "../../reducers/currentSubject";
 import SubjectDataForm from "../forms/SubjectDataForm";
 
 class SubjectDataPage extends React.Component {
@@ -33,8 +37,8 @@ class SubjectDataPage extends React.Component {
         );
   };
 
-  submit = data =>
-    this.props.editSubjectData(this.props.match.params._id, data);
+  submit = (tabId, data) =>
+    this.props.editSubjectData(this.props.match.params._id, tabId, data);
 
   delete = () =>
     this.props
@@ -44,7 +48,7 @@ class SubjectDataPage extends React.Component {
       );
 
   render() {
-    const { subjectData, fields } = this.props;
+    const { subjectData, fields, tabs } = this.props;
     const { loading } = this.state;
 
     return (
@@ -56,6 +60,7 @@ class SubjectDataPage extends React.Component {
             delete={this.delete}
             subjectData={subjectData}
             fields={fields}
+            tabs={tabs}
           />
         )}
       </CenterElemsContainer>
@@ -80,7 +85,14 @@ SubjectDataPage.propTypes = {
   }),
   fields: PropTypes.arrayOf(
     PropTypes.shape({
-      description: PropTypes.string.isRequired
+      _id: PropTypes.string,
+      description: PropTypes.string
+    })
+  ).isRequired,
+  tabs: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      description: PropTypes.string
     })
   ).isRequired,
   currentSubjectId: PropTypes.string.isRequired,
@@ -101,6 +113,7 @@ SubjectDataPage.defaultProps = {
 const mapStateToProps = (state, ownProps) => ({
   subjectData: getSubjectDataElem(state, ownProps.match.params._id),
   fields: getFieldsArray(state),
+  tabs: getTabsArray(state),
   currentSubjectId: getSubjectId(state)
 });
 

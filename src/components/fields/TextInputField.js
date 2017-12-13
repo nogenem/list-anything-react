@@ -37,6 +37,7 @@ const TextInputField = ({
 };
 
 TextInputField.propTypes = {
+  // ownProps
   value: PropTypes.string.isRequired,
   editable: PropTypes.bool,
   showFieldDescription: PropTypes.bool,
@@ -49,7 +50,6 @@ TextInputField.propTypes = {
 };
 
 TextInputField.defaultProps = {
-  // ownProps
   editable: false,
   showFieldDescription: true,
   error: "",

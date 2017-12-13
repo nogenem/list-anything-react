@@ -4,9 +4,7 @@ import { Form } from "semantic-ui-react";
 
 import InlineError from "../messages/InlineError";
 
-const handleClick = e => e.stopPropagation();
-
-const UrlInputField = ({
+const DateInputField = ({
   value,
   editable,
   showFieldDescription,
@@ -19,12 +17,12 @@ const UrlInputField = ({
       <Form.Field error={!!error}>
         <Form.Input
           fluid
-          type="url"
+          type="date"
           label={field.description}
           value={value}
           onChange={onChange}
           name={field._id}
-          placeholder="http://site.com/"
+          placeholder={field.description}
         />
         {error && <InlineError text={error} />}
       </Form.Field>
@@ -32,20 +30,13 @@ const UrlInputField = ({
   if (showFieldDescription)
     return (
       <Form.Field>
-        <b>{field.description}:</b>{" "}
-        <a href={value} target="_blank" onClick={handleClick}>
-          {value}
-        </a>
+        <b>{field.description}:</b> {value}
       </Form.Field>
     );
-  return (
-    <a href={value} target="_blank" onClick={handleClick}>
-      {value}
-    </a>
-  );
+  return value;
 };
 
-UrlInputField.propTypes = {
+DateInputField.propTypes = {
   // ownProps
   value: PropTypes.string.isRequired,
   editable: PropTypes.bool,
@@ -58,7 +49,7 @@ UrlInputField.propTypes = {
   onChange: PropTypes.func
 };
 
-UrlInputField.defaultProps = {
+DateInputField.defaultProps = {
   editable: false,
   showFieldDescription: true,
   error: "",
@@ -66,4 +57,4 @@ UrlInputField.defaultProps = {
   onChange: () => {}
 };
 
-export default UrlInputField;
+export default DateInputField;

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { Loader } from "semantic-ui-react";
+import { Loader, Segment } from "semantic-ui-react";
 import { getSubjectDataElem } from "../../reducers/subjectData";
 import {
   fetchSDById,
@@ -10,7 +10,6 @@ import {
   deleteSubjectData
 } from "../../actions/subjectData";
 import { fetchSubjectByTabId } from "../../actions/subjects";
-import CenterElemsContainer from "../containers/CenterElemsContainer";
 import {
   getFieldsArray,
   getSubjectId,
@@ -52,7 +51,7 @@ class SubjectDataPage extends React.Component {
     const { loading } = this.state;
 
     return (
-      <CenterElemsContainer>
+      <Segment basic style={{ maxWidth: 500, margin: "10px auto" }}>
         {loading && <Loader active inline="centered" />}
         {!loading && (
           <SubjectDataForm
@@ -63,7 +62,7 @@ class SubjectDataPage extends React.Component {
             tabs={tabs}
           />
         )}
-      </CenterElemsContainer>
+      </Segment>
     );
   }
 }

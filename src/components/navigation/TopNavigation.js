@@ -31,7 +31,7 @@ class TopNavigation extends React.Component {
     } = this.props;
 
     return (
-      <Menu size="small" attached="top" inverted stackable>
+      <Menu size="small" attached="top" id="top-navigation" inverted stackable>
         <Menu.Item onClick={toggleMenu}>
           <Icon name="sidebar" />Menu
         </Menu.Item>

@@ -30,7 +30,7 @@ class SearchPage extends Component {
     const { loading } = this.state;
     return (
       <Segment
-        style={{ maxWidth: "90%", margin: "10px auto", height: "96.5%" }}
+        style={{ maxWidth: "90%", margin: "10px auto" }}
         loading={loading}
         basic
       >

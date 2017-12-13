@@ -91,7 +91,7 @@ class SubjectPage extends Component {
 
     return (
       <Segment
-        style={{ maxWidth: "90%", margin: "10px auto", height: "96.5%" }}
+        style={{ maxWidth: "90%", margin: "10px auto", height: "90%" }}
         loading={loadingSubject}
         basic
       >

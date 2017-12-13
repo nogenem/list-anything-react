@@ -1,0 +1,17 @@
+#root,
+#app-container,
+#center-elems-container,
+#main-content-container,
+#main-container > div.pusher  {
+    height: 100%;
+}
+
+#main-container {
+  height: calc(100% - 54.031px);
+}
+
+@media only screen and (max-width: 767px) {
+  #main-container {
+    height: calc(100% - 215.531px);
+  }
+}

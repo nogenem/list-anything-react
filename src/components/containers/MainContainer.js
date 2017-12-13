@@ -13,12 +13,7 @@ const MainContainer = ({
   activeItem,
   subjects
 }) => (
-  <Sidebar.Pushable
-    id="main-container"
-    as={Segment}
-    attached="bottom"
-    style={{ height: "92.3%" }}
-  >
+  <Sidebar.Pushable id="main-container" as={Segment} attached="bottom">
     <Sidebar
       width="thin"
       as={Menu}

@@ -25,6 +25,8 @@ import UserRoute from "./components/routes/UserRoute";
 import { fetchAllSubjects } from "./actions/subjects";
 import { getEmail } from "./reducers/user";
 
+import "./App.css";
+
 class App extends Component {
   state = {
     loading: true,
@@ -62,17 +64,6 @@ class App extends Component {
 
     return (
       <div id="app-container">
-        <style>{`
-          #root,
-          #app-container,
-          #main-content-container,
-          #center-elems-container,
-          #main-container,
-          #main-container > div.pusher  {
-              height: 100%;
-          }
-        `}</style>
-
         {error && <ErrorPage />}
         <MainContentContainer history={history} showContent={showMainContent}>
           <UserRoute

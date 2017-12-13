@@ -45,10 +45,13 @@ class NewSubjectDataForm extends React.Component {
   validate = data => {
     const errors = {};
     const { fields } = this.props;
-    // TODO: Melhorar isso...
+
+    // Not the best validation but...
+    let flag = true;
     forEach(fields, val => {
-      if (!data[val._id]) errors[val._id] = "Can't be blank";
+      flag = flag && !data[val._id];
     });
+    if (flag) errors[fields[0]._id] = "You must enter at least one value";
     return errors;
   };
 

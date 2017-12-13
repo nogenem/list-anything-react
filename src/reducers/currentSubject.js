@@ -1,5 +1,4 @@
 import { createSelector } from "reselect";
-import sortBy from "lodash.sortby";
 
 import {
   SUBJECT_FETCHED_BY_ID,
@@ -35,9 +34,9 @@ export const getSubjectId = createSelector(
   subject => subject._id || ""
 );
 export const getTabsArray = state =>
-  sortBy(Object.values(state.currentSubject.tabs || {}), ["description"]);
+  Object.values(state.currentSubject.tabs || {});
 export const getFieldsArray = state =>
-  sortBy(Object.values(state.currentSubject.fields || {}), ["description"]);
+  Object.values(state.currentSubject.fields || {});
 export const getFieldsHash = createSelector(
   getSubject,
   subject => subject.fields

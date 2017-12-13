@@ -5,7 +5,7 @@ import ErrorMessage from "../messages/ErrorMessage";
 
 const ErrorPage = () => (
   <CenterElemsContainer>
-    <ErrorMessage text={"Please, try again later..."} />
+    <ErrorMessage text={"Server is offline. Please, try again later..."} />
   </CenterElemsContainer>
 );
 

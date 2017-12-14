@@ -6,6 +6,7 @@ import forEach from "lodash.foreach";
 import renderFieldComponent from "../../utils/renderFieldComponent";
 import EditDeleteBtnGroup from "../containers/EditDeleteBtnGroup";
 import ErrorMessage from "../messages/ErrorMessage";
+import handleServerErrors from "../../utils/handleServerErrors";
 
 class SubjectDataForm extends React.Component {
   constructor(props) {
@@ -56,15 +57,12 @@ class SubjectDataForm extends React.Component {
             editing: false
           })
         )
-        .catch(err => {
-          if (err.response.status === 500)
-            this.setState({
-              errors: { global: "Internal server error" },
-              loading: false
-            });
-          else
-            this.setState({ errors: err.response.data.errors, loading: false });
-        });
+        .catch(err =>
+          this.setState({
+            errors: handleServerErrors(err),
+            loading: false
+          })
+        );
     }
   };
 

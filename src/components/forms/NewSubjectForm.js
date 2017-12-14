@@ -7,6 +7,8 @@ import InlineError from "../messages/InlineError";
 import TabsAccordionForm from "./TabsAccordionForm";
 import FieldsAccordionForm from "./FieldsAccordionForm";
 
+import handleServerErrors from "../../utils/handleServerErrors";
+
 class NewSubjectForm extends React.Component {
   state = {
     data: {
@@ -33,15 +35,12 @@ class NewSubjectForm extends React.Component {
     this.focusOnDescriptionInput();
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
-      this.props.submit(this.state.data).catch(err => {
-        if (err.response.status === 500)
-          this.setState({
-            errors: { global: "Internal server error" },
-            loading: false
-          });
-        else
-          this.setState({ errors: err.response.data.errors, loading: false });
-      });
+      this.props.submit(this.state.data).catch(err =>
+        this.setState({
+          errors: handleServerErrors(err),
+          loading: false
+        })
+      );
     }
   };
 

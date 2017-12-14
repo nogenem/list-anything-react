@@ -7,6 +7,7 @@ import forEach from "lodash.foreach";
 import ErrorMessage from "../messages/ErrorMessage";
 import { getTabsArray, getFieldsArray } from "../../reducers/currentSubject";
 import renderFieldComponent from "../../utils/renderFieldComponent";
+import handleServerErrors from "../../utils/handleServerErrors";
 
 class NewSubjectDataForm extends React.Component {
   constructor(props) {
@@ -30,15 +31,12 @@ class NewSubjectDataForm extends React.Component {
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
-      this.props.submit(this.state.data).catch(err => {
-        if (err.response.status === 500)
-          this.setState({
-            errors: { global: "Internal server error" },
-            loading: false
-          });
-        else
-          this.setState({ errors: err.response.data.errors, loading: false });
-      });
+      this.props.submit(this.state.data).catch(err =>
+        this.setState({
+          errors: handleServerErrors(err),
+          loading: false
+        })
+      );
     }
   };
 

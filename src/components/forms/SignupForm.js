@@ -5,6 +5,7 @@ import isEmail from "validator/lib/isEmail";
 
 import InlineError from "../messages/InlineError";
 import ErrorMessage from "../messages/ErrorMessage";
+import handleServerErrors from "../../utils/handleServerErrors";
 
 class SignupForm extends React.Component {
   state = {
@@ -32,15 +33,12 @@ class SignupForm extends React.Component {
     this.focusOnEmailInput();
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
-      this.props.submit(this.state.data).catch(err => {
-        if (err.response.status === 500)
-          this.setState({
-            errors: { global: "Internal server error" },
-            loading: false
-          });
-        else
-          this.setState({ errors: err.response.data.errors, loading: false });
-      });
+      this.props.submit(this.state.data).catch(err =>
+        this.setState({
+          errors: handleServerErrors(err),
+          loading: false
+        })
+      );
     }
   };
 

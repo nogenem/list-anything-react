@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Form, Button, Message, Segment } from "semantic-ui-react";
 
 import InlineError from "../messages/InlineError";
+import handleServerErrors from "../../utils/handleServerErrors";
 
 class ResetPasswordForm extends React.Component {
   state = {
@@ -31,15 +32,12 @@ class ResetPasswordForm extends React.Component {
     this.focusOnPasswordInput();
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
-      this.props.submit(this.state.data).catch(err => {
-        if (err.response.status === 500)
-          this.setState({
-            errors: { global: "Internal server error" },
-            loading: false
-          });
-        else
-          this.setState({ errors: err.response.data.errors, loading: false });
-      });
+      this.props.submit(this.state.data).catch(err =>
+        this.setState({
+          errors: handleServerErrors(err),
+          loading: false
+        })
+      );
     }
   };
 

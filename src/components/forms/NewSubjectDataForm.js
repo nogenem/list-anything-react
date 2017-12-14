@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Form, Segment, Button } from "semantic-ui-react";
+import forEach from "lodash.foreach";
 
 import ErrorMessage from "../messages/ErrorMessage";
 import { getTabsArray, getFieldsArray } from "../../reducers/currentSubject";
@@ -30,13 +31,23 @@ class NewSubjectDataForm extends React.Component {
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
-      this.props.submit(this.state.data).catch(err =>
+      this.props.submit(this.fixData(this.state.data)).catch(err =>
         this.setState({
           errors: handleServerErrors(err),
           loading: false
         })
       );
     }
+  };
+
+  fixData = data => {
+    const { fields } = this.props;
+    const newData = { ...data };
+
+    forEach(fields, field => {
+      if (!newData[field._id]) newData[field._id] = "";
+    });
+    return newData;
   };
 
   validate = data => {

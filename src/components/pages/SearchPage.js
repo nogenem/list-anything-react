@@ -14,15 +14,28 @@ class SearchPage extends Component {
   };
 
   componentDidMount = () => {
-    const qObj = queryString.parse(this.props.location.search);
-    this.props
-      .requestSearch(qObj.query)
-      .then(() => this.setState({ loading: false }));
+    this.makeSearchRequest(this.props);
+  };
+
+  componentWillReceiveProps = nextProps => {
+    const mySearch = this.props.location.search;
+    const nextSearch = nextProps.location.search;
+
+    if (mySearch !== nextSearch) {
+      this.makeSearchRequest(nextProps);
+    }
   };
 
   onTableRowClick = e => {
     const to = e.currentTarget.getAttribute("to");
     this.props.history.push(to);
+  };
+
+  makeSearchRequest = props => {
+    const qObj = queryString.parse(props.location.search);
+    props
+      .requestSearch(qObj.query)
+      .then(() => this.setState({ loading: false }));
   };
 
   render() {

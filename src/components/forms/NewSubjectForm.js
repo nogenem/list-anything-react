@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Button, Segment } from "semantic-ui-react";
+import { Form, Button, Segment, Divider } from "semantic-ui-react";
 
 import ErrorMessage from "../messages/ErrorMessage";
 import InlineError from "../messages/InlineError";
@@ -111,14 +111,12 @@ class NewSubjectForm extends React.Component {
             />
             {errors.description && <InlineError text={errors.description} />}
           </Form.Field>
-
           <TabsAccordionForm
             tabs={data.tabs}
             addTab={this.addTab}
             removeTab={this.removeTab}
           />
           {errors.tabs && <InlineError text={errors.tabs} />}
-
           <FieldsAccordionForm
             fields={data.fields}
             addField={this.addField}
@@ -126,6 +124,7 @@ class NewSubjectForm extends React.Component {
           />
           {errors.fields && <InlineError text={errors.fields} />}
 
+          <Divider />
           <Button color="teal" fluid size="large">
             Create
           </Button>

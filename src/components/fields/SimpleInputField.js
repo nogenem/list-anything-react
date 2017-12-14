@@ -4,8 +4,9 @@ import { Form } from "semantic-ui-react";
 
 import InlineError from "../messages/InlineError";
 
-const TextInputField = ({
+const SimpleInputField = ({
   value,
+  type,
   editable,
   showFieldDescription,
   error,
@@ -17,7 +18,7 @@ const TextInputField = ({
       <Form.Field error={!!error}>
         <Form.Input
           fluid
-          type="text"
+          type={type}
           label={field.description}
           value={value}
           onChange={onChange}
@@ -36,9 +37,10 @@ const TextInputField = ({
   return value;
 };
 
-TextInputField.propTypes = {
+SimpleInputField.propTypes = {
   // ownProps
   value: PropTypes.string.isRequired,
+  type: PropTypes.string,
   editable: PropTypes.bool,
   showFieldDescription: PropTypes.bool,
   error: PropTypes.string,
@@ -49,7 +51,8 @@ TextInputField.propTypes = {
   onChange: PropTypes.func
 };
 
-TextInputField.defaultProps = {
+SimpleInputField.defaultProps = {
+  type: "text",
   editable: false,
   showFieldDescription: true,
   error: "",
@@ -57,4 +60,4 @@ TextInputField.defaultProps = {
   onChange: () => {}
 };
 
-export default TextInputField;
+export default SimpleInputField;

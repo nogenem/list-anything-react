@@ -2,28 +2,27 @@ import React from "react";
 
 import * as fieldTypes from "../constants/fieldTypes";
 
-import TextInputField from "../components/fields/TextInputField";
 import UrlInputImgField from "../components/fields/UrlInputImgField";
-import NumberInputField from "../components/fields/NumberInputField";
 import TextareaField from "../components/fields/TextareaField";
 import UrlInputField from "../components/fields/UrlInputField";
-import DateInputField from "../components/fields/DateInputField";
+
+import SimpleInputField from "../components/fields/SimpleInputField";
 
 export default fieldData => {
   const { field } = fieldData;
   switch (field.field_type) {
     case fieldTypes.TEXT_INPUT:
-      return <TextInputField {...fieldData} />;
+      return <SimpleInputField {...fieldData} />;
     case fieldTypes.URL_INPUT_IMG:
       return <UrlInputImgField {...fieldData} />;
     case fieldTypes.NUMBER_INPUT:
-      return <NumberInputField {...fieldData} />;
+      return <SimpleInputField {...fieldData} type="number" />;
     case fieldTypes.TEXTAREA:
       return <TextareaField {...fieldData} />;
     case fieldTypes.URL_INPUT:
       return <UrlInputField {...fieldData} />;
     case fieldTypes.DATE_INPUT:
-      return <DateInputField {...fieldData} />;
+      return <SimpleInputField {...fieldData} type="date" />;
     default:
       return <div key={field._id} />;
   }

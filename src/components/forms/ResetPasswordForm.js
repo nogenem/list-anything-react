@@ -29,7 +29,6 @@ class ResetPasswordForm extends React.Component {
     e.preventDefault();
     const errors = this.validate(this.state.data);
     this.setState({ errors });
-    this.focusOnPasswordInput();
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
       this.props.submit(this.state.data).catch(err =>
@@ -39,6 +38,7 @@ class ResetPasswordForm extends React.Component {
         })
       );
     }
+    this.focusOnPasswordInput();
   };
 
   focusOnPasswordInput = () => {

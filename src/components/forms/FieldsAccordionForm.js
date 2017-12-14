@@ -6,16 +6,15 @@ import InlineError from "../messages/InlineError";
 import * as fieldTypes from "../../constants/fieldTypes";
 
 class FieldsAccordionForm extends Component {
-  state = {
-    data: {
-      description: "",
-      is_unique: false,
-      show_in_list: false,
-      field_type: Object.values(fieldTypes)[0]
-    },
-    active: true,
-    error: ""
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: this.getCleanFormData(),
+      active: true,
+      error: ""
+    };
+  }
 
   onChange = e =>
     this.setState({
@@ -37,17 +36,19 @@ class FieldsAccordionForm extends Component {
     if (error === "") {
       this.props.addField(this.state.data);
       this.setState({
-        data: {
-          description: "",
-          is_unique: false,
-          show_in_list: false,
-          field_type: Object.values(fieldTypes)[0]
-        }
+        data: this.getCleanFormData()
       });
     }
     const $input = document.querySelector("#fields-accordion-input");
     if ($input) $input.focus();
   };
+
+  getCleanFormData = () => ({
+    description: "",
+    is_unique: false,
+    show_in_list: false,
+    field_type: Object.values(fieldTypes)[0]
+  });
 
   validate = data => {
     let error = "";

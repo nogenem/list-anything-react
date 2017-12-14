@@ -29,7 +29,6 @@ class LoginForm extends React.Component {
   onSubmit = () => {
     const errors = this.validate(this.state.data);
     this.setState({ errors });
-    this.focusOnEmailInput();
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
       this.props.submit(this.state.data).catch(err =>
@@ -39,6 +38,7 @@ class LoginForm extends React.Component {
         })
       );
     }
+    this.focusOnEmailInput();
   };
 
   focusOnEmailInput = () => {

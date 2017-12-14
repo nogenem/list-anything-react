@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Form, Segment, Button } from "semantic-ui-react";
-import forEach from "lodash.foreach";
 
 import ErrorMessage from "../messages/ErrorMessage";
 import { getTabsArray, getFieldsArray } from "../../reducers/currentSubject";
@@ -45,10 +44,7 @@ class NewSubjectDataForm extends React.Component {
     const { fields } = this.props;
 
     // Not the best validation but...
-    let flag = true;
-    forEach(fields, val => {
-      flag = flag && !data[val._id];
-    });
+    const flag = fields.reduce((prev, elem) => prev && !data[elem._id], true);
     if (flag) errors[fields[0]._id] = "You must enter at least one value";
     return errors;
   };

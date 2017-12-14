@@ -32,7 +32,6 @@ class NewSubjectForm extends React.Component {
   onSubmit = () => {
     const errors = this.validate(this.state.data);
     this.setState({ errors });
-    this.focusOnDescriptionInput();
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
       this.props.submit(this.state.data).catch(err =>
@@ -42,6 +41,7 @@ class NewSubjectForm extends React.Component {
         })
       );
     }
+    this.focusOnDescriptionInput();
   };
 
   focusOnDescriptionInput = () => {
@@ -97,7 +97,7 @@ class NewSubjectForm extends React.Component {
         (prev, elem) => prev || elem.show_in_list,
         false
       );
-      if (!flag) errors.fields = "Needs at least one field shown in list";
+      if (!flag) errors.fields = "Needs at least one field to show in list";
     }
     return errors;
   };

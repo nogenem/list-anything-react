@@ -107,10 +107,7 @@ class SubjectDataForm extends React.Component {
     const { fields } = this.props;
 
     // Not the best validation but...
-    let flag = true;
-    forEach(fields, val => {
-      flag = flag && !data[val._id];
-    });
+    const flag = fields.reduce((prev, elem) => prev && !data[elem._id], true);
     if (flag) errors[fields[0]._id] = "You must enter at least one value";
     return errors;
   };
@@ -119,6 +116,8 @@ class SubjectDataForm extends React.Component {
     const { subjectData } = this.props;
     const { editing } = this.state;
     const data = subjectData.data[field._id];
+
+    if (!data) return null;
 
     const fieldData = {
       key: data._id,

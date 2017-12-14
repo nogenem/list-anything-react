@@ -18,6 +18,10 @@ class NewSubjectForm extends React.Component {
     errors: {}
   };
 
+  componentDidMount = () => {
+    window.setTimeout(this.focusOnDescriptionInput, 0);
+  };
+
   onChange = e =>
     this.setState({
       data: { ...this.state.data, [e.target.name]: e.target.value }
@@ -26,6 +30,7 @@ class NewSubjectForm extends React.Component {
   onSubmit = () => {
     const errors = this.validate(this.state.data);
     this.setState({ errors });
+    this.focusOnDescriptionInput();
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
       this.props.submit(this.state.data).catch(err => {
@@ -38,6 +43,11 @@ class NewSubjectForm extends React.Component {
           this.setState({ errors: err.response.data.errors, loading: false });
       });
     }
+  };
+
+  focusOnDescriptionInput = () => {
+    const $input = document.getElementById("subject-description-input");
+    if ($input) $input.focus();
   };
 
   addTab = tab => {
@@ -108,6 +118,7 @@ class NewSubjectForm extends React.Component {
               value={data.description}
               onChange={this.onChange}
               name="description"
+              id="subject-description-input"
             />
             {errors.description && <InlineError text={errors.description} />}
           </Form.Field>

@@ -15,6 +15,10 @@ class ResetPasswordForm extends React.Component {
     errors: {}
   };
 
+  componentDidMount = () => {
+    window.setTimeout(this.focusOnPasswordInput, 0);
+  };
+
   onChange = e =>
     this.setState({
       data: { ...this.state.data, [e.target.name]: e.target.value }
@@ -24,6 +28,7 @@ class ResetPasswordForm extends React.Component {
     e.preventDefault();
     const errors = this.validate(this.state.data);
     this.setState({ errors });
+    this.focusOnPasswordInput();
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
       this.props.submit(this.state.data).catch(err => {
@@ -36,6 +41,11 @@ class ResetPasswordForm extends React.Component {
           this.setState({ errors: err.response.data.errors, loading: false });
       });
     }
+  };
+
+  focusOnPasswordInput = () => {
+    const $input = document.getElementById("reset-password-input");
+    if ($input) $input.focus();
   };
 
   validate = data => {
@@ -63,6 +73,7 @@ class ResetPasswordForm extends React.Component {
               value={data.password}
               onChange={this.onChange}
               name="password"
+              id="reset-password-input"
             />
             {errors.password && <InlineError text={errors.password} />}
           </Form.Field>

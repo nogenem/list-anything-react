@@ -45,6 +45,8 @@ class FieldsAccordionForm extends Component {
         }
       });
     }
+    const $input = document.querySelector("#fields-accordion-input");
+    if ($input) $input.focus();
   };
 
   validate = data => {
@@ -84,6 +86,7 @@ class FieldsAccordionForm extends Component {
               value={data.description}
               onChange={this.onChange}
               name="description"
+              id="fields-accordion-input"
             />
             {error && <InlineError text={error} />}
           </Form.Field>

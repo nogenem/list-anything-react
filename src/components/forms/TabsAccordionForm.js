@@ -31,6 +31,8 @@ class TabsAccordionForm extends Component {
         data: { description: "" }
       });
     }
+    const $input = document.querySelector("#tabs-accordion-input");
+    if ($input) $input.focus();
   };
 
   validate = data => {
@@ -72,6 +74,7 @@ class TabsAccordionForm extends Component {
               value={data.description}
               onChange={this.onChange}
               error={!!error}
+              id="tabs-accordion-input"
             />
             <Form.Button
               color="teal"

@@ -14,6 +14,10 @@ class ForgotPasswordForm extends React.Component {
     errors: {}
   };
 
+  componentDidMount = () => {
+    window.setTimeout(this.focusOnEmailInput, 0);
+  };
+
   onChange = e =>
     this.setState({
       data: { ...this.state.data, [e.target.name]: e.target.value }
@@ -23,6 +27,7 @@ class ForgotPasswordForm extends React.Component {
     e.preventDefault();
     const errors = this.validate(this.state.data);
     this.setState({ errors });
+    this.focusOnEmailInput();
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
       this.props.submit(this.state.data).catch(err => {
@@ -35,6 +40,11 @@ class ForgotPasswordForm extends React.Component {
           this.setState({ errors: err.response.data.errors, loading: false });
       });
     }
+  };
+
+  focusOnEmailInput = () => {
+    const $input = document.getElementById("forgot-password-email-input");
+    if ($input) $input.focus();
   };
 
   validate = data => {
@@ -60,6 +70,7 @@ class ForgotPasswordForm extends React.Component {
               value={data.email}
               onChange={this.onChange}
               name="email"
+              id="forgot-password-email-input"
             />
             {errors.email && <InlineError text={errors.email} />}
           </Form.Field>

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import queryString from "query-string";
 import { Segment } from "semantic-ui-react";
 
-import requestSearch from "../../actions/search";
+import searchRequest from "../../actions/search";
 import { getResults } from "../../reducers/searchResults";
 import SearchResultTable from "../tables/SearchResultTable";
 
@@ -34,7 +34,7 @@ class SearchPage extends Component {
   makeSearchRequest = props => {
     const qObj = queryString.parse(props.location.search);
     props
-      .requestSearch(qObj.query)
+      .searchRequest(qObj.query)
       .then(() => this.setState({ loading: false }));
   };
 
@@ -73,11 +73,11 @@ SearchPage.propTypes = {
     search: PropTypes.string.isRequired
   }).isRequired,
   // mapDispatchToProps
-  requestSearch: PropTypes.func.isRequired
+  searchRequest: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   results: getResults(state)
 });
 
-export default connect(mapStateToProps, { requestSearch })(SearchPage);
+export default connect(mapStateToProps, { searchRequest })(SearchPage);

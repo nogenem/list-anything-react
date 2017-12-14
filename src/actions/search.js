@@ -6,9 +6,9 @@ const searchResults = data => ({
   data
 });
 
-const requestSearch = query => dispatch =>
+const searchRequest = query => dispatch =>
   api.subjectData
     .search(query)
     .then(resData => dispatch(searchResults(resData)));
 
-export default requestSearch;
+export default searchRequest;

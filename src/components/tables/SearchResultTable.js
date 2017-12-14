@@ -15,6 +15,11 @@ class SearchResultTable extends Component {
           </Table.Row>
         </Table.Header>
         <Table.Body style={{ cursor: "pointer" }}>
+          {!results.length && (
+            <Table.Row>
+              <Table.Cell width={16}>Nothing was found.</Table.Cell>
+            </Table.Row>
+          )}
           {results.map(result => (
             <Table.Row
               key={result._id}

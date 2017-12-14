@@ -83,6 +83,13 @@ class NewSubjectForm extends React.Component {
     if (!data.description) errors.description = "Can't be blank";
     if (data.tabs.length === 0) errors.tabs = "Needs at least one tab";
     if (data.fields.length === 0) errors.fields = "Needs at least one field";
+    else {
+      const flag = data.fields.reduce(
+        (prev, elem) => prev || elem.show_in_list,
+        false
+      );
+      if (!flag) errors.fields = "Needs at least one field shown in list";
+    }
     return errors;
   };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Container } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 
 import InlineError from "../messages/InlineError";
 
@@ -17,6 +17,7 @@ const TextareaField = ({
       <Form.Field error={!!error}>
         <Form.TextArea
           autoHeight
+          style={{ maxHeight: "200px" }}
           label={field.description}
           value={value}
           onChange={onChange}
@@ -26,12 +27,17 @@ const TextareaField = ({
         {error && <InlineError text={error} />}
       </Form.Field>
     );
-  // TODO testar isso, talvez não seja uma boa utilizar Container...
   return (
-    <Container text fluid textAlign="left">
-      {showFieldDescription && <b>{field.description}:</b>}
-      <p>{value}</p>
-    </Container>
+    <Form.Field readOnly>
+      <Form.TextArea
+        autoHeight
+        style={{ maxHeight: "200px" }}
+        label={showFieldDescription && field.description}
+        value={value}
+        name={field._id}
+        placeholder={field.description}
+      />
+    </Form.Field>
   );
 };
 

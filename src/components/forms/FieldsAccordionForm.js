@@ -13,7 +13,7 @@ class FieldsAccordionForm extends Component {
       show_in_list: false,
       field_type: Object.values(fieldTypes)[0]
     },
-    active: false,
+    active: true,
     error: ""
   };
 

@@ -9,7 +9,7 @@ class TabsAccordionForm extends Component {
     data: {
       description: ""
     },
-    active: false,
+    active: true,
     error: ""
   };
 

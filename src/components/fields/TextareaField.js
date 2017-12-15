@@ -4,6 +4,11 @@ import { Form } from "semantic-ui-react";
 
 import InlineError from "../messages/InlineError";
 
+const onClick = e => {
+  e.preventDefault();
+  e.stopPropagation();
+};
+
 const TextareaField = ({
   value,
   editable,
@@ -31,11 +36,17 @@ const TextareaField = ({
     <Form.Field readOnly>
       <Form.TextArea
         autoHeight
-        style={{ maxHeight: "200px" }}
+        style={{
+          maxHeight: showFieldDescription ? "200px" : "150px",
+          border: "none",
+          minWidth: "100%",
+          outline: "none"
+        }}
         label={showFieldDescription && field.description}
         value={value}
         name={field._id}
         placeholder={field.description}
+        onClick={onClick}
       />
     </Form.Field>
   );

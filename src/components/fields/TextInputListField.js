@@ -105,7 +105,10 @@ class TextInputListField extends React.Component {
         </Form.Field>
       );
     return (
-      <List celled style={{ maxHeight: "100px", overflowY: "auto" }}>
+      <List
+        celled
+        style={{ maxHeight: "100px", overflowY: "auto", minWidth: "100%" }}
+      >
         {values.map((value, idx) => <List.Item key={idx}>{value}</List.Item>)}
       </List>
     );

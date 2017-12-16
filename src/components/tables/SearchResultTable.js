@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { Table } from "semantic-ui-react";
 import sortBy from "lodash.sortby";
 
+import renderFieldComponent from "../../utils/renderFieldComponent";
+
 class SearchResultTable extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +21,10 @@ class SearchResultTable extends Component {
       this.setState({ data: nextProps.results });
     }
   };
+
+  // Talvez seja necessário lidar com outros tipos também...
+  getCellWidth = fieldType =>
+    fieldType === "url_input_img" ? { width: 2 } : {};
 
   handleSort = clickedColumn => () => {
     const { column, data, direction } = this.state;
@@ -37,6 +43,21 @@ class SearchResultTable extends Component {
     }
   };
 
+  renderCell = data => (
+    <Table.Cell {...this.getCellWidth(data.field.field_type)} collapsing>
+      {this.renderField(data)}
+    </Table.Cell>
+  );
+
+  renderField = data => {
+    const fieldData = {
+      value: data.value,
+      showFieldDescription: false,
+      field: data.field
+    };
+    return renderFieldComponent(fieldData);
+  };
+
   render() {
     const { onTableRowClick } = this.props;
     const { column, data, direction } = this.state;
@@ -50,6 +71,12 @@ class SearchResultTable extends Component {
               onClick={this.handleSort("value")}
             >
               Value
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              sorted={column === "field" ? direction : null}
+              onClick={this.handleSort("field")}
+            >
+              Field
             </Table.HeaderCell>
             <Table.HeaderCell
               sorted={column === "tab" ? direction : null}
@@ -77,7 +104,8 @@ class SearchResultTable extends Component {
               to={`/subject-data/${result._id}`}
               onClick={onTableRowClick}
             >
-              <Table.Cell collapsing>{result.value}</Table.Cell>
+              {this.renderCell(result)}
+              <Table.Cell collapsing>{result.field.description}</Table.Cell>
               <Table.Cell collapsing>{result.tab}</Table.Cell>
               <Table.Cell collapsing>{result.subject}</Table.Cell>
             </Table.Row>

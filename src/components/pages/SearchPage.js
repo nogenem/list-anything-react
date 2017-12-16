@@ -7,10 +7,12 @@ import { Segment } from "semantic-ui-react";
 import searchRequest from "../../actions/search";
 import { getResults } from "../../reducers/searchResults";
 import SearchResultTable from "../tables/SearchResultTable";
+import ErrorMessage from "../messages/ErrorMessage";
 
 class SearchPage extends Component {
   state = {
-    loading: true
+    loading: true,
+    error: false
   };
 
   componentDidMount = () => {
@@ -35,22 +37,26 @@ class SearchPage extends Component {
     const qObj = queryString.parse(props.location.search);
     props
       .searchRequest(qObj.query)
-      .then(() => this.setState({ loading: false }));
+      .then(() => this.setState({ loading: false }))
+      .catch(() => this.setState({ loading: false, error: true }));
   };
 
   render() {
     const { results } = this.props;
-    const { loading } = this.state;
+    const { loading, error } = this.state;
     return (
       <Segment
         style={{ maxWidth: "90%", margin: "10px auto" }}
         loading={loading}
         basic
       >
-        <SearchResultTable
-          results={results}
-          onTableRowClick={this.onTableRowClick}
-        />
+        {error && <ErrorMessage text="" />}
+        {!error && (
+          <SearchResultTable
+            results={results}
+            onTableRowClick={this.onTableRowClick}
+          />
+        )}
       </Segment>
     );
   }

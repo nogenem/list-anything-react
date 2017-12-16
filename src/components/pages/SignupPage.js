@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import SignupForm from "../forms/SignupForm";
 import CenterElemsContainer from "../containers/CenterElemsContainer";
-import { signup } from "../../actions/users";
+import signup from "../../actions/users";
 
 class SignupPage extends Component {
   submit = data =>

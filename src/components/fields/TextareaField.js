@@ -22,7 +22,7 @@ const TextareaField = ({
       <Form.Field error={!!error}>
         <Form.TextArea
           autoHeight
-          style={{ maxHeight: "200px" }}
+          style={{ maxHeight: "200px", minHeight: "75px" }}
           label={field.description}
           value={value}
           onChange={onChange}

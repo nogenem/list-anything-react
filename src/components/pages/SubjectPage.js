@@ -83,6 +83,7 @@ class SubjectPage extends Component {
       activeTab
     } = this.state;
     const { fields } = this.props;
+    const sdId = this.props.match.params._id;
 
     let { subjectDataArray } = this.props;
     if (subjectDataArray.length > 0 && currentTabId !== "") {
@@ -107,7 +108,7 @@ class SubjectPage extends Component {
             <Button onClick={this.toggleMenu} icon="sidebar" />
             <Button
               as={Link}
-              to="/subject-datas/new"
+              to={`/subject/${sdId}/add`}
               icon="plus"
               color="green"
             />

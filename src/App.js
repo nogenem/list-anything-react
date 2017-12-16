@@ -86,7 +86,7 @@ class App extends Component {
           />
           <UserRoute
             location={location}
-            path="/subject-datas/new"
+            path="/subject/:_id/add"
             exact
             component={NewSubjectDataPage}
           />

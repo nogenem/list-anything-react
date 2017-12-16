@@ -4,7 +4,8 @@ import forEach from "lodash.foreach";
 import {
   SUBJECT_DATA_FETCHED,
   SUBJECT_FETCHED_BY_ID,
-  SUBJECT_DATA_EDITED
+  SUBJECT_DATA_EDITED,
+  USER_LOGGED_OUT
 } from "../constants/actionTypes";
 
 // Muda a sub-array data para um objeto aonde as keys
@@ -30,6 +31,8 @@ export default function subjectData(state = {}, action = {}) {
     case SUBJECT_DATA_EDITED:
       return { ...state, ...reshapeData(action.data.entities) };
     case SUBJECT_FETCHED_BY_ID:
+      return {};
+    case USER_LOGGED_OUT:
       return {};
     default:
       return state;

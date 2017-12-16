@@ -3,7 +3,8 @@ import { createSelector } from "reselect";
 import {
   SUBJECT_FETCHED_BY_ID,
   SUBJECT_FETCHED_BY_TABID,
-  SUBJECT_DELETED
+  SUBJECT_DELETED,
+  USER_LOGGED_OUT
 } from "../constants/actionTypes";
 
 const reshapeSubject = ({ subject: subjectHash, tabs, fields }) => {
@@ -17,6 +18,8 @@ export default function currentSubject(state = {}, action = {}) {
     case SUBJECT_FETCHED_BY_TABID:
       return reshapeSubject(action.data.entities);
     case SUBJECT_DELETED:
+      return {};
+    case USER_LOGGED_OUT:
       return {};
     default:
       return state;

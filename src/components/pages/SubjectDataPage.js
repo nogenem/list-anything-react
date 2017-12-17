@@ -16,12 +16,15 @@ import {
   getTabsArray
 } from "../../reducers/currentSubject";
 import SubjectDataForm from "../forms/SubjectDataForm";
+import handleServerErrors from "../../utils/handleServerErrors";
+import ErrorMessage from "../messages/ErrorMessage";
 
 class SubjectDataPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: this.props.subjectData._id === ""
+      loading: this.props.subjectData._id === "",
+      errors: {}
     };
   }
 
@@ -32,7 +35,10 @@ class SubjectDataPage extends React.Component {
         .then(() =>
           this.props
             .fetchSubjectByTabId(this.props.subjectData.tabId)
-            .then(() => this.setState({ loading: false }))
+            .then(() => this.setState({ loading: false, errors: {} }))
+        )
+        .catch(err =>
+          this.setState({ loading: false, errors: handleServerErrors(err) })
         );
   };
 
@@ -48,20 +54,22 @@ class SubjectDataPage extends React.Component {
 
   render() {
     const { subjectData, fields, tabs } = this.props;
-    const { loading } = this.state;
+    const { loading, errors } = this.state;
 
     return (
       <Segment basic style={{ maxWidth: 500, margin: "10px auto" }}>
         {loading && <Loader active inline="centered" />}
-        {!loading && (
-          <SubjectDataForm
-            submit={this.submit}
-            delete={this.delete}
-            subjectData={subjectData}
-            fields={fields}
-            tabs={tabs}
-          />
-        )}
+        {!loading && errors.global && <ErrorMessage text={errors.global} />}
+        {!loading &&
+          !errors.global && (
+            <SubjectDataForm
+              submit={this.submit}
+              delete={this.delete}
+              subjectData={subjectData}
+              fields={fields}
+              tabs={tabs}
+            />
+          )}
       </Segment>
     );
   }

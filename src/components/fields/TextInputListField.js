@@ -27,6 +27,7 @@ class TextInputListField extends React.Component {
       target: { name: this.props.field._id, value: values.join("\n") }
     });
     this.setState({ inputValue: "", values });
+    this.focusOnInput();
   };
 
   onRemoveValue = index => {
@@ -37,9 +38,17 @@ class TextInputListField extends React.Component {
       target: { name: this.props.field._id, value: values.join("\n") }
     });
     this.setState({ values });
+    this.focusOnInput();
   };
 
   onChange = e => this.setState({ inputValue: e.target.value });
+
+  focusOnInput = () => {
+    const $input = document.querySelector(
+      `input[name="${this.props.field._id}"]`
+    );
+    if ($input) $input.focus();
+  };
 
   render() {
     const { editable, showFieldDescription, error, field } = this.props;

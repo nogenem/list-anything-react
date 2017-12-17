@@ -11,6 +11,8 @@ import { getFieldsArray, getTabsArray } from "../../reducers/currentSubject";
 import { getSubjectDataArray } from "../../reducers/subjectData";
 import SubjectDataTable from "../tables/SubjectDataTable";
 import EditDeleteBtnGroup from "../containers/EditDeleteBtnGroup";
+import handleServerErrors from "../../utils/handleServerErrors";
+import ErrorMessage from "../messages/ErrorMessage";
 
 class SubjectPage extends Component {
   state = {
@@ -18,7 +20,8 @@ class SubjectPage extends Component {
     loadingData: false,
     menuVisible: false,
     currentTabId: "",
-    activeTab: ""
+    activeTab: "",
+    errors: {}
   };
 
   componentDidMount = () => this.loadSubjects(this.props);
@@ -56,7 +59,13 @@ class SubjectPage extends Component {
     this.setState({ loadingSubject: true });
     props
       .fetchSubjectById(props.match.params._id)
-      .then(() => this.setState({ loadingSubject: false }));
+      .then(() => this.setState({ loadingSubject: false, errors: {} }))
+      .catch(err =>
+        this.setState({
+          loadingSubject: false,
+          errors: handleServerErrors(err)
+        })
+      );
   };
 
   loadSubjectData = (props, tabId) => {
@@ -80,7 +89,8 @@ class SubjectPage extends Component {
       loadingSubject,
       menuVisible,
       currentTabId,
-      activeTab
+      activeTab,
+      errors
     } = this.state;
     const { fields } = this.props;
     const sdId = this.props.match.params._id;
@@ -96,39 +106,46 @@ class SubjectPage extends Component {
         loading={loadingSubject}
         basic
       >
-        <div
-          style={{
-            marginBottom: "3px",
-            display: "inline-flex",
-            width: "100%",
-            justifyContent: "space-between"
-          }}
-        >
-          <Button.Group size="medium" icon>
-            <Button onClick={this.toggleMenu} icon="sidebar" />
-            <Button
-              as={Link}
-              to={`/subject/${sdId}/add`}
-              icon="plus"
-              color="green"
-            />
-          </Button.Group>
-          <EditDeleteBtnGroup showEdit={false} onDelete={this.deleteSubject} />
-        </div>
-        {!loadingSubject && (
-          <SubjectDataContainer
-            menuVisible={menuVisible}
-            onMenuClick={this.onMenuClick}
-            activeTab={activeTab}
+        {errors.global && <ErrorMessage text={errors.global} />}
+        {!errors.global && (
+          <div
+            style={{
+              marginBottom: "3px",
+              display: "inline-flex",
+              width: "100%",
+              justifyContent: "space-between"
+            }}
           >
-            <SubjectDataTable
-              fields={fields}
-              subjectDataArray={subjectDataArray}
-              loading={loadingData}
-              onTableRowClick={this.onTableRowClick}
+            <Button.Group size="medium" icon>
+              <Button onClick={this.toggleMenu} icon="sidebar" />
+              <Button
+                as={Link}
+                to={`/subject/${sdId}/add`}
+                icon="plus"
+                color="green"
+              />
+            </Button.Group>
+            <EditDeleteBtnGroup
+              showEdit={false}
+              onDelete={this.deleteSubject}
             />
-          </SubjectDataContainer>
+          </div>
         )}
+        {!errors.global &&
+          !loadingSubject && (
+            <SubjectDataContainer
+              menuVisible={menuVisible}
+              onMenuClick={this.onMenuClick}
+              activeTab={activeTab}
+            >
+              <SubjectDataTable
+                fields={fields}
+                subjectDataArray={subjectDataArray}
+                loading={loadingData}
+                onTableRowClick={this.onTableRowClick}
+              />
+            </SubjectDataContainer>
+          )}
       </Segment>
     );
   }

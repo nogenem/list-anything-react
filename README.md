@@ -7,6 +7,8 @@ Tais assuntos são divididos em 'abas' e são constituidos por um conjunto de 'c
 
 Clique [aqui](https://imgur.com/a/K2s8p) para ver algumas imagens do site.
 
+**Observação:** Toda a parte base de login e cadastro de usuários foi retirada de um projeto desenvolvido por [Remchi](https://github.com/Remchi/bookworm-react).
+
 ## Desenvolvimento
 
 ### Construido com

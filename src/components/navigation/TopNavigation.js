@@ -12,8 +12,6 @@ import { getEmail } from "../../reducers/user";
 import SearchInput from "../forms/SearchInput";
 
 class TopNavigation extends React.Component {
-  search = query => this.props.history.push(`/search?query=${query}`);
-
   trigger = email => (
     <span>
       <Image avatar src={gravatarUrl(email, { size: 30 })} />
@@ -24,6 +22,7 @@ class TopNavigation extends React.Component {
     const {
       toggleMenu,
       hideMenu,
+      search,
       activeItem,
       email,
       hasSubjects,
@@ -31,9 +30,10 @@ class TopNavigation extends React.Component {
     } = this.props;
 
     return (
-      <Menu size="small" attached="top" id="top-navigation" inverted stackable>
+      <Menu size="small" attached="top" id="top-navigation" inverted>
         <Menu.Item onClick={toggleMenu}>
-          <Icon name="sidebar" />Menu
+          <Icon name="sidebar" className="menu-icon-responsive" />
+          <span className="hide-lt-767px">Menu</span>
         </Menu.Item>
         <Menu.Item
           as={Link}
@@ -41,7 +41,8 @@ class TopNavigation extends React.Component {
           active={activeItem === "/dashboard"}
           onClick={hideMenu}
         >
-          Dashboard
+          <Icon name="home" className="menu-icon-responsive" />
+          <span className="hide-lt-767px">Dashboard</span>
         </Menu.Item>
         {hasSubjects && (
           <Menu.Item
@@ -50,13 +51,14 @@ class TopNavigation extends React.Component {
             active={activeItem === "/subjects/new"}
             onClick={hideMenu}
           >
-            Add new Subject
+            <Icon name="plus" className="menu-icon-responsive" />
+            <span className="hide-lt-767px">Add new Subject</span>
           </Menu.Item>
         )}
 
         <Menu.Menu position="right">
-          <Menu.Item>
-            <SearchInput onSearch={this.search} />
+          <Menu.Item className="hide-lt-767px">
+            <SearchInput onSearch={search} />
           </Menu.Item>
           <Dropdown item trigger={this.trigger(email)}>
             <Dropdown.Menu>
@@ -73,9 +75,7 @@ TopNavigation.propTypes = {
   // ownProps
   toggleMenu: PropTypes.func.isRequired,
   hideMenu: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
+  search: PropTypes.func.isRequired,
   activeItem: PropTypes.string,
   // mapStateToProps
   email: PropTypes.string.isRequired,

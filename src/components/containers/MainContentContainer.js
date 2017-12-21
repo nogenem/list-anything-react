@@ -25,8 +25,13 @@ class MainContentContainer extends React.Component {
       activeItem: to || prevState.activeItem
     }));
 
+  search = query => {
+    this.props.history.push(`/search?query=${query}`);
+    this.hideMenu(null, {});
+  };
+
   render() {
-    const { children, showContent, history } = this.props;
+    const { children, showContent } = this.props;
     const { menuVisible, activeItem } = this.state;
     return (
       <div
@@ -38,13 +43,14 @@ class MainContentContainer extends React.Component {
             activeItem={activeItem}
             toggleMenu={this.toggleMenu}
             hideMenu={this.hideMenu}
-            history={history}
+            search={this.search}
           />
         )}
         <MainContainer
           menuVisible={menuVisible}
           activeItem={activeItem}
           hideMenu={this.hideMenu}
+          search={this.search}
         >
           {children}
         </MainContainer>

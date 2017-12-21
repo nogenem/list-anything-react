@@ -5,10 +5,12 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { getSubjectsArray } from "../../reducers/subjects";
+import SearchInput from "../forms/SearchInput";
 
 const MainContainer = ({
   menuVisible,
   hideMenu,
+  search,
   children,
   activeItem,
   subjects
@@ -23,6 +25,9 @@ const MainContainer = ({
       vertical
       inverted
     >
+      <Menu.Item className="hide-gt-767px">
+        <SearchInput onSearch={search} />
+      </Menu.Item>
       {subjects.map(subject => (
         <Menu.Item
           as={Link}
@@ -45,6 +50,7 @@ MainContainer.propTypes = {
   // ownProps
   menuVisible: PropTypes.bool.isRequired,
   hideMenu: PropTypes.func.isRequired,
+  search: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node

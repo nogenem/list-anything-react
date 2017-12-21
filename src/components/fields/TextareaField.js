@@ -45,7 +45,6 @@ const TextareaField = ({
         label={showFieldDescription && field.description}
         value={value}
         name={field._id}
-        placeholder={field.description}
         onClick={onClick}
       />
     </Form.Field>

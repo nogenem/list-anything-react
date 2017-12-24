@@ -1,6 +1,6 @@
 import { SEARCH_RESULTS, USER_LOGGED_OUT } from "../constants/actionTypes";
 
-export default function user(state = [], action = {}) {
+export default function searchResults(state = [], action = {}) {
   switch (action.type) {
     case SEARCH_RESULTS:
       return action.data;

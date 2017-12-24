@@ -8,8 +8,8 @@ import {
 } from "../constants/actionTypes";
 
 const reshapeSubject = ({ subject: subjectHash, tabs, fields }) => {
-  const subject = Object.values(subjectHash)[0];
-  return { _id: subject._id, description: subject.description, tabs, fields };
+  const { _id, description } = Object.values(subjectHash)[0];
+  return { _id, description, tabs, fields };
 };
 
 export default function currentSubject(state = {}, action = {}) {

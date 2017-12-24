@@ -27,16 +27,15 @@ class ForgotPasswordForm extends React.Component {
   onSubmit = e => {
     e.preventDefault();
     const errors = this.validate(this.state.data);
-    this.setState({ errors });
     if (Object.keys(errors).length === 0) {
-      this.setState({ loading: true });
+      this.setState({ loading: true, errors: {} });
       this.props.submit(this.state.data).catch(err =>
         this.setState({
           errors: handleServerErrors(err),
           loading: false
         })
       );
-    }
+    } else this.setState({ errors });
     this.focusOnEmailInput();
   };
 

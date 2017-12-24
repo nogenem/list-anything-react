@@ -43,9 +43,8 @@ class SubjectDataForm extends React.Component {
       return;
     }
     const errors = this.validate(this.state.data);
-    this.setState({ errors });
     if (Object.keys(errors).length === 0) {
-      this.setState({ loading: true });
+      this.setState({ loading: true, errors: {} });
       this.props
         .submit(this.state.tabId, this.state.data)
         .then(() =>
@@ -63,7 +62,7 @@ class SubjectDataForm extends React.Component {
             loading: false
           })
         );
-    }
+    } else this.setState({ errors });
   };
 
   onDelete = () =>

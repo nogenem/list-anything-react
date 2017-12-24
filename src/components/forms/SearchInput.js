@@ -16,8 +16,8 @@ class SearchInput extends Component {
   onSubmit = () => {
     const { query } = this.state;
     if (query) {
-      this.setState({ error: false, query: "" });
       this.props.onSearch(query);
+      this.setState({ error: false, query: "" });
     } else this.setState({ error: true });
   };
 

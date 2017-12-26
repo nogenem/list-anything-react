@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Header } from "semantic-ui-react";
+import { Header, Message } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 import SignupForm from "../forms/SignupForm";
@@ -18,6 +18,9 @@ class SignupPage extends Component {
           Sign up now!
         </Header>
         <SignupForm submit={this.submit} />
+        <Message>
+          Do you already have an account? <a href="/login">Log in</a> now!
+        </Message>
       </CenterElemsContainer>
     );
   }

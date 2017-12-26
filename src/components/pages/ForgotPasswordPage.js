@@ -28,6 +28,11 @@ class ForgotPasswordPage extends React.Component {
               Reset your password
             </Header>
             <ForgotPasswordForm submit={this.submit} />
+            <Message>
+              Did you remember your password? <a href="/login">Log in</a> now!
+              <br />
+              Dont have an account? <a href="/signup">Sign Up</a> now!
+            </Message>
           </div>
         )}
       </CenterElemsContainer>

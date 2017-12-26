@@ -1,6 +1,7 @@
 #root,
 #app-container,
 #main-content-container,
+#public-routes-container,
 #main-container > div.pusher  {
     height: 100%;
 }

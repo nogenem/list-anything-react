@@ -1,26 +1,10 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import HomePage from "./components/pages/HomePage";
-import DashboardPage from "./components/pages/DashboardPage";
-import LoginPage from "./components/pages/LoginPage";
-import SignupPage from "./components/pages/SignupPage";
-import ConfirmationPage from "./components/pages/ConfirmationPage";
-import ForgotPasswordPage from "./components/pages/ForgotPasswordPage";
-import ResetPasswordPage from "./components/pages/ResetPasswordPage";
-import NewSubjectPage from "./components/pages/NewSubjectPage";
-import SubjectPage from "./components/pages/SubjectPage";
-import NewSubjectDataPage from "./components/pages/NewSubjectDataPage";
-import SubjectDataPage from "./components/pages/SubjectDataPage";
 import ErrorPage from "./components/pages/ErrorPage";
-import SearchPage from "./components/pages/SearchPage";
-
-import MainContentContainer from "./components/containers/MainContentContainer";
-
-import GuestRoute from "./components/routes/GuestRoute";
-import UserRoute from "./components/routes/UserRoute";
+import PrivateRoutes from "./components/routes/PrivateRoutes";
+import PublicRoutes from "./components/routes/PublicRoutes";
 
 import { fetchAllSubjects } from "./actions/subjects";
 import { getEmail } from "./reducers/user";
@@ -65,76 +49,12 @@ class App extends Component {
     return (
       <div id="app-container">
         {error && <ErrorPage />}
-        <MainContentContainer history={history} showContent={showMainContent}>
-          <UserRoute
-            location={location}
-            path="/dashboard"
-            exact
-            component={DashboardPage}
-          />
-          <UserRoute
-            location={location}
-            path="/subjects/new"
-            exact
-            component={NewSubjectPage}
-          />
-          <UserRoute
-            location={location}
-            path="/subject/:_id"
-            exact
-            component={SubjectPage}
-          />
-          <UserRoute
-            location={location}
-            path="/subject/:_id/add"
-            exact
-            component={NewSubjectDataPage}
-          />
-          <UserRoute
-            location={location}
-            path="/subject-data/:_id"
-            exact
-            component={SubjectDataPage}
-          />
-          <UserRoute
-            location={location}
-            path="/search"
-            exact
-            component={SearchPage}
-          />
-        </MainContentContainer>
-
-        <Route location={location} path="/" exact component={HomePage} />
-        <GuestRoute
+        <PrivateRoutes
           location={location}
-          path="/login"
-          exact
-          component={LoginPage}
+          history={history}
+          showContent={showMainContent}
         />
-        <GuestRoute
-          location={location}
-          path="/signup"
-          exact
-          component={SignupPage}
-        />
-        <Route
-          location={location}
-          path="/confirmation/:token"
-          exact
-          component={ConfirmationPage}
-        />
-        <GuestRoute
-          location={location}
-          path="/forgot_password"
-          exact
-          component={ForgotPasswordPage}
-        />
-        <GuestRoute
-          location={location}
-          path="/reset_password/:token"
-          exact
-          component={ResetPasswordPage}
-        />
+        <PublicRoutes location={location} />
       </div>
     );
   }

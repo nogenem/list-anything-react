@@ -43,7 +43,12 @@ class SubjectDataPage extends React.Component {
   };
 
   submit = (tabId, data) =>
-    this.props.editSubjectData(this.props.match.params._id, tabId, data);
+    this.props.editSubjectData(
+      this.props.match.params._id,
+      this.props.currentSubjectId,
+      tabId,
+      data
+    );
 
   delete = () =>
     this.props

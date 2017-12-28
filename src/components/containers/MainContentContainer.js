@@ -27,7 +27,7 @@ class MainContentContainer extends React.Component {
 
   search = query => {
     this.props.history.push(`/search?query=${query}`);
-    this.hideMenu(null, {});
+    this.hideMenu(null, { to: "search" });
   };
 
   render() {

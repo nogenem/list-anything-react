@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",
-    "gravatar-url": "^2.0.0",
+    "crypto": "^1.0.1",
     "jwt-decode": "^2.2.0",
     "lodash.foreach": "^4.5.0",
     "lodash.isempty": "^4.4.0",

@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { Menu, Dropdown, Image, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import gravatarUrl from "gravatar-url";
 import isEmpty from "lodash.isempty";
 
+import gravatarUrl from "../../utils/gravatar-url";
 import * as actions from "../../actions/auth";
 import { getSubjectsArray } from "../../reducers/subjects";
 import { getEmail } from "../../reducers/user";

@@ -1,31 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Route } from "react-router-dom";
 
 import GuestRoute from "../routes/GuestRoute";
 
-import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
-import ConfirmationPage from "../pages/ConfirmationPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
 
-const PublicRoutes = ({ location }) => (
-  <div id="public-routes-container">
-    <Route location={location} path="/" exact component={HomePage} />
+const PublicRoutes = ({ location, showContent }) => (
+  <div
+    id="public-routes-container"
+    style={{ display: showContent ? "block" : "none" }}
+  >
     <GuestRoute location={location} path="/login" exact component={LoginPage} />
     <GuestRoute
       location={location}
       path="/signup"
       exact
       component={SignupPage}
-    />
-    <Route
-      location={location}
-      path="/confirmation/:token"
-      exact
-      component={ConfirmationPage}
     />
     <GuestRoute
       location={location}
@@ -46,7 +39,8 @@ PublicRoutes.propTypes = {
   // ownProps
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  showContent: PropTypes.bool.isRequired
 };
 
 export default PublicRoutes;

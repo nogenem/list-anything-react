@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Route } from "react-router-dom";
 
 import ErrorPage from "./components/pages/ErrorPage";
 import PrivateRoutes from "./components/routes/PrivateRoutes";
 import PublicRoutes from "./components/routes/PublicRoutes";
+
+import HomePage from "./components/pages/HomePage";
+import ConfirmationPage from "./components/pages/ConfirmationPage";
 
 import { fetchAllSubjects } from "./actions/subjects";
 import { getEmail } from "./reducers/user";
@@ -40,21 +44,31 @@ class App extends Component {
   render() {
     const { location, isAuthenticated, history } = this.props;
     const { error, loading } = this.state;
-    const showMainContent =
+    const showPrivateRoutes =
       isAuthenticated &&
       !loading &&
       !error &&
       !location.pathname.startsWith("/confirmation");
+    const showPublicRoutes = !isAuthenticated;
 
     return (
       <div id="app-container">
         {error && <ErrorPage />}
+
+        <Route location={location} path="/" exact component={HomePage} />
+        <Route
+          location={location}
+          path="/confirmation/:token"
+          exact
+          component={ConfirmationPage}
+        />
+
         <PrivateRoutes
           location={location}
           history={history}
-          showContent={showMainContent}
+          showContent={showPrivateRoutes}
         />
-        <PublicRoutes location={location} />
+        <PublicRoutes location={location} showContent={showPublicRoutes} />
       </div>
     );
   }

@@ -13,12 +13,14 @@ import ConfirmationPage from "./components/pages/ConfirmationPage";
 import { fetchAllSubjects } from "./actions/subjects";
 import { getEmail } from "./reducers/user";
 
+import handleServerErrors from "./utils/handleServerErrors";
+
 import "./App.css";
 
 class App extends Component {
   state = {
     loading: true,
-    error: false
+    error: null
   };
 
   componentDidMount = () => {
@@ -38,7 +40,9 @@ class App extends Component {
     this.props
       .fetchAllSubjects()
       .then(() => this.setState({ loading: false }))
-      .catch(() => this.setState({ error: true }));
+      .catch(err =>
+        this.setState({ error: handleServerErrors(err), loading: false })
+      );
   };
 
   render() {
@@ -53,7 +57,7 @@ class App extends Component {
 
     return (
       <div id="app-container">
-        {error && <ErrorPage />}
+        {error && <ErrorPage error={error.global} />}
 
         <Route location={location} path="/" exact component={HomePage} />
         <Route

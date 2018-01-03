@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedUserRoute renders correctly 1`] = `
+<UserRoute
+  component={[Function]}
+  dispatch={[Function]}
+  isAuthenticated={false}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+/>
+`;
+
+exports[`UnconnectedUserRoute when \`isAuthenticated\` is false renders correctly 1`] = `
+<UserRoute
+  component={[Function]}
+  isAuthenticated={false}
+>
+  <Route
+    render={[Function]}
+  >
+    <Redirect
+      push={false}
+      to="/"
+    />
+  </Route>
+</UserRoute>
+`;
+
+exports[`UnconnectedUserRoute when \`isAuthenticated\` is true renders correctly 1`] = `
+<UserRoute
+  component={[Function]}
+  isAuthenticated={true}
+>
+  <Route
+    render={[Function]}
+  >
+    <component
+      history={
+        Object {
+          "_listeners": Array [],
+          "_notifyListeners": [Function],
+          "action": "POP",
+          "createHref": [Function],
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "key": "111111",
+            "pathname": "/",
+            "search": "",
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+      location={
+        Object {
+          "hash": "",
+          "key": "111111",
+          "pathname": "/",
+          "search": "",
+        }
+      }
+      match={
+        Object {
+          "isExact": true,
+          "params": Object {},
+          "path": "/",
+          "url": "/",
+        }
+      }
+    >
+      <span>
+        Testando...
+      </span>
+    </component>
+  </Route>
+</UserRoute>
+`;

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainContentContainer renders correctly 1`] = `
+<div
+  id="main-content-container"
+  style={
+    Object {
+      "display": "none",
+    }
+  }
+>
+  <Connect(MainContainer)
+    activeItem=""
+    hideMenu={[Function]}
+    menuVisible={false}
+    search={[Function]}
+  >
+    <span>
+      Testando...
+    </span>
+  </Connect(MainContainer)>
+</div>
+`;

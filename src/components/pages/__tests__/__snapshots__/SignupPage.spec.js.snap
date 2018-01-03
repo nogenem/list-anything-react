@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedSignupPage renders correctly 1`] = `
+<SignupPage
+  history={
+    Object {
+      "push": [Function],
+    }
+  }
+  signup={[Function]}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+/>
+`;
+
+exports[`UnconnectedSignupPage renders correctly 1`] = `
+<CenterElemsContainer>
+  <Header
+    as="h2"
+    color="teal"
+    textAlign="center"
+  >
+    Sign up now!
+  </Header>
+  <SignupForm
+    submit={[Function]}
+  />
+  <Message>
+    Do you already have an account? 
+    <a
+      href="/login"
+    >
+      Log in
+    </a>
+     now!
+  </Message>
+</CenterElemsContainer>
+`;

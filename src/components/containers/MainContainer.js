@@ -74,4 +74,5 @@ const mapStateToProps = state => ({
   subjects: getSubjectsArray(state)
 });
 
+export const UnconnectedMainContainer = MainContainer;
 export default connect(mapStateToProps)(MainContainer);

@@ -37,4 +37,5 @@ LoginPage.propTypes = {
   login: PropTypes.func.isRequired
 };
 
+export const UnconnectedLoginPage = LoginPage;
 export default connect(null, { login })(LoginPage);

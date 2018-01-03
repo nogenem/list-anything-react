@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PublicRoutes when \`showContent\` is false renders correctly 1`] = `
+<div
+  id="public-routes-container"
+  style={
+    Object {
+      "display": "none",
+    }
+  }
+>
+  <Connect(GuestRoute)
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/login"
+  />
+  <Connect(GuestRoute)
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/signup"
+  />
+  <Connect(GuestRoute)
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/forgot_password"
+  />
+  <Connect(GuestRoute)
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/reset_password/:token"
+  />
+</div>
+`;
+
+exports[`PublicRoutes when \`showContent\` is true renders correctly 1`] = `
+<div
+  id="public-routes-container"
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <Connect(GuestRoute)
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/login"
+  />
+  <Connect(GuestRoute)
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/signup"
+  />
+  <Connect(GuestRoute)
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/forgot_password"
+  />
+  <Connect(GuestRoute)
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/reset_password/:token"
+  />
+</div>
+`;

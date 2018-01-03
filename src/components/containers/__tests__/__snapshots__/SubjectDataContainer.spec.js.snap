@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedSubjectDataContainer renders correctly 1`] = `
+<SubjectDataContainer
+  activeTab=""
+  dispatch={[Function]}
+  menuVisible={false}
+  onMenuClick={[Function]}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  tabs={Array []}
+>
+  <span>
+    Testando...
+  </span>
+</SubjectDataContainer>
+`;
+
+exports[`UnconnectedSubjectDataContainer renders correctly when \`tabs\` is empty 1`] = `
+<SidebarPushable
+  as={[Function]}
+  attached="bottom"
+  className="subject-data-container"
+>
+  <Sidebar
+    animation="overlay"
+    as={[Function]}
+    direction="left"
+    icon="labeled"
+    inverted={true}
+    vertical={true}
+    visible={false}
+    width="thin"
+  />
+  <SidebarPusher
+    dimmed={false}
+    style={
+      Object {
+        "overflowY": "auto",
+      }
+    }
+  >
+    <span>
+      Testando...
+    </span>
+  </SidebarPusher>
+</SidebarPushable>
+`;

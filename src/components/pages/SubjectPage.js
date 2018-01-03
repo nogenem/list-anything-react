@@ -193,6 +193,7 @@ const mapStateToProps = state => ({
   firstTab: getTabsArray(state)[0]
 });
 
+export const UnconnectedSubjectPage = SubjectPage;
 export default connect(mapStateToProps, {
   fetchSubjectById,
   fetchSDByTabId,

@@ -40,8 +40,9 @@ export default function subjectData(state = {}, action = {}) {
 }
 
 // SELECTORS
-export const getSubjectData = state => state.subjectData;
-export const getSubjectDataElem = (state, _id) => getSubjectData(state)[_id];
+export const getSubjectData = state => state.subjectData || {};
+export const getSubjectDataElem = (state, _id) =>
+  getSubjectData(state)[_id] || {};
 export const getSubjectDataArray = createSelector(getSubjectData, dataHash =>
   Object.values(dataHash || {})
 );

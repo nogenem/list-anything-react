@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextareaField when \`editable\` is false renders correctly when \`showFieldDescription\` is false 1`] = `
+<FormField
+  readOnly={true}
+>
+  <FormTextArea
+    as={[Function]}
+    autoHeight={true}
+    control={[Function]}
+    label={false}
+    name="1"
+    onClick={[Function]}
+    style={
+      Object {
+        "border": "none",
+        "maxHeight": "150px",
+        "minWidth": "100%",
+        "outline": "none",
+      }
+    }
+    value="testando..."
+  />
+</FormField>
+`;
+
+exports[`TextareaField when \`editable\` is false renders correctly when \`showFieldDescription\` is true 1`] = `
+<FormField
+  readOnly={true}
+>
+  <FormTextArea
+    as={[Function]}
+    autoHeight={true}
+    control={[Function]}
+    label="Testando:"
+    name="1"
+    onClick={[Function]}
+    style={
+      Object {
+        "border": "none",
+        "maxHeight": "200px",
+        "minWidth": "100%",
+        "outline": "none",
+      }
+    }
+    value="testando..."
+  />
+</FormField>
+`;
+
+exports[`TextareaField when \`editable\` is true renders correctly 1`] = `
+<FormField
+  error={false}
+>
+  <FormTextArea
+    as={[Function]}
+    autoHeight={true}
+    control={[Function]}
+    label="Testando:"
+    name="1"
+    onChange={[Function]}
+    placeholder="Testando:"
+    style={
+      Object {
+        "maxHeight": "200px",
+        "minHeight": "75px",
+      }
+    }
+    value="testando..."
+  />
+</FormField>
+`;

@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignupForm renders correctly 1`] = `
+<Form
+  as="form"
+  loading={false}
+  onSubmit={[Function]}
+>
+  <Segment
+    stacked={true}
+  >
+    <FormField
+      error={false}
+    >
+      <FormInput
+        as={[Function]}
+        control={[Function]}
+        fluid={true}
+        icon="user"
+        iconPosition="left"
+        id="signup-email-input"
+        name="email"
+        onChange={[Function]}
+        placeholder="example@example.com"
+        type="email"
+        value=""
+      />
+    </FormField>
+    <FormField
+      error={false}
+    >
+      <FormInput
+        as={[Function]}
+        control={[Function]}
+        fluid={true}
+        icon="lock"
+        iconPosition="left"
+        name="password"
+        onChange={[Function]}
+        placeholder="Password"
+        type="password"
+        value=""
+      />
+    </FormField>
+    <Button
+      as="button"
+      color="teal"
+      fluid={true}
+      size="large"
+    >
+      Sign up
+    </Button>
+  </Segment>
+</Form>
+`;

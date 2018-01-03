@@ -12,4 +12,4 @@ export default function searchResults(state = [], action = {}) {
 }
 
 // SELECTORS
-export const getResults = state => state.searchResults;
+export const getResults = state => state.searchResults || [];

@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UrlInputImgField when \`editable\` is false renders correctly when \`showFieldDescription\` is false 1`] = `
+<Image
+  as="img"
+  centered={true}
+  size="tiny"
+  src="http://www.example.com/image.png"
+  ui={true}
+/>
+`;
+
+exports[`UrlInputImgField when \`editable\` is false renders correctly when \`showFieldDescription\` is true 1`] = `
+<FormField>
+  <b>
+    Testando:
+  </b>
+  : 
+  <Image
+    as="img"
+    size="tiny"
+    src="http://www.example.com/image.png"
+    ui={true}
+  />
+</FormField>
+`;
+
+exports[`UrlInputImgField when \`editable\` is true renders correctly 1`] = `
+<FormField
+  error={false}
+>
+  <FormInput
+    as={[Function]}
+    control={[Function]}
+    fluid={true}
+    label="Testando:"
+    name="1"
+    onChange={[Function]}
+    placeholder="http://site.com/image.png"
+    type="url"
+    value="http://www.example.com/image.png"
+  />
+</FormField>
+`;

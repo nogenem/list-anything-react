@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchInput renders correctly 1`] = `
+<Form
+  as="form"
+  onSubmit={[Function]}
+>
+  <Input
+    error={false}
+    icon={
+      Object {
+        "link": true,
+        "name": "search",
+        "onClick": [Function],
+      }
+    }
+    onChange={[Function]}
+    placeholder="Search..."
+    size="mini"
+    type="text"
+    value=""
+  />
+</Form>
+`;

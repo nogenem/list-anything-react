@@ -1,0 +1,333 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedTopNavigation renders correctly 1`] = `
+<TopNavigation
+  activeItem=""
+  email="main@mail.com"
+  hasSubjects={false}
+  hideMenu={[Function]}
+  logout={[Function]}
+  search={[Function]}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  toggleMenu={[Function]}
+/>
+`;
+
+exports[`UnconnectedTopNavigation renders correctly when \`activeItem\` is set 1`] = `
+<Menu
+  attached="top"
+  id="top-navigation"
+  inverted={true}
+  size="small"
+>
+  <MenuItem
+    onClick={[Function]}
+  >
+    <Icon
+      as="i"
+      className="menu-icon-responsive"
+      name="sidebar"
+    />
+    <span
+      className="hide-lt-767px"
+    >
+      Menu
+    </span>
+  </MenuItem>
+  <MenuItem
+    active={true}
+    as={[Function]}
+    onClick={[Function]}
+    to="/dashboard"
+  >
+    <Icon
+      as="i"
+      className="menu-icon-responsive"
+      name="home"
+    />
+    <span
+      className="hide-lt-767px"
+    >
+      Dashboard
+    </span>
+  </MenuItem>
+  <MenuItem
+    active={false}
+    as={[Function]}
+    onClick={[Function]}
+    to="/subjects/new"
+  >
+    <Icon
+      as="i"
+      className="menu-icon-responsive"
+      name="plus"
+    />
+    <span
+      className="hide-lt-767px"
+    >
+      Add new Subject
+    </span>
+  </MenuItem>
+  <MenuMenu
+    position="right"
+  >
+    <MenuItem
+      className="hide-lt-767px"
+    >
+      <SearchInput
+        onSearch={[Function]}
+      />
+    </MenuItem>
+    <Dropdown
+      additionLabel="Add "
+      additionPosition="top"
+      closeOnBlur={true}
+      deburr={false}
+      icon="dropdown"
+      item={true}
+      minCharacters={1}
+      noResultsMessage="No results found."
+      openOnFocus={true}
+      renderLabel={[Function]}
+      searchInput="text"
+      selectOnBlur={true}
+      selectOnNavigation={true}
+      trigger={
+        <span>
+          <Image
+            as="img"
+            avatar={true}
+            src="https://gravatar.com/avatar/ad3ddf5072a6de3dcffc3b2c7c2cec04?size=30"
+            ui={true}
+          />
+        </span>
+      }
+    >
+      <DropdownMenu>
+        <DropdownItem
+          onClick={[Function]}
+        >
+          Logout
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  </MenuMenu>
+</Menu>
+`;
+
+exports[`UnconnectedTopNavigation renders correctly when \`hasSubjects\` is false 1`] = `
+<Menu
+  attached="top"
+  id="top-navigation"
+  inverted={true}
+  size="small"
+>
+  <MenuItem
+    onClick={[Function]}
+  >
+    <Icon
+      as="i"
+      className="menu-icon-responsive"
+      name="sidebar"
+    />
+    <span
+      className="hide-lt-767px"
+    >
+      Menu
+    </span>
+  </MenuItem>
+  <MenuItem
+    active={false}
+    as={[Function]}
+    onClick={[Function]}
+    to="/dashboard"
+  >
+    <Icon
+      as="i"
+      className="menu-icon-responsive"
+      name="home"
+    />
+    <span
+      className="hide-lt-767px"
+    >
+      Dashboard
+    </span>
+  </MenuItem>
+  <MenuMenu
+    position="right"
+  >
+    <MenuItem
+      className="hide-lt-767px"
+    >
+      <SearchInput
+        onSearch={[Function]}
+      />
+    </MenuItem>
+    <Dropdown
+      additionLabel="Add "
+      additionPosition="top"
+      closeOnBlur={true}
+      deburr={false}
+      icon="dropdown"
+      item={true}
+      minCharacters={1}
+      noResultsMessage="No results found."
+      openOnFocus={true}
+      renderLabel={[Function]}
+      searchInput="text"
+      selectOnBlur={true}
+      selectOnNavigation={true}
+      trigger={
+        <span>
+          <Image
+            as="img"
+            avatar={true}
+            src="https://gravatar.com/avatar/ad3ddf5072a6de3dcffc3b2c7c2cec04?size=30"
+            ui={true}
+          />
+        </span>
+      }
+    >
+      <DropdownMenu>
+        <DropdownItem
+          onClick={[Function]}
+        >
+          Logout
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  </MenuMenu>
+</Menu>
+`;
+
+exports[`UnconnectedTopNavigation renders correctly when \`hasSubjects\` is true 1`] = `
+<Menu
+  attached="top"
+  id="top-navigation"
+  inverted={true}
+  size="small"
+>
+  <MenuItem
+    onClick={[Function]}
+  >
+    <Icon
+      as="i"
+      className="menu-icon-responsive"
+      name="sidebar"
+    />
+    <span
+      className="hide-lt-767px"
+    >
+      Menu
+    </span>
+  </MenuItem>
+  <MenuItem
+    active={false}
+    as={[Function]}
+    onClick={[Function]}
+    to="/dashboard"
+  >
+    <Icon
+      as="i"
+      className="menu-icon-responsive"
+      name="home"
+    />
+    <span
+      className="hide-lt-767px"
+    >
+      Dashboard
+    </span>
+  </MenuItem>
+  <MenuItem
+    active={false}
+    as={[Function]}
+    onClick={[Function]}
+    to="/subjects/new"
+  >
+    <Icon
+      as="i"
+      className="menu-icon-responsive"
+      name="plus"
+    />
+    <span
+      className="hide-lt-767px"
+    >
+      Add new Subject
+    </span>
+  </MenuItem>
+  <MenuMenu
+    position="right"
+  >
+    <MenuItem
+      className="hide-lt-767px"
+    >
+      <SearchInput
+        onSearch={[Function]}
+      />
+    </MenuItem>
+    <Dropdown
+      additionLabel="Add "
+      additionPosition="top"
+      closeOnBlur={true}
+      deburr={false}
+      icon="dropdown"
+      item={true}
+      minCharacters={1}
+      noResultsMessage="No results found."
+      openOnFocus={true}
+      renderLabel={[Function]}
+      searchInput="text"
+      selectOnBlur={true}
+      selectOnNavigation={true}
+      trigger={
+        <span>
+          <Image
+            as="img"
+            avatar={true}
+            src="https://gravatar.com/avatar/ad3ddf5072a6de3dcffc3b2c7c2cec04?size=30"
+            ui={true}
+          />
+        </span>
+      }
+    >
+      <DropdownMenu>
+        <DropdownItem
+          onClick={[Function]}
+        >
+          Logout
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  </MenuMenu>
+</Menu>
+`;

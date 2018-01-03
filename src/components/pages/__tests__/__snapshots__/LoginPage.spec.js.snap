@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedLoginPage renders correctly 1`] = `
+<LoginPage
+  history={
+    Object {
+      "push": [Function],
+    }
+  }
+  login={[Function]}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+/>
+`;
+
+exports[`UnconnectedLoginPage renders correctly 1`] = `
+<CenterElemsContainer>
+  <Header
+    as="h2"
+    color="teal"
+    textAlign="center"
+  >
+    Log-in to your account
+  </Header>
+  <LoginForm
+    submit={[Function]}
+  />
+  <Message>
+    Dont have an account? 
+    <a
+      href="/signup"
+    >
+      Sign Up
+    </a>
+     now!
+    <br />
+    <a
+      href="/forgot_password"
+    >
+      Forgot
+    </a>
+     your password?
+  </Message>
+</CenterElemsContainer>
+`;

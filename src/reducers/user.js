@@ -14,7 +14,7 @@ export default function user(state = {}, action = {}) {
 }
 
 // SELECTORS
-export const getUser = state => state.user;
+export const getUser = state => state.user || {};
 export const getEmail = createSelector(
   getUser,
   userData => userData.email || ""

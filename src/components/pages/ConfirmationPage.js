@@ -70,4 +70,5 @@ ConfirmationPage.propTypes = {
   confirm: PropTypes.func.isRequired
 };
 
+export const UnconnectedConfirmationPage = ConfirmationPage;
 export default connect(null, { confirm })(ConfirmationPage);

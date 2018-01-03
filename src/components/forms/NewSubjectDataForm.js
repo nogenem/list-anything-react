@@ -14,7 +14,7 @@ class NewSubjectDataForm extends React.Component {
     super(props);
     this.state = {
       data: {
-        tabId: props.tabs[0]._id
+        tabId: props.tabs.length ? props.tabs[0]._id : ""
       },
       errors: {},
       loading: false
@@ -125,4 +125,5 @@ const mapStateToProps = state => ({
   fields: getFieldsArray(state)
 });
 
+export const UnconnectedNewSubjectDataForm = NewSubjectDataForm;
 export default connect(mapStateToProps)(NewSubjectDataForm);

@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PrivateRoutes renders correctly 1`] = `
+<MainContentContainer
+  history={
+    Object {
+      "location": Object {
+        "pathname": "",
+      },
+      "push": [Function],
+    }
+  }
+  showContent={false}
+>
+  <Connect(UserRoute)
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/dashboard"
+  />
+  <Connect(UserRoute)
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/subjects/new"
+  />
+  <Connect(UserRoute)
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/subject/:_id"
+  />
+  <Connect(UserRoute)
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/subject/:_id/add"
+  />
+  <Connect(UserRoute)
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/subject-data/:_id"
+  />
+  <Connect(UserRoute)
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/search"
+  />
+</MainContentContainer>
+`;

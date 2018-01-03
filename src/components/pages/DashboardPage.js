@@ -29,4 +29,5 @@ const mapStateToProps = state => ({
   hasSubjects: !isEmpty(getSubjectsArray(state))
 });
 
+export const UnconnectedDashboardPage = DashboardPage;
 export default connect(mapStateToProps)(DashboardPage);

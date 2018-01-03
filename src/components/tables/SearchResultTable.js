@@ -113,7 +113,12 @@ SearchResultTable.propTypes = {
       _id: PropTypes.string,
       value: PropTypes.string,
       subject: PropTypes.string,
-      tab: PropTypes.string
+      tab: PropTypes.string,
+      field: PropTypes.shape({
+        _id: PropTypes.string,
+        description: PropTypes.string,
+        field_type: PropTypes.string
+      })
     })
   ).isRequired,
   onTableRowClick: PropTypes.func.isRequired

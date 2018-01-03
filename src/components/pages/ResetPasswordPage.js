@@ -55,6 +55,7 @@ ResetPasswordPage.propTypes = {
   resetPassword: PropTypes.func.isRequired
 };
 
+export const UnconnectedResetPasswordPage = ResetPasswordPage;
 export default connect(null, { validateToken, resetPassword })(
   ResetPasswordPage
 );

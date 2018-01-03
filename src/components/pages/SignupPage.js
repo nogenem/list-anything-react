@@ -35,4 +35,5 @@ SignupPage.propTypes = {
   signup: PropTypes.func.isRequired
 };
 
+export const UnconnectedSignupPage = SignupPage;
 export default connect(null, { signup })(SignupPage);

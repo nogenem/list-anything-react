@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfirmEmailMessage renders correctly 1`] = `
+<Message
+  info={true}
+  style={
+    Object {
+      "textAlign": "center",
+    }
+  }
+>
+  <MessageHeader>
+    Please, verify your email to unlock awesomeness
+  </MessageHeader>
+</Message>
+`;

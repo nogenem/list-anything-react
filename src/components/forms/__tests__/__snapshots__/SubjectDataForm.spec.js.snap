@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SubjectDataForm renders correctly 1`] = `
+<Form
+  as="form"
+  loading={false}
+  onSubmit={[Function]}
+  size="large"
+  style={
+    Object {
+      "textAlign": "left",
+    }
+  }
+>
+  <EditDeleteBtnGroup
+    onDelete={[Function]}
+    onEdit={[Function]}
+    showDelete={true}
+    showEdit={true}
+  />
+  <Segment
+    stacked={true}
+  />
+</Form>
+`;

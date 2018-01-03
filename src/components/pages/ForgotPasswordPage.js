@@ -45,4 +45,5 @@ ForgotPasswordPage.propTypes = {
   resetPasswordRequest: PropTypes.func.isRequired
 };
 
+export const UnconnectedForgotPasswordPage = ForgotPasswordPage;
 export default connect(null, { resetPasswordRequest })(ForgotPasswordPage);

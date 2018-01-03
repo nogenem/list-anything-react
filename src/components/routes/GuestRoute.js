@@ -25,4 +25,5 @@ const mapStateToProps = state => ({
   isAuthenticated: !!getToken(state)
 });
 
+export const UnconnectedGuestRoute = GuestRoute;
 export default connect(mapStateToProps)(GuestRoute);

@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedMainContainer renders correctly 1`] = `
+<MainContainer
+  activeItem=""
+  dispatch={[Function]}
+  hideMenu={[Function]}
+  menuVisible={false}
+  search={[Function]}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  subjects={Array []}
+>
+  <span>
+    Testando...
+  </span>
+</MainContainer>
+`;
+
+exports[`UnconnectedMainContainer renders correctly when \`subjects\` is empty 1`] = `
+<SidebarPushable
+  as={[Function]}
+  attached="bottom"
+  id="main-container"
+>
+  <Sidebar
+    animation="uncover"
+    as={[Function]}
+    direction="left"
+    icon="labeled"
+    inverted={true}
+    vertical={true}
+    visible={false}
+    width="thin"
+  >
+    <MenuItem
+      className="hide-gt-767px"
+    >
+      <SearchInput
+        onSearch={[Function]}
+      />
+    </MenuItem>
+  </Sidebar>
+  <SidebarPusher
+    dimmed={false}
+    style={
+      Object {
+        "overflowY": "auto",
+      }
+    }
+  >
+    <span>
+      Testando...
+    </span>
+  </SidebarPusher>
+</SidebarPushable>
+`;

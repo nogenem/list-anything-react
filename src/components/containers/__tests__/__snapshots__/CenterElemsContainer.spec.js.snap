@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CenterElemsContainer renders correctly 1`] = `
+<Grid
+  style={
+    Object {
+      "height": "100%",
+    }
+  }
+  textAlign="center"
+  verticalAlign="middle"
+>
+  <GridColumn
+    style={
+      Object {
+        "maxWidth": 450,
+      }
+    }
+  >
+    Testando...
+  </GridColumn>
+</Grid>
+`;

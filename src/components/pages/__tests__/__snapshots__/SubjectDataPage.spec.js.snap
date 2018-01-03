@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedSubjectDataPage renders correctly 1`] = `
+<SubjectDataPage
+  currentSubjectId=""
+  deleteSubjectData={[Function]}
+  editSubjectData={[Function]}
+  fetchSDById={[Function]}
+  fetchSubjectByTabId={[Function]}
+  fields={Array []}
+  history={
+    Object {
+      "push": [Function],
+    }
+  }
+  match={
+    Object {
+      "params": Object {
+        "_id": "1",
+      },
+    }
+  }
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  subjectData={Object {}}
+  tabs={Array []}
+/>
+`;
+
+exports[`UnconnectedSubjectDataPage renders correctly 1`] = `
+<Segment
+  basic={true}
+  style={
+    Object {
+      "margin": "10px auto",
+      "maxWidth": 500,
+    }
+  }
+>
+  <SubjectDataForm
+    delete={[Function]}
+    fields={Array []}
+    subjectData={
+      Object {
+        "_id": "1",
+        "tabId": "1",
+      }
+    }
+    submit={[Function]}
+    tabs={Array []}
+  />
+</Segment>
+`;

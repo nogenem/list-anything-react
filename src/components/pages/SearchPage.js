@@ -64,14 +64,6 @@ class SearchPage extends Component {
 
 SearchPage.propTypes = {
   // ownProps
-  results: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string,
-      value: PropTypes.string,
-      subject: PropTypes.string,
-      tab: PropTypes.string
-    })
-  ).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
@@ -79,11 +71,21 @@ SearchPage.propTypes = {
     search: PropTypes.string.isRequired
   }).isRequired,
   // mapDispatchToProps
-  searchRequest: PropTypes.func.isRequired
+  searchRequest: PropTypes.func.isRequired,
+  // mapStateToProps
+  results: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      value: PropTypes.string,
+      subject: PropTypes.string,
+      tab: PropTypes.string
+    })
+  ).isRequired
 };
 
 const mapStateToProps = state => ({
   results: getResults(state)
 });
 
+export const UnconnectedSearchPage = SearchPage;
 export default connect(mapStateToProps, { searchRequest })(SearchPage);

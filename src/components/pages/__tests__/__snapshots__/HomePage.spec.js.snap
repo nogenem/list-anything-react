@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedHomePage renders correctly 1`] = `
+<HomePage
+  dispatch={[Function]}
+  isAuthenticated={false}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+/>
+`;
+
+exports[`UnconnectedHomePage when \`isAuthenticated\` is false renders correctly 1`] = `
+<div>
+  <Redirect
+    push={false}
+    to="/login"
+  />
+</div>
+`;
+
+exports[`UnconnectedHomePage when \`isAuthenticated\` is true renders correctly 1`] = `
+<div>
+  <Redirect
+    push={false}
+    to="/dashboard"
+  />
+</div>
+`;

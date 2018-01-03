@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedSubjectPage renders correctly 1`] = `
+<SubjectPage
+  deleteSubject={[Function]}
+  fetchSDByTabId={[Function]}
+  fetchSubjectById={[Function]}
+  fields={Array []}
+  firstTab={
+    Object {
+      "_id": "",
+    }
+  }
+  history={
+    Object {
+      "push": [Function],
+    }
+  }
+  match={
+    Object {
+      "params": Object {
+        "_id": "1",
+      },
+    }
+  }
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  subjectDataArray={Array []}
+/>
+`;
+
+exports[`UnconnectedSubjectPage renders correctly 1`] = `
+<Segment
+  basic={true}
+  loading={true}
+  style={
+    Object {
+      "height": "90%",
+      "margin": "10px auto",
+      "maxWidth": "90%",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "display": "inline-flex",
+        "justifyContent": "space-between",
+        "marginBottom": "3px",
+        "width": "100%",
+      }
+    }
+  >
+    <ButtonGroup
+      icon={true}
+      size="medium"
+    >
+      <Button
+        as="button"
+        icon="sidebar"
+        onClick={[Function]}
+      />
+      <Button
+        as={[Function]}
+        color="green"
+        icon="plus"
+        to="/subject/1/add"
+      />
+    </ButtonGroup>
+    <EditDeleteBtnGroup
+      onDelete={[Function]}
+      onEdit={null}
+      showDelete={true}
+      showEdit={false}
+    />
+  </div>
+</Segment>
+`;

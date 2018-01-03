@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FieldsAccordionForm renders correctly 1`] = `
+<Accordion
+  as={[Function]}
+>
+  <AccordionTitle
+    active={true}
+    name="tabs"
+    onClick={[Function]}
+  >
+    <Icon
+      as="i"
+      name="dropdown"
+    />
+    Add Fields
+  </AccordionTitle>
+  <AccordionContent
+    active={true}
+  >
+    <FormField
+      error={false}
+    >
+      <FormInput
+        as={[Function]}
+        control={[Function]}
+        fluid={true}
+        id="fields-accordion-input"
+        name="description"
+        onChange={[Function]}
+        placeholder="field description"
+        type="text"
+        value=""
+      />
+    </FormField>
+    <FormField
+      control="select"
+      label="Select the field type:"
+      name="field_type"
+      onChange={[Function]}
+      value="text_input"
+    >
+      <option
+        key="0"
+        value="text_input"
+      >
+        text_input
+      </option>
+      <option
+        key="1"
+        value="url_input_img"
+      >
+        url_input_img
+      </option>
+      <option
+        key="2"
+        value="number_input"
+      >
+        number_input
+      </option>
+      <option
+        key="3"
+        value="textarea"
+      >
+        textarea
+      </option>
+      <option
+        key="4"
+        value="url_input"
+      >
+        url_input
+      </option>
+      <option
+        key="5"
+        value="date_input"
+      >
+        date_input
+      </option>
+      <option
+        key="6"
+        value="text_input_list"
+      >
+        text_input_list
+      </option>
+      <option
+        key="7"
+        value="url_input_list"
+      >
+        url_input_list
+      </option>
+    </FormField>
+    <FormCheckbox
+      as={[Function]}
+      checked={false}
+      control={[Function]}
+      label="Is a unique field?"
+      name="is_unique"
+      onChange={[Function]}
+    />
+    <FormCheckbox
+      as={[Function]}
+      checked={false}
+      control={[Function]}
+      label="Should show in the main list?"
+      name="show_in_list"
+      onChange={[Function]}
+    />
+    <FormButton
+      as={[Function]}
+      color="teal"
+      content="Add"
+      control={[Function]}
+      fluid={true}
+      onClick={[Function]}
+    />
+    <List
+      celled={true}
+    />
+  </AccordionContent>
+</Accordion>
+`;

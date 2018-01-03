@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SubjectDataTable renders correctly 1`] = `
+<Table
+  as="table"
+  celled={true}
+  compact="very"
+  selectable={true}
+  sortable={true}
+>
+  <TableHeader
+    as="thead"
+  >
+    <TableRow
+      as="tr"
+      cellAs="td"
+    />
+  </TableHeader>
+  <TableBody
+    as="tbody"
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+  />
+</Table>
+`;

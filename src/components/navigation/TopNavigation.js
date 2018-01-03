@@ -93,6 +93,7 @@ const mapStateToProps = state => ({
   hasSubjects: !isEmpty(getSubjectsArray(state))
 });
 
+export const UnconnectedTopNavigation = TopNavigation;
 export default connect(mapStateToProps, {
   logout: actions.logout
 })(TopNavigation);

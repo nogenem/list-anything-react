@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedNewSubjectPage renders correctly 1`] = `
+<NewSubjectPage
+  createSubject={[Function]}
+  history={
+    Object {
+      "push": [Function],
+    }
+  }
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+/>
+`;
+
+exports[`UnconnectedNewSubjectPage renders correctly 1`] = `
+<Segment
+  style={
+    Object {
+      "margin": "10px auto",
+      "maxWidth": 500,
+    }
+  }
+>
+  <Header
+    as="h2"
+    color="teal"
+    textAlign="center"
+  >
+    Create new Subject
+  </Header>
+  <NewSubjectForm
+    submit={[Function]}
+  />
+</Segment>
+`;

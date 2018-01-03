@@ -64,6 +64,7 @@ const mapStateToProps = state => ({
   subjectId: getSubjectId(state)
 });
 
+export const UnconnectedNewSubjectDataPage = NewSubjectDataPage;
 export default connect(mapStateToProps, {
   createSubjectData,
   fetchSubjectById

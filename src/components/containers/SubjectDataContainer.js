@@ -69,4 +69,5 @@ const mapStateToProps = state => ({
   tabs: getTabsArray(state)
 });
 
+export const UnconnectedSubjectDataContainer = SubjectDataContainer;
 export default connect(mapStateToProps)(SubjectDataContainer);

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddSubjectCtA renders correctly 1`] = `
+<Card
+  centered={true}
+>
+  <CardContent
+    textAlign="center"
+  >
+    <CardHeader>
+      Add new subject
+    </CardHeader>
+    <Link
+      replace={false}
+      to="/subjects/new"
+    >
+      <Icon
+        as="i"
+        name="plus circle"
+        size="massive"
+      />
+    </Link>
+  </CardContent>
+</Card>
+`;

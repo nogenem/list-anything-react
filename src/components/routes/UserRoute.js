@@ -30,4 +30,5 @@ const mapStateToProps = state => ({
   isAuthenticated: !!getToken(state)
 });
 
+export const UnconnectedUserRoute = UserRoute;
 export default connect(mapStateToProps)(UserRoute);

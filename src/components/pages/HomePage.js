@@ -20,4 +20,5 @@ const mapStateToProps = state => ({
   isAuthenticated: !!getToken(state)
 });
 
+export const UnconnectedHomePage = HomePage;
 export default connect(mapStateToProps)(HomePage);

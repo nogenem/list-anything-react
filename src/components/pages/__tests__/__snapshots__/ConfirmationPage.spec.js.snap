@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedConfirmationPage renders correctly 1`] = `
+<ConfirmationPage
+  confirm={[Function]}
+  match={
+    Object {
+      "params": Object {
+        "token": "some token",
+      },
+    }
+  }
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+/>
+`;
+
+exports[`UnconnectedConfirmationPage after \`props.confirm\` finishes successfully renders correctly 1`] = `
+<CenterElemsContainer>
+  <Message
+    icon={true}
+    success={true}
+  >
+    <Icon
+      as="i"
+      name="checkmark"
+    />
+    <MessageContent>
+      <MessageHeader>
+        Thank you. Your account has been verified.
+      </MessageHeader>
+      <Link
+        replace={false}
+        to="/dashboard"
+      >
+        Go to your dashboard
+      </Link>
+    </MessageContent>
+  </Message>
+</CenterElemsContainer>
+`;
+
+exports[`UnconnectedConfirmationPage after \`props.confirm\` finishes with failure renders correctly 1`] = `
+<CenterElemsContainer>
+  <Message
+    icon={true}
+    negative={true}
+  >
+    <Icon
+      as="i"
+      name="warning sign"
+    />
+    <MessageContent>
+      <MessageHeader>
+        Ooops. Invalid token it seems.
+      </MessageHeader>
+    </MessageContent>
+  </Message>
+</CenterElemsContainer>
+`;
+
+exports[`UnconnectedConfirmationPage before \`props.confirm\` finishes renders correctly 1`] = `
+<CenterElemsContainer>
+  <Message
+    icon={true}
+  >
+    <Icon
+      as="i"
+      loading={true}
+      name="circle notched"
+    />
+    <MessageHeader>
+      Validating your email
+    </MessageHeader>
+  </Message>
+</CenterElemsContainer>
+`;

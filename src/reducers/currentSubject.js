@@ -27,7 +27,7 @@ export default function currentSubject(state = {}, action = {}) {
 }
 
 // SELECTORS
-export const getSubject = state => state.currentSubject;
+export const getSubject = state => state.currentSubject || {};
 export const getSubjectDescription = createSelector(
   getSubject,
   subject => subject.description || ""
@@ -37,10 +37,10 @@ export const getSubjectId = createSelector(
   subject => subject._id || ""
 );
 export const getTabsArray = state =>
-  Object.values(state.currentSubject.tabs || {});
+  Object.values(getSubject(state).tabs || {});
 export const getFieldsArray = state =>
-  Object.values(state.currentSubject.fields || {});
+  Object.values(getSubject(state).fields || {});
 export const getFieldsHash = createSelector(
   getSubject,
-  subject => subject.fields
+  subject => subject.fields || {}
 );

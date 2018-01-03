@@ -33,4 +33,5 @@ NewSubjectPage.propTypes = {
   createSubject: PropTypes.func.isRequired
 };
 
+export const UnconnectedNewSubjectPage = NewSubjectPage;
 export default connect(null, { createSubject })(NewSubjectPage);

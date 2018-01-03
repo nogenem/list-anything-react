@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedNewSubjectDataForm renders correctly 1`] = `
+<NewSubjectDataForm
+  dispatch={[Function]}
+  fields={Array []}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  submit={[Function]}
+  tabs={Array []}
+/>
+`;
+
+exports[`UnconnectedNewSubjectDataForm renders correctly 1`] = `
+<Form
+  as="form"
+  loading={false}
+  onSubmit={[Function]}
+  size="large"
+>
+  <Segment
+    stacked={true}
+    textAlign="left"
+  >
+    <FormField
+      control="select"
+      label="Select the tab:"
+      name="tabId"
+      onChange={[Function]}
+      value=""
+    />
+    <Button
+      as="button"
+      color="teal"
+      fluid={true}
+      size="large"
+    >
+      Add
+    </Button>
+  </Segment>
+</Form>
+`;

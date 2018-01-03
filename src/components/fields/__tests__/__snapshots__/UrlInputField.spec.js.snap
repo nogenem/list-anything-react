@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UrlInputField when \`editable\` is false renders correctly when \`showFieldDescription\` is false 1`] = `
+<a
+  href="http://www.example.com"
+  onClick={[Function]}
+  target="_blank"
+>
+  http://www.example.com
+</a>
+`;
+
+exports[`UrlInputField when \`editable\` is false renders correctly when \`showFieldDescription\` is true 1`] = `
+<FormField>
+  <b>
+    Testando:
+    :
+  </b>
+   
+  <a
+    href="http://www.example.com"
+    onClick={[Function]}
+    target="_blank"
+  >
+    http://www.example.com
+  </a>
+</FormField>
+`;
+
+exports[`UrlInputField when \`editable\` is true renders correctly 1`] = `
+<FormField
+  error={false}
+>
+  <FormInput
+    as={[Function]}
+    control={[Function]}
+    fluid={true}
+    label="Testando:"
+    name="1"
+    onChange={[Function]}
+    placeholder="http://site.com/"
+    type="url"
+    value="http://www.example.com"
+  />
+</FormField>
+`;

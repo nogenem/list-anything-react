@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedDashboardPage renders correctly 1`] = `
+<DashboardPage
+  dispatch={[Function]}
+  hasSubjects={false}
+  isConfirmed={false}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+/>
+`;
+
+exports[`UnconnectedDashboardPage when \`isConfirmed\` is false renders correctly 1`] = `
+<Segment
+  basic={true}
+>
+  <ConfirmEmailMessage />
+</Segment>
+`;
+
+exports[`UnconnectedDashboardPage when \`isConfirmed\` is true when \`hasSubjects\` is false renders correctly 1`] = `
+<Segment
+  basic={true}
+>
+  <WelcomeMessage />
+  <AddSubjectCtA />
+</Segment>
+`;
+
+exports[`UnconnectedDashboardPage when \`isConfirmed\` is true when \`hasSubjects\` is true renders correctly 1`] = `
+<Segment
+  basic={true}
+>
+  <WelcomeMessage />
+</Segment>
+`;

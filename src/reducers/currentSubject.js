@@ -36,11 +36,19 @@ export const getSubjectId = createSelector(
   getSubject,
   subject => subject._id || ""
 );
-export const getTabsArray = state =>
-  Object.values(getSubject(state).tabs || {});
-export const getFieldsArray = state =>
-  Object.values(getSubject(state).fields || {});
+
+export const getTabsHash = createSelector(
+  getSubject,
+  subject => subject.tabs || {}
+);
+export const getTabsArray = createSelector(getTabsHash, hash =>
+  Object.values(hash)
+);
+
 export const getFieldsHash = createSelector(
   getSubject,
   subject => subject.fields || {}
+);
+export const getFieldsArray = createSelector(getFieldsHash, hash =>
+  Object.values(hash)
 );

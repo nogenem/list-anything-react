@@ -23,13 +23,13 @@ class SubjectDataPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: this.props.subjectData._id === "",
+      loading: !this.props.subjectData._id,
       errors: {}
     };
   }
 
   componentDidMount = () => {
-    if (this.props.subjectData._id === "")
+    if (!this.props.subjectData._id)
       this.props
         .fetchSDById(this.props.match.params._id)
         .then(() =>
@@ -123,7 +123,7 @@ SubjectDataPage.defaultProps = {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  subjectData: getSubjectDataElem(state, ownProps.match.params._id),
+  subjectData: getSubjectDataElem(state, ownProps),
   fields: getFieldsArray(state),
   tabs: getTabsArray(state),
   currentSubjectId: getSubjectId(state)

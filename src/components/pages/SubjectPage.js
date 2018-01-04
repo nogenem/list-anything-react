@@ -45,6 +45,7 @@ class SubjectPage extends Component {
     ) {
       this.loadSubjectData(nextProps, nextProps.firstTab._id);
       this.filterSubjectData(subjectDataArray, currentTabId);
+      this.hideMenu();
     }
 
     if (
@@ -96,6 +97,8 @@ class SubjectPage extends Component {
 
   toggleMenu = () =>
     this.setState(prevState => ({ menuVisible: !prevState.menuVisible }));
+
+  hideMenu = () => this.setState({ menuVisible: false });
 
   deleteSubject = () =>
     this.props

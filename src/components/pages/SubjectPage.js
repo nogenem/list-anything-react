@@ -14,8 +14,10 @@ import EditDeleteBtnGroup from "../containers/EditDeleteBtnGroup";
 import handleServerErrors from "../../utils/handleServerErrors";
 import ErrorMessage from "../messages/ErrorMessage";
 
+// TODO: Melhorar este componente, quebrando em subcomponentes por exemplo.
 class SubjectPage extends Component {
   state = {
+    subjectData: [],
     loadingSubject: false,
     loadingData: false,
     menuVisible: false,
@@ -39,6 +41,20 @@ class SubjectPage extends Component {
       this.props.firstTab !== nextProps.firstTab
     ) {
       this.loadSubjectData(nextProps, nextProps.firstTab._id);
+    }
+
+    const { subjectDataArray } = nextProps;
+    const currentTabId = nextProps.firstTab._id;
+    if (
+      this.props.subjectDataArray !== subjectDataArray &&
+      subjectDataArray.length > 0 &&
+      currentTabId !== ""
+    ) {
+      const subjectData = subjectDataArray.filter(
+        d => d.tabId === currentTabId
+      );
+
+      this.setState({ subjectData });
     }
   }
 
@@ -85,20 +101,15 @@ class SubjectPage extends Component {
 
   render() {
     const {
+      subjectData,
       loadingData,
       loadingSubject,
       menuVisible,
-      currentTabId,
       activeTab,
       errors
     } = this.state;
     const { fields } = this.props;
     const sdId = this.props.match.params._id;
-
-    let { subjectDataArray } = this.props;
-    if (subjectDataArray.length > 0 && currentTabId !== "") {
-      subjectDataArray = subjectDataArray.filter(d => d.tabId === currentTabId);
-    }
 
     return (
       <Segment
@@ -140,7 +151,7 @@ class SubjectPage extends Component {
             >
               <SubjectDataTable
                 fields={fields}
-                subjectDataArray={subjectDataArray}
+                subjectDataArray={subjectData}
                 loading={loadingData}
                 onTableRowClick={this.onTableRowClick}
               />

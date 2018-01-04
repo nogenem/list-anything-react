@@ -16,13 +16,12 @@ exports[`SubjectDataTable renders correctly 1`] = `
       cellAs="td"
     />
   </TableHeader>
-  <TableBody
-    as="tbody"
-    style={
-      Object {
-        "cursor": "pointer",
-      }
-    }
+  <SubjectDataTableBody
+    data={Array []}
+    fields={Array []}
+    loading={false}
+    onTableRowClick={[Function]}
+    renderCell={[Function]}
   />
 </Table>
 `;

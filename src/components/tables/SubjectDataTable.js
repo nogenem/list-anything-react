@@ -1,8 +1,9 @@
 import React from "react";
-import { Table, Loader } from "semantic-ui-react";
+import { Table } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import sortBy from "lodash.sortby";
 
+import SubjectDataTableBody from "./SubjectDataTableBody";
 import renderFieldComponent from "../../utils/renderFieldComponent";
 
 class SubjectDataTable extends React.Component {
@@ -32,12 +33,12 @@ class SubjectDataTable extends React.Component {
     if (column !== clickedColumn) {
       this.setState({
         column: clickedColumn,
-        data: sortBy(data, [o => o.data[clickedColumn].value]),
+        data: sortBy([...data], [o => o.data[clickedColumn].value]),
         direction: "ascending"
       });
     } else {
       this.setState({
-        data: data.reverse(),
+        data: [...data].reverse(),
         direction: direction === "ascending" ? "descending" : "ascending"
       });
     }
@@ -88,27 +89,13 @@ class SubjectDataTable extends React.Component {
             )}
           </Table.Row>
         </Table.Header>
-        <Table.Body style={{ cursor: "pointer" }}>
-          {loading && (
-            <Table.Row>
-              <Table.Cell width={16}>
-                <Loader active inline="centered" />
-              </Table.Cell>
-            </Table.Row>
-          )}
-          {!loading &&
-            data.map(sd => (
-              <Table.Row
-                key={sd._id}
-                to={`/subject-data/${sd._id}`}
-                onClick={onTableRowClick}
-              >
-                {fields.map(
-                  field => field.show_in_list && this.renderCell(sd, field)
-                )}
-              </Table.Row>
-            ))}
-        </Table.Body>
+        <SubjectDataTableBody
+          loading={loading}
+          data={data}
+          fields={fields}
+          onTableRowClick={onTableRowClick}
+          renderCell={this.renderCell}
+        />
       </Table>
     );
   }

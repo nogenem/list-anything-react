@@ -4,7 +4,7 @@ import setAuthorizationHeader from "../utils/setAuthorizationHeader";
 
 const signup = data => dispatch =>
   api.user.signup(data).then(user => {
-    localStorage.listanythingJWT = user.token;
+    localStorage.setItem("listanythingJWT", user.token);
     setAuthorizationHeader(user.token);
     dispatch(userLoggedIn(user));
   });

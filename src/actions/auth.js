@@ -13,7 +13,7 @@ export const userLoggedOut = () => ({
 
 export const login = credentials => dispatch =>
   api.user.login(credentials).then(user => {
-    localStorage.listanythingJWT = user.token;
+    localStorage.setItem("listanythingJWT", user.token);
     setAuthorizationHeader(user.token);
     dispatch(userLoggedIn(user));
   });
@@ -26,7 +26,7 @@ export const logout = () => dispatch => {
 
 export const confirm = token => dispatch =>
   api.user.confirm(token).then(user => {
-    localStorage.listanythingJWT = user.token;
+    localStorage.setItem("listanythingJWT", user.token);
     dispatch(userLoggedIn(user));
   });
 

@@ -32,6 +32,9 @@ class SubjectPage extends Component {
     const currentId = this.props.match.params._id;
     const nextId = nextProps.match.params._id;
 
+    const { subjectDataArray } = nextProps;
+    const currentTabId = nextProps.firstTab._id;
+
     if (currentId !== nextId) {
       this.loadSubjects(nextProps);
     }
@@ -41,20 +44,15 @@ class SubjectPage extends Component {
       this.props.firstTab !== nextProps.firstTab
     ) {
       this.loadSubjectData(nextProps, nextProps.firstTab._id);
+      this.filterSubjectData(subjectDataArray, currentTabId);
     }
 
-    const { subjectDataArray } = nextProps;
-    const currentTabId = nextProps.firstTab._id;
     if (
       this.props.subjectDataArray !== subjectDataArray &&
       subjectDataArray.length > 0 &&
       currentTabId !== ""
     ) {
-      const subjectData = subjectDataArray.filter(
-        d => d.tabId === currentTabId
-      );
-
-      this.setState({ subjectData });
+      this.filterSubjectData(subjectDataArray, currentTabId);
     }
   }
 
@@ -69,6 +67,11 @@ class SubjectPage extends Component {
     // também porque não da pra por Table.Row como Link
     const to = e.currentTarget.getAttribute("to");
     this.props.history.push(to);
+  };
+
+  filterSubjectData = (data, tabId) => {
+    const subjectData = data.filter(d => d.tabId === tabId);
+    this.setState({ subjectData });
   };
 
   loadSubjects = props => {

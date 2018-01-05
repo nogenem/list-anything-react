@@ -1,13 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`InlineError renders correctly 1`] = `
-<span
+<div
   style={
     Object {
       "color": "#ae5856",
+      "minWidth": "100%",
+      "textAlign": "left",
     }
   }
 >
   some text
-</span>
+</div>
 `;

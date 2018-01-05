@@ -7,7 +7,9 @@ import {
   USER_LOGGED_OUT
 } from "../constants/actionTypes";
 
-export default function subjects(state = {}, action = {}) {
+export const initialState = {};
+
+export default function subjects(state = initialState, action = {}) {
   switch (action.type) {
     case SUBJECTS_FETCHED:
     case SUBJECT_CREATED:
@@ -18,14 +20,14 @@ export default function subjects(state = {}, action = {}) {
       return newState;
     }
     case USER_LOGGED_OUT:
-      return {};
+      return initialState;
     default:
       return state;
   }
 }
 
 // SELECTORS
-export const getSubjects = state => state.subjects || {};
+export const getSubjects = state => state.subjects || initialState;
 export const getSubjectsArray = createSelector(getSubjects, subjectsHash =>
   Object.values(subjectsHash)
 );

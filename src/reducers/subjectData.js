@@ -25,22 +25,24 @@ const reshapeData = ({ subjectData: sData }) => {
   return result;
 };
 
-export default function subjectData(state = {}, action = {}) {
+export const initialState = {};
+
+export default function subjectData(state = initialState, action = {}) {
   switch (action.type) {
     case SUBJECT_DATA_FETCHED:
     case SUBJECT_DATA_EDITED:
       return { ...state, ...reshapeData(action.data.entities) };
     case SUBJECT_FETCHED_BY_ID:
-      return {};
+      return initialState;
     case USER_LOGGED_OUT:
-      return {};
+      return initialState;
     default:
       return state;
   }
 }
 
 // SELECTORS
-export const getSubjectData = state => state.subjectData || {};
+export const getSubjectData = state => state.subjectData || initialState;
 const getParamsId = (_, props) => props.match.params._id;
 
 export const getSubjectDataElem = createSelector(

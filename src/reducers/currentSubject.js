@@ -12,22 +12,24 @@ const reshapeSubject = ({ subject: subjectHash, tabs, fields }) => {
   return { _id, description, tabs, fields };
 };
 
-export default function currentSubject(state = {}, action = {}) {
+export const initialState = {};
+
+export default function currentSubject(state = initialState, action = {}) {
   switch (action.type) {
     case SUBJECT_FETCHED_BY_ID:
     case SUBJECT_FETCHED_BY_TABID:
       return reshapeSubject(action.data.entities);
     case SUBJECT_DELETED:
-      return {};
+      return initialState;
     case USER_LOGGED_OUT:
-      return {};
+      return initialState;
     default:
       return state;
   }
 }
 
 // SELECTORS
-export const getSubject = state => state.currentSubject || {};
+export const getSubject = state => state.currentSubject || initialState;
 export const getSubjectDescription = createSelector(
   getSubject,
   subject => subject.description || ""

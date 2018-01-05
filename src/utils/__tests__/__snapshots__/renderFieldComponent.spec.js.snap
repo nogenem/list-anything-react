@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renderFieldComponent when passed a valid \`field.field_type\` renders the correct field component 1`] = `
+<FormField
+  error={false}
+>
+  <FormInput
+    as={[Function]}
+    control={[Function]}
+    fluid={true}
+    label="Testando:"
+    name="1"
+    onChange={[Function]}
+    placeholder="Testando:"
+    type="text"
+    value="testando..."
+  />
+</FormField>
+`;
+
+exports[`renderFieldComponent when passed a valid \`field.field_type\` renders the default div 1`] = `
+<div
+  key="1"
+/>
+`;

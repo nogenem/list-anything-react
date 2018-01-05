@@ -43,7 +43,8 @@ export default function subjectData(state = initialState, action = {}) {
 
 // SELECTORS
 export const getSubjectData = state => state.subjectData || initialState;
-const getParamsId = (_, props) => props.match.params._id;
+const getParamsId = (_, props) =>
+  (props.match && props.match.params && props.match.params._id) || "";
 
 export const getSubjectDataElem = createSelector(
   getSubjectData,

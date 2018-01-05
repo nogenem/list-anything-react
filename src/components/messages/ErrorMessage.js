@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Message } from "semantic-ui-react";
+
+import CustomMessage from "./CustomMessage";
 
 const ErrorMessage = ({ text, showHeader }) => (
-  <Message negative style={{ textAlign: "center" }}>
-    {showHeader && <Message.Header>Something went wrong</Message.Header>}
-    <p>{text}</p>
-  </Message>
+  <CustomMessage
+    header={showHeader ? "Something went wrong" : null}
+    content={text}
+    type={"error"}
+  />
 );
 
 ErrorMessage.propTypes = {

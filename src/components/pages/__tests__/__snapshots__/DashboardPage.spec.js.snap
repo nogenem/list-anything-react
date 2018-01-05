@@ -43,7 +43,12 @@ exports[`UnconnectedDashboardPage when \`isConfirmed\` is false renders correctl
 <Segment
   basic={true}
 >
-  <ConfirmEmailMessage />
+  <CustomMessage
+    color="none"
+    content=""
+    header="Please, verify your email to unlock awesomeness"
+    type="info"
+  />
 </Segment>
 `;
 
@@ -51,7 +56,12 @@ exports[`UnconnectedDashboardPage when \`isConfirmed\` is true when \`hasSubject
 <Segment
   basic={true}
 >
-  <WelcomeMessage />
+  <CustomMessage
+    color="none"
+    content=""
+    header="Welcome to ListAnything!"
+    type="info"
+  />
   <AddSubjectCtA />
 </Segment>
 `;
@@ -60,6 +70,11 @@ exports[`UnconnectedDashboardPage when \`isConfirmed\` is true when \`hasSubject
 <Segment
   basic={true}
 >
-  <WelcomeMessage />
+  <CustomMessage
+    color="none"
+    content=""
+    header="Welcome to ListAnything!"
+    type="info"
+  />
 </Segment>
 `;

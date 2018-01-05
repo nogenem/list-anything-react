@@ -4,16 +4,22 @@ import { connect } from "react-redux";
 import { Segment } from "semantic-ui-react";
 import isEmpty from "lodash.isempty";
 
-import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
-import WelcomeMessage from "../messages/WelcomeMessage";
+import CustomMessage from "../messages/CustomMessage";
 import AddSubjectCtA from "../ctas/AddSubjectCtA";
 import { getConfirmed } from "../../reducers/user";
 import { getSubjectsArray } from "../../reducers/subjects";
 
 const DashboardPage = ({ isConfirmed, hasSubjects }) => (
   <Segment basic>
-    {!isConfirmed && <ConfirmEmailMessage />}
-    {isConfirmed && <WelcomeMessage />}
+    {!isConfirmed && (
+      <CustomMessage
+        header={"Please, verify your email to unlock awesomeness"}
+        type={"info"}
+      />
+    )}
+    {isConfirmed && (
+      <CustomMessage header={"Welcome to ListAnything!"} type={"info"} />
+    )}
     {isConfirmed && !hasSubjects && <AddSubjectCtA />}
   </Segment>
 );

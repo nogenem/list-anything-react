@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomMessage renders correctly when all props are passed 1`] = `
+<Message
+  color="red"
+  error={true}
+  style={
+    Object {
+      "textAlign": "center",
+    }
+  }
+>
+  <MessageHeader>
+    TEST
+  </MessageHeader>
+  <MessageContent>
+    Testando...
+  </MessageContent>
+</Message>
+`;
+
+exports[`CustomMessage renders correctly when no property is passed 1`] = `
+<Message
+  style={
+    Object {
+      "textAlign": "center",
+    }
+  }
+/>
+`;

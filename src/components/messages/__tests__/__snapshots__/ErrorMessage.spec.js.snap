@@ -1,34 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ErrorMessage renders correctly when \`showHeader\` is false 1`] = `
-<Message
-  negative={true}
-  style={
-    Object {
-      "textAlign": "center",
-    }
-  }
->
-  <p>
-    some text
-  </p>
-</Message>
+<CustomMessage
+  color="none"
+  content="some text"
+  header={null}
+  type="error"
+/>
 `;
 
 exports[`ErrorMessage renders correctly when \`showHeader\` is true 1`] = `
-<Message
-  negative={true}
-  style={
-    Object {
-      "textAlign": "center",
-    }
-  }
->
-  <MessageHeader>
-    Something went wrong
-  </MessageHeader>
-  <p>
-    some text
-  </p>
-</Message>
+<CustomMessage
+  color="none"
+  content="some text"
+  header="Something went wrong"
+  type="error"
+/>
 `;

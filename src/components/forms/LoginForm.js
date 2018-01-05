@@ -54,9 +54,13 @@ class LoginForm extends React.Component {
 
   render() {
     const { data, errors, loading } = this.state;
-
     return (
-      <Form onSubmit={this.onSubmit} loading={loading} size="large">
+      <Form
+        onSubmit={this.onSubmit}
+        loading={loading}
+        error={!!errors.global}
+        size="large"
+      >
         {errors.global && <ErrorMessage text={errors.global} />}
         <Segment stacked>
           <Form.Field error={!!errors.email}>

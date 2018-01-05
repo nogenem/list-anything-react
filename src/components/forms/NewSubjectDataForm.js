@@ -76,7 +76,12 @@ class NewSubjectDataForm extends React.Component {
     const { errors, loading, data } = this.state;
     const { tabs, fields } = this.props;
     return (
-      <Form onSubmit={this.onSubmit} loading={loading} size="large">
+      <Form
+        onSubmit={this.onSubmit}
+        loading={loading}
+        error={!!errors.global}
+        size="large"
+      >
         {errors.global && <ErrorMessage text={errors.global} />}
         <Segment stacked textAlign="left">
           <Form.Field

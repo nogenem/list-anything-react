@@ -3,8 +3,10 @@
 exports[`SignupForm renders correctly 1`] = `
 <Form
   as="form"
+  error={false}
   loading={false}
   onSubmit={[Function]}
+  size="large"
 >
   <Segment
     stacked={true}

@@ -57,7 +57,12 @@ class SignupForm extends React.Component {
     const { data, errors, loading } = this.state;
 
     return (
-      <Form onSubmit={this.onSubmit} loading={loading}>
+      <Form
+        onSubmit={this.onSubmit}
+        loading={loading}
+        error={!!errors.global}
+        size="large"
+      >
         {errors.global && <ErrorMessage text={errors.global} />}
         <Segment stacked>
           <Form.Field error={!!errors.email}>

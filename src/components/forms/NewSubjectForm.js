@@ -105,7 +105,12 @@ class NewSubjectForm extends React.Component {
     const { data, errors, loading } = this.state;
 
     return (
-      <Form onSubmit={this.onSubmit} loading={loading} size="large">
+      <Form
+        onSubmit={this.onSubmit}
+        loading={loading}
+        error={!!errors.global}
+        size="large"
+      >
         {errors.global && <ErrorMessage text={errors.global} />}
         <Segment stacked textAlign="left">
           <Form.Field error={!!errors.description}>

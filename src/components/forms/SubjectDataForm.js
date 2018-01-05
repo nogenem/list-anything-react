@@ -137,6 +137,7 @@ class SubjectDataForm extends React.Component {
       <Form
         onSubmit={this.onSubmit}
         loading={loading}
+        error={!!errors.global}
         size="large"
         style={{ textAlign: "left" }}
       >

@@ -25,3 +25,24 @@ const childContextTypes = {
 global.shallowWithContext = comp => shallow(comp, { context: createContext() });
 global.mountWithContext = comp =>
   mount(comp, { context: createContext(), childContextTypes });
+
+class LocalStorageMock {
+  constructor() {
+    this.store = {};
+  }
+
+  clear = () => {
+    this.store = {};
+  };
+
+  getItem = key => this.store[key] || null;
+
+  setItem = (key, value) => {
+    this.store[key] = value;
+  };
+
+  removeItem = key => {
+    delete this.store[key];
+  };
+}
+global.localStorage = new LocalStorageMock();

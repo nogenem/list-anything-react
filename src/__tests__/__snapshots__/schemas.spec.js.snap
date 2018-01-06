@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`schemas subjectDataSchema renders correctly 1`] = `
+EntitySchema {
+  "_getId": [Function],
+  "_idAttribute": "_id",
+  "_key": "subjectData",
+  "_mergeStrategy": [Function],
+  "_processStrategy": [Function],
+  "schema": Object {},
+}
+`;
+
+exports[`schemas subjectSchema renders correctly 1`] = `
+EntitySchema {
+  "_getId": [Function],
+  "_idAttribute": "_id",
+  "_key": "subject",
+  "_mergeStrategy": [Function],
+  "_processStrategy": [Function],
+  "schema": Object {
+    "fields": Array [
+      EntitySchema {
+        "_getId": [Function],
+        "_idAttribute": "_id",
+        "_key": "fields",
+        "_mergeStrategy": [Function],
+        "_processStrategy": [Function],
+        "schema": Object {},
+      },
+    ],
+    "tabs": Array [
+      EntitySchema {
+        "_getId": [Function],
+        "_idAttribute": "_id",
+        "_key": "tabs",
+        "_mergeStrategy": [Function],
+        "_processStrategy": [Function],
+        "schema": Object {},
+      },
+    ],
+  },
+}
+`;
+
+exports[`schemas subjectsSchema renders correctly 1`] = `
+EntitySchema {
+  "_getId": [Function],
+  "_idAttribute": "_id",
+  "_key": "subjects",
+  "_mergeStrategy": [Function],
+  "_processStrategy": [Function],
+  "schema": Object {},
+}
+`;

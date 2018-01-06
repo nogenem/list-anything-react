@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedApp renders correctly 1`] = `
+<App
+  fetchAllSubjects={[Function]}
+  history={
+    Object {
+      "push": [Function],
+    }
+  }
+  isAuthenticated={false}
+  location={
+    Object {
+      "pathname": "",
+    }
+  }
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+/>
+`;
+
+exports[`UnconnectedApp when \`isAuthenticated\` is false renders correctly 1`] = `
+<div
+  id="app-container"
+>
+  <Route
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/"
+  />
+  <Route
+    component={[Function]}
+    exact={true}
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    path="/confirmation/:token"
+  />
+  <PrivateRoutes
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    showContent={false}
+  />
+  <PublicRoutes
+    location={
+      Object {
+        "pathname": "",
+      }
+    }
+    showContent={true}
+  />
+</div>
+`;

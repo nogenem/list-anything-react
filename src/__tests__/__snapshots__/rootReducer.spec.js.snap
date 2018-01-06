@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rootReducer renders correctly 1`] = `
+Object {
+  "currentSubject": Object {},
+  "searchResults": Array [],
+  "subjectData": Object {},
+  "subjects": Object {},
+  "user": Object {},
+}
+`;

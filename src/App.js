@@ -96,4 +96,5 @@ const mapStateToProps = state => ({
   isAuthenticated: !!getEmail(state)
 });
 
+export const UnconnectedApp = App;
 export default connect(mapStateToProps, { fetchAllSubjects })(App);

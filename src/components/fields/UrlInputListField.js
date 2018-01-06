@@ -1,138 +1,57 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, List } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 
-import InlineError from "../messages/InlineError";
+import ListValues from "./ListValues";
+import EditableListInput from "./EditableListInput";
+
+const styles = {
+  showFieldDescription: {
+    marginTop: "0px",
+    maxHeight: "100px",
+    overflowY: "auto"
+  },
+  default: { maxHeight: "100px", overflowY: "auto" }
+};
 
 class UrlInputListField extends React.Component {
   constructor(props) {
     super(props);
-
-    const { value } = props;
-
-    this.state = {
-      inputValue: "",
-      values: value ? value.split("\n") : []
-    };
+    this.values = props.value ? props.value.split("\n") : [];
   }
 
-  onAddValue = e => {
-    e.preventDefault();
-    let { inputValue: value } = this.state;
+  shouldComponentUpdate = nextProps =>
+    this.props.editable !== nextProps.editable ||
+    this.props.showFieldDescription !== nextProps.showFieldDescription ||
+    this.props.error !== nextProps.error;
 
-    if (!value) return;
-    if (!value.startsWith("http")) value = `http://${value}`;
-
-    const values = [...this.state.values, value];
-    this.props.onChange({
-      target: { name: this.props.field._id, value: values.join("\n") }
-    });
-    this.setState({ inputValue: "", values });
-    this.focusOnInput();
-  };
-
-  onRemoveValue = index => {
-    const values = [...this.state.values];
-    values.splice(index, 1);
-
-    this.props.onChange({
-      target: { name: this.props.field._id, value: values.join("\n") }
-    });
-    this.setState({ values });
-    this.focusOnInput();
-  };
-
-  onChange = e => this.setState({ inputValue: e.target.value });
-
-  focusOnInput = () => {
-    const $input = document.querySelector(
-      `input[name="${this.props.field._id}"]`
-    );
-    if ($input) $input.focus();
+  onChange = e => {
+    this.values = e.target.values;
+    this.props.onChange(e);
   };
 
   render() {
     const { editable, showFieldDescription, error, field } = this.props;
-    const { inputValue, values } = this.state;
+    const { values } = this;
 
     if (editable)
       return (
-        <div>
-          <Form.Group widths={2}>
-            <Form.Input
-              width={13}
-              fluid
-              type="url"
-              placeholder={field.description}
-              name={field._id}
-              value={inputValue}
-              onChange={this.onChange}
-              error={!!error}
-            />
-            <Form.Button
-              color="teal"
-              width={3}
-              onClick={this.onAddValue}
-              content="Add"
-            />
-          </Form.Group>
-          {error && <InlineError text={error} />}
-          <List
-            celled
-            style={{
-              marginBottom: "14px",
-              maxHeight: "100px",
-              overflowY: "auto"
-            }}
-          >
-            {values.map((value, idx) => (
-              <List.Item key={idx}>
-                <List.Content floated="right">
-                  <List.Icon
-                    link
-                    name="remove"
-                    onClick={() => this.onRemoveValue(idx)}
-                  />
-                </List.Content>
-                <List.Content>
-                  <a href={value} target="_blank">
-                    {value}
-                  </a>
-                </List.Content>
-              </List.Item>
-            ))}
-          </List>
-        </div>
+        <EditableListInput
+          values={values}
+          type="url"
+          error={error}
+          field={field}
+          onChange={this.onChange}
+        />
       );
     if (showFieldDescription)
       return (
         <Form.Field>
           <b>{field.description}:</b>
-          <List
-            celled
-            style={{ marginTop: "0px", maxHeight: "100px", overflowY: "auto" }}
-          >
-            {values.map((value, idx) => (
-              <List.Item key={idx}>
-                <a href={value} target="_blank">
-                  {value}
-                </a>
-              </List.Item>
-            ))}
-          </List>
+          <ListValues values={values} style={styles.showFieldDescription} />
         </Form.Field>
       );
-    return (
-      <List celled style={{ maxHeight: "100px", overflowY: "auto" }}>
-        {values.map((value, idx) => (
-          <List.Item key={idx}>
-            <a href={value} target="_blank">
-              {value}
-            </a>
-          </List.Item>
-        ))}
-      </List>
-    );
+    return <ListValues values={values} style={styles.default} />;
   }
 }
 

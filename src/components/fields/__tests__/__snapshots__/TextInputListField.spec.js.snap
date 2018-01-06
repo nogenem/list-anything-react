@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TextInputListField when \`editable\` is false renders correctly when \`showFieldDescription\` is false 1`] = `
-<List
-  celled={true}
+<ListField
+  onRemove={null}
   style={
     Object {
       "maxHeight": "100px",
@@ -10,13 +10,12 @@ exports[`TextInputListField when \`editable\` is false renders correctly when \`
       "overflowY": "auto",
     }
   }
->
-  <ListItem
-    key="0"
-  >
-    testando...
-  </ListItem>
-</List>
+  values={
+    Array [
+      "testando...",
+    ]
+  }
+/>
 `;
 
 exports[`TextInputListField when \`editable\` is false renders correctly when \`showFieldDescription\` is true 1`] = `
@@ -25,8 +24,8 @@ exports[`TextInputListField when \`editable\` is false renders correctly when \`
     Testando:
     :
   </b>
-  <List
-    celled={true}
+  <ListField
+    onRemove={null}
     style={
       Object {
         "marginTop": "0px",
@@ -34,68 +33,30 @@ exports[`TextInputListField when \`editable\` is false renders correctly when \`
         "overflowY": "auto",
       }
     }
-  >
-    <ListItem
-      key="0"
-    >
-      testando...
-    </ListItem>
-  </List>
+    values={
+      Array [
+        "testando...",
+      ]
+    }
+  />
 </FormField>
 `;
 
 exports[`TextInputListField when \`editable\` is true renders correctly 1`] = `
-<div>
-  <FormGroup
-    widths={2}
-  >
-    <FormInput
-      as={[Function]}
-      control={[Function]}
-      error={false}
-      fluid={true}
-      name="1"
-      onChange={[Function]}
-      placeholder="Testando:"
-      type="text"
-      value=""
-      width={13}
-    />
-    <FormButton
-      as={[Function]}
-      color="teal"
-      content="Add"
-      control={[Function]}
-      onClick={[Function]}
-      width={3}
-    />
-  </FormGroup>
-  <List
-    celled={true}
-    style={
-      Object {
-        "marginBottom": "14px",
-        "maxHeight": "100px",
-        "overflowY": "auto",
-      }
+<EditableListInput
+  error=""
+  field={
+    Object {
+      "_id": "1",
+      "description": "Testando:",
     }
-  >
-    <ListItem
-      key="0"
-    >
-      <ListContent
-        floated="right"
-      >
-        <ListIcon
-          link={true}
-          name="remove"
-          onClick={[Function]}
-        />
-      </ListContent>
-      <ListContent>
-        testando...
-      </ListContent>
-    </ListItem>
-  </List>
-</div>
+  }
+  onChange={[Function]}
+  type="text"
+  values={
+    Array [
+      "testando...",
+    ]
+  }
+/>
 `;

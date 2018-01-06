@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditableListInput when \`type\` is "text" renders correctly 1`] = `
+<div>
+  <FormGroup
+    widths={2}
+  >
+    <FormInput
+      as={[Function]}
+      control={[Function]}
+      error={false}
+      fluid={true}
+      name="1"
+      onChange={[Function]}
+      placeholder="Testando:"
+      type="text"
+      value=""
+      width={13}
+    />
+    <FormButton
+      as={[Function]}
+      color="teal"
+      content="Add"
+      control={[Function]}
+      onClick={[Function]}
+      width={3}
+    />
+  </FormGroup>
+  <ListField
+    onRemove={[Function]}
+    style={
+      Object {
+        "marginBottom": "14px",
+        "maxHeight": "100px",
+        "overflowY": "auto",
+      }
+    }
+    values={
+      Array [
+        "testando1",
+        "testando2",
+      ]
+    }
+  />
+</div>
+`;
+
+exports[`EditableListInput when \`type\` is "url" renders correctly 1`] = `
+<div>
+  <FormGroup
+    widths={2}
+  >
+    <FormInput
+      as={[Function]}
+      control={[Function]}
+      error={false}
+      fluid={true}
+      name="1"
+      onChange={[Function]}
+      placeholder="Testando:"
+      type="url"
+      value=""
+      width={13}
+    />
+    <FormButton
+      as={[Function]}
+      color="teal"
+      content="Add"
+      control={[Function]}
+      onClick={[Function]}
+      width={3}
+    />
+  </FormGroup>
+  <ListField
+    onRemove={[Function]}
+    style={
+      Object {
+        "marginBottom": "14px",
+        "maxHeight": "100px",
+        "overflowY": "auto",
+      }
+    }
+    values={
+      Array [
+        "http://google.com",
+        "http://youtube.com",
+      ]
+    }
+  />
+</div>
+`;

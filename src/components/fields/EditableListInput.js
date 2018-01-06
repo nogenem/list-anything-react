@@ -64,11 +64,11 @@ class EditableListInput extends Component {
     const { inputValue, values } = this.state;
 
     return (
-      <div>
-        <Form.Group widths={2}>
+      <Form.Field className="Editable-List-Input">
+        <Form.Group widths={2} unstackable>
           <Form.Input
-            width={13}
             fluid
+            width={13}
             type={type}
             placeholder={field.description}
             name={field._id}
@@ -77,8 +77,8 @@ class EditableListInput extends Component {
             error={!!error}
           />
           <Form.Button
-            color="teal"
             width={3}
+            color="teal"
             onClick={this.onAddValue}
             content="Add"
           />
@@ -89,7 +89,7 @@ class EditableListInput extends Component {
           onRemove={this.onRemoveValue}
           style={style}
         />
-      </div>
+      </Form.Field>
     );
   }
 }

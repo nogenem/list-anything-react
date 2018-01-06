@@ -1,8 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditableListInput when \`type\` is "text" renders correctly 1`] = `
-<div>
+<FormField
+  className="Editable-List-Input"
+>
   <FormGroup
+    unstackable={true}
     widths={2}
   >
     <FormInput
@@ -42,12 +45,15 @@ exports[`EditableListInput when \`type\` is "text" renders correctly 1`] = `
       ]
     }
   />
-</div>
+</FormField>
 `;
 
 exports[`EditableListInput when \`type\` is "url" renders correctly 1`] = `
-<div>
+<FormField
+  className="Editable-List-Input"
+>
   <FormGroup
+    unstackable={true}
     widths={2}
   >
     <FormInput
@@ -87,5 +93,5 @@ exports[`EditableListInput when \`type\` is "url" renders correctly 1`] = `
       ]
     }
   />
-</div>
+</FormField>
 `;

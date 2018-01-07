@@ -14,10 +14,8 @@ exports[`EditableListInput when \`type\` is "text" renders correctly 1`] = `
       error={false}
       fluid={true}
       name="1"
-      onChange={[Function]}
       placeholder="Testando:"
       type="text"
-      value=""
       width={13}
     />
     <FormButton
@@ -62,10 +60,8 @@ exports[`EditableListInput when \`type\` is "url" renders correctly 1`] = `
       error={false}
       fluid={true}
       name="1"
-      onChange={[Function]}
       placeholder="Testando:"
       type="url"
-      value=""
       width={13}
     />
     <FormButton

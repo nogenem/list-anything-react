@@ -15,17 +15,17 @@ class EditableListInput extends Component {
   constructor(props) {
     super(props);
 
-    const { values } = props;
-
     this.state = {
-      inputValue: "",
-      values
+      values: props.values
     };
   }
 
   onAddValue = e => {
     e.preventDefault();
-    let { inputValue: value } = this.state;
+
+    const name = this.props.field._id;
+    const $input = this.getInput();
+    let value = $input.value;
 
     if (!value) return;
     if (this.props.type === "url" && !value.startsWith("http"))
@@ -33,9 +33,11 @@ class EditableListInput extends Component {
 
     const values = [...this.state.values, value];
     this.props.onChange({
-      target: { name: this.props.field._id, value: values.join("\n"), values }
+      target: { name, value: values.join("\n"), values }
     });
-    this.setState({ inputValue: "", values });
+    this.setState({ values });
+
+    $input.value = "";
     this.focusOnInput();
   };
 
@@ -50,18 +52,19 @@ class EditableListInput extends Component {
     this.focusOnInput();
   };
 
-  onChange = e => this.setState({ inputValue: e.target.value });
+  getInput = () =>
+    document.querySelector(
+      `.Editable-List-Input input[name="${this.props.field._id}"]`
+    );
 
   focusOnInput = () => {
-    const $input = document.querySelector(
-      `input[name="${this.props.field._id}"]`
-    );
+    const $input = this.getInput();
     if ($input) $input.focus();
   };
 
   render() {
     const { error, field, type } = this.props;
-    const { inputValue, values } = this.state;
+    const { values } = this.state;
 
     return (
       <Form.Field className="Editable-List-Input">
@@ -72,8 +75,6 @@ class EditableListInput extends Component {
             type={type}
             placeholder={field.description}
             name={field._id}
-            value={inputValue}
-            onChange={this.onChange}
             error={!!error}
           />
           <Form.Button

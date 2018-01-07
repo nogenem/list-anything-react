@@ -9,10 +9,6 @@ import handleServerErrors from "../../utils/handleServerErrors";
 
 class LoginForm extends React.Component {
   state = {
-    data: {
-      email: "",
-      password: ""
-    },
     loading: false,
     errors: {}
   };
@@ -21,16 +17,18 @@ class LoginForm extends React.Component {
     window.setTimeout(this.focusOnEmailInput, 0);
   };
 
-  onChange = e =>
-    this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value }
-    });
+  onSubmit = e => {
+    e.preventDefault();
 
-  onSubmit = () => {
-    const errors = this.validate(this.state.data);
+    const data = {
+      email: this.getInputByName("email").value,
+      password: this.getInputByName("password").value
+    };
+
+    const errors = this.validate(data);
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true, errors: {} });
-      this.props.submit(this.state.data).catch(err =>
+      this.props.submit(data).catch(err =>
         this.setState({
           errors: handleServerErrors(err),
           loading: false
@@ -40,8 +38,11 @@ class LoginForm extends React.Component {
     this.focusOnEmailInput();
   };
 
+  getInputByName = name =>
+    document.querySelector(`#login-form input[name="${name}"]`);
+
   focusOnEmailInput = () => {
-    const $input = document.getElementById("login-email-input");
+    const $input = this.getInputByName("email");
     if ($input) $input.focus();
   };
 
@@ -53,9 +54,11 @@ class LoginForm extends React.Component {
   };
 
   render() {
-    const { data, errors, loading } = this.state;
+    const { errors, loading } = this.state;
+
     return (
       <Form
+        id="login-form"
         onSubmit={this.onSubmit}
         loading={loading}
         error={!!errors.global}
@@ -70,10 +73,7 @@ class LoginForm extends React.Component {
               iconPosition="left"
               type="email"
               placeholder="example@example.com"
-              value={data.email}
-              onChange={this.onChange}
               name="email"
-              id="login-email-input"
             />
             {errors.email && <InlineError text={errors.email} />}
           </Form.Field>
@@ -85,8 +85,6 @@ class LoginForm extends React.Component {
               iconPosition="left"
               placeholder="Password"
               type="password"
-              value={data.password}
-              onChange={this.onChange}
               name="password"
             />
             {errors.password && <InlineError text={errors.password} />}

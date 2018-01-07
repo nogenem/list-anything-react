@@ -21,7 +21,7 @@ class ForgotPasswordPage extends React.Component {
     return (
       <CenterElemsContainer>
         {this.state.success ? (
-          <Message>Email has been sent.</Message>
+          <Message info>Email has been sent.</Message>
         ) : (
           <div>
             <Header as="h2" color="teal" textAlign="center">

@@ -1,17 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Button, Message, Segment } from "semantic-ui-react";
+import { Form, Button, Segment } from "semantic-ui-react";
 
 import InlineError from "../messages/InlineError";
+import ErrorMessage from "../messages/ErrorMessage";
 import handleServerErrors from "../../utils/handleServerErrors";
 
 class ResetPasswordForm extends React.Component {
   state = {
-    data: {
-      token: this.props.token,
-      password: "",
-      passwordConfirmation: ""
-    },
     loading: false,
     errors: {}
   };
@@ -20,17 +16,19 @@ class ResetPasswordForm extends React.Component {
     window.setTimeout(this.focusOnPasswordInput, 0);
   };
 
-  onChange = e =>
-    this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value }
-    });
-
   onSubmit = e => {
     e.preventDefault();
-    const errors = this.validate(this.state.data);
+
+    const data = {
+      token: this.props.token,
+      password: this.getInputByName("password").value,
+      passwordConfirmation: this.getInputByName("passwordConfirmation").value
+    };
+
+    const errors = this.validate(data);
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true, errors: {} });
-      this.props.submit(this.state.data).catch(err =>
+      this.props.submit(data).catch(err =>
         this.setState({
           errors: handleServerErrors(err),
           loading: false
@@ -40,8 +38,11 @@ class ResetPasswordForm extends React.Component {
     this.focusOnPasswordInput();
   };
 
+  getInputByName = name =>
+    document.querySelector(`#reset-pass-form input[name="${name}"]`);
+
   focusOnPasswordInput = () => {
-    const $input = document.getElementById("reset-password-input");
+    const $input = this.getInputByName("password");
     if ($input) $input.focus();
   };
 
@@ -54,11 +55,16 @@ class ResetPasswordForm extends React.Component {
   };
 
   render() {
-    const { errors, data, loading } = this.state;
-
+    const { errors, loading } = this.state;
     return (
-      <Form onSubmit={this.onSubmit} loading={loading}>
-        {!!errors.global && <Message negative>{errors.global}</Message>}
+      <Form
+        id="reset-pass-form"
+        onSubmit={this.onSubmit}
+        loading={loading}
+        error={!!errors.global}
+        size="large"
+      >
+        {errors.global && <ErrorMessage text={errors.global} />}
         <Segment stacked>
           <Form.Field error={!!errors.password}>
             <Form.Input
@@ -67,10 +73,7 @@ class ResetPasswordForm extends React.Component {
               iconPosition="left"
               placeholder="Password"
               type="password"
-              value={data.password}
-              onChange={this.onChange}
               name="password"
-              id="reset-password-input"
             />
             {errors.password && <InlineError text={errors.password} />}
           </Form.Field>
@@ -81,8 +84,6 @@ class ResetPasswordForm extends React.Component {
               iconPosition="left"
               placeholder="Confirm your new password"
               type="password"
-              value={data.passwordConfirmation}
-              onChange={this.onChange}
               name="passwordConfirmation"
             />
             {errors.passwordConfirmation && (

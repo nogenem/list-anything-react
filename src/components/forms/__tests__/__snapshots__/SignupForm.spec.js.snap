@@ -4,6 +4,7 @@ exports[`SignupForm renders correctly 1`] = `
 <Form
   as="form"
   error={false}
+  id="signup-form"
   loading={false}
   onSubmit={[Function]}
   size="large"
@@ -20,12 +21,9 @@ exports[`SignupForm renders correctly 1`] = `
         fluid={true}
         icon="user"
         iconPosition="left"
-        id="signup-email-input"
         name="email"
-        onChange={[Function]}
         placeholder="example@example.com"
         type="email"
-        value=""
       />
     </FormField>
     <FormField
@@ -38,10 +36,8 @@ exports[`SignupForm renders correctly 1`] = `
         icon="lock"
         iconPosition="left"
         name="password"
-        onChange={[Function]}
         placeholder="Password"
         type="password"
-        value=""
       />
     </FormField>
     <Button

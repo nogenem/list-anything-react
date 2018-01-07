@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SimpleForm renders correctly 1`] = `
+<Form
+  as="form"
+  error={false}
+  id="test-form"
+  loading={false}
+  onSubmit={[Function]}
+  size="large"
+>
+  <div />
+</Form>
+`;

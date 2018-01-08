@@ -3,6 +3,7 @@
 exports[`TabsAccordionForm renders correctly 1`] = `
 <Accordion
   as={[Function]}
+  id="tabs-accordion-test"
 >
   <AccordionTitle
     active={true}
@@ -19,6 +20,8 @@ exports[`TabsAccordionForm renders correctly 1`] = `
     active={true}
   >
     <FormGroup
+      className="inline-input-btn"
+      unstackable={true}
       widths={2}
     >
       <FormInput
@@ -26,12 +29,9 @@ exports[`TabsAccordionForm renders correctly 1`] = `
         control={[Function]}
         error={false}
         fluid={true}
-        id="tabs-accordion-input"
         name="description"
-        onChange={[Function]}
         placeholder="tab description"
         type="text"
-        value=""
         width={13}
       />
       <FormButton
@@ -43,8 +43,11 @@ exports[`TabsAccordionForm renders correctly 1`] = `
         width={3}
       />
     </FormGroup>
-    <List
-      celled={true}
+    <ListField
+      onRemove={[Function]}
+      renderValue={[Function]}
+      style={Object {}}
+      values={Array []}
     />
   </AccordionContent>
 </Accordion>

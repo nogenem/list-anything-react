@@ -3,6 +3,7 @@
 exports[`FieldsAccordionForm renders correctly 1`] = `
 <Accordion
   as={[Function]}
+  id="fields-accordion-test"
 >
   <AccordionTitle
     active={true}
@@ -25,20 +26,16 @@ exports[`FieldsAccordionForm renders correctly 1`] = `
         as={[Function]}
         control={[Function]}
         fluid={true}
-        id="fields-accordion-input"
         name="description"
-        onChange={[Function]}
         placeholder="field description"
         type="text"
-        value=""
       />
     </FormField>
     <FormField
       control="select"
+      defaultValue="text_input"
       label="Select the field type:"
       name="field_type"
-      onChange={[Function]}
-      value="text_input"
     >
       <option
         key="0"
@@ -91,19 +88,15 @@ exports[`FieldsAccordionForm renders correctly 1`] = `
     </FormField>
     <FormCheckbox
       as={[Function]}
-      checked={false}
       control={[Function]}
       label="Is a unique field?"
       name="is_unique"
-      onChange={[Function]}
     />
     <FormCheckbox
       as={[Function]}
-      checked={false}
       control={[Function]}
       label="Should show in the main list?"
       name="show_in_list"
-      onChange={[Function]}
     />
     <FormButton
       as={[Function]}
@@ -113,8 +106,11 @@ exports[`FieldsAccordionForm renders correctly 1`] = `
       fluid={true}
       onClick={[Function]}
     />
-    <List
-      celled={true}
+    <ListField
+      onRemove={[Function]}
+      renderValue={[Function]}
+      style={Object {}}
+      values={Array []}
     />
   </AccordionContent>
 </Accordion>

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { List } from "semantic-ui-react";
 
-const renderValue = value =>
+const render = value =>
   value.startsWith("http") ? (
     <a href={value} target="_blank">
       {value}
@@ -11,7 +11,7 @@ const renderValue = value =>
     value
   );
 
-const ListField = ({ values, onRemove, style }) => (
+const ListField = ({ values, onRemove, renderValue, style }) => (
   <List celled style={style}>
     {values.map((value, idx) => (
       <List.Item key={idx}>
@@ -27,13 +27,18 @@ const ListField = ({ values, onRemove, style }) => (
 );
 
 ListField.propTypes = {
-  values: PropTypes.arrayOf(PropTypes.string).isRequired,
+  // ownProps
+  values: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  ).isRequired,
   onRemove: PropTypes.func,
+  renderValue: PropTypes.func,
   style: PropTypes.objectOf(PropTypes.string)
 };
 
 ListField.defaultProps = {
   onRemove: null,
+  renderValue: render,
   style: {}
 };
 

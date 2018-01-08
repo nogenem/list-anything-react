@@ -54,7 +54,7 @@ class EditableListInput extends Component {
 
   getInput = () =>
     document.querySelector(
-      `.Editable-List-Input input[name="${this.props.field._id}"]`
+      `[name="Editable-List-Input"] input[name="${this.props.field._id}"]`
     );
 
   focusOnInput = () => {
@@ -67,8 +67,8 @@ class EditableListInput extends Component {
     const { values } = this.state;
 
     return (
-      <Form.Field className="Editable-List-Input">
-        <Form.Group widths={2} unstackable>
+      <Form.Field name="Editable-List-Input">
+        <Form.Group widths={2} unstackable className="inline-input-btn">
           <Form.Input
             fluid
             width={13}

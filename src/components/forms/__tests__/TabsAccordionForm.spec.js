@@ -4,6 +4,7 @@ import { shallow } from "enzyme";
 import TabsAccordionForm from "../TabsAccordionForm";
 
 const defaultProps = {
+  id: "tabs-accordion-test",
   tabs: [],
   addTab: () => {},
   removeTab: () => {}

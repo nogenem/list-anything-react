@@ -1,54 +1,57 @@
 import React, { Component } from "react";
-import { Accordion, List, Icon, Form } from "semantic-ui-react";
+import { Accordion, Icon, Form } from "semantic-ui-react";
 import PropTypes from "prop-types";
 
 import InlineError from "../messages/InlineError";
 import * as fieldTypes from "../../constants/fieldTypes";
 
+import ListValues from "../fields/ListValues";
+
 class FieldsAccordionForm extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      data: this.getCleanFormData(),
-      active: true,
-      error: ""
-    };
-  }
-
-  onChange = e =>
-    this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value }
-    });
-
-  onCheckboxChange = (e, elm) =>
-    this.setState({
-      data: { ...this.state.data, [elm.name]: elm.checked }
-    });
+  state = {
+    active: true,
+    error: ""
+  };
 
   onAccordionClick = () =>
     this.setState(prevState => ({ active: !prevState.active }));
 
   onAddField = e => {
     e.preventDefault();
-    const error = this.validate(this.state.data);
+
+    const data = this.getData();
+    const error = this.validate(data);
+
     this.setState({ error });
-    if (error === "") {
-      this.props.addField(this.state.data);
-      this.setState({
-        data: this.getCleanFormData()
-      });
-    }
-    const $input = document.querySelector("#fields-accordion-input");
-    if ($input) $input.focus();
+    if (error === "") this.props.addField(data);
+
+    this.resetFormData();
+    const $input = this.getNodeByName("description");
+    $input.focus();
   };
 
-  getCleanFormData = () => ({
-    description: "",
-    is_unique: false,
-    show_in_list: false,
-    field_type: Object.values(fieldTypes)[0]
+  getData = () => ({
+    description: this.getNodeByName("description").value,
+    field_type: this.getNodeByName("field_type", "select").value,
+    is_unique: this.getNodeByName("is_unique").checked,
+    show_in_list: this.getNodeByName("show_in_list").checked
   });
+
+  getNodeByName = (name, nodeType = "input") =>
+    document.querySelector(`#${this.props.id} ${nodeType}[name="${name}"]`);
+
+  resetFormData = () => {
+    this.getNodeByName("description").value = "";
+    this.getNodeByName("field_type", "select").value = Object.values(
+      fieldTypes
+    )[0];
+
+    let $input = this.getNodeByName("is_unique");
+    if ($input.checked) $input.click();
+
+    $input = this.getNodeByName("show_in_list");
+    if ($input.checked) $input.click();
+  };
 
   validate = data => {
     let error = "";
@@ -64,12 +67,13 @@ class FieldsAccordionForm extends Component {
     return error;
   };
 
-  render() {
-    const { fields, removeField } = this.props;
-    const { data, active, error } = this.state;
+  renderValue = value => value.description;
 
+  render() {
+    const { id, fields, removeField } = this.props;
+    const { active, error } = this.state;
     return (
-      <Accordion as={Form.Field}>
+      <Accordion id={id} as={Form.Field}>
         <Accordion.Title
           name="tabs"
           onClick={this.onAccordionClick}
@@ -84,10 +88,7 @@ class FieldsAccordionForm extends Component {
               fluid
               type="text"
               placeholder="field description"
-              value={data.description}
-              onChange={this.onChange}
               name="description"
-              id="fields-accordion-input"
             />
             {error && <InlineError text={error} />}
           </Form.Field>
@@ -96,8 +97,7 @@ class FieldsAccordionForm extends Component {
             label="Select the field type:"
             control="select"
             name="field_type"
-            value={data.field_type}
-            onChange={this.onChange}
+            defaultValue={Object.values(fieldTypes)[0]}
           >
             {Object.values(fieldTypes).map((type, idx) => (
               <option key={idx} value={type}>
@@ -106,17 +106,10 @@ class FieldsAccordionForm extends Component {
             ))}
           </Form.Field>
 
-          <Form.Checkbox
-            label="Is a unique field?"
-            name="is_unique"
-            checked={data.is_unique}
-            onChange={this.onCheckboxChange}
-          />
+          <Form.Checkbox label="Is a unique field?" name="is_unique" />
           <Form.Checkbox
             label="Should show in the main list?"
             name="show_in_list"
-            checked={data.show_in_list}
-            onChange={this.onCheckboxChange}
           />
 
           <Form.Button
@@ -126,16 +119,11 @@ class FieldsAccordionForm extends Component {
             content="Add"
           />
 
-          <List celled>
-            {fields.map((item, idx) => (
-              <List.Item key={idx}>
-                <List.Content floated="right">
-                  <List.Icon name="remove" onClick={() => removeField(item)} />
-                </List.Content>
-                <List.Content>{item.description}</List.Content>
-              </List.Item>
-            ))}
-          </List>
+          <ListValues
+            values={fields}
+            onRemove={removeField}
+            renderValue={this.renderValue}
+          />
         </Accordion.Content>
       </Accordion>
     );
@@ -144,6 +132,7 @@ class FieldsAccordionForm extends Component {
 
 FieldsAccordionForm.propTypes = {
   // ownProps
+  id: PropTypes.string,
   fields: PropTypes.arrayOf(
     PropTypes.shape({
       description: PropTypes.string.isRequired
@@ -151,6 +140,10 @@ FieldsAccordionForm.propTypes = {
   ).isRequired,
   addField: PropTypes.func.isRequired,
   removeField: PropTypes.func.isRequired
+};
+
+FieldsAccordionForm.defaultProps = {
+  id: `fields-accordion-${Math.floor(Math.random() * 100000)}`
 };
 
 export default FieldsAccordionForm;

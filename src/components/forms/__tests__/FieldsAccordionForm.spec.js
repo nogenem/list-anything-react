@@ -4,6 +4,7 @@ import { shallow } from "enzyme";
 import FieldsAccordionForm from "../FieldsAccordionForm";
 
 const defaultProps = {
+  id: "fields-accordion-test",
   fields: [],
   addField: () => {},
   removeField: () => {}

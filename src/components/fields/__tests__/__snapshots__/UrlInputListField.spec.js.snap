@@ -3,6 +3,7 @@
 exports[`UrlInputListField when \`editable\` is false renders correctly when \`showFieldDescription\` is false 1`] = `
 <ListField
   onRemove={null}
+  renderValue={[Function]}
   style={
     Object {
       "maxHeight": "100px",
@@ -25,6 +26,7 @@ exports[`UrlInputListField when \`editable\` is false renders correctly when \`s
   </b>
   <ListField
     onRemove={null}
+    renderValue={[Function]}
     style={
       Object {
         "marginTop": "0px",

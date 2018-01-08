@@ -1,43 +1,46 @@
 import React, { Component } from "react";
-import { Accordion, List, Icon, Form } from "semantic-ui-react";
+import { Accordion, Icon, Form } from "semantic-ui-react";
 import PropTypes from "prop-types";
 
 import InlineError from "../messages/InlineError";
+import ListValues from "../fields/ListValues";
 
 class TabsAccordionForm extends Component {
   state = {
-    data: {
-      description: ""
-    },
     active: true,
     error: ""
   };
-
-  onChange = e =>
-    this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value }
-    });
 
   onAccordionClick = () =>
     this.setState(prevState => ({ active: !prevState.active }));
 
   onAddTab = e => {
     e.preventDefault();
-    const error = this.validate(this.state.data);
+
+    const data = this.getData();
+    const error = this.validate(data);
+
     this.setState({ error });
-    if (error === "") {
-      this.props.addTab(this.state.data);
-      this.setState({
-        data: { description: "" }
-      });
-    }
-    const $input = document.querySelector("#tabs-accordion-input");
-    if ($input) $input.focus();
+    if (error === "") this.props.addTab(data);
+
+    this.resetFormData();
+    const $input = this.getNodeByName("description");
+    $input.focus();
   };
 
-  validate = data => {
+  getData = () => ({
+    description: this.getNodeByName("description").value
+  });
+
+  getNodeByName = (name, nodeType = "input") =>
+    document.querySelector(`#${this.props.id} ${nodeType}[name="${name}"]`);
+
+  resetFormData = () => {
+    this.getNodeByName("description").value = "";
+  };
+
+  validate = ({ description: desc }) => {
     let error = "";
-    const desc = data.description;
     if (!desc) error = "Can't be blank";
     else {
       const duplicated = this.props.tabs.reduce(
@@ -49,12 +52,13 @@ class TabsAccordionForm extends Component {
     return error;
   };
 
-  render() {
-    const { tabs, removeTab } = this.props;
-    const { data, active, error } = this.state;
+  renderValue = value => value.description;
 
+  render() {
+    const { id, tabs, removeTab } = this.props;
+    const { active, error } = this.state;
     return (
-      <Accordion as={Form.Field}>
+      <Accordion id={id} as={Form.Field}>
         <Accordion.Title
           name="tabs"
           onClick={this.onAccordionClick}
@@ -64,40 +68,28 @@ class TabsAccordionForm extends Component {
           Add tabs
         </Accordion.Title>
         <Accordion.Content active={active}>
-          <Form.Group widths={2}>
+          <Form.Group widths={2} unstackable className="inline-input-btn">
             <Form.Input
-              width={13}
               fluid
+              width={13}
               type="text"
               placeholder="tab description"
               name="description"
-              value={data.description}
-              onChange={this.onChange}
               error={!!error}
-              id="tabs-accordion-input"
             />
             <Form.Button
-              color="teal"
               width={3}
+              color="teal"
               onClick={this.onAddTab}
               content="Add"
             />
           </Form.Group>
           {error && <InlineError text={error} />}
-          <List celled>
-            {tabs.map((item, idx) => (
-              <List.Item key={idx}>
-                <List.Content floated="right">
-                  <List.Icon
-                    link
-                    name="remove"
-                    onClick={() => removeTab(item)}
-                  />
-                </List.Content>
-                <List.Content>{item.description}</List.Content>
-              </List.Item>
-            ))}
-          </List>
+          <ListValues
+            values={tabs}
+            onRemove={removeTab}
+            renderValue={this.renderValue}
+          />
         </Accordion.Content>
       </Accordion>
     );
@@ -106,13 +98,18 @@ class TabsAccordionForm extends Component {
 
 TabsAccordionForm.propTypes = {
   // ownProps
+  id: PropTypes.string,
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
-      description: PropTypes.string.isRequired
+      description: PropTypes.string
     })
   ).isRequired,
   addTab: PropTypes.func.isRequired,
   removeTab: PropTypes.func.isRequired
+};
+
+TabsAccordionForm.defaultProps = {
+  id: `tabs-accordion-${Math.floor(Math.random() * 100000)}`
 };
 
 export default TabsAccordionForm;

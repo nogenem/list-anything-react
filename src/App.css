@@ -28,11 +28,11 @@
 }
 
 @media only screen and (max-width: 430px) {
-  .field.Editable-List-Input > .fields > .thirteen.wide.field  {
+  .fields.inline-input-btn > .thirteen.wide.field  {
     width: 100% !important;
   }
 
-  .field.Editable-List-Input > .fields > .three.wide.field {
+  .fields.inline-input-btn > .three.wide.field {
     margin-top: 5px;
   }
 }

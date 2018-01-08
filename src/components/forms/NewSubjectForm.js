@@ -28,10 +28,11 @@ class NewSubjectForm extends React.Component {
     }));
   };
 
-  removeTab = item => {
-    this.setState(prevState => ({
-      tabs: prevState.tabs.filter(elem => elem !== item)
-    }));
+  removeTab = index => {
+    const tabs = [...this.state.tabs];
+    tabs.splice(index, 1);
+
+    this.setState({ tabs });
   };
 
   addField = field => {
@@ -41,10 +42,11 @@ class NewSubjectForm extends React.Component {
     }));
   };
 
-  removeField = item => {
-    this.setState(prevState => ({
-      fields: prevState.fields.filter(elem => elem !== item)
-    }));
+  removeField = index => {
+    const fields = [...this.state.fields];
+    fields.splice(index, 1);
+
+    this.setState({ fields });
   };
 
   validate = data => {
@@ -76,12 +78,14 @@ class NewSubjectForm extends React.Component {
           {errors.description && <InlineError text={errors.description} />}
         </Form.Field>
         <TabsAccordionForm
+          id="tabs-accordion-NSF"
           tabs={this.state.tabs}
           addTab={this.addTab}
           removeTab={this.removeTab}
         />
         {errors.tabs && <InlineError text={errors.tabs} />}
         <FieldsAccordionForm
+          id="fields-accordion-NSF"
           fields={this.state.fields}
           addField={this.addField}
           removeField={this.removeField}

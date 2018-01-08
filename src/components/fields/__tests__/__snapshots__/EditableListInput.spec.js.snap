@@ -2,9 +2,10 @@
 
 exports[`EditableListInput when \`type\` is "text" renders correctly 1`] = `
 <FormField
-  className="Editable-List-Input"
+  name="Editable-List-Input"
 >
   <FormGroup
+    className="inline-input-btn"
     unstackable={true}
     widths={2}
   >
@@ -29,6 +30,7 @@ exports[`EditableListInput when \`type\` is "text" renders correctly 1`] = `
   </FormGroup>
   <ListField
     onRemove={[Function]}
+    renderValue={[Function]}
     style={
       Object {
         "marginBottom": "14px",
@@ -48,9 +50,10 @@ exports[`EditableListInput when \`type\` is "text" renders correctly 1`] = `
 
 exports[`EditableListInput when \`type\` is "url" renders correctly 1`] = `
 <FormField
-  className="Editable-List-Input"
+  name="Editable-List-Input"
 >
   <FormGroup
+    className="inline-input-btn"
     unstackable={true}
     widths={2}
   >
@@ -75,6 +78,7 @@ exports[`EditableListInput when \`type\` is "url" renders correctly 1`] = `
   </FormGroup>
   <ListField
     onRemove={[Function]}
+    renderValue={[Function]}
     style={
       Object {
         "marginBottom": "14px",

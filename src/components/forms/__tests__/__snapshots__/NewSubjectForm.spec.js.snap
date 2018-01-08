@@ -1,51 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NewSubjectForm renders correctly 1`] = `
-<Form
-  as="form"
-  error={false}
-  loading={false}
-  onSubmit={[Function]}
-  size="large"
->
-  <Segment
-    stacked={true}
-    textAlign="left"
-  >
-    <FormField
-      error={false}
-    >
-      <FormInput
-        as={[Function]}
-        control={[Function]}
-        fluid={true}
-        id="subject-description-input"
-        name="description"
-        onChange={[Function]}
-        placeholder="subject description"
-        type="text"
-        value=""
-      />
-    </FormField>
-    <TabsAccordionForm
-      addTab={[Function]}
-      removeTab={[Function]}
-      tabs={Array []}
-    />
-    <FieldsAccordionForm
-      addField={[Function]}
-      fields={Array []}
-      removeField={[Function]}
-    />
-    <Divider />
-    <Button
-      as="button"
-      color="teal"
-      fluid={true}
-      size="large"
-    >
-      Create
-    </Button>
-  </Segment>
-</Form>
+<SimpleForm
+  getData={[Function]}
+  id="new-subject-form"
+  render={[Function]}
+  submit={[Function]}
+  validate={[Function]}
+/>
 `;

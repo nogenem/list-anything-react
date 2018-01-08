@@ -7,82 +7,43 @@ import InlineError from "../messages/InlineError";
 import TabsAccordionForm from "./TabsAccordionForm";
 import FieldsAccordionForm from "./FieldsAccordionForm";
 
-import handleServerErrors from "../../utils/handleServerErrors";
+import SimpleForm from "./SimpleForm";
 
 class NewSubjectForm extends React.Component {
   state = {
-    data: {
-      description: "",
-      tabs: [],
-      fields: []
-    },
-    loading: false,
-    errors: {}
+    tabs: [],
+    fields: []
   };
 
-  componentDidMount = () => {
-    window.setTimeout(this.focusOnDescriptionInput, 0);
-  };
-
-  onChange = e =>
-    this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value }
-    });
-
-  onSubmit = () => {
-    const errors = this.validate(this.state.data);
-    if (Object.keys(errors).length === 0) {
-      this.setState({ loading: true, errors: {} });
-      this.props.submit(this.state.data).catch(err =>
-        this.setState({
-          errors: handleServerErrors(err),
-          loading: false
-        })
-      );
-    } else this.setState({ errors });
-    this.focusOnDescriptionInput();
-  };
-
-  focusOnDescriptionInput = () => {
-    const $input = document.getElementById("subject-description-input");
-    if ($input) $input.focus();
-  };
+  getData = getInputByName => ({
+    description: getInputByName("description").value,
+    tabs: this.state.tabs,
+    fields: this.state.fields
+  });
 
   addTab = tab => {
     const newTab = { ...tab };
     this.setState(prevState => ({
-      data: {
-        ...prevState.data,
-        tabs: [...prevState.data.tabs, newTab]
-      }
+      tabs: [...prevState.tabs, newTab]
     }));
   };
 
   removeTab = item => {
     this.setState(prevState => ({
-      data: {
-        ...prevState.data,
-        tabs: prevState.data.tabs.filter(elem => elem !== item)
-      }
+      tabs: prevState.tabs.filter(elem => elem !== item)
     }));
   };
 
   addField = field => {
     const newField = { ...field };
     this.setState(prevState => ({
-      data: {
-        ...prevState.data,
-        fields: [...prevState.data.fields, newField]
-      }
+      fields: [...prevState.fields, newField]
     }));
   };
 
   removeField = item => {
     this.setState(prevState => ({
-      data: {
-        ...prevState.data,
-        fields: prevState.data.fields.filter(elem => elem !== item)
-      }
+      fields: prevState.fields.filter(elem => elem !== item)
     }));
   };
 
@@ -101,49 +62,49 @@ class NewSubjectForm extends React.Component {
     return errors;
   };
 
+  renderFormData = ({ errors }) => (
+    <React.Fragment>
+      {errors.global && <ErrorMessage text={errors.global} />}
+      <Segment stacked>
+        <Form.Field error={!!errors.description}>
+          <Form.Input
+            fluid
+            type="text"
+            placeholder="subject description"
+            name="description"
+          />
+          {errors.description && <InlineError text={errors.description} />}
+        </Form.Field>
+        <TabsAccordionForm
+          tabs={this.state.tabs}
+          addTab={this.addTab}
+          removeTab={this.removeTab}
+        />
+        {errors.tabs && <InlineError text={errors.tabs} />}
+        <FieldsAccordionForm
+          fields={this.state.fields}
+          addField={this.addField}
+          removeField={this.removeField}
+        />
+        {errors.fields && <InlineError text={errors.fields} />}
+
+        <Divider />
+        <Button color="teal" fluid size="large">
+          Create
+        </Button>
+      </Segment>
+    </React.Fragment>
+  );
+
   render() {
-    const { data, errors, loading } = this.state;
-
     return (
-      <Form
-        onSubmit={this.onSubmit}
-        loading={loading}
-        error={!!errors.global}
-        size="large"
-      >
-        {errors.global && <ErrorMessage text={errors.global} />}
-        <Segment stacked textAlign="left">
-          <Form.Field error={!!errors.description}>
-            <Form.Input
-              fluid
-              type="text"
-              placeholder="subject description"
-              value={data.description}
-              onChange={this.onChange}
-              name="description"
-              id="subject-description-input"
-            />
-            {errors.description && <InlineError text={errors.description} />}
-          </Form.Field>
-          <TabsAccordionForm
-            tabs={data.tabs}
-            addTab={this.addTab}
-            removeTab={this.removeTab}
-          />
-          {errors.tabs && <InlineError text={errors.tabs} />}
-          <FieldsAccordionForm
-            fields={data.fields}
-            addField={this.addField}
-            removeField={this.removeField}
-          />
-          {errors.fields && <InlineError text={errors.fields} />}
-
-          <Divider />
-          <Button color="teal" fluid size="large">
-            Create
-          </Button>
-        </Segment>
-      </Form>
+      <SimpleForm
+        id="new-subject-form"
+        validate={this.validate}
+        render={this.renderFormData}
+        getData={this.getData}
+        submit={this.props.submit}
+      />
     );
   }
 }

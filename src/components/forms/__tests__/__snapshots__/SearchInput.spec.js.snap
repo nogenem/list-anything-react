@@ -3,6 +3,7 @@
 exports[`SearchInput renders correctly 1`] = `
 <Form
   as="form"
+  id="seach-form-1"
   onSubmit={[Function]}
 >
   <Input
@@ -14,11 +15,10 @@ exports[`SearchInput renders correctly 1`] = `
         "onClick": [Function],
       }
     }
-    onChange={[Function]}
+    name="query"
     placeholder="Search..."
     size="mini"
     type="text"
-    value=""
   />
 </Form>
 `;

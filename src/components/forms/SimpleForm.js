@@ -22,12 +22,15 @@ class SimpleForm extends Component {
 
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true, errors: {} });
-      this.props.submit(data).catch(err =>
-        this.setState({
-          loading: false,
-          errors: handleServerErrors(err)
-        })
-      );
+      this.props
+        .submit(data)
+        .then(() => this.setState({ loading: false }))
+        .catch(err =>
+          this.setState({
+            loading: false,
+            errors: handleServerErrors(err)
+          })
+        );
     } else this.setState({ errors });
     this.focusOnFirstInput();
   };
@@ -65,7 +68,7 @@ SimpleForm.propTypes = {
 };
 
 SimpleForm.defaultProps = {
-  id: `my-form-${Math.random()}`,
+  id: `my-form-${Math.floor(Math.random() * 100000)}`,
   validate: () => ({})
 };
 

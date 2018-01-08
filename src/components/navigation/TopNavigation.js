@@ -58,7 +58,7 @@ class TopNavigation extends React.Component {
 
         <Menu.Menu position="right">
           <Menu.Item className="hide-lt-767px">
-            <SearchInput onSearch={search} />
+            <SearchInput id="seach-form-topnav" onSearch={search} />
           </Menu.Item>
           <Dropdown item trigger={this.trigger(email)}>
             <Dropdown.Menu>

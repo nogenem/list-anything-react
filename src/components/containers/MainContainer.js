@@ -26,7 +26,7 @@ const MainContainer = ({
       inverted
     >
       <Menu.Item className="hide-gt-767px">
-        <SearchInput onSearch={search} />
+        <SearchInput id="seach-form-sidebar" onSearch={search} />
       </Menu.Item>
       {subjects.map(subject => (
         <Menu.Item

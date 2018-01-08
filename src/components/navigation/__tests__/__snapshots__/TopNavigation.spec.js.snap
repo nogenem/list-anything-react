@@ -105,6 +105,7 @@ exports[`UnconnectedTopNavigation renders correctly when \`activeItem\` is set 1
       className="hide-lt-767px"
     >
       <SearchInput
+        id="seach-form-topnav"
         onSearch={[Function]}
       />
     </MenuItem>
@@ -190,6 +191,7 @@ exports[`UnconnectedTopNavigation renders correctly when \`hasSubjects\` is fals
       className="hide-lt-767px"
     >
       <SearchInput
+        id="seach-form-topnav"
         onSearch={[Function]}
       />
     </MenuItem>
@@ -292,6 +294,7 @@ exports[`UnconnectedTopNavigation renders correctly when \`hasSubjects\` is true
       className="hide-lt-767px"
     >
       <SearchInput
+        id="seach-form-topnav"
         onSearch={[Function]}
       />
     </MenuItem>

@@ -4,6 +4,7 @@ import { shallow } from "enzyme";
 import SearchInput from "../SearchInput";
 
 const defaultProps = {
+  id: "seach-form-1",
   onSearch: () => {}
 };
 

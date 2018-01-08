@@ -66,6 +66,7 @@ exports[`UnconnectedMainContainer renders correctly when \`subjects\` is empty 1
       className="hide-gt-767px"
     >
       <SearchInput
+        id="seach-form-sidebar"
         onSearch={[Function]}
       />
     </MenuItem>

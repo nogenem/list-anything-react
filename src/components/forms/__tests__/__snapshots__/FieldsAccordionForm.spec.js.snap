@@ -1,117 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FieldsAccordionForm renders correctly 1`] = `
-<Accordion
-  as={[Function]}
+<SimpleAccordionForm
+  getData={[Function]}
   id="fields-accordion-test"
->
-  <AccordionTitle
-    active={true}
-    name="tabs"
-    onClick={[Function]}
-  >
-    <Icon
-      as="i"
-      name="dropdown"
-    />
-    Add Fields
-  </AccordionTitle>
-  <AccordionContent
-    active={true}
-  >
-    <FormField
-      error={false}
-    >
-      <FormInput
-        as={[Function]}
-        control={[Function]}
-        fluid={true}
-        name="description"
-        placeholder="field description"
-        type="text"
-      />
-    </FormField>
-    <FormField
-      control="select"
-      defaultValue="text_input"
-      label="Select the field type:"
-      name="field_type"
-    >
-      <option
-        key="0"
-        value="text_input"
-      >
-        text_input
-      </option>
-      <option
-        key="1"
-        value="url_input_img"
-      >
-        url_input_img
-      </option>
-      <option
-        key="2"
-        value="number_input"
-      >
-        number_input
-      </option>
-      <option
-        key="3"
-        value="textarea"
-      >
-        textarea
-      </option>
-      <option
-        key="4"
-        value="url_input"
-      >
-        url_input
-      </option>
-      <option
-        key="5"
-        value="date_input"
-      >
-        date_input
-      </option>
-      <option
-        key="6"
-        value="text_input_list"
-      >
-        text_input_list
-      </option>
-      <option
-        key="7"
-        value="url_input_list"
-      >
-        url_input_list
-      </option>
-    </FormField>
-    <FormCheckbox
-      as={[Function]}
-      control={[Function]}
-      label="Is a unique field?"
-      name="is_unique"
-    />
-    <FormCheckbox
-      as={[Function]}
-      control={[Function]}
-      label="Should show in the main list?"
-      name="show_in_list"
-    />
-    <FormButton
-      as={[Function]}
-      color="teal"
-      content="Add"
-      control={[Function]}
-      fluid={true}
-      onClick={[Function]}
-    />
-    <ListField
-      onRemove={[Function]}
-      renderValue={[Function]}
-      style={Object {}}
-      values={Array []}
-    />
-  </AccordionContent>
-</Accordion>
+  render={[Function]}
+  resetFormData={[Function]}
+  submit={[Function]}
+  title="Add Field"
+  validate={[Function]}
+/>
 `;

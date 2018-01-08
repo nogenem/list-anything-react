@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SimpleAccordionForm renders correctly 1`] = `
+<Accordion
+  as={[Function]}
+  id="accordion-form-test"
+>
+  <AccordionTitle
+    active={true}
+    name="tabs"
+    onClick={[Function]}
+  >
+    <Icon
+      as="i"
+      name="dropdown"
+    />
+    Test
+  </AccordionTitle>
+  <AccordionContent
+    active={true}
+  >
+    <div>
+      Testando...
+    </div>
+  </AccordionContent>
+</Accordion>
+`;

@@ -1,97 +1,69 @@
 import React, { Component } from "react";
-import { Accordion, Icon, Form } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import PropTypes from "prop-types";
 
 import InlineError from "../messages/InlineError";
 import ListValues from "../fields/ListValues";
+import SimpleAccordionForm from "./SimpleAccordionForm";
 
 class TabsAccordionForm extends Component {
-  state = {
-    active: true,
-    error: ""
-  };
-
-  onAccordionClick = () =>
-    this.setState(prevState => ({ active: !prevState.active }));
-
-  onAddTab = e => {
-    e.preventDefault();
-
-    const data = this.getData();
-    const error = this.validate(data);
-
-    this.setState({ error });
-    if (error === "") this.props.addTab(data);
-
-    this.resetFormData();
-    const $input = this.getNodeByName("description");
-    $input.focus();
-  };
-
-  getData = () => ({
-    description: this.getNodeByName("description").value
+  getData = getNodeByName => ({
+    description: getNodeByName("description").value
   });
 
-  getNodeByName = (name, nodeType = "input") =>
-    document.querySelector(`#${this.props.id} ${nodeType}[name="${name}"]`);
-
-  resetFormData = () => {
-    this.getNodeByName("description").value = "";
+  resetFormData = getNodeByName => {
+    const $input = getNodeByName("description");
+    $input.value = "";
   };
 
   validate = ({ description: desc }) => {
-    let error = "";
-    if (!desc) error = "Can't be blank";
+    const errors = {};
+    if (!desc) errors.description = "Can't be blank";
     else {
       const duplicated = this.props.tabs.reduce(
         (acc, item) => acc || item.description === desc,
         false
       );
-      if (duplicated) error = "Can't have duplicates";
+      if (duplicated) errors.description = "Can't have duplicates";
     }
-    return error;
+    return errors;
   };
 
   renderValue = value => value.description;
 
+  renderFormData = ({ errors }, onSubmit) => (
+    <React.Fragment>
+      <Form.Group widths={2} unstackable className="inline-input-btn">
+        <Form.Input
+          fluid
+          width={13}
+          type="text"
+          placeholder="tab description"
+          name="description"
+          error={!!errors.description}
+        />
+        <Form.Button width={3} color="teal" onClick={onSubmit} content="Add" />
+      </Form.Group>
+      {errors.description && <InlineError text={errors.description} />}
+      <ListValues
+        values={this.props.tabs}
+        onRemove={this.props.removeTab}
+        renderValue={this.renderValue}
+      />
+    </React.Fragment>
+  );
+
   render() {
-    const { id, tabs, removeTab } = this.props;
-    const { active, error } = this.state;
     return (
-      <Accordion id={id} as={Form.Field}>
-        <Accordion.Title
-          name="tabs"
-          onClick={this.onAccordionClick}
-          active={active}
-        >
-          <Icon name="dropdown" />
-          Add tabs
-        </Accordion.Title>
-        <Accordion.Content active={active}>
-          <Form.Group widths={2} unstackable className="inline-input-btn">
-            <Form.Input
-              fluid
-              width={13}
-              type="text"
-              placeholder="tab description"
-              name="description"
-              error={!!error}
-            />
-            <Form.Button
-              width={3}
-              color="teal"
-              onClick={this.onAddTab}
-              content="Add"
-            />
-          </Form.Group>
-          {error && <InlineError text={error} />}
-          <ListValues
-            values={tabs}
-            onRemove={removeTab}
-            renderValue={this.renderValue}
-          />
-        </Accordion.Content>
-      </Accordion>
+      <SimpleAccordionForm
+        id={this.props.id}
+        title="Add Tab"
+        validate={this.validate}
+        render={this.renderFormData}
+        submit={this.props.addTab}
+        getData={this.getData}
+        resetFormData={this.resetFormData}
+      />
     );
   }
 }

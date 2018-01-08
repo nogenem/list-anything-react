@@ -1,54 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TabsAccordionForm renders correctly 1`] = `
-<Accordion
-  as={[Function]}
+<SimpleAccordionForm
+  getData={[Function]}
   id="tabs-accordion-test"
->
-  <AccordionTitle
-    active={true}
-    name="tabs"
-    onClick={[Function]}
-  >
-    <Icon
-      as="i"
-      name="dropdown"
-    />
-    Add tabs
-  </AccordionTitle>
-  <AccordionContent
-    active={true}
-  >
-    <FormGroup
-      className="inline-input-btn"
-      unstackable={true}
-      widths={2}
-    >
-      <FormInput
-        as={[Function]}
-        control={[Function]}
-        error={false}
-        fluid={true}
-        name="description"
-        placeholder="tab description"
-        type="text"
-        width={13}
-      />
-      <FormButton
-        as={[Function]}
-        color="teal"
-        content="Add"
-        control={[Function]}
-        onClick={[Function]}
-        width={3}
-      />
-    </FormGroup>
-    <ListField
-      onRemove={[Function]}
-      renderValue={[Function]}
-      style={Object {}}
-      values={Array []}
-    />
-  </AccordionContent>
-</Accordion>
+  render={[Function]}
+  resetFormData={[Function]}
+  submit={[Function]}
+  title="Add Tab"
+  validate={[Function]}
+/>
 `;

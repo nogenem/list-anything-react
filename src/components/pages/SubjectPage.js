@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Segment, Button } from "semantic-ui-react";
+import { Segment } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
 import SubjectDataContainer from "../containers/SubjectDataContainer";
 import { fetchSubjectById, deleteSubject } from "../../actions/subjects";
@@ -10,9 +9,19 @@ import { fetchSDByTabId } from "../../actions/subjectData";
 import { getFieldsArray, getTabsArray } from "../../reducers/currentSubject";
 import { getSubjectDataArray } from "../../reducers/subjectData";
 import SubjectDataTable from "../tables/SubjectDataTable";
-import EditDeleteBtnGroup from "../containers/EditDeleteBtnGroup";
 import handleServerErrors from "../../utils/handleServerErrors";
 import ErrorMessage from "../messages/ErrorMessage";
+
+import ActionBtnsContainer from "../containers/ActionBtnsContainer";
+
+const styles = {
+  btnContainer: {
+    marginBottom: "3px",
+    display: "inline-flex",
+    width: "100%",
+    justifyContent: "space-between"
+  }
+};
 
 // TODO: Melhorar este componente, quebrando em subcomponentes por exemplo.
 class SubjectPage extends Component {
@@ -21,7 +30,6 @@ class SubjectPage extends Component {
     loadingSubject: false,
     loadingData: false,
     menuVisible: false,
-    currentTabId: "",
     activeTab: "",
     errors: {}
   };
@@ -32,29 +40,13 @@ class SubjectPage extends Component {
     const currentId = this.props.match.params._id;
     const nextId = nextProps.match.params._id;
 
-    const { subjectDataArray } = nextProps;
-    const currentTabId = nextProps.firstTab._id;
+    if (currentId !== nextId) this.loadSubjects(nextProps);
 
-    if (currentId !== nextId) {
-      this.loadSubjects(nextProps);
-    }
+    const currentArray = this.props.subjectDataArray;
+    const nextArray = nextProps.subjectDataArray;
 
-    if (
-      nextProps.firstTab._id !== "" &&
-      this.props.firstTab !== nextProps.firstTab
-    ) {
-      this.loadSubjectData(nextProps, nextProps.firstTab._id);
-      this.filterSubjectData(subjectDataArray, currentTabId);
-      this.hideMenu();
-    }
-
-    if (
-      this.props.subjectDataArray !== subjectDataArray &&
-      subjectDataArray.length > 0 &&
-      currentTabId !== ""
-    ) {
-      this.filterSubjectData(subjectDataArray, currentTabId);
-    }
+    if (currentArray !== nextArray && nextArray.length > 0)
+      this.filterSubjectData(nextArray, this.state.activeTab);
   }
 
   onMenuClick = (e, { tabid }) => {
@@ -75,11 +67,18 @@ class SubjectPage extends Component {
     this.setState({ subjectData });
   };
 
+  gotoAdd = () => {
+    this.props.history.push(`/subject/${this.props.match.params._id}/add`);
+  };
+
   loadSubjects = props => {
     this.setState({ loadingSubject: true });
     props
       .fetchSubjectById(props.match.params._id)
-      .then(() => this.setState({ loadingSubject: false, errors: {} }))
+      .then(() => {
+        this.loadSubjectData(this.props, this.props.firstTab._id);
+        this.setState({ loadingSubject: false, errors: {} });
+      })
       .catch(err =>
         this.setState({
           loadingSubject: false,
@@ -92,7 +91,7 @@ class SubjectPage extends Component {
     this.setState({ loadingData: true, activeTab: tabId });
     props
       .fetchSDByTabId(tabId)
-      .then(() => this.setState({ loadingData: false, currentTabId: tabId }));
+      .then(() => this.setState({ loadingData: false }));
   };
 
   toggleMenu = () =>
@@ -115,7 +114,6 @@ class SubjectPage extends Component {
       errors
     } = this.state;
     const { fields } = this.props;
-    const sdId = this.props.match.params._id;
 
     return (
       <Segment
@@ -125,28 +123,12 @@ class SubjectPage extends Component {
       >
         {errors.global && <ErrorMessage text={errors.global} />}
         {!errors.global && (
-          <div
-            style={{
-              marginBottom: "3px",
-              display: "inline-flex",
-              width: "100%",
-              justifyContent: "space-between"
-            }}
-          >
-            <Button.Group size="medium" icon>
-              <Button onClick={this.toggleMenu} icon="sidebar" />
-              <Button
-                as={Link}
-                to={`/subject/${sdId}/add`}
-                icon="plus"
-                color="green"
-              />
-            </Button.Group>
-            <EditDeleteBtnGroup
-              showEdit={false}
-              onDelete={this.deleteSubject}
-            />
-          </div>
+          <ActionBtnsContainer
+            onMenu={this.toggleMenu}
+            onAdd={this.gotoAdd}
+            onDelete={this.deleteSubject}
+            style={styles.btnContainer}
+          />
         )}
         {!errors.global &&
           !loadingSubject && (

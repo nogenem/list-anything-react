@@ -4,7 +4,7 @@ import { Form, Button, Segment } from "semantic-ui-react";
 import forEach from "lodash.foreach";
 
 import renderFieldComponent from "../../utils/renderFieldComponent";
-import EditDeleteBtnGroup from "../containers/EditDeleteBtnGroup";
+import ActionBtnsContainer from "../containers/ActionBtnsContainer";
 import ErrorMessage from "../messages/ErrorMessage";
 import handleServerErrors from "../../utils/handleServerErrors";
 
@@ -143,7 +143,7 @@ class SubjectDataForm extends React.Component {
       >
         {errors.global && <ErrorMessage text={errors.global} />}
         {!editing && (
-          <EditDeleteBtnGroup
+          <ActionBtnsContainer
             onEdit={this.startEditing}
             onDelete={this.onDelete}
           />

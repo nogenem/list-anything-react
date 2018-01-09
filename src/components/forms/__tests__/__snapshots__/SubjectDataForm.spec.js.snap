@@ -13,11 +13,12 @@ exports[`SubjectDataForm renders correctly 1`] = `
     }
   }
 >
-  <EditDeleteBtnGroup
+  <ActionBtnsContainer
+    onAdd={null}
     onDelete={[Function]}
     onEdit={[Function]}
-    showDelete={true}
-    showEdit={true}
+    onMenu={null}
+    style={Object {}}
   />
   <Segment
     stacked={true}

@@ -1,18 +1,18 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import EditDeleteBtnGroup from "../EditDeleteBtnGroup";
+import ActionBtnsContainer from "../ActionBtnsContainer";
 
 const defaultProps = {
-  showEdit: true,
+  onMenu: () => {},
+  onAdd: () => {},
   onEdit: () => {},
-  showDelete: true,
   onDelete: () => {}
 };
 
-describe("EditDeleteBtnGroup", () => {
+describe("ActionBtnsContainer", () => {
   it("renders correctly", () => {
-    const wrapper = shallow(<EditDeleteBtnGroup {...defaultProps} />);
+    const wrapper = shallow(<ActionBtnsContainer {...defaultProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

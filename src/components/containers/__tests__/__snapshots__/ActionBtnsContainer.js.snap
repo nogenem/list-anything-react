@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActionBtnsContainer renders correctly 1`] = `
+<div
+  style={Object {}}
+>
+  <ButtonGroup
+    icon={true}
+    size="medium"
+  >
+    <Popup
+      content="Side Menu"
+      on="hover"
+      position="top left"
+      trigger={
+        <Button
+          as="button"
+          icon="sidebar"
+          onClick={[Function]}
+        />
+      }
+    />
+    <Popup
+      content="Add"
+      on="hover"
+      position="top left"
+      trigger={
+        <Button
+          as="button"
+          color="green"
+          icon="plus"
+          onClick={[Function]}
+        />
+      }
+    />
+  </ButtonGroup>
+  <ButtonGroup
+    icon={true}
+    size="medium"
+  >
+    <Popup
+      content="Edit"
+      on="hover"
+      position="top left"
+      trigger={
+        <Button
+          as="button"
+          color="blue"
+          icon="edit"
+          onClick={[Function]}
+        />
+      }
+    />
+    <Popup
+      content="Delete"
+      on="hover"
+      position="top left"
+      trigger={
+        <Button
+          as="button"
+          color="red"
+          icon="delete"
+          onClick={[Function]}
+        />
+      }
+    />
+    <Confirm
+      cancelButton="Cancel"
+      confirmButton="OK"
+      content="Are you sure?"
+      onCancel={[Function]}
+      onConfirm={[Function]}
+      open={false}
+    />
+  </ButtonGroup>
+</div>
+`;

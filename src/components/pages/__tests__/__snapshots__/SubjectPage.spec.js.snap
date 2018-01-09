@@ -70,7 +70,11 @@ exports[`UnconnectedSubjectPage renders correctly 1`] = `
     }
   }
 >
-  <div
+  <ActionBtnsContainer
+    onAdd={[Function]}
+    onDelete={[Function]}
+    onEdit={null}
+    onMenu={[Function]}
     style={
       Object {
         "display": "inline-flex",
@@ -79,29 +83,6 @@ exports[`UnconnectedSubjectPage renders correctly 1`] = `
         "width": "100%",
       }
     }
-  >
-    <ButtonGroup
-      icon={true}
-      size="medium"
-    >
-      <Button
-        as="button"
-        icon="sidebar"
-        onClick={[Function]}
-      />
-      <Button
-        as={[Function]}
-        color="green"
-        icon="plus"
-        to="/subject/1/add"
-      />
-    </ButtonGroup>
-    <EditDeleteBtnGroup
-      onDelete={[Function]}
-      onEdit={null}
-      showDelete={true}
-      showEdit={false}
-    />
-  </div>
+  />
 </Segment>
 `;

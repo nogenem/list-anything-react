@@ -1,31 +1,83 @@
 import { shallow } from "enzyme";
 
 import renderFieldComponent from "../renderFieldComponent";
-import { TEXT_INPUT } from "../../constants/fieldTypes";
+import {
+  TEXT_INPUT,
+  URL_INPUT_IMG,
+  NUMBER_INPUT,
+  TEXTAREA,
+  URL_INPUT,
+  DATE_INPUT,
+  TEXT_INPUT_LIST,
+  URL_INPUT_LIST
+} from "../../constants/fieldTypes";
+
+const defaultProps = {
+  value: "testando...",
+  field: { _id: "1", description: "Testando:", field_type: "" }
+};
 
 describe("renderFieldComponent", () => {
-  describe("when passed a valid `field.field_type`", () => {
-    const testData = {
-      value: "testando...",
-      editable: true,
-      showFieldDescription: true,
-      field: { _id: "1", description: "Testando:", field_type: TEXT_INPUT }
-    };
+  it("renders correctly when `field.field_type` = TEXT_INPUT", () => {
+    defaultProps.field.field_type = TEXT_INPUT;
 
-    it("renders the correct field component", () => {
-      const wrapper = shallow(renderFieldComponent(testData));
-      expect(wrapper).toMatchSnapshot();
-    });
+    const wrapper = shallow(renderFieldComponent(defaultProps));
+    expect(wrapper).toMatchSnapshot();
   });
 
-  describe("when passed a valid `field.field_type`", () => {
-    const testData = {
-      field: { _id: "1", description: "Testando:", field_type: "test" }
-    };
+  it("renders correctly when `field.field_type` = URL_INPUT_IMG", () => {
+    defaultProps.field.field_type = URL_INPUT_IMG;
 
-    it("renders the default div", () => {
-      const wrapper = shallow(renderFieldComponent(testData));
-      expect(wrapper).toMatchSnapshot();
-    });
+    const wrapper = shallow(renderFieldComponent(defaultProps));
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it("renders correctly when `field.field_type` = NUMBER_INPUT", () => {
+    defaultProps.field.field_type = NUMBER_INPUT;
+
+    const wrapper = shallow(renderFieldComponent(defaultProps));
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it("renders correctly when `field.field_type` = TEXTAREA", () => {
+    defaultProps.field.field_type = TEXTAREA;
+
+    const wrapper = shallow(renderFieldComponent(defaultProps));
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it("renders correctly when `field.field_type` = URL_INPUT", () => {
+    defaultProps.field.field_type = URL_INPUT;
+
+    const wrapper = shallow(renderFieldComponent(defaultProps));
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it("renders correctly when `field.field_type` = DATE_INPUT", () => {
+    defaultProps.field.field_type = DATE_INPUT;
+
+    const wrapper = shallow(renderFieldComponent(defaultProps));
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it("renders correctly when `field.field_type` = TEXT_INPUT_LIST", () => {
+    defaultProps.field.field_type = TEXT_INPUT_LIST;
+
+    const wrapper = shallow(renderFieldComponent(defaultProps));
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it("renders correctly when `field.field_type` = URL_INPUT_LIST", () => {
+    defaultProps.field.field_type = URL_INPUT_LIST;
+
+    const wrapper = shallow(renderFieldComponent(defaultProps));
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it("renders correctly when `field.field_type` is invalid", () => {
+    defaultProps.field.field_type = "test";
+
+    const wrapper = shallow(renderFieldComponent(defaultProps));
+    expect(wrapper).toMatchSnapshot();
   });
 });

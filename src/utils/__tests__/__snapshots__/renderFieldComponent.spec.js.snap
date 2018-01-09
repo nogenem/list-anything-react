@@ -1,24 +1,145 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderFieldComponent when passed a valid \`field.field_type\` renders the correct field component 1`] = `
+exports[`renderFieldComponent renders correctly when \`field.field_type\` = DATE_INPUT 1`] = `
+<FormField>
+  <b>
+    Testando:
+    :
+  </b>
+   
+  testando...
+</FormField>
+`;
+
+exports[`renderFieldComponent renders correctly when \`field.field_type\` = NUMBER_INPUT 1`] = `
+<FormField>
+  <b>
+    Testando:
+    :
+  </b>
+   
+  testando...
+</FormField>
+`;
+
+exports[`renderFieldComponent renders correctly when \`field.field_type\` = TEXT_INPUT 1`] = `
+<FormField>
+  <b>
+    Testando:
+    :
+  </b>
+   
+  testando...
+</FormField>
+`;
+
+exports[`renderFieldComponent renders correctly when \`field.field_type\` = TEXT_INPUT_LIST 1`] = `
+<FormField>
+  <b>
+    Testando:
+    :
+  </b>
+  <ListField
+    onRemove={null}
+    renderValue={[Function]}
+    style={
+      Object {
+        "marginTop": "0px",
+        "maxHeight": "100px",
+        "overflowY": "auto",
+      }
+    }
+    values={
+      Array [
+        "testando...",
+      ]
+    }
+  />
+</FormField>
+`;
+
+exports[`renderFieldComponent renders correctly when \`field.field_type\` = TEXTAREA 1`] = `
 <FormField
-  error={false}
+  readOnly={true}
 >
-  <FormInput
+  <FormTextArea
     as={[Function]}
+    autoHeight={true}
     control={[Function]}
-    fluid={true}
     label="Testando:"
     name="1"
-    onChange={[Function]}
-    placeholder="Testando:"
-    type="text"
+    onClick={[Function]}
+    style={
+      Object {
+        "border": "none",
+        "maxHeight": "200px",
+        "minWidth": "100%",
+        "outline": "none",
+      }
+    }
     value="testando..."
   />
 </FormField>
 `;
 
-exports[`renderFieldComponent when passed a valid \`field.field_type\` renders the default div 1`] = `
+exports[`renderFieldComponent renders correctly when \`field.field_type\` = URL_INPUT 1`] = `
+<FormField>
+  <b>
+    Testando:
+    :
+  </b>
+   
+  <a
+    href="testando..."
+    onClick={[Function]}
+    target="_blank"
+  >
+    testando...
+  </a>
+</FormField>
+`;
+
+exports[`renderFieldComponent renders correctly when \`field.field_type\` = URL_INPUT_IMG 1`] = `
+<FormField>
+  <b>
+    Testando:
+  </b>
+  : 
+  <Image
+    as="img"
+    size="tiny"
+    src="testando..."
+    ui={true}
+  />
+</FormField>
+`;
+
+exports[`renderFieldComponent renders correctly when \`field.field_type\` = URL_INPUT_LIST 1`] = `
+<FormField>
+  <b>
+    Testando:
+    :
+  </b>
+  <ListField
+    onRemove={null}
+    renderValue={[Function]}
+    style={
+      Object {
+        "marginTop": "0px",
+        "maxHeight": "100px",
+        "overflowY": "auto",
+      }
+    }
+    values={
+      Array [
+        "testando...",
+      ]
+    }
+  />
+</FormField>
+`;
+
+exports[`renderFieldComponent renders correctly when \`field.field_type\` is invalid 1`] = `
 <div
   key="1"
 />

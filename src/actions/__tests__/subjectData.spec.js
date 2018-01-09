@@ -17,38 +17,38 @@ jest.mock("../../api", () => ({
   default: {
     subjectData: {
       fetchByTabId: tabId => {
-        expect(tabId).toBe("1"); // testTabId
+        expect(tabId).toBe("1"); // ids.tabId
         return Promise.resolve([]);
       },
       fetchById: _id => {
-        expect(_id).toBe("2"); // testSubjectId
+        expect(_id).toBe("2"); // ids.subjectId
         return Promise.resolve([]);
       },
       create: data => {
         expect(data).toEqual({
-          tabId: "1", // testTabId
-          subjectId: "2", // testSubjectId
-          data: []
+          tabId: "1", // ids.tabId
+          subjectId: "2", // ids.subjectId
+          data: [{ fieldId: "4", value: "test" }]
         });
         return Promise.resolve({
-          _id: "3" // testSDId
+          _id: "3" // ids.subjectDataId
         });
       },
       edit: data => {
         expect(data).toEqual({
-          _id: "3", // testSDId
-          tabId: "1", // testTabId
-          subjectId: "2", // testSubjectId
+          _id: "3", // ids.subjectDataId
+          tabId: "1", // ids.tabId
+          subjectId: "2", // ids.subjectId
           data: {}
         });
         return Promise.resolve([
           {
-            _id: "3" // testSDId
+            _id: "3" // ids.subjectDataId
           }
         ]);
       },
       delete: sdId => {
-        expect(sdId).toBe("3"); // testSDId
+        expect(sdId).toBe("3"); // ids.subjectDataId
         return Promise.resolve({
           _id: sdId
         });
@@ -57,12 +57,16 @@ jest.mock("../../api", () => ({
   }
 }));
 
-const testTabId = "1";
-const testSubjectId = "2";
-const testSDId = "3";
+const ids = {
+  tabId: "1",
+  subjectId: "2",
+  subjectDataId: "3",
+  fieldId: "4"
+};
 const testSubjectDataCreate = {
-  tabId: testTabId,
-  subjectId: testSubjectId
+  tabId: ids.tabId,
+  subjectId: ids.subjectId,
+  [ids.fieldId]: "test"
 };
 
 describe("subjectData actions", () => {
@@ -77,7 +81,7 @@ describe("subjectData actions", () => {
       });
     };
 
-    await fetchSDByTabId(testTabId)(dispatch);
+    await fetchSDByTabId(ids.tabId)(dispatch);
   });
 
   it("fetchSDById", async () => {
@@ -91,7 +95,7 @@ describe("subjectData actions", () => {
       });
     };
 
-    await fetchSDById(testSubjectId)(dispatch);
+    await fetchSDById(ids.subjectId)(dispatch);
   });
 
   it("createSubjectData", async () => {
@@ -102,12 +106,12 @@ describe("subjectData actions", () => {
         // dados normalizados
         entities: {
           subjectData: {
-            [testSDId]: {
-              _id: testSDId
+            [ids.subjectDataId]: {
+              _id: ids.subjectDataId
             }
           }
         },
-        result: testSDId
+        result: ids.subjectDataId
       });
     };
 
@@ -122,16 +126,18 @@ describe("subjectData actions", () => {
         // dados normalizados
         entities: {
           subjectData: {
-            [testSDId]: {
-              _id: testSDId
+            [ids.subjectDataId]: {
+              _id: ids.subjectDataId
             }
           }
         },
-        result: [testSDId]
+        result: [ids.subjectDataId]
       });
     };
 
-    await editSubjectData(testSDId, testSubjectId, testTabId, {})(dispatch);
+    await editSubjectData(ids.subjectDataId, ids.subjectId, ids.tabId, {})(
+      dispatch
+    );
   });
 
   it("deleteSubjectData", async () => {
@@ -139,10 +145,10 @@ describe("subjectData actions", () => {
     const dispatch = action => {
       expect(action.type).toBe(SUBJECT_DATA_DELETED);
       expect(action.data).toEqual({
-        _id: testSDId
+        _id: ids.subjectDataId
       });
     };
 
-    await deleteSubjectData(testSDId)(dispatch);
+    await deleteSubjectData(ids.subjectDataId)(dispatch);
   });
 });

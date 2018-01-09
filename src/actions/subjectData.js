@@ -50,7 +50,9 @@ const reshapeSubjectData = data => {
     subjectId: data.subjectId,
     data: []
   };
-  const keys = Object.keys(data).splice(2); // retira o subjectId e tabId
+  const keys = Object.keys(data).filter(
+    key => key !== "subjectId" && key !== "tabId"
+  );
   forEach(keys, key => {
     result.data.push({
       fieldId: key,

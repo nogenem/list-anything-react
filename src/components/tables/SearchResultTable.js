@@ -4,15 +4,22 @@ import { Table } from "semantic-ui-react";
 import sortBy from "lodash.sortby";
 
 import renderFieldComponent from "../../utils/renderFieldComponent";
+import SortableDataTableHeader from "./SortableDataTableHeader";
+import DataTableBody from "./DataTableBody";
+
+const headers = [
+  { id: "value", description: "Value" },
+  { id: "field", description: "Field" },
+  { id: "tab", description: "Tab" },
+  { id: "subject", description: "Subject" }
+];
 
 class SearchResultTable extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      column: null,
-      data: props.results,
-      direction: null
+      data: props.results
     };
   }
 
@@ -22,21 +29,19 @@ class SearchResultTable extends Component {
     }
   };
 
-  handleSort = clickedColumn => () => {
-    const { column, data, direction } = this.state;
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.data !== nextState.data;
+  }
 
-    if (column !== clickedColumn) {
-      this.setState({
-        column: clickedColumn,
-        data: sortBy(data, [clickedColumn]),
-        direction: "ascending"
-      });
-    } else {
-      this.setState({
-        data: data.reverse(),
-        direction: direction === "ascending" ? "descending" : "ascending"
-      });
-    }
+  sort = (column, clickedColumn) => {
+    if (column !== clickedColumn)
+      this.setState(prevState => ({
+        data: sortBy([...prevState.data], [clickedColumn])
+      }));
+    else
+      this.setState(prevState => ({
+        data: [...prevState.data].reverse()
+      }));
   };
 
   renderField = data => {
@@ -48,59 +53,46 @@ class SearchResultTable extends Component {
     return renderFieldComponent(fieldData);
   };
 
-  render() {
-    const { onTableRowClick } = this.props;
-    const { column, data, direction } = this.state;
+  renderHeader = generateCell => (
+    <React.Fragment>
+      {headers.map(header => generateCell(header.id, header.description))}
+    </React.Fragment>
+  );
 
+  renderBody = () => {
+    const { data } = this.state;
+    return (
+      <React.Fragment>
+        {!data.length && (
+          <Table.Row>
+            <Table.Cell width={16}>Nothing was found.</Table.Cell>
+          </Table.Row>
+        )}
+        {data.map(result => (
+          <Table.Row
+            key={result._id}
+            to={`/subject-data/${result._id}`}
+            onClick={this.props.onTableRowClick}
+          >
+            <Table.Cell>{this.renderField(result)}</Table.Cell>
+            <Table.Cell collapsing>{result.field.description}</Table.Cell>
+            <Table.Cell collapsing>{result.tab}</Table.Cell>
+            <Table.Cell collapsing>{result.subject}</Table.Cell>
+          </Table.Row>
+        ))}
+      </React.Fragment>
+    );
+  };
+
+  render() {
     return (
       <Table celled compact="very" selectable sortable>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell
-              sorted={column === "value" ? direction : null}
-              onClick={this.handleSort("value")}
-            >
-              Value
-            </Table.HeaderCell>
-            <Table.HeaderCell
-              sorted={column === "field" ? direction : null}
-              onClick={this.handleSort("field")}
-            >
-              Field
-            </Table.HeaderCell>
-            <Table.HeaderCell
-              sorted={column === "tab" ? direction : null}
-              onClick={this.handleSort("tab")}
-            >
-              Tab
-            </Table.HeaderCell>
-            <Table.HeaderCell
-              sorted={column === "subject" ? direction : null}
-              onClick={this.handleSort("subject")}
-            >
-              Subject
-            </Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body style={{ cursor: "pointer" }}>
-          {!data.length && (
-            <Table.Row>
-              <Table.Cell width={16}>Nothing was found.</Table.Cell>
-            </Table.Row>
-          )}
-          {data.map(result => (
-            <Table.Row
-              key={result._id}
-              to={`/subject-data/${result._id}`}
-              onClick={onTableRowClick}
-            >
-              <Table.Cell>{this.renderField(result)}</Table.Cell>
-              <Table.Cell collapsing>{result.field.description}</Table.Cell>
-              <Table.Cell collapsing>{result.tab}</Table.Cell>
-              <Table.Cell collapsing>{result.subject}</Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
+        <SortableDataTableHeader
+          data={this.props.results}
+          sort={this.sort}
+          renderHeader={this.renderHeader}
+        />
+        <DataTableBody renderBody={this.renderBody} />
       </Table>
     );
   }

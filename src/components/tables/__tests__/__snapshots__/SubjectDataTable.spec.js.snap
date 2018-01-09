@@ -8,20 +8,13 @@ exports[`SubjectDataTable renders correctly 1`] = `
   selectable={true}
   sortable={true}
 >
-  <TableHeader
-    as="thead"
-  >
-    <TableRow
-      as="tr"
-      cellAs="td"
-    />
-  </TableHeader>
-  <SubjectDataTableBody
+  <SortableDataTableHeader
     data={Array []}
-    fields={Array []}
-    loading={false}
-    onTableRowClick={[Function]}
-    renderCell={[Function]}
+    renderHeader={[Function]}
+    sort={[Function]}
+  />
+  <DataTableBody
+    renderBody={[Function]}
   />
 </Table>
 `;

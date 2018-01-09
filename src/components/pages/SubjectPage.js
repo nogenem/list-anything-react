@@ -35,12 +35,7 @@ class SubjectPage extends Component {
   };
 
   componentDidMount = () => {
-    const { subjectDataArray, firstTab } = this.props;
-    if (!subjectDataArray.length) this.loadSubjects(this.props);
-    else {
-      this.setState({ activeTab: firstTab._id });
-      this.filterSubjectData(subjectDataArray, firstTab._id);
-    }
+    this.loadSubjects(this.props);
   };
 
   componentWillReceiveProps(nextProps) {

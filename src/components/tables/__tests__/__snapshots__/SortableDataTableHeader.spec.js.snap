@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SortableDataTableHeader renders correctly 1`] = `
+<TableHeader
+  as="thead"
+>
+  <TableRow
+    as="tr"
+    cellAs="td"
+  >
+    <div>
+      Testando...
+    </div>
+  </TableRow>
+</TableHeader>
+`;

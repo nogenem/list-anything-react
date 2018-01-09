@@ -8,63 +8,14 @@ exports[`SearchResultTable renders correctly when \`results\` is empty 1`] = `
   selectable={true}
   sortable={true}
 >
-  <TableHeader
-    as="thead"
-  >
-    <TableRow
-      as="tr"
-      cellAs="td"
-    >
-      <TableHeaderCell
-        as="th"
-        onClick={[Function]}
-        sorted={null}
-      >
-        Value
-      </TableHeaderCell>
-      <TableHeaderCell
-        as="th"
-        onClick={[Function]}
-        sorted={null}
-      >
-        Field
-      </TableHeaderCell>
-      <TableHeaderCell
-        as="th"
-        onClick={[Function]}
-        sorted={null}
-      >
-        Tab
-      </TableHeaderCell>
-      <TableHeaderCell
-        as="th"
-        onClick={[Function]}
-        sorted={null}
-      >
-        Subject
-      </TableHeaderCell>
-    </TableRow>
-  </TableHeader>
-  <TableBody
-    as="tbody"
-    style={
-      Object {
-        "cursor": "pointer",
-      }
-    }
-  >
-    <TableRow
-      as="tr"
-      cellAs="td"
-    >
-      <TableCell
-        as="td"
-        width={16}
-      >
-        Nothing was found.
-      </TableCell>
-    </TableRow>
-  </TableBody>
+  <SortableDataTableHeader
+    data={Array []}
+    renderHeader={[Function]}
+    sort={[Function]}
+  />
+  <DataTableBody
+    renderBody={[Function]}
+  />
 </Table>
 `;
 
@@ -76,84 +27,27 @@ exports[`SearchResultTable renders correctly when \`results\` is not empty 1`] =
   selectable={true}
   sortable={true}
 >
-  <TableHeader
-    as="thead"
-  >
-    <TableRow
-      as="tr"
-      cellAs="td"
-    >
-      <TableHeaderCell
-        as="th"
-        onClick={[Function]}
-        sorted={null}
-      >
-        Value
-      </TableHeaderCell>
-      <TableHeaderCell
-        as="th"
-        onClick={[Function]}
-        sorted={null}
-      >
-        Field
-      </TableHeaderCell>
-      <TableHeaderCell
-        as="th"
-        onClick={[Function]}
-        sorted={null}
-      >
-        Tab
-      </TableHeaderCell>
-      <TableHeaderCell
-        as="th"
-        onClick={[Function]}
-        sorted={null}
-      >
-        Subject
-      </TableHeaderCell>
-    </TableRow>
-  </TableHeader>
-  <TableBody
-    as="tbody"
-    style={
-      Object {
-        "cursor": "pointer",
-      }
+  <SortableDataTableHeader
+    data={
+      Array [
+        Object {
+          "_id": "0",
+          "field": Object {
+            "_id": "0",
+            "description": "Test Description",
+            "field_type": "test_field",
+          },
+          "subject": "Test Subject",
+          "tab": "Test Tab",
+          "value": "Test Value",
+        },
+      ]
     }
-  >
-    <TableRow
-      as="tr"
-      cellAs="td"
-      key="0"
-      onClick={[Function]}
-      to="/subject-data/0"
-    >
-      <TableCell
-        as="td"
-      >
-        <div
-          key="0"
-        />
-      </TableCell>
-      <TableCell
-        as="td"
-        collapsing={true}
-      >
-        Test Description
-      </TableCell>
-      <TableCell
-        as="td"
-        collapsing={true}
-      >
-        Test Tab
-      </TableCell>
-      <TableCell
-        as="td"
-        collapsing={true}
-      >
-        Test Subject
-      </TableCell>
-    </TableRow>
-  </TableBody>
+    renderHeader={[Function]}
+    sort={[Function]}
+  />
+  <DataTableBody
+    renderBody={[Function]}
+  />
 </Table>
 `;

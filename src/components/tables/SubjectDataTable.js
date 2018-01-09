@@ -1,19 +1,18 @@
 import React from "react";
-import { Table } from "semantic-ui-react";
+import { Table, Loader } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import sortBy from "lodash.sortby";
 
-import SubjectDataTableBody from "./SubjectDataTableBody";
 import renderFieldComponent from "../../utils/renderFieldComponent";
+import SortableDataTableHeader from "./SortableDataTableHeader";
+import DataTableBody from "./DataTableBody";
 
 class SubjectDataTable extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      column: null,
-      data: props.subjectDataArray,
-      direction: null
+      data: props.subjectDataArray
     };
   }
 
@@ -23,25 +22,27 @@ class SubjectDataTable extends React.Component {
     }
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      this.props.loading !== nextProps.loading ||
+      this.props.fields !== nextState.fields ||
+      this.state.data !== nextState.data
+    );
+  }
+
   // Talvez seja necessário lidar com outros tipos também...
   getCellWidth = fieldType =>
     fieldType === "url_input_img" ? { width: 2 } : {};
 
-  handleSort = clickedColumn => () => {
-    const { column, data, direction } = this.state;
-
-    if (column !== clickedColumn) {
-      this.setState({
-        column: clickedColumn,
-        data: sortBy([...data], [o => o.data[clickedColumn].value]),
-        direction: "ascending"
-      });
-    } else {
-      this.setState({
-        data: [...data].reverse(),
-        direction: direction === "ascending" ? "descending" : "ascending"
-      });
-    }
+  sort = (column, clickedColumn) => {
+    if (column !== clickedColumn)
+      this.setState(prevState => ({
+        data: sortBy([...prevState.data], [o => o.data[clickedColumn].value])
+      }));
+    else
+      this.setState(prevState => ({
+        data: [...prevState.data].reverse()
+      }));
   };
 
   renderCell = (subjectData, field) => {
@@ -68,35 +69,58 @@ class SubjectDataTable extends React.Component {
     return renderFieldComponent(fieldData);
   };
 
-  render() {
-    const { loading, onTableRowClick, fields } = this.props;
-    const { column, direction, data } = this.state;
+  renderHeader = generateCell => (
+    <React.Fragment>
+      {this.props.fields.map(
+        field =>
+          field.show_in_list && generateCell(field._id, field.description)
+      )}
+    </React.Fragment>
+  );
 
+  renderBody = () => {
+    const { loading, onTableRowClick, fields } = this.props;
+    const { data } = this.state;
+    return (
+      <React.Fragment>
+        {loading && (
+          <Table.Row>
+            <Table.Cell width={16}>
+              <Loader active inline="centered" />
+            </Table.Cell>
+          </Table.Row>
+        )}
+        {!loading &&
+          !data.length && (
+            <Table.Row>
+              <Table.Cell width={16}>Nothing was found.</Table.Cell>
+            </Table.Row>
+          )}
+        {!loading &&
+          data.map(sd => (
+            <Table.Row
+              key={sd._id}
+              to={`/subject-data/${sd._id}`}
+              onClick={onTableRowClick}
+            >
+              {fields.map(
+                field => field.show_in_list && this.renderCell(sd, field)
+              )}
+            </Table.Row>
+          ))}
+      </React.Fragment>
+    );
+  };
+
+  render() {
     return (
       <Table celled compact="very" selectable sortable>
-        <Table.Header>
-          <Table.Row>
-            {fields.map(
-              field =>
-                field.show_in_list && (
-                  <Table.HeaderCell
-                    key={field._id}
-                    sorted={column === field._id ? direction : null}
-                    onClick={this.handleSort(field._id)}
-                  >
-                    {field.description}
-                  </Table.HeaderCell>
-                )
-            )}
-          </Table.Row>
-        </Table.Header>
-        <SubjectDataTableBody
-          loading={loading}
-          data={data}
-          fields={fields}
-          onTableRowClick={onTableRowClick}
-          renderCell={this.renderCell}
+        <SortableDataTableHeader
+          data={this.props.subjectDataArray}
+          sort={this.sort}
+          renderHeader={this.renderHeader}
         />
+        <DataTableBody renderBody={this.renderBody} />
       </Table>
     );
   }
@@ -116,10 +140,6 @@ SubjectDataTable.propTypes = {
     })
   ).isRequired,
   onTableRowClick: PropTypes.func.isRequired
-};
-
-SubjectDataTable.defaultProps = {
-  fieldHash: {}
 };
 
 export default SubjectDataTable;

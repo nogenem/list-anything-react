@@ -46,6 +46,7 @@ class SubjectDataTable extends React.Component {
 
   renderCell = (subjectData, field) => {
     const data = subjectData.data[field._id];
+    if (!data) return null;
     return (
       <Table.Cell
         {...this.getCellWidth(field.field_type)}

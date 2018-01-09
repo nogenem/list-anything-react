@@ -114,8 +114,10 @@ class SubjectDataForm extends React.Component {
   renderField = field => {
     const { subjectData } = this.props;
     const { editing } = this.state;
-    const data = subjectData.data[field._id];
 
+    if (!subjectData || !subjectData.data) return null;
+
+    const data = subjectData.data[field._id];
     if (!data) return null;
 
     const fieldData = {

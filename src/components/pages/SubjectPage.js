@@ -34,7 +34,14 @@ class SubjectPage extends Component {
     errors: {}
   };
 
-  componentDidMount = () => this.loadSubjects(this.props);
+  componentDidMount = () => {
+    const { subjectDataArray, firstTab } = this.props;
+    if (!subjectDataArray.length) this.loadSubjects(this.props);
+    else {
+      this.setState({ activeTab: firstTab._id });
+      this.filterSubjectData(subjectDataArray, firstTab._id);
+    }
+  };
 
   componentWillReceiveProps(nextProps) {
     const currentId = this.props.match.params._id;
@@ -45,13 +52,13 @@ class SubjectPage extends Component {
     const currentArray = this.props.subjectDataArray;
     const nextArray = nextProps.subjectDataArray;
 
-    if (currentArray !== nextArray && nextArray.length > 0)
+    if (currentArray !== nextArray)
       this.filterSubjectData(nextArray, this.state.activeTab);
   }
 
   onMenuClick = (e, { tabid }) => {
     this.setState({ menuVisible: false });
-    this.loadSubjectData(this.props, tabid);
+    if (tabid !== this.state.activeTab) this.loadSubjectData(this.props, tabid);
   };
 
   onTableRowClick = e => {
@@ -91,7 +98,13 @@ class SubjectPage extends Component {
     this.setState({ loadingData: true, activeTab: tabId });
     props
       .fetchSDByTabId(tabId)
-      .then(() => this.setState({ loadingData: false }));
+      .then(() => this.setState({ loadingData: false }))
+      .catch(err =>
+        this.setState({
+          loadingSubject: false,
+          errors: handleServerErrors(err)
+        })
+      );
   };
 
   toggleMenu = () =>

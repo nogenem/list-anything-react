@@ -2,6 +2,8 @@ import {
   SUBJECT_DATA_FETCHED,
   SUBJECT_FETCHED_BY_ID,
   SUBJECT_DATA_EDITED,
+  SUBJECT_DATA_CREATED,
+  SUBJECT_DATA_DELETED,
   USER_LOGGED_OUT
 } from "../../constants/actionTypes";
 
@@ -65,11 +67,29 @@ describe("subjectData - Reducer", () => {
     expect(newState).toEqual(expectedData);
   });
 
+  it("SUBJECT_DATA_CREATED", () => {
+    const action = {
+      type: SUBJECT_DATA_CREATED,
+      data
+    };
+    const newState = subjectData(initialState, action);
+    expect(newState).toEqual(expectedData);
+  });
+
   it("SUBJECT_FETCHED_BY_ID", () => {
     const action = {
       type: SUBJECT_FETCHED_BY_ID
     };
     expect(subjectData(initialState, action)).toEqual(initialState);
+  });
+
+  it("SUBJECT_DATA_DELETED", () => {
+    const action = {
+      type: SUBJECT_DATA_DELETED,
+      data: { _id: ids.sdId }
+    };
+    const newState = subjectData({ ...initialState, ...expectedData }, action);
+    expect(newState).toEqual(initialState);
   });
 
   it("USER_LOGGED_OUT", () => {

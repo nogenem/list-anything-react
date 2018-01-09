@@ -5,6 +5,8 @@ import {
   SUBJECT_DATA_FETCHED,
   SUBJECT_FETCHED_BY_ID,
   SUBJECT_DATA_EDITED,
+  SUBJECT_DATA_CREATED,
+  SUBJECT_DATA_DELETED,
   USER_LOGGED_OUT
 } from "../constants/actionTypes";
 
@@ -31,7 +33,13 @@ export default function subjectData(state = initialState, action = {}) {
   switch (action.type) {
     case SUBJECT_DATA_FETCHED:
     case SUBJECT_DATA_EDITED:
+    case SUBJECT_DATA_CREATED:
       return { ...state, ...reshapeData(action.data.entities) };
+    case SUBJECT_DATA_DELETED: {
+      const newState = { ...state };
+      delete newState[action.data._id];
+      return newState;
+    }
     case SUBJECT_FETCHED_BY_ID:
       return initialState;
     case USER_LOGGED_OUT:

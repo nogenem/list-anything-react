@@ -1,18 +1,26 @@
-import React from "react";
-import { shallow } from "enzyme";
-
 import ErrorMessage from "../ErrorMessage";
+
+const setup = (propOverrides = {}) => {
+  const props = {
+    text: "some text",
+    showHeader: true,
+    ...propOverrides
+  };
+
+  return {
+    props,
+    wrapperShallow: wrapperShallow(ErrorMessage, props)
+  };
+};
 
 describe("ErrorMessage", () => {
   it("renders correctly when `showHeader` is true", () => {
-    const wrapper = shallow(<ErrorMessage text="some text" showHeader />);
-    expect(wrapper).toMatchSnapshot();
+    const { wrapperShallow: wrapper } = setup({ showHeader: true });
+    expect(wrapper()).toMatchSnapshot();
   });
 
   it("renders correctly when `showHeader` is false", () => {
-    const wrapper = shallow(
-      <ErrorMessage text="some text" showHeader={false} />
-    );
-    expect(wrapper).toMatchSnapshot();
+    const { wrapperShallow: wrapper } = setup({ showHeader: false });
+    expect(wrapper()).toMatchSnapshot();
   });
 });

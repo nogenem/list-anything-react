@@ -11,7 +11,7 @@ exports[`CustomMessage renders correctly when all props are passed 1`] = `
   }
 >
   <MessageHeader>
-    TEST
+    Test
   </MessageHeader>
   <MessageContent>
     Testando...
@@ -19,7 +19,7 @@ exports[`CustomMessage renders correctly when all props are passed 1`] = `
 </Message>
 `;
 
-exports[`CustomMessage renders correctly when no property is passed 1`] = `
+exports[`CustomMessage renders correctly when no prop is passed 1`] = `
 <Message
   style={
     Object {

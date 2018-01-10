@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PublicRoutes when \`showContent\` is false renders correctly 1`] = `
+exports[`PublicRoutes renders correctly when \`showContent\` is false 1`] = `
 <div
   id="public-routes-container"
   style={
@@ -14,7 +14,7 @@ exports[`PublicRoutes when \`showContent\` is false renders correctly 1`] = `
     exact={true}
     location={
       Object {
-        "pathname": "",
+        "pathname": "/login",
       }
     }
     path="/login"
@@ -24,7 +24,7 @@ exports[`PublicRoutes when \`showContent\` is false renders correctly 1`] = `
     exact={true}
     location={
       Object {
-        "pathname": "",
+        "pathname": "/login",
       }
     }
     path="/signup"
@@ -34,7 +34,7 @@ exports[`PublicRoutes when \`showContent\` is false renders correctly 1`] = `
     exact={true}
     location={
       Object {
-        "pathname": "",
+        "pathname": "/login",
       }
     }
     path="/forgot_password"
@@ -44,7 +44,7 @@ exports[`PublicRoutes when \`showContent\` is false renders correctly 1`] = `
     exact={true}
     location={
       Object {
-        "pathname": "",
+        "pathname": "/login",
       }
     }
     path="/reset_password/:token"
@@ -52,7 +52,7 @@ exports[`PublicRoutes when \`showContent\` is false renders correctly 1`] = `
 </div>
 `;
 
-exports[`PublicRoutes when \`showContent\` is true renders correctly 1`] = `
+exports[`PublicRoutes renders correctly when \`showContent\` is true 1`] = `
 <div
   id="public-routes-container"
   style={
@@ -66,7 +66,7 @@ exports[`PublicRoutes when \`showContent\` is true renders correctly 1`] = `
     exact={true}
     location={
       Object {
-        "pathname": "",
+        "pathname": "/login",
       }
     }
     path="/login"
@@ -76,7 +76,7 @@ exports[`PublicRoutes when \`showContent\` is true renders correctly 1`] = `
     exact={true}
     location={
       Object {
-        "pathname": "",
+        "pathname": "/login",
       }
     }
     path="/signup"
@@ -86,7 +86,7 @@ exports[`PublicRoutes when \`showContent\` is true renders correctly 1`] = `
     exact={true}
     location={
       Object {
-        "pathname": "",
+        "pathname": "/login",
       }
     }
     path="/forgot_password"
@@ -96,7 +96,7 @@ exports[`PublicRoutes when \`showContent\` is true renders correctly 1`] = `
     exact={true}
     location={
       Object {
-        "pathname": "",
+        "pathname": "/login",
       }
     }
     path="/reset_password/:token"

@@ -5,9 +5,9 @@ import PrivateRoutes from "../PrivateRoutes";
 const defaultProps = {
   history: {
     push: () => {},
-    location: { pathname: "" }
+    location: { pathname: "/dashboard" }
   },
-  location: { pathname: "" },
+  location: { pathname: "/dashboard" },
   showContent: false
 };
 

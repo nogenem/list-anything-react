@@ -39,7 +39,7 @@ exports[`ConnectedGuestRoute renders correctly 1`] = `
 />
 `;
 
-exports[`UnconnectedGuestRoute when \`isAuthenticated\` is false renders correctly 1`] = `
+exports[`UnconnectedGuestRoute renders correctly when \`isAuthenticated\` is false 1`] = `
 <GuestRoute
   component={[Function]}
   isAuthenticated={false}
@@ -58,7 +58,7 @@ exports[`UnconnectedGuestRoute when \`isAuthenticated\` is false renders correct
           "location": Object {
             "hash": "",
             "key": "111111",
-            "pathname": "/",
+            "pathname": "/dashboard",
             "search": "",
           },
           "push": [Function],
@@ -69,7 +69,7 @@ exports[`UnconnectedGuestRoute when \`isAuthenticated\` is false renders correct
         Object {
           "hash": "",
           "key": "111111",
-          "pathname": "/",
+          "pathname": "/dashboard",
           "search": "",
         }
       }
@@ -82,15 +82,13 @@ exports[`UnconnectedGuestRoute when \`isAuthenticated\` is false renders correct
         }
       }
     >
-      <span>
-        Testando...
-      </span>
+      Testando...
     </component>
   </Route>
 </GuestRoute>
 `;
 
-exports[`UnconnectedGuestRoute when \`isAuthenticated\` is true renders correctly 1`] = `
+exports[`UnconnectedGuestRoute renders correctly when \`isAuthenticated\` is true 1`] = `
 <GuestRoute
   component={[Function]}
   isAuthenticated={true}

@@ -1,34 +1,30 @@
-import React from "react";
-
 import PublicRoutes from "../PublicRoutes";
 
-const defaultProps = {
-  history: {
-    push: () => {},
-    location: { pathname: "" }
-  },
-  location: { pathname: "" },
-  showContent: false
+const setup = (propOverrides = {}, pathname = "/login") => {
+  const props = {
+    history: {
+      push: jest.fn(),
+      location: { pathname }
+    },
+    location: { pathname },
+    showContent: false,
+    ...propOverrides
+  };
+
+  return {
+    props,
+    wrapperShallow: wrapperShallow(PublicRoutes, props, true)
+  };
 };
 
 describe("PublicRoutes", () => {
-  const props = { ...defaultProps };
-
-  describe("when `showContent` is false", () => {
-    it("renders correctly", () => {
-      props.showContent = false;
-
-      const wrapper = shallowWithContext(<PublicRoutes {...props} />);
-      expect(wrapper).toMatchSnapshot();
-    });
+  it("renders correctly when `showContent` is false", () => {
+    const { wrapperShallow: wrapper } = setup({ showContent: false });
+    expect(wrapper()).toMatchSnapshot();
   });
 
-  describe("when `showContent` is true", () => {
-    it("renders correctly", () => {
-      props.showContent = true;
-
-      const wrapper = shallowWithContext(<PublicRoutes {...props} />);
-      expect(wrapper).toMatchSnapshot();
-    });
+  it("renders correctly when `showContent` is true", () => {
+    const { wrapperShallow: wrapper } = setup({ showContent: true });
+    expect(wrapper()).toMatchSnapshot();
   });
 });

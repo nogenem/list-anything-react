@@ -1,41 +1,46 @@
-import React from "react";
 import configureStore from "redux-mock-store";
 
 import ConnectedUserRoute, { UnconnectedUserRoute } from "../UserRoute";
 
-const defaultProps = {
-  component: () => <span>Testando...</span>
+const setup = (propOverrides = {}) => {
+  const props = {
+    component: () => "Testando...",
+    isAuthenticated: false,
+    ...propOverrides
+  };
+
+  return {
+    props,
+    connectedWrapperShallow: wrapperShallow(ConnectedUserRoute, props, true),
+    // Lembrar de sempre chamar `unmount` quando usar esse wrapper \/
+    wrapperMount: wrapperMount(UnconnectedUserRoute, props, true)
+  };
 };
 
 describe("ConnectedUserRoute", () => {
   const mockStore = configureStore();
-  const initialState = {};
-  const props = { ...defaultProps, store: mockStore(initialState) };
+  const state = {};
 
   it("renders correctly", () => {
-    const wrapper = shallowWithContext(<ConnectedUserRoute {...props} />);
-    expect(wrapper).toMatchSnapshot();
+    const { connectedWrapperShallow: wrapper } = setup({
+      store: mockStore(state)
+    });
+    expect(wrapper()).toMatchSnapshot();
   });
 });
 
 describe("UnconnectedUserRoute", () => {
-  const props = {
-    ...defaultProps
-  };
+  it("renders correctly when `isAuthenticated` is false", () => {
+    const { wrapperMount: wrapper } = setup({ isAuthenticated: false });
+    expect(wrapper()).toMatchSnapshot();
 
-  describe("when `isAuthenticated` is false", () => {
-    it("renders correctly", () => {
-      props.isAuthenticated = false;
-      const wrapper = mountWithContext(<UnconnectedUserRoute {...props} />);
-      expect(wrapper).toMatchSnapshot();
-    });
+    wrapper().unmount();
   });
 
-  describe("when `isAuthenticated` is true", () => {
-    it("renders correctly", () => {
-      props.isAuthenticated = true;
-      const wrapper = mountWithContext(<UnconnectedUserRoute {...props} />);
-      expect(wrapper).toMatchSnapshot();
-    });
+  it("renders correctly when `isAuthenticated` is true", () => {
+    const { wrapperMount: wrapper } = setup({ isAuthenticated: true });
+    expect(wrapper()).toMatchSnapshot();
+
+    wrapper().unmount();
   });
 });

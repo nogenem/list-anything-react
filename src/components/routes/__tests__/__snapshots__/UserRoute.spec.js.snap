@@ -39,7 +39,7 @@ exports[`ConnectedUserRoute renders correctly 1`] = `
 />
 `;
 
-exports[`UnconnectedUserRoute when \`isAuthenticated\` is false renders correctly 1`] = `
+exports[`UnconnectedUserRoute renders correctly when \`isAuthenticated\` is false 1`] = `
 <UserRoute
   component={[Function]}
   isAuthenticated={false}
@@ -55,7 +55,7 @@ exports[`UnconnectedUserRoute when \`isAuthenticated\` is false renders correctl
 </UserRoute>
 `;
 
-exports[`UnconnectedUserRoute when \`isAuthenticated\` is true renders correctly 1`] = `
+exports[`UnconnectedUserRoute renders correctly when \`isAuthenticated\` is true 1`] = `
 <UserRoute
   component={[Function]}
   isAuthenticated={true}
@@ -74,7 +74,7 @@ exports[`UnconnectedUserRoute when \`isAuthenticated\` is true renders correctly
           "location": Object {
             "hash": "",
             "key": "111111",
-            "pathname": "/",
+            "pathname": "/dashboard",
             "search": "",
           },
           "push": [Function],
@@ -85,7 +85,7 @@ exports[`UnconnectedUserRoute when \`isAuthenticated\` is true renders correctly
         Object {
           "hash": "",
           "key": "111111",
-          "pathname": "/",
+          "pathname": "/dashboard",
           "search": "",
         }
       }
@@ -98,9 +98,7 @@ exports[`UnconnectedUserRoute when \`isAuthenticated\` is true renders correctly
         }
       }
     >
-      <span>
-        Testando...
-      </span>
+      Testando...
     </component>
   </Route>
 </UserRoute>

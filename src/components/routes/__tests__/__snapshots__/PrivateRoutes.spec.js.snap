@@ -5,7 +5,7 @@ exports[`PrivateRoutes renders correctly 1`] = `
   history={
     Object {
       "location": Object {
-        "pathname": "",
+        "pathname": "/dashboard",
       },
       "push": [Function],
     }
@@ -17,7 +17,7 @@ exports[`PrivateRoutes renders correctly 1`] = `
     exact={true}
     location={
       Object {
-        "pathname": "",
+        "pathname": "/dashboard",
       }
     }
     path="/dashboard"
@@ -27,7 +27,7 @@ exports[`PrivateRoutes renders correctly 1`] = `
     exact={true}
     location={
       Object {
-        "pathname": "",
+        "pathname": "/dashboard",
       }
     }
     path="/subjects/new"
@@ -37,7 +37,7 @@ exports[`PrivateRoutes renders correctly 1`] = `
     exact={true}
     location={
       Object {
-        "pathname": "",
+        "pathname": "/dashboard",
       }
     }
     path="/subject/:_id"
@@ -47,7 +47,7 @@ exports[`PrivateRoutes renders correctly 1`] = `
     exact={true}
     location={
       Object {
-        "pathname": "",
+        "pathname": "/dashboard",
       }
     }
     path="/subject/:_id/add"
@@ -57,7 +57,7 @@ exports[`PrivateRoutes renders correctly 1`] = `
     exact={true}
     location={
       Object {
-        "pathname": "",
+        "pathname": "/dashboard",
       }
     }
     path="/subject-data/:_id"
@@ -67,7 +67,7 @@ exports[`PrivateRoutes renders correctly 1`] = `
     exact={true}
     location={
       Object {
-        "pathname": "",
+        "pathname": "/dashboard",
       }
     }
     path="/search"

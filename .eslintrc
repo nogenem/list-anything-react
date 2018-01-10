@@ -20,7 +20,9 @@
   },
   "globals": {
     "shallowWithContext": true,
-    "mountWithContext": true
+    "mountWithContext": true,
+    "wrapperShallow": true,
+    "wrapperMount": true
   },
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],

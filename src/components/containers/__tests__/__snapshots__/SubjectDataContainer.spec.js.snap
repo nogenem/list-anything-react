@@ -39,10 +39,104 @@ exports[`ConnectedSubjectDataContainer renders correctly 1`] = `
   }
   tabs={Array []}
 >
-  <span>
-    Testando...
-  </span>
+  Testando...
 </SubjectDataContainer>
+`;
+
+exports[`UnconnectedSubjectDataContainer renders correctly when \`activeTab\` is set 1`] = `
+<SidebarPushable
+  as={[Function]}
+  attached="bottom"
+  className="subject-data-container"
+>
+  <Sidebar
+    animation="overlay"
+    as={[Function]}
+    direction="left"
+    icon="labeled"
+    inverted={true}
+    vertical={true}
+    visible={false}
+    width="thin"
+  >
+    <MenuItem
+      active={true}
+      key="1"
+      onClick={[Function]}
+      tabid="1"
+    >
+      Test
+    </MenuItem>
+  </Sidebar>
+  <SidebarPusher
+    dimmed={false}
+    style={
+      Object {
+        "overflowY": "auto",
+      }
+    }
+  >
+    Testando...
+  </SidebarPusher>
+</SidebarPushable>
+`;
+
+exports[`UnconnectedSubjectDataContainer renders correctly when \`menuVisible\` is false 1`] = `
+<SidebarPushable
+  as={[Function]}
+  attached="bottom"
+  className="subject-data-container"
+>
+  <Sidebar
+    animation="overlay"
+    as={[Function]}
+    direction="left"
+    icon="labeled"
+    inverted={true}
+    vertical={true}
+    visible={false}
+    width="thin"
+  />
+  <SidebarPusher
+    dimmed={false}
+    style={
+      Object {
+        "overflowY": "auto",
+      }
+    }
+  >
+    Testando...
+  </SidebarPusher>
+</SidebarPushable>
+`;
+
+exports[`UnconnectedSubjectDataContainer renders correctly when \`menuVisible\` is true 1`] = `
+<SidebarPushable
+  as={[Function]}
+  attached="bottom"
+  className="subject-data-container"
+>
+  <Sidebar
+    animation="overlay"
+    as={[Function]}
+    direction="left"
+    icon="labeled"
+    inverted={true}
+    vertical={true}
+    visible={true}
+    width="thin"
+  />
+  <SidebarPusher
+    dimmed={true}
+    style={
+      Object {
+        "overflowY": "auto",
+      }
+    }
+  >
+    Testando...
+  </SidebarPusher>
+</SidebarPushable>
 `;
 
 exports[`UnconnectedSubjectDataContainer renders correctly when \`tabs\` is empty 1`] = `
@@ -69,9 +163,45 @@ exports[`UnconnectedSubjectDataContainer renders correctly when \`tabs\` is empt
       }
     }
   >
-    <span>
-      Testando...
-    </span>
+    Testando...
+  </SidebarPusher>
+</SidebarPushable>
+`;
+
+exports[`UnconnectedSubjectDataContainer renders correctly when \`tabs\` is not empty 1`] = `
+<SidebarPushable
+  as={[Function]}
+  attached="bottom"
+  className="subject-data-container"
+>
+  <Sidebar
+    animation="overlay"
+    as={[Function]}
+    direction="left"
+    icon="labeled"
+    inverted={true}
+    vertical={true}
+    visible={false}
+    width="thin"
+  >
+    <MenuItem
+      active={false}
+      key="1"
+      onClick={[Function]}
+      tabid="1"
+    >
+      Test
+    </MenuItem>
+  </Sidebar>
+  <SidebarPusher
+    dimmed={false}
+    style={
+      Object {
+        "overflowY": "auto",
+      }
+    }
+  >
+    Testando...
   </SidebarPusher>
 </SidebarPushable>
 `;

@@ -66,8 +66,7 @@ MainContainer.propTypes = {
 };
 
 MainContainer.defaultProps = {
-  activeItem: "",
-  subjects: []
+  activeItem: ""
 };
 
 const mapStateToProps = state => ({

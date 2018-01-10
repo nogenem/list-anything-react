@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ActionBtnsContainer renders correctly 1`] = `
+exports[`ActionBtnsContainer renders correctly when passed all props 1`] = `
 <div
   style={Object {}}
 >
@@ -51,6 +51,57 @@ exports[`ActionBtnsContainer renders correctly 1`] = `
         />
       }
     />
+    <Popup
+      content="Delete"
+      on="hover"
+      position="top left"
+      trigger={
+        <Button
+          as="button"
+          color="red"
+          icon="delete"
+          onClick={[Function]}
+        />
+      }
+    />
+    <Confirm
+      cancelButton="Cancel"
+      confirmButton="OK"
+      content="Are you sure?"
+      onCancel={[Function]}
+      onConfirm={[Function]}
+      open={false}
+    />
+  </ButtonGroup>
+</div>
+`;
+
+exports[`ActionBtnsContainer renders correctly when passed only \`onAdd\` and \`onDelete\` 1`] = `
+<div
+  style={Object {}}
+>
+  <ButtonGroup
+    icon={true}
+    size="medium"
+  >
+    <Popup
+      content="Add"
+      on="hover"
+      position="top left"
+      trigger={
+        <Button
+          as="button"
+          color="green"
+          icon="plus"
+          onClick={[Function]}
+        />
+      }
+    />
+  </ButtonGroup>
+  <ButtonGroup
+    icon={true}
+    size="medium"
+  >
     <Popup
       content="Delete"
       on="hover"

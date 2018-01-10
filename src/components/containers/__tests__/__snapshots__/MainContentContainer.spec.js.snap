@@ -1,6 +1,84 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MainContentContainer renders correctly 1`] = `
+exports[`MainContentContainer hides menu when passed a valid \`to\` 1`] = `
+<div
+  id="main-content-container"
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <Connect(TopNavigation)
+    activeItem="/test"
+    hideMenu={[Function]}
+    search={[Function]}
+    toggleMenu={[Function]}
+  />
+  <Connect(MainContainer)
+    activeItem="/test"
+    hideMenu={[Function]}
+    menuVisible={false}
+    search={[Function]}
+  >
+    Testando...
+  </Connect(MainContainer)>
+</div>
+`;
+
+exports[`MainContentContainer hides menu when passed an empty \`to\` 1`] = `
+<div
+  id="main-content-container"
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <Connect(TopNavigation)
+    activeItem="/dashboard"
+    hideMenu={[Function]}
+    search={[Function]}
+    toggleMenu={[Function]}
+  />
+  <Connect(MainContainer)
+    activeItem="/dashboard"
+    hideMenu={[Function]}
+    menuVisible={false}
+    search={[Function]}
+  >
+    Testando...
+  </Connect(MainContainer)>
+</div>
+`;
+
+exports[`MainContentContainer redirects to the search page and closes the menu 1`] = `
+<div
+  id="main-content-container"
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <Connect(TopNavigation)
+    activeItem="search"
+    hideMenu={[Function]}
+    search={[Function]}
+    toggleMenu={[Function]}
+  />
+  <Connect(MainContainer)
+    activeItem="search"
+    hideMenu={[Function]}
+    menuVisible={false}
+    search={[Function]}
+  >
+    Testando...
+  </Connect(MainContainer)>
+</div>
+`;
+
+exports[`MainContentContainer renders correctly when \`showContent\` is false 1`] = `
 <div
   id="main-content-container"
   style={
@@ -10,14 +88,90 @@ exports[`MainContentContainer renders correctly 1`] = `
   }
 >
   <Connect(MainContainer)
-    activeItem=""
+    activeItem="/dashboard"
     hideMenu={[Function]}
     menuVisible={false}
     search={[Function]}
   >
-    <span>
-      Testando...
-    </span>
+    Testando...
+  </Connect(MainContainer)>
+</div>
+`;
+
+exports[`MainContentContainer renders correctly when \`showContent\` is true 1`] = `
+<div
+  id="main-content-container"
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <Connect(TopNavigation)
+    activeItem="/dashboard"
+    hideMenu={[Function]}
+    search={[Function]}
+    toggleMenu={[Function]}
+  />
+  <Connect(MainContainer)
+    activeItem="/dashboard"
+    hideMenu={[Function]}
+    menuVisible={false}
+    search={[Function]}
+  >
+    Testando...
+  </Connect(MainContainer)>
+</div>
+`;
+
+exports[`MainContentContainer toggles menu when passed a valid \`to\` 1`] = `
+<div
+  id="main-content-container"
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <Connect(TopNavigation)
+    activeItem="/test"
+    hideMenu={[Function]}
+    search={[Function]}
+    toggleMenu={[Function]}
+  />
+  <Connect(MainContainer)
+    activeItem="/test"
+    hideMenu={[Function]}
+    menuVisible={true}
+    search={[Function]}
+  >
+    Testando...
+  </Connect(MainContainer)>
+</div>
+`;
+
+exports[`MainContentContainer toggles menu when passed an empty \`to\` 1`] = `
+<div
+  id="main-content-container"
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <Connect(TopNavigation)
+    activeItem="/dashboard"
+    hideMenu={[Function]}
+    search={[Function]}
+    toggleMenu={[Function]}
+  />
+  <Connect(MainContainer)
+    activeItem="/dashboard"
+    hideMenu={[Function]}
+    menuVisible={true}
+    search={[Function]}
+  >
+    Testando...
   </Connect(MainContainer)>
 </div>
 `;

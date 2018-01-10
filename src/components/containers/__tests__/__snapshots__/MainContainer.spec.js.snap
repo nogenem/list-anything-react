@@ -40,10 +40,131 @@ exports[`ConnectedMainContainer renders correctly 1`] = `
   }
   subjects={Array []}
 >
-  <span>
-    Testando...
-  </span>
+  Testando...
 </MainContainer>
+`;
+
+exports[`UnconnectedMainContainer renders correctly when \`activeItem\` is set 1`] = `
+<SidebarPushable
+  as={[Function]}
+  attached="bottom"
+  id="main-container"
+>
+  <Sidebar
+    animation="uncover"
+    as={[Function]}
+    direction="left"
+    icon="labeled"
+    inverted={true}
+    vertical={true}
+    visible={false}
+    width="thin"
+  >
+    <MenuItem
+      className="hide-gt-767px"
+    >
+      <SearchInput
+        id="seach-form-sidebar"
+        onSearch={[Function]}
+      />
+    </MenuItem>
+    <MenuItem
+      active={true}
+      as={[Function]}
+      key="1"
+      onClick={[Function]}
+      to="/subject/1"
+    >
+      Test
+    </MenuItem>
+  </Sidebar>
+  <SidebarPusher
+    dimmed={false}
+    style={
+      Object {
+        "overflowY": "auto",
+      }
+    }
+  >
+    Testando...
+  </SidebarPusher>
+</SidebarPushable>
+`;
+
+exports[`UnconnectedMainContainer renders correctly when \`menuVisible\` is false 1`] = `
+<SidebarPushable
+  as={[Function]}
+  attached="bottom"
+  id="main-container"
+>
+  <Sidebar
+    animation="uncover"
+    as={[Function]}
+    direction="left"
+    icon="labeled"
+    inverted={true}
+    vertical={true}
+    visible={false}
+    width="thin"
+  >
+    <MenuItem
+      className="hide-gt-767px"
+    >
+      <SearchInput
+        id="seach-form-sidebar"
+        onSearch={[Function]}
+      />
+    </MenuItem>
+  </Sidebar>
+  <SidebarPusher
+    dimmed={false}
+    style={
+      Object {
+        "overflowY": "auto",
+      }
+    }
+  >
+    Testando...
+  </SidebarPusher>
+</SidebarPushable>
+`;
+
+exports[`UnconnectedMainContainer renders correctly when \`menuVisible\` is true 1`] = `
+<SidebarPushable
+  as={[Function]}
+  attached="bottom"
+  id="main-container"
+>
+  <Sidebar
+    animation="uncover"
+    as={[Function]}
+    direction="left"
+    icon="labeled"
+    inverted={true}
+    vertical={true}
+    visible={true}
+    width="thin"
+  >
+    <MenuItem
+      className="hide-gt-767px"
+    >
+      <SearchInput
+        id="seach-form-sidebar"
+        onSearch={[Function]}
+      />
+    </MenuItem>
+  </Sidebar>
+  <SidebarPusher
+    dimmed={true}
+    style={
+      Object {
+        "overflowY": "auto",
+      }
+    }
+  >
+    Testando...
+  </SidebarPusher>
+</SidebarPushable>
 `;
 
 exports[`UnconnectedMainContainer renders correctly when \`subjects\` is empty 1`] = `
@@ -79,9 +200,54 @@ exports[`UnconnectedMainContainer renders correctly when \`subjects\` is empty 1
       }
     }
   >
-    <span>
-      Testando...
-    </span>
+    Testando...
+  </SidebarPusher>
+</SidebarPushable>
+`;
+
+exports[`UnconnectedMainContainer renders correctly when \`subjects\` is not empty 1`] = `
+<SidebarPushable
+  as={[Function]}
+  attached="bottom"
+  id="main-container"
+>
+  <Sidebar
+    animation="uncover"
+    as={[Function]}
+    direction="left"
+    icon="labeled"
+    inverted={true}
+    vertical={true}
+    visible={false}
+    width="thin"
+  >
+    <MenuItem
+      className="hide-gt-767px"
+    >
+      <SearchInput
+        id="seach-form-sidebar"
+        onSearch={[Function]}
+      />
+    </MenuItem>
+    <MenuItem
+      active={false}
+      as={[Function]}
+      key="1"
+      onClick={[Function]}
+      to="/subject/1"
+    >
+      Test
+    </MenuItem>
+  </Sidebar>
+  <SidebarPusher
+    dimmed={false}
+    style={
+      Object {
+        "overflowY": "auto",
+      }
+    }
+  >
+    Testando...
   </SidebarPusher>
 </SidebarPushable>
 `;

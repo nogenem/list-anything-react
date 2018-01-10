@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // Esse aquivo só é chamado durante testes!
 
+import React from "react";
 import { configure, shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import createRouterContext from "react-router-test-context";
@@ -10,7 +11,7 @@ configure({ adapter: new Adapter() });
 
 const createContext = () => {
   const location = {
-    pathname: "/",
+    pathname: "/dashboard",
     search: "",
     hash: "",
     key: "111111"
@@ -22,18 +23,38 @@ const childContextTypes = {
   router: PropTypes.object
 };
 
+const getContext = () => ({ context: createContext(), childContextTypes });
+
+// TODO: remover essas 2 funções após trocar elas em todos os testes
 global.shallowWithContext = comp => shallow(comp, { context: createContext() });
 global.mountWithContext = comp =>
   mount(comp, { context: createContext(), childContextTypes });
+
+global.wrapperShallow = (Comp, props, withContext = false) => {
+  let wrapper;
+  return () => {
+    if (!wrapper) {
+      if (withContext) wrapper = shallow(<Comp {...props} />, getContext());
+      else wrapper = shallow(<Comp {...props} />);
+    }
+    return wrapper;
+  };
+};
+global.wrapperMount = (Comp, props, withContext = false) => {
+  let wrapper;
+  return () => {
+    if (!wrapper) {
+      if (withContext) wrapper = mount(<Comp {...props} />, getContext());
+      else wrapper = mount(<Comp {...props} />);
+    }
+    return wrapper;
+  };
+};
 
 class LocalStorageMock {
   constructor() {
     this.store = {};
   }
-
-  clear = () => {
-    this.store = {};
-  };
 
   getItem = key => this.store[key] || null;
 

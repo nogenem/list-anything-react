@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ListValues when \`onRemove\` is not passed renders correctly 1`] = `
+exports[`ListValues renders correctly when \`onRemove\` is not passed 1`] = `
 <List
   celled={true}
   style={Object {}}
@@ -10,13 +10,6 @@ exports[`ListValues when \`onRemove\` is not passed renders correctly 1`] = `
   >
     <ListContent>
       testando1
-    </ListContent>
-  </ListItem>
-  <ListItem
-    key="1"
-  >
-    <ListContent>
-      testando2
     </ListContent>
   </ListItem>
 </List>
@@ -43,6 +36,30 @@ exports[`ListValues when \`onRemove\` is passed renders correctly 1`] = `
       testando1
     </ListContent>
   </ListItem>
+</List>
+`;
+
+exports[`ListValues when \`renderValue\` is not passed renders correctly both strings and urls 1`] = `
+<List
+  celled={true}
+  style={Object {}}
+>
+  <ListItem
+    key="0"
+  >
+    <ListContent
+      floated="right"
+    >
+      <ListIcon
+        link={true}
+        name="remove"
+        onClick={[Function]}
+      />
+    </ListContent>
+    <ListContent>
+      testando1
+    </ListContent>
+  </ListItem>
   <ListItem
     key="1"
   >
@@ -56,38 +73,11 @@ exports[`ListValues when \`onRemove\` is passed renders correctly 1`] = `
       />
     </ListContent>
     <ListContent>
-      testando2
-    </ListContent>
-  </ListItem>
-</List>
-`;
-
-exports[`ListValues when \`values\` are urls renders correctly 1`] = `
-<List
-  celled={true}
-  style={Object {}}
->
-  <ListItem
-    key="0"
-  >
-    <ListContent>
       <a
         href="http://google.com"
         target="_blank"
       >
         http://google.com
-      </a>
-    </ListContent>
-  </ListItem>
-  <ListItem
-    key="1"
-  >
-    <ListContent>
-      <a
-        href="http://youtube.com"
-        target="_blank"
-      >
-        http://youtube.com
       </a>
     </ListContent>
   </ListItem>

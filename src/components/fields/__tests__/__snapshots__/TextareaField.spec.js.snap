@@ -70,3 +70,29 @@ exports[`TextareaField when \`editable\` is true renders correctly 1`] = `
   />
 </FormField>
 `;
+
+exports[`TextareaField when \`editable\` is true renders correctly when \`error\` is passed 1`] = `
+<FormField
+  error={true}
+>
+  <FormTextArea
+    as={[Function]}
+    autoHeight={true}
+    control={[Function]}
+    label="Testando:"
+    name="1"
+    onChange={[Function]}
+    placeholder="Testando:"
+    style={
+      Object {
+        "maxHeight": "200px",
+        "minHeight": "75px",
+      }
+    }
+    value="testando..."
+  />
+  <InlineError
+    text="Something went wrong..."
+  />
+</FormField>
+`;

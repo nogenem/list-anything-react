@@ -20,10 +20,13 @@ class UrlInputListField extends React.Component {
     this.values = props.value ? props.value.split("\n") : [];
   }
 
-  shouldComponentUpdate = nextProps =>
-    this.props.editable !== nextProps.editable ||
-    this.props.showFieldDescription !== nextProps.showFieldDescription ||
-    this.props.error !== nextProps.error;
+  shouldComponentUpdate(nextProps) {
+    return (
+      this.props.editable !== nextProps.editable ||
+      this.props.showFieldDescription !== nextProps.showFieldDescription ||
+      this.props.error !== nextProps.error
+    );
+  }
 
   onChange = e => {
     this.values = e.target.values;

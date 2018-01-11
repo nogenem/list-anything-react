@@ -42,3 +42,24 @@ exports[`UrlInputImgField when \`editable\` is true renders correctly 1`] = `
   />
 </FormField>
 `;
+
+exports[`UrlInputImgField when \`editable\` is true renders correctly when \`error\` is passed 1`] = `
+<FormField
+  error={true}
+>
+  <FormInput
+    as={[Function]}
+    control={[Function]}
+    fluid={true}
+    label="Testando:"
+    name="1"
+    onChange={[Function]}
+    placeholder="http://site.com/image.png"
+    type="url"
+    value="http://www.example.com/image.png"
+  />
+  <InlineError
+    text="Something went wrong..."
+  />
+</FormField>
+`;

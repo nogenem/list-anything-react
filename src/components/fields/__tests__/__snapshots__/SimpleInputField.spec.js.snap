@@ -30,3 +30,24 @@ exports[`SimpleInputField when \`editable\` is true renders correctly 1`] = `
   />
 </FormField>
 `;
+
+exports[`SimpleInputField when \`editable\` is true renders correctly when \`error\` is passed 1`] = `
+<FormField
+  error={true}
+>
+  <FormInput
+    as={[Function]}
+    control={[Function]}
+    fluid={true}
+    label="Testando:"
+    name="1"
+    onChange={[Function]}
+    placeholder="Testando:"
+    type="text"
+    value="testando..."
+  />
+  <InlineError
+    text="Something went wrong..."
+  />
+</FormField>
+`;

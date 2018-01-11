@@ -1,6 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditableListInput when \`type\` is "text" renders correctly 1`] = `
+exports[`EditableListInput renders correctly when \`error\` is passed 1`] = `
+<FormField
+  name="Editable-List-Input"
+>
+  <FormGroup
+    className="inline-input-btn"
+    unstackable={true}
+    widths={2}
+  >
+    <FormInput
+      as={[Function]}
+      control={[Function]}
+      error={true}
+      fluid={true}
+      name="1"
+      placeholder="Testando:"
+      type="text"
+      width={13}
+    />
+    <FormButton
+      as={[Function]}
+      color="teal"
+      content="Add"
+      control={[Function]}
+      onClick={[Function]}
+      width={3}
+    />
+  </FormGroup>
+  <InlineError
+    text="Something went wrong..."
+  />
+  <ListField
+    onRemove={[Function]}
+    renderValue={[Function]}
+    style={
+      Object {
+        "marginBottom": "14px",
+        "maxHeight": "100px",
+        "overflowY": "auto",
+      }
+    }
+    values={
+      Array [
+        "testando1",
+      ]
+    }
+  />
+</FormField>
+`;
+
+exports[`EditableListInput renders correctly when \`type\` is text 1`] = `
 <FormField
   name="Editable-List-Input"
 >
@@ -41,14 +91,13 @@ exports[`EditableListInput when \`type\` is "text" renders correctly 1`] = `
     values={
       Array [
         "testando1",
-        "testando2",
       ]
     }
   />
 </FormField>
 `;
 
-exports[`EditableListInput when \`type\` is "url" renders correctly 1`] = `
+exports[`EditableListInput renders correctly when \`type\` is url 1`] = `
 <FormField
   name="Editable-List-Input"
 >
@@ -88,8 +137,7 @@ exports[`EditableListInput when \`type\` is "url" renders correctly 1`] = `
     }
     values={
       Array [
-        "http://google.com",
-        "http://youtube.com",
+        "testando1",
       ]
     }
   />

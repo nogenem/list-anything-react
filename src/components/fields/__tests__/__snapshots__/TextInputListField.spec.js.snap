@@ -62,3 +62,22 @@ exports[`TextInputListField when \`editable\` is true renders correctly 1`] = `
   }
 />
 `;
+
+exports[`TextInputListField when \`editable\` is true renders correctly when \`error\` is passed 1`] = `
+<EditableListInput
+  error="Something went wrong..."
+  field={
+    Object {
+      "_id": "1",
+      "description": "Testando:",
+    }
+  }
+  onChange={[Function]}
+  type="text"
+  values={
+    Array [
+      "testando...",
+    ]
+  }
+/>
+`;

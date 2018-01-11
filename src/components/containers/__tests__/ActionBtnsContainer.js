@@ -9,8 +9,6 @@ const setup = (propOverrides = {}) => {
     ...propOverrides
   };
 
-  document.body.innerHTML = "";
-
   return {
     props,
     wrapperShallow: wrapperShallow(ActionBtnsContainer, props),

@@ -12,7 +12,7 @@ exports[`UrlInputListField when \`editable\` is false renders correctly when \`s
   }
   values={
     Array [
-      "testando...",
+      "http://example.com",
     ]
   }
 />
@@ -36,7 +36,7 @@ exports[`UrlInputListField when \`editable\` is false renders correctly when \`s
     }
     values={
       Array [
-        "testando...",
+        "http://example.com",
       ]
     }
   />
@@ -56,7 +56,26 @@ exports[`UrlInputListField when \`editable\` is true renders correctly 1`] = `
   type="url"
   values={
     Array [
-      "testando...",
+      "http://example.com",
+    ]
+  }
+/>
+`;
+
+exports[`UrlInputListField when \`editable\` is true renders correctly when \`error\` is passed 1`] = `
+<EditableListInput
+  error="Something went wrong..."
+  field={
+    Object {
+      "_id": "1",
+      "description": "Testando:",
+    }
+  }
+  onChange={[Function]}
+  type="url"
+  values={
+    Array [
+      "http://example.com",
     ]
   }
 />

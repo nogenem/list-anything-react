@@ -40,12 +40,23 @@ global.wrapperShallow = (Comp, props, withContext = false) => {
     return wrapper;
   };
 };
-global.wrapperMount = (Comp, props, withContext = false) => {
+global.wrapperMount = (
+  Comp,
+  props,
+  withContext = false,
+  attachToDiv = false
+) => {
   let wrapper;
   return () => {
     if (!wrapper) {
-      if (withContext) wrapper = mount(<Comp {...props} />, getContext());
-      else wrapper = mount(<Comp {...props} />);
+      const options = {};
+      if (attachToDiv) {
+        document.body.innerHTML = '<div id="root"></div>';
+        options.attachTo = document.getElementById("root");
+      } else if (document.body.innerHTML) document.body.innerHTML = "";
+      if (withContext)
+        wrapper = mount(<Comp {...props} />, { ...options, ...getContext() });
+      else wrapper = mount(<Comp {...props} />, options);
     }
     return wrapper;
   };

@@ -31,7 +31,7 @@ class TopNavigation extends React.Component {
 
     return (
       <Menu size="small" attached="top" id="top-navigation" inverted>
-        <Menu.Item onClick={toggleMenu}>
+        <Menu.Item name="toggle-sidebar" onClick={toggleMenu}>
           <Icon name="sidebar" className="menu-icon-responsive" />
           <span className="hide-lt-767px">Menu</span>
         </Menu.Item>
@@ -62,7 +62,9 @@ class TopNavigation extends React.Component {
           </Menu.Item>
           <Dropdown item trigger={this.trigger(email)}>
             <Dropdown.Menu>
-              <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+              <Dropdown.Item name="logout-btn" onClick={logout}>
+                Logout
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Menu>

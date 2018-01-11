@@ -51,6 +51,7 @@ exports[`UnconnectedTopNavigation renders correctly when \`activeItem\` is set 1
   size="small"
 >
   <MenuItem
+    name="toggle-sidebar"
     onClick={[Function]}
   >
     <Icon
@@ -81,23 +82,6 @@ exports[`UnconnectedTopNavigation renders correctly when \`activeItem\` is set 1
       Dashboard
     </span>
   </MenuItem>
-  <MenuItem
-    active={false}
-    as={[Function]}
-    onClick={[Function]}
-    to="/subjects/new"
-  >
-    <Icon
-      as="i"
-      className="menu-icon-responsive"
-      name="plus"
-    />
-    <span
-      className="hide-lt-767px"
-    >
-      Add new Subject
-    </span>
-  </MenuItem>
   <MenuMenu
     position="right"
   >
@@ -136,6 +120,7 @@ exports[`UnconnectedTopNavigation renders correctly when \`activeItem\` is set 1
     >
       <DropdownMenu>
         <DropdownItem
+          name="logout-btn"
           onClick={[Function]}
         >
           Logout
@@ -154,6 +139,7 @@ exports[`UnconnectedTopNavigation renders correctly when \`hasSubjects\` is fals
   size="small"
 >
   <MenuItem
+    name="toggle-sidebar"
     onClick={[Function]}
   >
     <Icon
@@ -222,6 +208,7 @@ exports[`UnconnectedTopNavigation renders correctly when \`hasSubjects\` is fals
     >
       <DropdownMenu>
         <DropdownItem
+          name="logout-btn"
           onClick={[Function]}
         >
           Logout
@@ -240,6 +227,7 @@ exports[`UnconnectedTopNavigation renders correctly when \`hasSubjects\` is true
   size="small"
 >
   <MenuItem
+    name="toggle-sidebar"
     onClick={[Function]}
   >
     <Icon
@@ -325,6 +313,7 @@ exports[`UnconnectedTopNavigation renders correctly when \`hasSubjects\` is true
     >
       <DropdownMenu>
         <DropdownItem
+          name="logout-btn"
           onClick={[Function]}
         >
           Logout

@@ -3,15 +3,13 @@ import { shallow } from "enzyme";
 
 import DataTableBody from "../DataTableBody";
 
-const defaultProps = {
+const props = {
   renderBody: () => <div>Testando...</div>
 };
 
 describe("DataTableBody", () => {
   it("renders correctly", () => {
-    defaultProps.results = [];
-
-    const wrapper = shallow(<DataTableBody {...defaultProps} />);
+    const wrapper = shallow(<DataTableBody {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

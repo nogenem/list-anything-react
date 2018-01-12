@@ -8,9 +8,22 @@ exports[`SortableDataTableHeader renders correctly 1`] = `
     as="tr"
     cellAs="td"
   >
-    <div>
-      Testando...
-    </div>
+    <TableHeaderCell
+      as="th"
+      key="1"
+      onClick={[Function]}
+      sorted={null}
+    >
+      Test
+    </TableHeaderCell>
+    <TableHeaderCell
+      as="th"
+      key="2"
+      onClick={[Function]}
+      sorted={null}
+    >
+      My Test
+    </TableHeaderCell>
   </TableRow>
 </TableHeader>
 `;

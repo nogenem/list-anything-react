@@ -51,7 +51,51 @@ exports[`ConnectedNewSubjectDataPage renders correctly 1`] = `
 />
 `;
 
-exports[`UnconnectedNewSubjectDataPage renders correctly 1`] = `
+exports[`UnconnectedNewSubjectDataPage renders correctly when \`subjectId\` is not empty 1`] = `
+<Segment
+  style={
+    Object {
+      "margin": "10px auto",
+      "maxWidth": 500,
+    }
+  }
+>
+  <Header
+    as="h2"
+    color="teal"
+    textAlign="center"
+  >
+    Add new Subject Data
+  </Header>
+  <Connect(NewSubjectDataForm)
+    submit={[Function]}
+  />
+</Segment>
+`;
+
+exports[`UnconnectedNewSubjectDataPage when \`subjectId\` is empty renders correctly after \`fetchSubjectById\` finishes successfully 1`] = `
+<Segment
+  style={
+    Object {
+      "margin": "10px auto",
+      "maxWidth": 500,
+    }
+  }
+>
+  <Header
+    as="h2"
+    color="teal"
+    textAlign="center"
+  >
+    Add new Subject Data
+  </Header>
+  <Connect(NewSubjectDataForm)
+    submit={[Function]}
+  />
+</Segment>
+`;
+
+exports[`UnconnectedNewSubjectDataPage when \`subjectId\` is empty renders correctly before \`fetchSubjectById\` finishes 1`] = `
 <Segment
   style={
     Object {

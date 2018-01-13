@@ -1,37 +1,41 @@
-import React from "react";
 import configureStore from "redux-mock-store";
 
 import ConnectedHomePage, { UnconnectedHomePage } from "../HomePage";
 
+const setup = (propOverrides = {}) => {
+  const props = {
+    isAuthenticated: false,
+    ...propOverrides
+  };
+
+  return {
+    props,
+    connectedWrapperShallow: wrapperShallow(ConnectedHomePage, props, true),
+    wrapperShallow: wrapperShallow(UnconnectedHomePage, props, true)
+  };
+};
+
 describe("ConnectedHomePage", () => {
   const mockStore = configureStore();
-  const initialState = {};
-  const props = { store: mockStore(initialState) };
-
+  const state = {};
   it("renders correctly", () => {
-    const wrapper = shallowWithContext(<ConnectedHomePage {...props} />);
-    expect(wrapper).toMatchSnapshot();
+    const { connectedWrapperShallow: wrapper } = setup({
+      store: mockStore(state)
+    });
+    expect(wrapper()).toMatchSnapshot();
   });
 });
 
 describe("UnconnectedHomePage", () => {
-  const props = {
-    isAuthenticated: false
-  };
-
-  describe("when `isAuthenticated` is false", () => {
-    it("renders correctly", () => {
-      props.isAuthenticated = false;
-      const wrapper = shallowWithContext(<UnconnectedHomePage {...props} />);
-      expect(wrapper).toMatchSnapshot();
-    });
+  it("renders correctly when `isAuthenticated` is false", () => {
+    const { wrapperShallow: wrapper } = setup();
+    expect(wrapper()).toMatchSnapshot();
   });
 
-  describe("when `isAuthenticated` is true", () => {
-    it("renders correctly", () => {
-      props.isAuthenticated = true;
-      const wrapper = shallowWithContext(<UnconnectedHomePage {...props} />);
-      expect(wrapper).toMatchSnapshot();
+  it("renders correctly when `isAuthenticated` is true", () => {
+    const { wrapperShallow: wrapper } = setup({
+      isAuthenticated: true
     });
+    expect(wrapper()).toMatchSnapshot();
   });
 });

@@ -1,81 +1,70 @@
-import React from "react";
 import configureStore from "redux-mock-store";
-import thunk from "redux-thunk";
 
 import ConnectedConfirmationPage, {
   UnconnectedConfirmationPage
 } from "../ConfirmationPage";
 
-const defaultProps = {
-  match: { params: { token: "some token" } }
+const testData = {
+  token: "some token"
+};
+
+const setup = (propOverrides = {}) => {
+  const props = {
+    match: { params: { token: testData.token } },
+    confirm: jest.fn(() => Promise.resolve()),
+    ...propOverrides
+  };
+
+  return {
+    props,
+    connectedWrapperShallow: wrapperShallow(ConnectedConfirmationPage, props),
+    wrapperShallow: wrapperShallow(UnconnectedConfirmationPage, props)
+  };
 };
 
 describe("ConnectedConfirmationPage", () => {
-  const mockStore = configureStore([thunk]);
-  const initialState = {};
-  const props = { ...defaultProps, store: mockStore(initialState) };
-
+  const mockStore = configureStore();
+  const state = {};
   it("renders correctly", () => {
-    const wrapper = shallowWithContext(
-      <ConnectedConfirmationPage {...props} />
-    );
-    expect(wrapper).toMatchSnapshot();
+    const { connectedWrapperShallow: wrapper } = setup({
+      store: mockStore(state)
+    });
+    expect(wrapper()).toMatchSnapshot();
   });
 });
 
 describe("UnconnectedConfirmationPage", () => {
-  const props = {
-    ...defaultProps
-  };
-
-  beforeEach(() => {
-    props.confirm = token => {
-      expect(token).toBe(defaultProps.match.params.token);
-      return Promise.resolve();
-    };
+  it("renders correctly before `confirm` finishes", () => {
+    const { wrapperShallow: wrapper, props } = setup();
+    expect(wrapper()).toMatchSnapshot();
+    expect(props.confirm).toHaveBeenCalledWith(testData.token);
   });
 
-  describe("before `props.confirm` finishes", () => {
-    it("renders correctly", () => {
-      const wrapper = shallowWithContext(
-        <UnconnectedConfirmationPage {...props} />
-      );
-      expect(wrapper).toMatchSnapshot();
+  it("renders correctly after `confirm` finishes successfully", done => {
+    const { wrapperShallow: wrapper, props } = setup();
+
+    wrapper();
+    expect(props.confirm).toHaveBeenCalledWith(testData.token);
+
+    setImmediate(() => {
+      wrapper().update();
+      expect(wrapper()).toMatchSnapshot();
+      done();
     });
   });
 
-  describe("after `props.confirm` finishes successfully", () => {
-    it("renders correctly", done => {
-      expect.assertions(2);
-
-      const wrapper = shallowWithContext(
-        <UnconnectedConfirmationPage {...props} />
-      );
-      setImmediate(() => {
-        wrapper.update();
-        expect(wrapper).toMatchSnapshot();
-        done();
-      });
+  it("renders correctly after `confirm` finishes with failure", done => {
+    const { wrapperShallow: wrapper, props } = setup({
+      confirm: jest.fn(() => Promise.reject())
     });
-  });
 
-  describe("after `props.confirm` finishes with failure", () => {
-    it("renders correctly", done => {
-      expect.assertions(2);
+    wrapper();
+    expect(props.confirm).toHaveBeenCalledWith(testData.token);
 
-      props.confirm = token => {
-        expect(token).toBe(defaultProps.match.params.token);
-        return Promise.reject();
-      };
-
-      const wrapper = shallowWithContext(
-        <UnconnectedConfirmationPage {...props} />
-      );
-      setImmediate(() => {
-        wrapper.update();
-        expect(wrapper).toMatchSnapshot();
-        done();
-      });
+    setImmediate(() => {
+      wrapper().update();
+      expect(wrapper()).toMatchSnapshot();
+      done();
     });
   });
 });

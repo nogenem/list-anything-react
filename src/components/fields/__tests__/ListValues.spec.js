@@ -46,11 +46,12 @@ describe("ListValues", () => {
 
     it("calls `onRemove` when clicking on a `Remove Icon`", () => {
       const { wrapperShallow: wrapper, props } = setup();
+
       wrapper()
         .find('ListIcon[name="remove"]')
         .first()
         .simulate("click");
-      expect(props.onRemove).toHaveBeenCalled();
+
       expect(props.onRemove).toHaveBeenCalledWith(0); // index
     });
   });

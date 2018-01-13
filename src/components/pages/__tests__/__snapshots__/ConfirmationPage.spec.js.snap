@@ -23,7 +23,7 @@ exports[`ConnectedConfirmationPage renders correctly 1`] = `
 />
 `;
 
-exports[`UnconnectedConfirmationPage after \`props.confirm\` finishes successfully renders correctly 1`] = `
+exports[`UnconnectedConfirmationPage renders correctly after \`confirm\` finishes successfully 1`] = `
 <CenterElemsContainer>
   <Message
     icon={true}
@@ -48,7 +48,7 @@ exports[`UnconnectedConfirmationPage after \`props.confirm\` finishes successful
 </CenterElemsContainer>
 `;
 
-exports[`UnconnectedConfirmationPage after \`props.confirm\` finishes with failure renders correctly 1`] = `
+exports[`UnconnectedConfirmationPage renders correctly after \`confirm\` finishes with failure 1`] = `
 <CenterElemsContainer>
   <Message
     icon={true}
@@ -67,7 +67,7 @@ exports[`UnconnectedConfirmationPage after \`props.confirm\` finishes with failu
 </CenterElemsContainer>
 `;
 
-exports[`UnconnectedConfirmationPage before \`props.confirm\` finishes renders correctly 1`] = `
+exports[`UnconnectedConfirmationPage renders correctly before \`confirm\` finishes 1`] = `
 <CenterElemsContainer>
   <Message
     icon={true}

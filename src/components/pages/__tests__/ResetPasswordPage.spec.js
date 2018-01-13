@@ -1,45 +1,93 @@
-import React from "react";
 import configureStore from "redux-mock-store";
 
 import ConnectedResetPasswordPage, {
   UnconnectedResetPasswordPage
 } from "../ResetPasswordPage";
 
-const defaultProps = {
-  history: {
-    push: () => {}
-  },
-  match: {
-    params: {
-      token: "some token"
-    }
-  }
+const testData = {
+  token: "some token",
+  formData: {}
+};
+
+const setup = (propOverrides = {}) => {
+  const props = {
+    history: {
+      push: jest.fn()
+    },
+    match: {
+      params: {
+        token: testData.token
+      }
+    },
+    validateToken: jest.fn(() => Promise.resolve()),
+    resetPassword: jest.fn(() => Promise.resolve()),
+    ...propOverrides
+  };
+
+  return {
+    props,
+    connectedWrapperShallow: wrapperShallow(ConnectedResetPasswordPage, props),
+    wrapperShallow: wrapperShallow(UnconnectedResetPasswordPage, props)
+  };
 };
 
 describe("ConnectedResetPasswordPage", () => {
   const mockStore = configureStore();
-  const initialState = {};
-  const props = { ...defaultProps, store: mockStore(initialState) };
-
+  const state = {};
   it("renders correctly", () => {
-    const wrapper = shallowWithContext(
-      <ConnectedResetPasswordPage {...props} />
-    );
-    expect(wrapper).toMatchSnapshot();
+    const { connectedWrapperShallow: wrapper } = setup({
+      store: mockStore(state)
+    });
+    expect(wrapper()).toMatchSnapshot();
   });
 });
 
 describe("UnconnectedResetPasswordPage", () => {
-  const props = {
-    ...defaultProps,
-    validateToken: () => Promise.resolve(),
-    resetPassword: () => Promise.resolve()
-  };
+  it("renders correctly before `validateToken` finishes", () => {
+    const { wrapperShallow: wrapper, props } = setup();
+    expect(wrapper()).toMatchSnapshot();
+    expect(props.validateToken).toHaveBeenCalledWith(testData.token);
+  });
 
-  it("renders correctly", () => {
-    const wrapper = shallowWithContext(
-      <UnconnectedResetPasswordPage {...props} />
-    );
-    expect(wrapper).toMatchSnapshot();
+  it("renders correctly after `validateToken` finishes successfully", done => {
+    const { wrapperShallow: wrapper, props } = setup();
+
+    wrapper();
+    expect(props.validateToken).toHaveBeenCalledWith(testData.token);
+
+    setImmediate(() => {
+      wrapper().update();
+      expect(wrapper()).toMatchSnapshot();
+      done();
+    });
+  });
+
+  it("renders correctly after `validateToken` finishes with failure", done => {
+    const { wrapperShallow: wrapper, props } = setup({
+      validateToken: jest.fn(() => Promise.reject())
+    });
+
+    wrapper();
+    expect(props.validateToken).toHaveBeenCalledWith(testData.token);
+
+    setImmediate(() => {
+      wrapper().update();
+      expect(wrapper()).toMatchSnapshot();
+      done();
+    });
+  });
+
+  it("calls `resetPassword` and `history.push` when calling `submit`", done => {
+    const { wrapperShallow: wrapper, props } = setup();
+
+    wrapper()
+      .instance()
+      .submit(testData.formData);
+
+    expect(props.resetPassword).toHaveBeenCalledWith(testData.formData);
+    setImmediate(() => {
+      expect(props.history.push).toHaveBeenCalledWith("/login");
+      done();
+    });
   });
 });

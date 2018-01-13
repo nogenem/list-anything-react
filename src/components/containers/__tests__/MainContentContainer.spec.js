@@ -87,7 +87,7 @@ describe("MainContentContainer", () => {
     wrapper()
       .instance()
       .search(testData.query);
-    expect(props.history.push).toHaveBeenCalled();
+
     expect(props.history.push).toHaveBeenCalledWith(expectedUrl);
 
     wrapper().update();

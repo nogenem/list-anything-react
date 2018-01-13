@@ -1,37 +1,57 @@
-import React from "react";
 import configureStore from "redux-mock-store";
 
 import ConnectedNewSubjectPage, {
   UnconnectedNewSubjectPage
 } from "../NewSubjectPage";
 
-const defaultProps = {
-  history: {
-    push: () => {}
-  }
+const testData = {
+  formData: {}
+};
+
+const setup = (propOverrides = {}) => {
+  const props = {
+    history: {
+      push: jest.fn()
+    },
+    createSubject: jest.fn(() => Promise.resolve()),
+    ...propOverrides
+  };
+
+  return {
+    props,
+    connectedWrapperShallow: wrapperShallow(ConnectedNewSubjectPage, props),
+    wrapperShallow: wrapperShallow(UnconnectedNewSubjectPage, props)
+  };
 };
 
 describe("ConnectedNewSubjectPage", () => {
   const mockStore = configureStore();
-  const initialState = {};
-  const props = { ...defaultProps, store: mockStore(initialState) };
-
+  const state = {};
   it("renders correctly", () => {
-    const wrapper = shallowWithContext(<ConnectedNewSubjectPage {...props} />);
-    expect(wrapper).toMatchSnapshot();
+    const { connectedWrapperShallow: wrapper } = setup({
+      store: mockStore(state)
+    });
+    expect(wrapper()).toMatchSnapshot();
   });
 });
 
 describe("UnconnectedNewSubjectPage", () => {
-  const props = {
-    ...defaultProps,
-    createSubject: () => Promise.resolve()
-  };
-
   it("renders correctly", () => {
-    const wrapper = shallowWithContext(
-      <UnconnectedNewSubjectPage {...props} />
-    );
-    expect(wrapper).toMatchSnapshot();
+    const { wrapperShallow: wrapper } = setup();
+    expect(wrapper()).toMatchSnapshot();
+  });
+
+  it("calls `createSubject` and `history.push` when calling `submit`", done => {
+    const { wrapperShallow: wrapper, props } = setup();
+
+    wrapper()
+      .instance()
+      .submit(testData.formData);
+
+    expect(props.createSubject).toHaveBeenCalledWith(testData.formData);
+    setImmediate(() => {
+      expect(props.history.push).toHaveBeenCalledWith("/dashboard");
+      done();
+    });
   });
 });

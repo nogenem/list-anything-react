@@ -1,33 +1,55 @@
-import React from "react";
 import configureStore from "redux-mock-store";
 
 import ConnectedSignupPage, { UnconnectedSignupPage } from "../SignupPage";
 
-const defaultProps = {
-  history: {
-    push: () => {}
-  }
+const testData = {
+  formData: {}
+};
+
+const setup = (propOverrides = {}) => {
+  const props = {
+    history: {
+      push: jest.fn()
+    },
+    signup: jest.fn(() => Promise.resolve()),
+    ...propOverrides
+  };
+
+  return {
+    props,
+    connectedWrapperShallow: wrapperShallow(ConnectedSignupPage, props),
+    wrapperShallow: wrapperShallow(UnconnectedSignupPage, props)
+  };
 };
 
 describe("ConnectedSignupPage", () => {
   const mockStore = configureStore();
-  const initialState = {};
-  const props = { ...defaultProps, store: mockStore(initialState) };
-
+  const state = {};
   it("renders correctly", () => {
-    const wrapper = shallowWithContext(<ConnectedSignupPage {...props} />);
-    expect(wrapper).toMatchSnapshot();
+    const { connectedWrapperShallow: wrapper } = setup({
+      store: mockStore(state)
+    });
+    expect(wrapper()).toMatchSnapshot();
   });
 });
 
 describe("UnconnectedSignupPage", () => {
-  const props = {
-    ...defaultProps,
-    signup: () => Promise.resolve()
-  };
-
   it("renders correctly", () => {
-    const wrapper = shallowWithContext(<UnconnectedSignupPage {...props} />);
-    expect(wrapper).toMatchSnapshot();
+    const { wrapperShallow: wrapper } = setup();
+    expect(wrapper()).toMatchSnapshot();
+  });
+
+  it("calls `signup` and `history.push` when calling `submit`", done => {
+    const { wrapperShallow: wrapper, props } = setup();
+
+    wrapper()
+      .instance()
+      .submit(testData.formData);
+
+    expect(props.signup).toHaveBeenCalledWith(testData.formData);
+    setImmediate(() => {
+      expect(props.history.push).toHaveBeenCalledWith("/dashboard");
+      done();
+    });
   });
 });

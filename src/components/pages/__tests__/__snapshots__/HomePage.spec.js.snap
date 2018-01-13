@@ -38,7 +38,7 @@ exports[`ConnectedHomePage renders correctly 1`] = `
 />
 `;
 
-exports[`UnconnectedHomePage when \`isAuthenticated\` is false renders correctly 1`] = `
+exports[`UnconnectedHomePage renders correctly when \`isAuthenticated\` is false 1`] = `
 <div>
   <Redirect
     push={false}
@@ -47,7 +47,7 @@ exports[`UnconnectedHomePage when \`isAuthenticated\` is false renders correctly
 </div>
 `;
 
-exports[`UnconnectedHomePage when \`isAuthenticated\` is true renders correctly 1`] = `
+exports[`UnconnectedHomePage renders correctly when \`isAuthenticated\` is true 1`] = `
 <div>
   <Redirect
     push={false}

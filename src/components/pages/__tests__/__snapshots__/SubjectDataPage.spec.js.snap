@@ -56,7 +56,7 @@ exports[`ConnectedSubjectDataPage renders correctly 1`] = `
 />
 `;
 
-exports[`UnconnectedSubjectDataPage renders correctly 1`] = `
+exports[`UnconnectedSubjectDataPage renders correctly when \`subjectData._id\` is not empty 1`] = `
 <Segment
   basic={true}
   style={
@@ -71,12 +71,70 @@ exports[`UnconnectedSubjectDataPage renders correctly 1`] = `
     fields={Array []}
     subjectData={
       Object {
-        "_id": "1",
-        "tabId": "1",
+        "_id": "2",
+        "tabId": "3",
       }
     }
     submit={[Function]}
     tabs={Array []}
+  />
+</Segment>
+`;
+
+exports[`UnconnectedSubjectDataPage when \`subjectData._id\` is empty renders correctly after \`fetchSDById\` and \`fetchSubjectByTabId\` finishes successfully 1`] = `
+<Segment
+  basic={true}
+  style={
+    Object {
+      "margin": "10px auto",
+      "maxWidth": 500,
+    }
+  }
+>
+  <SubjectDataForm
+    delete={[Function]}
+    fields={Array []}
+    subjectData={
+      Object {
+        "tabId": "3",
+      }
+    }
+    submit={[Function]}
+    tabs={Array []}
+  />
+</Segment>
+`;
+
+exports[`UnconnectedSubjectDataPage when \`subjectData._id\` is empty renders correctly after \`fetchSDById\` finishes with failure 1`] = `
+<Segment
+  basic={true}
+  style={
+    Object {
+      "margin": "10px auto",
+      "maxWidth": 500,
+    }
+  }
+>
+  <ErrorMessage
+    showHeader={true}
+    text="Internal server error"
+  />
+</Segment>
+`;
+
+exports[`UnconnectedSubjectDataPage when \`subjectData._id\` is empty renders correctly before \`fetchSDById\` finishes 1`] = `
+<Segment
+  basic={true}
+  style={
+    Object {
+      "margin": "10px auto",
+      "maxWidth": 500,
+    }
+  }
+>
+  <Loader
+    active={true}
+    inline="centered"
   />
 </Segment>
 `;

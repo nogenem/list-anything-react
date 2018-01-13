@@ -9,7 +9,7 @@ exports[`ConnectedSearchPage renders correctly 1`] = `
   }
   location={
     Object {
-      "search": "some search",
+      "search": "?query=test",
     }
   }
   results={Array []}
@@ -48,7 +48,43 @@ exports[`ConnectedSearchPage renders correctly 1`] = `
 />
 `;
 
-exports[`UnconnectedSearchPage renders correctly 1`] = `
+exports[`UnconnectedSearchPage renders correctly after \`searchRequest\` finishes successfully 1`] = `
+<Segment
+  basic={true}
+  loading={false}
+  style={
+    Object {
+      "margin": "10px auto",
+      "maxWidth": "90%",
+    }
+  }
+>
+  <SearchResultTable
+    onTableRowClick={[Function]}
+    results={Array []}
+  />
+</Segment>
+`;
+
+exports[`UnconnectedSearchPage renders correctly after \`searchRequest\` finishes with failure 1`] = `
+<Segment
+  basic={true}
+  loading={false}
+  style={
+    Object {
+      "margin": "10px auto",
+      "maxWidth": "90%",
+    }
+  }
+>
+  <ErrorMessage
+    showHeader={true}
+    text=""
+  />
+</Segment>
+`;
+
+exports[`UnconnectedSearchPage renders correctly before \`searchRequest\` finishes 1`] = `
 <Segment
   basic={true}
   loading={true}

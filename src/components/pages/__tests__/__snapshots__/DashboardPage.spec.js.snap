@@ -39,7 +39,7 @@ exports[`ConnectedDashboardPage renders correctly 1`] = `
 />
 `;
 
-exports[`UnconnectedDashboardPage when \`isConfirmed\` is false renders correctly 1`] = `
+exports[`UnconnectedDashboardPage renders correctly when \`isConfirmed\` is false 1`] = `
 <Segment
   basic={true}
 >
@@ -52,7 +52,7 @@ exports[`UnconnectedDashboardPage when \`isConfirmed\` is false renders correctl
 </Segment>
 `;
 
-exports[`UnconnectedDashboardPage when \`isConfirmed\` is true when \`hasSubjects\` is false renders correctly 1`] = `
+exports[`UnconnectedDashboardPage when \`isConfirmed\` is true renders correctly when \`hasSubjects\` is false 1`] = `
 <Segment
   basic={true}
 >
@@ -66,7 +66,7 @@ exports[`UnconnectedDashboardPage when \`isConfirmed\` is true when \`hasSubject
 </Segment>
 `;
 
-exports[`UnconnectedDashboardPage when \`isConfirmed\` is true when \`hasSubjects\` is true renders correctly 1`] = `
+exports[`UnconnectedDashboardPage when \`isConfirmed\` is true renders correctly when \`hasSubjects\` is true 1`] = `
 <Segment
   basic={true}
 >

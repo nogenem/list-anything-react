@@ -1,64 +1,53 @@
-import React from "react";
 import configureStore from "redux-mock-store";
-import thunk from "redux-thunk";
 
 import ConnectedDashboardPage, {
   UnconnectedDashboardPage
 } from "../DashboardPage";
 
-describe("ConnectedDashboardPage", () => {
-  const mockStore = configureStore([thunk]);
-  const initialState = {};
-  const props = { store: mockStore(initialState) };
+const setup = (propOverrides = {}) => {
+  const props = {
+    isConfirmed: true,
+    hasSubjects: false,
+    ...propOverrides
+  };
 
+  return {
+    props,
+    connectedWrapperShallow: wrapperShallow(ConnectedDashboardPage, props),
+    wrapperShallow: wrapperShallow(UnconnectedDashboardPage, props)
+  };
+};
+
+describe("ConnectedDashboardPage", () => {
+  const mockStore = configureStore();
+  const state = {};
   it("renders correctly", () => {
-    const wrapper = shallowWithContext(<ConnectedDashboardPage {...props} />);
-    expect(wrapper).toMatchSnapshot();
+    const { connectedWrapperShallow: wrapper } = setup({
+      store: mockStore(state)
+    });
+    expect(wrapper()).toMatchSnapshot();
   });
 });
 
 describe("UnconnectedDashboardPage", () => {
-  const props = {
-    isConfirmed: false,
-    hasSubjects: false
-  };
-
-  describe("when `isConfirmed` is false", () => {
-    it("renders correctly", () => {
-      props.isConfirmed = false;
-
-      const wrapper = shallowWithContext(
-        <UnconnectedDashboardPage {...props} />
-      );
-      expect(wrapper).toMatchSnapshot();
+  it("renders correctly when `isConfirmed` is false", () => {
+    const { wrapperShallow: wrapper } = setup({
+      isConfirmed: false
     });
+    expect(wrapper()).toMatchSnapshot();
   });
 
   describe("when `isConfirmed` is true", () => {
-    beforeEach(() => {
-      props.isConfirmed = true;
+    it("renders correctly when `hasSubjects` is false", () => {
+      const { wrapperShallow: wrapper } = setup();
+      expect(wrapper()).toMatchSnapshot();
     });
 
-    describe("when `hasSubjects` is false", () => {
-      it("renders correctly", () => {
-        props.hasSubjects = false;
-
-        const wrapper = shallowWithContext(
-          <UnconnectedDashboardPage {...props} />
-        );
-        expect(wrapper).toMatchSnapshot();
+    it("renders correctly when `hasSubjects` is true", () => {
+      const { wrapperShallow: wrapper } = setup({
+        hasSubjects: true
       });
-    });
-
-    describe("when `hasSubjects` is true", () => {
-      it("renders correctly", () => {
-        props.hasSubjects = true;
-
-        const wrapper = shallowWithContext(
-          <UnconnectedDashboardPage {...props} />
-        );
-        expect(wrapper).toMatchSnapshot();
-      });
+      expect(wrapper()).toMatchSnapshot();
     });
   });
 });
